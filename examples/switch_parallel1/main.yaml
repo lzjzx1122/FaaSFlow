@@ -1,0 +1,64 @@
+main:
+  type: workflow
+  start: checkInput
+  end: GoodBye
+  nodes: 
+    - name: checkInput
+      type: function
+      operation: checkInput.py
+      paramerters:
+        - para1: 3
+        - para2: 1
+      next: 
+        - handleInput
+    - name: handleInput
+      type: switch
+      next: GoodBye
+      choices:
+        - condition: "{$.checkInput.Output == True}"
+          go:
+            name: sorry
+            type: function
+            operation: sorry.py
+        - condition: "{$.checkInput.Output == False}"
+          go: 
+            name: calc
+            type: workflow
+            start: calcResult
+            end: printResult
+            nodes:
+              - name: calcResult
+                type: function
+                operation: calcResult.py
+                parameters:
+                  - para1: 3
+                  - para2: 1
+                next: 
+                  - printResult
+              - name: printResult
+                type: function
+                operation: printResult.py
+                parameters:
+                  - para: "{$.calcResult.Output}"
+    - name: GoodBye
+      type: function
+      operation: GoodBye.py
+
+
+#  |-----------------------------------------------------|
+#  |                   checkInput                        |
+#  |                       |                             |
+#  |           |-----------|-----------|                 |
+#  |           |                       |                 |
+#  |         False                    True               |
+#  |           |                       ↓                 |
+#  |           |              |-------------------|      |
+#  |         sorry            |    calcResult     |      |
+#  |           |              |        ↓          |      |
+#  |           |              |    printResult    |      |
+#  |           |              |-------------------|      |
+#  |           |                       |                 |
+#  |           |-----------------------|                 |
+#  |                       ↓                             |
+#  |                    GoodBye                          |
+#  |-----------------------------------------------------|

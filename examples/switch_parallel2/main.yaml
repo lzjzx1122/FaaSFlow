@@ -1,0 +1,74 @@
+main:
+  type: workflow
+  start: checkInput
+  end: GoodBye
+  nodes: 
+    - checkInput
+    - handleInput
+    - GoodBye
+      
+checkInput:
+  type: function
+  operation: checkInput.py
+  paramerters:
+    - para1: 3
+    - para2: 1
+  next: handleInput
+
+handleInput:
+  type: switch
+  choices:
+    - condition: "{$.checkInput.Output == True}"
+      go: sorry
+    - condition: "{$.checkInput.Output == False}"
+      go: calc
+  next: GoodBye
+
+sorry:
+  type: function
+  operation: sorry.py
+
+calc:
+  type: workflow
+  start: calcResult
+  end: printResult
+  nodes:
+    - calcResult
+    - printResult
+
+calcResult:
+  type: function
+  operation: calcResult.py
+  parameters:
+    - para1: 3
+    - para2: 1
+  next: 
+    - printResult
+
+printResult:
+  type: function
+  operation: printResult.py
+  parameters:
+    - para: "{$.calcResult.Output}"
+
+GoodBye:
+  type: function
+  operation: GoodBye.py
+
+#  |-----------------------------------------------------|
+#  |                   checkInput                        |
+#  |                       |                             |
+#  |           |-----------|-----------|                 |
+#  |           |                       |                 |
+#  |         False                    True               |
+#  |           |                       ↓                 |
+#  |           |              |-------------------|      |
+#  |         sorry            |    calcResult     |      |
+#  |           |              |        ↓          |      |
+#  |           |              |    printResult    |      |
+#  |           |              |-------------------|      |
+#  |           |                       |                 |
+#  |           |-----------------------|                 |
+#  |                       ↓                             |
+#  |                    GoodBye                          |
+#  |-----------------------------------------------------|

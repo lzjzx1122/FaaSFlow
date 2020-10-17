@@ -1,0 +1,42 @@
+main:
+  type: workflow
+  start: funcA
+  end: funcD
+  nodes:
+    - name: funcA
+      type: function
+      operation: echo.py
+      parameters:
+        L: 1
+        R: 5
+      next:
+        - funcB
+        - funcC
+    - name: funcB 
+      type: function
+      operation: echo.py
+      parameters:
+        L: 6
+        R: 10
+      next:
+        - funcD
+    - name: funcC 
+      type: function
+      operation: echo.py
+      parameters:
+        L: 11
+        R: 15
+      next:
+        - funcD
+    - name: funcD 
+      type: function
+      operation: echo.py
+      parameters:
+        L: 16
+        R: 20
+
+#   ------------> funcB ------------|
+#   |                               ↓
+#  funcA                          funcD
+#   |                               ↑ 
+#   |-----------> funcC ------------|
