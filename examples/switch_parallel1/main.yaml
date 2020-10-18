@@ -1,64 +1,54 @@
 main:
   type: workflow
-  start: checkInput
-  end: GoodBye
+  start: generateInput
+  end: handleInput
   nodes: 
-    - name: checkInput
+    - name: generateInput
       type: function
-      operation: checkInput.py
-      paramerters:
-        - para1: 3
-        - para2: 1
+      source: generateInput.py
       next: 
         - handleInput
     - name: handleInput
       type: switch
-      next: GoodBye
       choices:
-        - condition: "{$.checkInput.Output == True}"
+        - condition: $.generateInput.Output.x < $.generateInput.Output.y
           go:
             name: sorry
             type: function
-            operation: sorry.py
-        - condition: "{$.checkInput.Output == False}"
+            source: sorry.py
+        - condition: $.generateInput.Output.x >= $.generateInput.Output.y
           go: 
             name: calc
             type: workflow
-            start: calcResult
-            end: printResult
+            start: sub
+            end: sqrt
             nodes:
-              - name: calcResult
+              - name: sub
                 type: function
-                operation: calcResult.py
+                source: sub.py
                 parameters:
-                  - para1: 3
-                  - para2: 1
+                  x: $.generateInput.Output.x
+                  y: $.generateInput.Output.y
                 next: 
-                  - printResult
-              - name: printResult
+                  - sqrt
+              - name: sqrt
                 type: function
-                operation: printResult.py
+                source: sqrt.py
                 parameters:
-                  - para: "{$.calcResult.Output}"
-    - name: GoodBye
-      type: function
-      operation: GoodBye.py
+                  x: $.sub.Output.SubResult
 
-
+#  calculate sqrt(x-y)
 #  |-----------------------------------------------------|
-#  |                   checkInput                        |
+#  |                   generateInput                     |
 #  |                       |                             |
 #  |           |-----------|-----------|                 |
 #  |           |                       |                 |
-#  |         False                    True               |
+#  |          x<y                     x>=y               |
 #  |           |                       ↓                 |
 #  |           |              |-------------------|      |
-#  |         sorry            |    calcResult     |      |
-#  |           |              |        ↓          |      |
-#  |           |              |    printResult    |      |
-#  |           |              |-------------------|      |
-#  |           |                       |                 |
-#  |           |-----------------------|                 |
-#  |                       ↓                             |
-#  |                    GoodBye                          |
+#  |         sorry            |       sub         |      |
+#  |                          |        ↓          |      |
+#  |                          |       sqrt        |      |
+#  |                          |-------------------|      |
+#  |                                                     |
 #  |-----------------------------------------------------|

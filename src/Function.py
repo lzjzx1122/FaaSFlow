@@ -1,7 +1,7 @@
 from ServerlessBase import ServerlessBase
 
 class Function(ServerlessBase):
-    def __init__(self, name, next, operation, parameters):
+    def __init__(self, name, next, source, parameters):
         ServerlessBase.__init__(self, name, next)
-        self.operation = operation
+        self.source = source
         self.parameters = parameters

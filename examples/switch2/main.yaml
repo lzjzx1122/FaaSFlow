@@ -1,48 +1,47 @@
 main:
   type: workflow
-  start: random
-  end: switch_example
+  start: rand
+  end: branch
   nodes: 
-    - name: random
-      type: function
-      operation: random.py
-      paramerters:
-      next: 
-        - switch_example
-    - switch_example
-        
-switch_example:
+    - rand
+    - branch
+
+rand:
+  type: function
+  source: rand.py
+  next: 
+    - branch
+
+branch:
   type: switch
   choices:
-    - condition: "{$.random.Output < 5}"
-      go: echo0
-    - condition: "{$.random.Output >= 5}"
+    - condition: $.rand.Output.RandomNumber < 5
+      go: echo0 
+    - condition: $.rand.Output.RandomNumber > 5
       go: echo1
     - default: echo2
-    
+        
 echo0:
   type: function
-  operation: echo.sh
+  source: echo.py
   parameters:
-    L: 0
-    R: 0
-
+    x: 0
+      
 echo1:
   type: function
-  operation: echo.sh
+  source: echo.py
   parameters:
-    L: 1
-    R: 1
+    x: 1
 
 echo2:
   type: function
-  operation: echo.sh
+  source: echo.py
   parameters:
-    L: 2
-    R: 2
+    x: 2
 
-# random -----(output < 5)-----> echo 0
+      
+# rand- -----(output < 5)-----> echo 0
 #    |       
 #    |--------(output > 5)----> echo 1      
 #    |
-#    |--------(output = 5)----> echo 2   
+#    |--------(output = 5)----> echo 2

@@ -1,42 +1,37 @@
 main:
   type: workflow
-  start: funcA
-  end: funcD
+  start: rand
+  end: add
   nodes:
-    - name: funcA
+    - name: rand
       type: function
-      operation: echo.py
-      parameters:
-        L: 1
-        R: 5
+      source: rand.py
       next:
-        - funcB
-        - funcC
-    - name: funcB 
+        - square
+        - cube
+    - name: square
       type: function
-      operation: echo.py
+      source: square.py
       parameters:
-        L: 6
-        R: 10
+        x: $.rand.Output.RandomNumber
       next:
-        - funcD
-    - name: funcC 
+        - add
+    - name: cube
       type: function
-      operation: echo.py
+      source: cube.py
       parameters:
-        L: 11
-        R: 15
+        x: $.rand.Output.RandomNumber
       next:
-        - funcD
-    - name: funcD 
+        - add
+    - name: add
       type: function
-      operation: echo.py
+      source: add.py
       parameters:
-        L: 16
-        R: 20
+        x: $.square.Output.SquareResult
+        y: $.cube.Output.CubeResult
 
-#   ------------> funcB ------------|
-#   |                               ↓
-#  funcA                          funcD
-#   |                               ↑ 
-#   |-----------> funcC ------------|
+#   ------------> square1 ------------|
+#   |                                 ↓
+#  rand                              add
+#   |                                 ↑ 
+#   |-----------> cube  --------------|

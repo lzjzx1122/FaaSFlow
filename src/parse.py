@@ -1,5 +1,6 @@
 import sys
 import yaml
+import queue
 from ServerlessBase import ServerlessBase
 from Function import Function
 from Workflow import Workflow
@@ -8,10 +9,10 @@ from Switch import Switch
 def dataAtIndex(data, index):
     return data[index] if index in data else None 
 
-func_keys = {'type', 'next', 'parameters', 'operation'}
+func_keys = {'type', 'next', 'parameters', 'source'}
 switch_keys = {'type', 'next', 'choices'}
 wf_keys = {'type', 'next', 'start', 'end', 'nodes'}
-all_keys = {'type', 'next', 'start', 'end', 'parameters', 'operation', 'choices', 'nodes', 'condition', 'go', 'default'}
+all_keys = {'type', 'next', 'start', 'end', 'parameters', 'source', 'choices', 'nodes', 'condition', 'go', 'default'}
 
 
 def parseFunction(data, name):
@@ -31,17 +32,17 @@ def parseFunction(data, name):
     if parameters and type(parameters) is not dict:
         raise Exception('The key \'parameters\' of \'{}\' should be a dict.'.format(name))
     
-    operation = dataAtIndex(data, 'operation')
-    if operation is None:
-        raise Exception('The key \'operation\' should be in \'{}\'.'.format(name))
-    if type(operation) is not str:
-        raise Exception('The key \'operation\' of \'{}\' should be a str.'.format(name))
+    source = dataAtIndex(data, 'source')
+    if source is None:
+        raise Exception('The key \'source\' should be in \'{}\'.'.format(name))
+    if type(source) is not str:
+        raise Exception('The key \'source\' of \'{}\' should be a str.'.format(name))
     
     for key in all_keys:
         if key not in func_keys and dataAtIndex(data, key):
             raise Exception('The key \'{}\' should not be in \'{}\'.'.format(key, name))
     
-    res = Function(name, next, operation, parameters)    
+    res = Function(name, next, source, parameters)    
     objectMap[name] = res
     return res 
 
@@ -169,11 +170,12 @@ def travel(obj):
         nxt = objectMap[obj.next[k]]
         obj.next[k] = nxt
         nxt.prev.append(obj)
+        nxt.prev_queue.append(queue.Queue())
+        nxt.prev_set.append(set())
         
     if type(obj) is Workflow:
         obj.start = objectMap[obj.start]
         obj.end = objectMap[obj.end]
-        obj.end.next = obj.next
         for k in range(len(obj.nodes)):
             node = objectMap[obj.nodes[k]]
             obj.nodes[k] = node
@@ -184,7 +186,6 @@ def travel(obj):
         for (k,v) in obj.choices.items():
             choice = objectMap[v]
             obj.choices[k] = choice
-            choice.next = obj.next
             choice.father = obj
             travel(choice)
 
@@ -208,6 +209,7 @@ def check_next(obj):
     elif type(obj) is Switch:
         for choice in obj.choices.values():
             check_next(choice)
+
 
 # print('sys:', sys.argv[1])
 filename = sys.argv[1] + 'main.yaml'
