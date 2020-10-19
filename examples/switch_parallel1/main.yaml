@@ -1,7 +1,7 @@
 main:
   type: workflow
   start: generateInput
-  end: handleInput
+  end: GoodBye
   nodes: 
     - name: generateInput
       type: function
@@ -10,12 +10,13 @@ main:
         - handleInput
     - name: handleInput
       type: switch
+      next: GoodBye
       choices:
         - condition: $.generateInput.Output.x < $.generateInput.Output.y
           go:
-            name: sorry
+            name: invalid
             type: function
-            source: sorry.py
+            source: invalid.py
         - condition: $.generateInput.Output.x >= $.generateInput.Output.y
           go: 
             name: calc
@@ -36,6 +37,12 @@ main:
                 source: sqrt.py
                 parameters:
                   x: $.sub.Output.SubResult
+    - name: GoodBye              
+      type: function
+      source: GoodBye.py
+      parameters:
+        input: $.handleInput.Output.Result            
+    
 
 #  calculate sqrt(x-y)
 #  |-----------------------------------------------------|
@@ -46,9 +53,12 @@ main:
 #  |          x<y                     x>=y               |
 #  |           |                       ↓                 |
 #  |           |              |-------------------|      |
-#  |         sorry            |       sub         |      |
-#  |                          |        ↓          |      |
-#  |                          |       sqrt        |      |
-#  |                          |-------------------|      |
-#  |                                                     |
+#  |         invalid          |       sub         |      |
+#  |           |              |        ↓          |      |
+#  |           |              |       sqrt        |      |
+#  |           |              |-------------------|      |
+#  |           |                        |                |
+#  |           |------------------------|                | 
+#  |                       ↓                             |
+#  |                     GoodBye                         |
 #  |-----------------------------------------------------|

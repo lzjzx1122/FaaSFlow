@@ -30,7 +30,7 @@ main:
         x: $.square.Output.SquareResult
         y: $.cube.Output.CubeResult
 
-#   ------------> square1 ------------|
+#   ------------> square -------------|
 #   |                                 ↓
 #  rand                              add
 #   |                                 ↑ 

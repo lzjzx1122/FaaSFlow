@@ -17,19 +17,22 @@ if not os.path.exists(db_path):
 thread_pool = []
 thread_pool_lock = threading.Lock()
 prev_lock = threading.Lock()
-    
+
+# Get the value of an expression.    
+# For example, get the value of $.rand.Output.RandomNumber    
 def getOutput(expr, request_id):
     expr = expr.split('.')
     assert(len(expr) == 4 and expr[0] == '$' and expr[2] == 'Output')
     filename = db_path + expr[1] + '_' + str(request_id) + '.json'
     json_data = json.load(open(filename))
     output = json_data[expr[3]]
-    assert(type(output) is int)
+    # assert(type(output) is int)
     return output
 
+# Check whether an exepression is true or not.
+# For example, $.rand.Output.RandomNumber < 5    
 symbols = ['<=', '>=', '==', '<', '>']
-def check_expr(expr, request_id):
-    # print('check:', expr)
+def checkExpr(expr, request_id):
     for s in symbols:
         if s in expr:
             left, right = expr.split(s)
@@ -37,7 +40,7 @@ def check_expr(expr, request_id):
             right = right.strip()
             left_number = getOutput(left, request_id) if '$' in left else int(left)
             right_number = getOutput(right, request_id) if '$' in right else int(right)
-            # print(left_number, s, right_number)
+            assert((type(left_number) is int) and (type(right_number) is int))
             if s == '<=':
                 return left_number <= right_number
             elif s == '>=':
@@ -51,7 +54,6 @@ def check_expr(expr, request_id):
 
 
 def executeFunction_thread(obj, request_id):
-    # print('exe_thread:', obj.name, request_id)
     name = obj.name
     parameters = ''
     if obj.parameters != None:
@@ -59,26 +61,32 @@ def executeFunction_thread(obj, request_id):
         for (k, v) in parameters.items():
             if type(v) is str and '$' in v:
                 parameters[k] = getOutput(v, request_id)
-                # print(name, request_id, parameters[k])
         parameters = json.dumps(parameters)
 
-    execute_str = 'python3 ' + path + obj.source + ' \'' + parameters + '\'' + ' > ' + db_path + name + '_' + str(request_id) + '.json'
-    # print(execute_str)
+    # Create a new process.
+    # For example, python3 sqrt.py '{"x": 4}' > sqrt_0.json
+    filename = db_path + name + '_' + str(request_id) + '.json'
+    execute_str = 'python3 ' + path + obj.source + ' \'' + parameters + '\'' + ' > ' + filename
     os.system(execute_str)
     
     while obj.father != None:
+        cp_filename = db_path + obj.father.name + '_' + str(request_id) + '.json'
         if type(obj.father) is Switch:
+            os.system('cp ' + filename + ' ' + cp_filename)
             obj = obj.father
         elif type(obj.father) is Workflow and obj.father.end == obj:
+            os.system('cp ' + filename + ' ' + cp_filename)
             obj = obj.father
         else:
             break
 
-    if obj.father == None: # Workflow execution complete.
+    # Workflow execution complete.
+    if obj.father == None: 
         filename = db_path + name + '_' + str(request_id) + '.json'
         result = json.load(open(filename))
         print('Request #{} execution complete: {}'.format(request_id, json.dumps(result)))
 
+    # Trigger new workflow / switch / function.
     prev_lock.acquire()
     for nxt in obj.next:
         prev_all_satisified = True
@@ -95,7 +103,6 @@ def executeFunction_thread(obj, request_id):
 
 
 def executeFunction(obj, request_id):
-    # executeFunction_thread(obj, request_id)
     t = threading.Thread(target=executeFunction_thread, args=(obj, request_id))
     thread_pool_lock.acquire()
     thread_pool.append(t)
@@ -107,9 +114,10 @@ def executeSwitch(obj, request_id):
     for (choice, go) in obj.choices.items():
         if choice == 'default':
             execute(go, request_id)
-        elif check_expr(choice, request_id):
+        elif checkExpr(choice, request_id):
                 execute(go, request_id)
                 break
+
 
 def executeWorkflow(obj, request_id):
     execute(obj.start, request_id)
@@ -123,8 +131,7 @@ def execute(obj, request_id):
     elif type(obj) is Workflow:
         executeWorkflow(obj, request_id)
 
-
-total = 100
+total = 10
 for request_id in range(total):
     time.sleep(0.1)
     execute(parse.mainObject, request_id)

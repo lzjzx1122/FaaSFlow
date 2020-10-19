@@ -6,18 +6,18 @@ from Function import Function
 from Workflow import Workflow
 from Switch import Switch
 
-def dataAtIndex(data, index):
-    return data[index] if index in data else None 
-
 func_keys = {'type', 'next', 'parameters', 'source'}
 switch_keys = {'type', 'next', 'choices'}
 wf_keys = {'type', 'next', 'start', 'end', 'nodes'}
 all_keys = {'type', 'next', 'start', 'end', 'parameters', 'source', 'choices', 'nodes', 'condition', 'go', 'default'}
 
+def dataAtIndex(data, index):
+    return data[index] if index in data else None 
+
 
 def parseFunction(data, name):
     if name in objectMap:
-        raise Exception('\'{}\' should be defined once'.format(name))
+        raise Exception('\'{}\' should be defined once.'.format(name))
 
     next = dataAtIndex(data, 'next')
     if next is None:
@@ -95,7 +95,6 @@ def parseSwitch(data, name):
     for key in all_keys:
         if key not in switch_keys and dataAtIndex(data, key):
             raise Exception('The key \'{}\' should not be in \'{}\'.'.format(key, name))
-    # print('choices_str:', choices_str)
     res = Switch(name, next, choices_str)
     objectMap[name] = res
     return res
@@ -165,12 +164,11 @@ def parse(data, name):
 
 
 def travel(obj):
-    # print('travel:', obj.name)
     for k in range(len(obj.next)):
         nxt = objectMap[obj.next[k]]
         obj.next[k] = nxt
         nxt.prev.append(obj)
-        nxt.prev_queue.append(queue.Queue())
+        # nxt.prev_queue.append(queue.Queue())
         nxt.prev_set.append(set())
         
     if type(obj) is Workflow:
@@ -181,7 +179,6 @@ def travel(obj):
             obj.nodes[k] = node
             node.father = obj
             travel(node)
-
     elif type(obj) is Switch:
         for (k,v) in obj.choices.items():
             choice = objectMap[v]
@@ -191,15 +188,11 @@ def travel(obj):
 
 
 def check_next(obj):
-    # print('check:', obj.name)
     father = obj.father
-    for n in obj.next:
-        # print(obj.name, '->', n.name)
-        # print('father:', father.name)
-        if type(father) is Switch:
-            if n not in father.choice.values():
-                raise Exception('\'{}\' can not point to \'{}\'.'.format(obj.name, n.name))
-        elif type(father) is Workflow:
+    if type(father) is Switch and len(obj.next) > 0:
+        raise Exception('Choice \'{}\' should not have the key \'next\'.'.format(obj.name))
+    if type(father) is Workflow:
+        for n in obj.next:
             if n not in father.nodes:
                 raise Exception('\'{}\' can not point to \'{}\'.'.format(obj.name, n.name))
     
@@ -211,21 +204,24 @@ def check_next(obj):
             check_next(choice)
 
 
-# print('sys:', sys.argv[1])
 filename = sys.argv[1] + 'main.yaml'
 data = yaml.load(open(filename))
 mainObject = None
 objectMap = dict()    
 
+# The first travel: define all Workflow/Switch/Function objects.
 if 'main' not in data:
     raise Exception('main not found.')
 else:
     mainObject = parse(data['main'], 'main')
-
 for name in data.keys():
     if name != 'main':
         parse(data[name], name)
 
+# The second travel:
 travel(mainObject)
-check_next(mainObject)
+# After the first travel, obj.next = [str1, str2, str3]
+# After the second travel, obj.next = [obj1, obj2, obj3] 
 
+# Check whether the key 'next' is valid or not.
+check_next(mainObject)
