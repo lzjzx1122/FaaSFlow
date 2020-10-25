@@ -14,19 +14,27 @@ all_keys = {'type', 'next', 'start', 'end', 'parameters', 'source', 'choices', '
 def dataAtIndex(data, index):
     return data[index] if index in data else None 
 
+# --------------------------------- Checking format errors begins. -------------------------------
+def check(data, name):
+    tp = dataAtIndex(data, 'type')
+    # print("check:", name, tp)
+    if tp == 'function':
+        return checkFunction(data, name)
+    elif tp == 'workflow':
+        return checkWorkflow(data, name)
+    elif tp == 'switch':
+        return checkSwitch(data, name)
+    else:
+        raise Exception('The type of \'{}\' should be function, workflow or switch.'.format(name))
 
-def parseFunction(data, name):
+def checkFunction(data, name):
     if name in objectMap:
         raise Exception('\'{}\' should be defined once.'.format(name))
+    objectMap[name] = None
 
     next = dataAtIndex(data, 'next')
-    if next is None:
-        next = []
-    else:
-        if type(next) is str:
-            next = [next]
-        elif type(next) is not list:
-            raise Exception('The key \'next\' of \'{}\' should be a str or list.'.format(name))
+    if next and type(next) is not str and type(next) is not list:
+        raise Exception('The key \'next\' of \'{}\' should be a str or list.'.format(name))
 
     parameters = dataAtIndex(data, 'parameters')
     if parameters and type(parameters) is not dict:
@@ -41,53 +49,38 @@ def parseFunction(data, name):
     for key in all_keys:
         if key not in func_keys and dataAtIndex(data, key):
             raise Exception('The key \'{}\' should not be in \'{}\'.'.format(key, name))
-    
-    res = Function(name, next, source, parameters)    
-    objectMap[name] = res
-    return res 
 
-
-def parseSwitch(data, name):
+def checkSwitch(data, name):
     if name in objectMap:
         raise Exception('\'{}\' should be defined once'.format(name))
+    objectMap[name] = None
 
     next = dataAtIndex(data, 'next')
-    if next is None:
-        next = []
-    else:
-        if type(next) is str:
-            next = [next]
-        elif type(next) is not list:
-            raise Exception('The key \'next\' of \'{}\' should be a str or list.'.format(name))
+    if next and type(next) is not str and type(next) is not list:
+        raise Exception('The key \'next\' of \'{}\' should be a str or list.'.format(name))
         
     choices = dataAtIndex(data, 'choices')
     if choices is None:
         raise Exception('The key \'choices\' should be in \'{}\'.'.format(name))
-    if type(choices) is not list:
+    elif type(choices) is not list:
         raise Exception('The key \'choices\' of \'{}\' should be a list.'.format(name))
-    choices_str = {}
+
     for choice in choices:
         if type(choice) is not dict:
             raise Exception('All choices of \'{}\' should be dict.'.format(name))
         if 'condition' in choice and 'go' in choice:
-            if type(choice['go']) is str:
-                choices_str[choice['condition']] = choice['go']
-            elif type(choice['go']) is dict:
+            if type(choice['go']) is dict:
                 if 'name' not in choice['go']:
                     raise Exception('The key \'name\' should be in all choices of \'{}\''.format(name))
-                choices_str[choice['condition']] = choice['go']['name']
-                parse(choice['go'], choice['go']['name'])
-            else:
+                check(choice['go'], choice['go']['name'])
+            elif type(choice['go']) is not str:
                 raise Exception('All choices of \'{}\' should be dict or str.'.format(name))
         elif 'default' in choice:
-            if type(choice['default']) is str:
-                choices_str['default'] = choice['default']
-            elif type(choice['default']) is dict:
+            if type(choice['default']) is dict:
                 if 'name' not in choice['default']:
                     raise Exception('The key \'name\' should be in default choice of \'{}\''.format(name))
-                choices_str['default'] = choice['default']['name']
-                parse(choice['default'], choice['default']['name'])
-            else:
+                check(choice['default'], choice['default']['name'])
+            elif type(choice['default']) is not str:
                 raise Exception('The default choice of \'{}\' should be a dict or str.'.format(name))
         else:
             raise Exception('Invalid choice appears in switch \'{}\''.format(name))
@@ -95,23 +88,15 @@ def parseSwitch(data, name):
     for key in all_keys:
         if key not in switch_keys and dataAtIndex(data, key):
             raise Exception('The key \'{}\' should not be in \'{}\'.'.format(key, name))
-    res = Switch(name, next, choices_str)
-    objectMap[name] = res
-    return res
 
-
-def parseWorkflow(data, name):
+def checkWorkflow(data, name):
     if name in objectMap:
         raise Exception('\'{}\' should be defined once'.format(name))
+    objectMap[name] = None
 
     next = dataAtIndex(data, 'next')
-    if next is None:
-        next = []
-    else:
-        if type(next) is str:
-            next = [next]
-        elif type(next) is not list:
-            raise Exception('The key \'next\' of \'{}\' should be a str or list.'.format(name))
+    if next and type(next) is not str and type(next) is not list:
+        raise Exception('The key \'next\' of \'{}\' should be a str or list.'.format(name))
 
     start = dataAtIndex(data, 'start')
     if start is None:
@@ -130,27 +115,21 @@ def parseWorkflow(data, name):
         raise Exception('The key \'nodes\' should be in \'{}\'.'.format(name))
     if type(nodes) is not list:
         raise Exception('The key \'nodes\' should be a list.'.format(name))
-    nodes_str = []
     for node in nodes:
-        if type(node) is str:
-            nodes_str.append(node)
-        elif type(node) is dict:
+        if type(node) is dict:
             if 'name' not in node:
                 raise Exception('The key \'name\' should be in all nodes of \'{}\''.format(name))
-            nodes_str.append(node['name'])
-            parse(node, node['name'])
-        else:
+            check(node, node['name'])
+        elif type(node) is not str:
             raise Exception('All nodes of \'{}\' should be str or dict.'.format(name))
 
     for key in all_keys:
         if key not in wf_keys and dataAtIndex(data, key):
             raise Exception('The key \'{}\' should not be in \'{}\'.'.format(key, name))
-    
-    res =  Workflow(name, next, start, end, nodes_str)
-    objectMap[name] = res
-    return res
+# --------------------------------- Checking format errors ends. ---------------------------------
 
 
+# ------------------ Enumrate all Function/Switch/Workflow and transform them to objects. --------
 def parse(data, name):
     tp = dataAtIndex(data, 'type')
     if tp == 'function':
@@ -159,16 +138,78 @@ def parse(data, name):
         return parseWorkflow(data, name)
     elif tp == 'switch':
         return parseSwitch(data, name)
-    else:
-        raise Exception('The type of \'{}\' should be function, workflow or switch.'.format(name))
+    
+def parseFunction(data, name):
+    parameters = dataAtIndex(data, 'parameters')
+    source = dataAtIndex(data, 'source')
+    next = dataAtIndex(data, 'next')
+    if next is None:
+        next = []
+    elif type(next) is str:
+        next = [next]
+    res = Function(name, next, source, parameters)    
+    objectMap[name] = res
+    return res 
 
+def parseSwitch(data, name):
+    next = dataAtIndex(data, 'next')
+    if next is None:
+        next = []
+    elif type(next) is str:
+        next = [next]
+      
+    choices = dataAtIndex(data, 'choices')
+    choices_str = {}
+    for choice in choices:
+        if 'condition' in choice and 'go' in choice:
+            if type(choice['go']) is str:
+                choices_str[choice['condition']] = choice['go']
+            elif type(choice['go']) is dict:
+                choices_str[choice['condition']] = choice['go']['name']
+                parse(choice['go'], choice['go']['name'])
+        elif 'default' in choice:
+            if type(choice['default']) is str:
+                choices_str['default'] = choice['default']
+            elif type(choice['default']) is dict:
+                choices_str['default'] = choice['default']['name']
+                parse(choice['default'], choice['default']['name'])
 
-def travel(obj):
+    res = Switch(name, next, choices_str)
+    objectMap[name] = res
+    return res
+
+def parseWorkflow(data, name):
+    next = dataAtIndex(data, 'next')
+    if next is None:
+        next = []
+    elif type(next) is str:
+        next = [next]
+   
+    start = dataAtIndex(data, 'start')
+    end = dataAtIndex(data, 'end')
+
+    nodes = dataAtIndex(data, 'nodes')  
+    nodes_str = []
+    for node in nodes:
+        if type(node) is str:
+            nodes_str.append(node)
+        elif type(node) is dict:
+            nodes_str.append(node['name'])
+            parse(node, node['name'])
+
+    res =  Workflow(name, next, start, end, nodes_str)
+    objectMap[name] = res
+    return res
+# ---------------------------------------- Enumrating Ends. -----------------------------------------
+
+# ------------------------------------ Transform str to object. --------------------------------------
+# Before the travel, obj.next = [str1, str2, str3]
+# After the travel, obj.next = [obj1, obj2, obj3] 
+def strToObj(obj):
     for k in range(len(obj.next)):
         nxt = objectMap[obj.next[k]]
         obj.next[k] = nxt
         nxt.prev.append(obj)
-        # nxt.prev_queue.append(queue.Queue())
         nxt.prev_set.append(set())
         
     if type(obj) is Workflow:
@@ -178,13 +219,14 @@ def travel(obj):
             node = objectMap[obj.nodes[k]]
             obj.nodes[k] = node
             node.father = obj
-            travel(node)
+            strToObj(node)
     elif type(obj) is Switch:
         for (k,v) in obj.choices.items():
             choice = objectMap[v]
             obj.choices[k] = choice
             choice.father = obj
-            travel(choice)
+            strToObj(choice)
+# ----------------------------------------- Transform end. ------------------------------------------
 
 
 def check_next(obj):
@@ -204,24 +246,29 @@ def check_next(obj):
             check_next(choice)
 
 
+# __name__ == '__main__'
 filename = sys.argv[1] + 'main.yaml'
 data = yaml.load(open(filename))
 mainObject = None
 objectMap = dict()    
 
-# The first travel: define all Workflow/Switch/Function objects.
+# The first travel: check format errors.
 if 'main' not in data:
     raise Exception('main not found.')
 else:
-    mainObject = parse(data['main'], 'main')
+    check(data['main'], 'main')
+for name in data.keys():
+    if name != 'main':
+        check(data[name], name)
+
+# The second travel: enumrate all Function/Switch/Workflow and transform them to objects.
+mainObject = parse(data['main'], 'main')
 for name in data.keys():
     if name != 'main':
         parse(data[name], name)
 
-# The second travel:
-travel(mainObject)
-# After the first travel, obj.next = [str1, str2, str3]
-# After the second travel, obj.next = [obj1, obj2, obj3] 
+# The third travel.
+strToObj(mainObject)
 
 # Check whether the key 'next' is valid or not.
 check_next(mainObject)
