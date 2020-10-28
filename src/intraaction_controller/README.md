@@ -1,41 +1,39 @@
-# Intra-action Controller
+# Action Controller
 
-## API
-proxy server runs at port 5000. it receives the following requests:
-- `/init`: POST request. do the init job.
-- `/repack`: POST request. tell the controller the pack image has been changed.
-- `/run`: POST request. return a json. send a user request to run the action.
-- `/lend`: GET request. return a json. get a lender container.
-- `/status`: GET request. return a json. get the status of controller.
-
-### init
-the request should contain a json object including the init auguments:
-```json
-{
-    "action": "linpack",
-    "pwd": "linpack",
-    "QOS_time": 0.3,
-    "QOS_requirement": 0.95,
-    "max_container": 10
-}
+## config file
+the config file defines every action workable on this machine. it should be a yaml file like the following:
+```yaml
+max_container: 10
+actions:
+  - name: test_action1
+    pwd: test1
+    image: test_img1
+    qos_time: 100
+    qos_requirement: 0.99
+  - name: test_action2
+    pwd: test2
+    image: test_img2
+    qos_time: 200
+    qos_requirement: 0.95
 ```
 
 the meaning of each field:
-- `action`: the name of action, used in the image name
-- `pwd`: passphrase for decrypting action's zipfile
-- `QOS_time`: the maximum time by QOS, in seconds
-- `QOS_requirement`: the precent of requests satisfying the QOS requirement
-- `max_container`: the maximum number of containers that this action's controller can create
+- `max_container`: the maximum number of containers an action can create for itself.
+- `actions`: a list containing the information of actions:
+  - `name`: the name of action.
+  - `pwd`: the passphrase for decrypting action's zipfile.
+  - `image`: the name of the docker image for this action.
+  - `qos_time`: the maximum execution time of QOS requirement.
+  - `qos_requirement`: the precentage that shoud meet the QOS requirment.
 
-return `200 OK` if success
+## restful API
+proxy server runs at port 5000. it receives the following requests:
+- `/run/<action_name>`: POST request. return a json. send a user request to run the action.
+- `/status`: GET request. return a json. get the status of controller.
+- `/end`: 
 
-### repack
-inform intra-action controller that pack image has been changed. controller will removes all lender containers since they are uesless now.
-
-nothing need to be sent. return `200 OK` if success.
-
-### run
-send the request to a container to actually run the code once.
+### run/<action_name>
+send the request to a container to actually run the code once. the target action is `action_name`.
 
 it requires a json object:
 ```json
@@ -70,23 +68,6 @@ the meaning of each field:
 - `end`: the time when contaienr finish request
 
 it returns `200 OK` if success
-
-### lend
-get a lender container from controller. nothing should be sent.
-
-it returns `404 no lender` if no lender container is available.
-
-if there's available lender container, controller remove this container from its pool and return a json object:
-```json
-{
-    "id": XXX,
-    "port": 30000
-}
-```
-
-the meaning of each field:
-- `id`: the docker long id of this container
-- `port`: the port number this container uses
 
 ### status
 get the current status of controller. nothing should be sent.

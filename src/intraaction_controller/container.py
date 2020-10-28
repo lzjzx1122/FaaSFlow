@@ -1,7 +1,6 @@
 import requests
 import docker
 import time
-from gevent import queue
 import gevent
 
 base_url = 'http://127.0.0.1:{}/{}'

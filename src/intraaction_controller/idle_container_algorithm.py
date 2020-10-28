@@ -46,7 +46,4 @@ def idle_status_check(lambd, n, mu, Qos_time, Qos_value_cal, Qos_value_requireme
     if Qos_value_cal > Qos_value_requirement and n > 1:
         judge = Qos_value_algorithm(lambd, n - 1, mu, Qos_time)
         idle_sign = judge > Qos_value_requirement
-        # if judge > Qos_value_requirement:
-        #     idle_sign = True
-        # else: idle_sign = False
     return idle_sign

@@ -9,4 +9,3 @@ class PortManager:
 
     def put(self, port):
         self.port_resource.append(port)
-
