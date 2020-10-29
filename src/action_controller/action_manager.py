@@ -1,40 +1,22 @@
-import requests
-import time
-import json
+import gevent
 
+repack_clean_interval = 5.000 # repack and clean every 5 seconds
+dispatch_interval = 0.005 # 200 qps at most
+
+# the class for scheduling actions' inter-operations
 class ActionManager:
-    def __init__(self):
-        pass
-    
-    def rent(self, action_name):
-        try:
-            res = requests.post("http://0.0.0.0:5000/rent", json = {"action_name": action_name})
-            if res.text == "no lender":
-                return None
-            else:
-                res_dict = json.loads(res.text)
-                return res_dict['id'], res_dict['port']
-        except Exception:
-            return None  
+    def __init__(self, action_list):
+        self.action_list = action_list
 
-    def create_pack_image(self, action_name):
-        while True:
-            try:
-                res = requests.post("http://0.0.0.0:5000/repack_image", json = {"action_name": action_name})
-                return res.text
-            except Exception:
-                time.sleep(0.01)
+    def start_loop(self):
+        gevent.spawn_later(repack_clean_interval, self._clean_loop)
 
-    def have_lender(self, action_name):
-        while True:
-            try:
-                res = requests.post("http://0.0.0.0:5000/have_lender", json = {"action_name": action_name})
-            except Exception:
-                time.sleep(0.01)
+    def _clean_loop(self):
+        gevent.spawn_later(repack_clean_interval, self._clean_loop)
+        for action in self.action_list:
+            gevent.spawn(action.repack_and_clean)
 
-    def no_lender(self, action_name):
-        while True:
-            try:
-                res = requests.post("http://0.0.0.0:5000/no_lender", json = {"action_name": action_name})
-            except Exception:
-                time.sleep(0.01)
+    def _dispatch_loop(self):
+        gevent.spawn_later(dispatch_interval, self._dispatch_loop)
+        for action in self.action_list:
+            gevent.spawn(action.dispatch_request)

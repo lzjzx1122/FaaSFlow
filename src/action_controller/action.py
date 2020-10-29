@@ -6,8 +6,6 @@ from container import Container
 from action_info import ActionInfo
 from idle_container_algorithm import idle_status_check
 
-repack_clean_interval = 5.000 # repack and clean every 5 seconds
-dispatch_interval = 0.005 # 200 qps at most
 update_rate = 0.65 # the update rate of lambda and mu
 
 # data structure for request info
