@@ -1,6 +1,8 @@
 from gevent import monkey
 monkey.patch_all()
 import gevent
+from flask import Flask, request
+from gevent.pywsgi import WSGIServer
 import couchdb
 import requests
 import json
@@ -37,7 +39,7 @@ def parseOutput(expr, request_id):
             obj = obj.end
         else:
             obj = choices[request_id][obj]
-    result = db[obj.name + '_' + str(request_id)][key]
+    result = db[obj.name + '_' + request_id]['result'][key]
     return result
 
 # Check whether an exepression is true or not.
@@ -64,6 +66,7 @@ def parseExpr(expr, request_id):
                 return left_number > right_number
 
 def run(obj, request_id):
+    # print('run:', obj.name, request_id)
     if type(obj) is Function:
         runFunction(obj, request_id)
     elif type(obj) is Switch:
@@ -85,13 +88,15 @@ def runSwitch(obj, request_id):
             break
 
 def runFunction(obj, request_id):
-    dispatch_pool.append(gevent.spawn(runFunction_gevent, obj, request_id))
+    # print('runFunc:', obj.name)
+    gevent.joinall([gevent.spawn(runFunction_gevent, obj, request_id)])
 
 def isEnd(obj):
     father = obj.father
     return type(father) is Switch or (type(father) is Workflow and father.end == obj)
 
 def runFunction_gevent(obj, request_id):
+    # print('runGevent:', obj.name)
     name = obj.name
     parameters = {}
     if obj.parameters != None:
@@ -99,12 +104,13 @@ def runFunction_gevent(obj, request_id):
         for (k, v) in parameters.items():
             if type(v) is str and '$' in v:
                 parameters[k] = parseOutput(v, request_id)
-        parameters = json.dumps(parameters)
         
-    url = controller_url + 'run/' + name
+    url = controller_url + 'run/' + obj.source
+    send_id = name + '_' + request_id
     while True:
         try:
-            res = requests.post(url, json = {"request_id": str(request_id), "data": parammeters})    
+            # print('send_id:', send_id)
+            res = requests.post(url, json = {"request_id": send_id, "data": parameters})    
             if res.text == 'OK':
                 break
         except Exception:
@@ -113,9 +119,11 @@ def runFunction_gevent(obj, request_id):
     while obj.father != None and isEnd(obj):
         obj = obj.father
     if obj.father == None: 
-        result = db[name + '_' + str(request_id)]
+        result = db[name + '_' + request_id]['result']
         print('Request #{} execution complete: {}'.format(request_id, json.dumps(result)))
-        choices.pop(request_id)
+        if request_id in choices:
+            choices.pop(request_id)
+        return
 
     # Trigger new workflow / switch / function.
     for nxt in obj.next:
@@ -130,9 +138,23 @@ def runFunction_gevent(obj, request_id):
                 nxt.prev_set[i].remove(request_id)
             run(nxt, request_id)
 
-total = 10
-for request_id in range(total):
-    gevent.sleep(1)
-    run(parser.mainObject, request_id)
+proxy = Flask(__name__)
 
-gevent.joinall(dispatch_pool)
+@proxy.route('/listen', methods=['POST'])
+def listen():
+    inp = request.get_json(force=True, silent=True)
+    # print('id:', inp['request_id'])
+    run(parser.mainObject, inp['request_id'])
+    return ('OK', 200)
+
+if __name__ == '__main__':
+    server = WSGIServer(('0.0.0.0', 18000), proxy)
+    server.serve_forever()
+
+# total = 1
+# for request_id in range(total):
+#    gevent.sleep(1)
+#    run(parser.mainObject, request_id)
+
+# print(dispatch_pool)
+# gevent.joinall(dispatch_pool)

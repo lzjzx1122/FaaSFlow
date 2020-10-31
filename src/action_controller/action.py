@@ -70,10 +70,9 @@ class Action:
         if len(self.rq) - self.num_processing == 0:
             return
         self.num_processing += 1
-
+        
         # 1.1 try to get a workable container from pool
         container = self.self_container()
-
         # 1.2 try to get a renter container from interaction controller
         # rent_start = time.time()
         # if container is None:
@@ -83,7 +82,7 @@ class Action:
         # 1.3 create a new containerZ
         if container is None:
             container = self.create_container()
-
+        
         # the number of exec container hits limit
         if container is None:
             self.num_processing -= 1
@@ -205,7 +204,7 @@ class Action:
 
     # do the action specific initialization work
     def init_container(self, container):
-        container.init(self.info.name, self.info.pwd)
+        container.init(self.info.action_name, self.info.pwd)
 
     # update stat info for idle alg
     def update_statistics(self):

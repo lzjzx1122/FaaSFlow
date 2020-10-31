@@ -10,13 +10,14 @@ class ActionManager:
 
     def start_loop(self):
         gevent.spawn_later(repack_clean_interval, self._clean_loop)
-
+        gevent.spawn_later(dispatch_interval, self._dispatch_loop)
+    
     def _clean_loop(self):
         gevent.spawn_later(repack_clean_interval, self._clean_loop)
-        for action in self.action_list:
+        for action in self.action_list.values():
             gevent.spawn(action.repack_and_clean)
 
     def _dispatch_loop(self):
         gevent.spawn_later(dispatch_interval, self._dispatch_loop)
-        for action in self.action_list:
+        for action in self.action_list.values():
             gevent.spawn(action.dispatch_request)
