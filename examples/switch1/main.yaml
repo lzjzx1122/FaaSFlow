@@ -5,7 +5,7 @@ main:
   nodes: 
     - name: rand
       type: function
-      source: rand.py
+      source: rand
       next: 
         - branch
     - name: branch
@@ -15,20 +15,20 @@ main:
           go: 
             name: echo0
             type: function
-            source: echo.py
+            source: echo
             parameters:
               x: 0
         - condition: $.rand.Output.RandomNumber > 5
           go:
             name: echo1
             type: function
-            source: echo.py
+            source: echo
             parameters:
               x: 1
         - default: 
             name: echo2
             type: function
-            source: echo.py
+            source: echo
             parameters:
               x: 2
       

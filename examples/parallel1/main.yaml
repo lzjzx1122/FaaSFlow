@@ -5,27 +5,27 @@ main:
   nodes:
     - name: rand
       type: function
-      source: rand.py
+      source: rand
       next:
         - square
         - cube
     - name: square
       type: function
-      source: square.py
+      source: square
       parameters:
-        x: $.rand.Output.RandomNumber
+        x: $.rand.Output.RandomResult
       next:
         - add
     - name: cube
       type: function
-      source: cube.py
+      source: cube
       parameters:
-        x: $.rand.Output.RandomNumber
+        x: $.rand.Output.RandomResult
       next:
         - add
     - name: add
       type: function
-      source: add.py
+      source: add
       parameters:
         x: $.square.Output.SquareResult
         y: $.cube.Output.CubeResult

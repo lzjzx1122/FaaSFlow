@@ -8,7 +8,7 @@ main:
 
 rand:
   type: function
-  source: rand.py
+  source: rand
   next: 
     - branch
 
@@ -23,19 +23,19 @@ branch:
         
 echo0:
   type: function
-  source: echo.py
+  source: echo
   parameters:
     x: 0
       
 echo1:
   type: function
-  source: echo.py
+  source: echo
   parameters:
     x: 1
 
 echo2:
   type: function
-  source: echo.py
+  source: echo
   parameters:
     x: 2
 
