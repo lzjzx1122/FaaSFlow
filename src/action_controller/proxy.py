@@ -7,7 +7,7 @@ from action_manager import ActionManager
 
 username = 'openwhisk'
 password = 'openwhisk'
-couchdb_url = 'http://127.0.0.1:5984/'
+couchdb_url = f'http://{username}:{password}@127.0.0.1:5984/'
 db_name = 'action_results'
 
 class ProxyServer:

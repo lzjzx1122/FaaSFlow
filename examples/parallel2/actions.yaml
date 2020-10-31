@@ -1,0 +1,6 @@
+actions:
+- {image: action_rand, name: rand, pwd: rand, qos_requirement: 0.95, qos_time: 100}
+- {image: action_square, name: square, pwd: square, qos_requirement: 0.95, qos_time: 100}
+- {image: action_cube, name: cube, pwd: cube, qos_requirement: 0.95, qos_time: 100}
+- {image: action_add, name: add, pwd: add, qos_requirement: 0.95, qos_time: 100}
+max_container: 10

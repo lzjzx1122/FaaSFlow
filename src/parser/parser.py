@@ -272,3 +272,12 @@ strToObj(mainObject)
 
 # Check whether the key 'next' is valid or not.
 check_next(mainObject)
+
+actions_yaml = {'max_container': 10, 'actions': []}
+sources = set()
+for obj in objectMap.values():
+    if type(obj) is Function and obj.source not in sources:
+        sources.add(obj.source)
+        actions_yaml['actions'].append({'name': obj.source, 'pwd': obj.source, \
+            'image': 'action_' + obj.source, 'qos_time': 100, 'qos_requirement': 0.95})
+yaml.dump(actions_yaml, open(sys.argv[1] + 'actions.yaml', 'w'))
