@@ -1,0 +1,132 @@
+main:
+  type: workflow
+  start: BookTrain 
+  end: CheckTrain
+  nodes: 
+    - name: BookTrain
+      type: function
+      source: BookTrain
+      next: 
+        - CheckTrain
+    - CheckTrain
+
+CheckTrain:
+  type: switch
+  choices:
+    - condition: $.BookTrain.Output.status == 1
+      go: TrainSucceeded
+    - condition: $.BookTrain.Output.status == 0
+      go: 
+        name: TrainFailed
+        type: function
+        source: OrderFailed
+    
+TrainSucceeded:
+  type: workflow
+  start: BookFlight
+  end: CheckFlight
+  nodes: 
+    - name: BookFlight
+      type: function
+      source: BookFlight
+      next: 
+        - CheckFlight
+    - CheckFlight
+
+CheckFlight:
+  type: switch
+  choices:
+    - condition: $.BookFlight.Output.status == 1
+      go: FlightSucceeded
+    - condition: $.BookFlight.Output.status == 0
+      go:
+        name: FlightFailed
+        type: workflow
+        start: CancelTrain1
+        end: OrderFailed1
+        nodes: 
+          - name: CancelTrain1
+            type: function
+            source: CancelTrain
+            parameters:
+              - txn_id: $.BookTrain.Output.txn_id
+            next: CancelTrainChecking1
+          - name: CancelTrainChecking1
+            type: switch
+            next: OrderFailed1
+            choices:
+              - condition: $.CancelTrain1.Output.status == 0
+                go: 
+                  name: SendAlert1
+                  type: function
+                  source: SendAlert
+          - name: OrderFailed1
+            type: function
+            source: OrderFailed
+          
+FlightSucceeded:
+  type: workflow
+  start: BookHotel
+  end: CheckHotel
+  nodes: 
+    - name: BookHotel
+      type: function
+      source: BookHotel
+      next: 
+        - CheckHotel
+    - CheckHotel
+
+CheckHotel:
+  type: switch
+  choices:
+    - condition: $.BookHotel.Output.status == 1
+      go: 
+        name: OrderSucceeded
+        type: function
+        source: OrderSucceeded
+    - condition: $.BookHotel.Output.status == 0
+      go:
+        name: HotelFailed
+        type: workflow
+        start: CancelFlight
+        end: OrderFailed2
+        nodes:
+          - name: CancelFlight
+            type: function
+            source: CancelFlight
+            parameters:
+              - txn_id: $.BookFlight.Output.txn_id
+            next: CancelFlightChecking 
+          - name: CancelFlightChecking
+            type: switch
+            next: OrderFailed2
+            choices:
+              - condition: $.CancelFlight.Output.status == 0
+                go: 
+                  name: SendAlert2
+                  type: function
+                  source: SendAlert
+              - condition: $.CancelFlight.Output.status == 1
+                go: 
+                  name: HotelFailedContinue
+                  type: workflow
+                  start: CancelTrain2
+                  end: CancelTrainChecking
+                  nodes: 
+                    - name: CancelTrain2
+                      type: function
+                      source: CancelTrain
+                      parameters:
+                        - txn_id: $.BookTrain.Output.txn_id
+                      next: CancelTrainChecking2
+                    - name: CancelTrainChecking2
+                      type: switch
+                      choices:
+                        - condition: $.CancelTrain2.Output.status == 0
+                          go: 
+                            name: SendAlert3
+                            type: function
+                            source: SendAlert
+          - name: OrderFailed2
+            type: function
+            source: OrderFailed
