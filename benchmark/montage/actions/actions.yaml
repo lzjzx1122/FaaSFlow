@@ -1,0 +1,15 @@
+actions:
+- {image: action_init, name: init, pwd: init, qos_requirement: 0.95, qos_time: 100}
+- {image: action_mProjectPP, name: mProjectPP, pwd: mProjectPP, qos_requirement: 0.95,
+  qos_time: 100}
+- {image: action_mImgtbl, name: mImgtbl, pwd: mImgtbl, qos_requirement: 0.95, qos_time: 100}
+- {image: action_mOverlaps, name: mOverlaps, pwd: mOverlaps, qos_requirement: 0.95,
+  qos_time: 100}
+- {image: action_mDiffFitExec, name: mDiffFitExec, pwd: mDiffFitExec, qos_requirement: 0.95,
+  qos_time: 100}
+- {image: action_mBgModel, name: mBgModel, pwd: mBgModel, qos_requirement: 0.95, qos_time: 100}
+- {image: action_mBackground, name: mBackground, pwd: mBackground, qos_requirement: 0.95,
+  qos_time: 100}
+- {image: action_mAdd, name: mAdd, pwd: mAdd, qos_requirement: 0.95, qos_time: 100}
+- {image: action_mViewer, name: mViewer, pwd: mViewer, qos_requirement: 0.95, qos_time: 100}
+max_container: 10
