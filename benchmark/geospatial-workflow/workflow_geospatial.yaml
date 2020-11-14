@@ -1,0 +1,1820 @@
+main:
+  end: end_node
+  nodes:
+  - name: start_node
+    next:
+    - get_stations
+    - asc_to_geotiff_0
+    type: dummy
+  - name: get_stations
+    next: wait_for_data
+    source: get_stations
+    type: function
+  - name: wait_for_data
+    next:
+    - compute_solar_radiance_0_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_0_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_0_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_0_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_0_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_1_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_1_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_1_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_1_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_1_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_2_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_2_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_2_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_2_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_2_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_3_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_3_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_3_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_3_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_3_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_4_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_4_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_4_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_4_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - compute_solar_radiance_4_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_0_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_0_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_0_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_0_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_0_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_1_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_1_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_1_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_1_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_1_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_2_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_2_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_2_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_2_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_2_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_3_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_3_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_3_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_3_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_3_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_4_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_4_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_4_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_4_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_humidity_4_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_0_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_0_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_0_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_0_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_0_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_1_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_1_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_1_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_1_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_1_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_2_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_2_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_2_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_2_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_2_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_3_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_3_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_3_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_3_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_3_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_4_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_4_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_4_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_4_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_temperature_4_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_0_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_0_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_0_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_0_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_0_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_1_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_1_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_1_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_1_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_1_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_2_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_2_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_2_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_2_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_2_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_3_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_3_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_3_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_3_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_3_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_4_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_4_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_4_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_4_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    - interpolate_wind_4_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    type: dummy
+  - name: end_node
+    type: dummy
+  - name: compute_solar_radiance_0_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_0_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_0_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_0_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_0_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_1_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_1_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_1_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_1_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_1_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_2_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_2_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_2_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_2_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_2_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_3_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_3_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_3_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_3_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_3_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_4_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_4_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_4_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_4_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: compute_solar_radiance_4_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    - merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: solar_radiance
+    type: function
+  - name: merge_global_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    next:
+    - combine_calculations_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+      tile: PNOA_MDT05_ETRS89_HU30_0933_LID
+      type: RADIANCE
+    source: gather_blocks
+    type: function
+  - name: merge_extraterrestrial_radiance_PNOA_MDT05_ETRS89_HU30_0933_LID
+    next:
+    - combine_calculations_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+      tile: PNOA_MDT05_ETRS89_HU30_0933_LID
+      type: EXTRAD
+    source: gather_blocks
+    type: function
+  - name: interpolate_humidity_0_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_0_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_0_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_0_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_0_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_1_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_1_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_1_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_1_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_1_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_2_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_2_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_2_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_2_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_2_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_3_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_3_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_3_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_3_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_3_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_4_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_4_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_4_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_4_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: interpolate_humidity_4_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_humidity
+    type: function
+  - name: merge_humidity_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    next:
+    - combine_calculations_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+      tile: PNOA_MDT05_ETRS89_HU30_0933_LID
+      type: HUMIDITY
+    source: gather_blocks
+    type: function
+  - name: interpolate_temperature_0_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_0_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_0_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_0_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_0_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_1_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_1_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_1_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_1_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_1_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_2_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_2_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_2_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_2_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_2_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_3_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_3_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_3_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_3_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_3_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_4_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_4_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_4_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_4_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: interpolate_temperature_4_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_temperature
+    type: function
+  - name: merge_temperature_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    next:
+    - combine_calculations_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+      tile: PNOA_MDT05_ETRS89_HU30_0933_LID
+      type: TEMPERATURE
+    source: gather_blocks
+    type: function
+  - name: interpolate_wind_0_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_0_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_0_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_0_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_0_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 0
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_1_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_1_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_1_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_1_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_1_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 1
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_2_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_2_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_2_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_2_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_2_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 2
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_3_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_3_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_3_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_3_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_3_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 3
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_4_0_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 0
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_4_1_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 1
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_4_2_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 2
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_4_3_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 3
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: interpolate_wind_4_4_PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+    next:
+    - merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      chunk:
+        block_x: 4
+        block_y: 4
+        mdt_key: PNOA_MDT05_ETRS89_HU30_0933_LID.tif
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+    source: interpolate_wind
+    type: function
+  - name: merge_wind_interpolation_PNOA_MDT05_ETRS89_HU30_0933_LID
+    next:
+    - combine_calculations_PNOA_MDT05_ETRS89_HU30_0933_LID
+    parameters:
+      parameters:
+        AREA_OF_INFLUENCE: 4000
+        DAY_OF_YEAR: 50
+        SPLITS: 5
+        r: -0.0056
+        zdet: 2000
+      tile: PNOA_MDT05_ETRS89_HU30_0933_LID
+      type: WIND
+    source: gather_blocks
+    type: function
+  - name: combine_calculations_PNOA_MDT05_ETRS89_HU30_0933_LID
+    next: end_node
+    parameters:
+      tile: PNOA_MDT05_ETRS89_HU30_0933_LID
+    source: combine_calculations
+    type: function
+  start: start_node
+  type: workflow

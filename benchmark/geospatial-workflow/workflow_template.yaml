@@ -1,0 +1,5 @@
+main:
+  type: workflow
+  start: start_node
+  end: end_node
+  nodes: []
