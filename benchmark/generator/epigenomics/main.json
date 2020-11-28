@@ -1,0 +1,314 @@
+{
+    "name": "Epigenomics-synthetic-trace",
+    "description": "Trace generated with WorkflowHub - https://workflowhub.org",
+    "createdAt": "2020-11-28T07:55:57.108961",
+    "schemaVersion": "1.0",
+    "author": {
+        "name": "gls",
+        "email": "support@workflowhub.org"
+    },
+    "wms": {
+        "name": "WorkflowHub",
+        "version": "0.3",
+        "url": "https://workflowhub.readthedocs.io/en/v0.3/"
+    },
+    "workflow": {
+        "executedAt": "20201128T155557+0800",
+        "makespan": 0.0,
+        "machines": [
+            {
+                "nodeName": "fake-1",
+                "system": "linux",
+                "cpu": {
+                    "count": 1,
+                    "speed": 1
+                }
+            }
+        ],
+        "jobs": [
+            {
+                "name": "fastqSplit_00000001",
+                "type": "compute",
+                "runtime": 20.324,
+                "parents": [],
+                "children": [
+                    "filterContams_00000002"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "df16efeb-29e5-4905-b214-7c793fe53cef.sfq",
+                        "size": 109431824
+                    },
+                    {
+                        "link": "output",
+                        "name": "5be8f087-edf6-4fa4-b295-6a5fa453370e.sfq",
+                        "size": 385300
+                    }
+                ]
+            },
+            {
+                "name": "filterContams_00000002",
+                "type": "compute",
+                "runtime": 14.932,
+                "parents": [
+                    "fastqSplit_00000001"
+                ],
+                "children": [
+                    "sol2sanger_00000003"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "5be8f087-edf6-4fa4-b295-6a5fa453370e.sfq",
+                        "size": 385300
+                    },
+                    {
+                        "link": "output",
+                        "name": "d35126ab-743d-4ef7-b63e-9946161f4b4a.sfq",
+                        "size": 379368
+                    }
+                ]
+            },
+            {
+                "name": "sol2sanger_00000003",
+                "type": "compute",
+                "runtime": 0.808,
+                "parents": [
+                    "filterContams_00000002"
+                ],
+                "children": [
+                    "fast2bfq_00000004"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "d35126ab-743d-4ef7-b63e-9946161f4b4a.sfq",
+                        "size": 379368
+                    },
+                    {
+                        "link": "input",
+                        "name": "e98ba874-5871-4605-89fc-06bcb5f0f534maq",
+                        "size": 171256
+                    },
+                    {
+                        "link": "input",
+                        "name": "943a289f-8964-42b5-b0db-7c103e231588maqindex",
+                        "size": 118456
+                    },
+                    {
+                        "link": "output",
+                        "name": "4f78638c-78db-4eaf-b7c7-1a383e8bcca2.fq",
+                        "size": 290449
+                    }
+                ]
+            },
+            {
+                "name": "fast2bfq_00000004",
+                "type": "compute",
+                "runtime": 10.513,
+                "parents": [
+                    "sol2sanger_00000003"
+                ],
+                "children": [
+                    "map_00000005"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "4f78638c-78db-4eaf-b7c7-1a383e8bcca2.fq",
+                        "size": 290449
+                    },
+                    {
+                        "link": "input",
+                        "name": "75bb54d9-84a2-4dff-bb96-815fbd7ffe5bmaq",
+                        "size": 171256
+                    },
+                    {
+                        "link": "input",
+                        "name": "5a7957ca-a6e3-41c6-92fe-31140ca1d072maqindex",
+                        "size": 118456
+                    },
+                    {
+                        "link": "output",
+                        "name": "6703a70a-01a8-4024-8005-6ead671ab6a2.bfq",
+                        "size": 71135
+                    }
+                ]
+            },
+            {
+                "name": "map_00000005",
+                "type": "compute",
+                "runtime": 37.926,
+                "parents": [
+                    "fast2bfq_00000004"
+                ],
+                "children": [
+                    "mapMerge_00000006"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "6703a70a-01a8-4024-8005-6ead671ab6a2.bfq",
+                        "size": 71135
+                    },
+                    {
+                        "link": "input",
+                        "name": "07a5c3ad-488b-45c6-848c-e4188b9bca6dmaq",
+                        "size": 171256
+                    },
+                    {
+                        "link": "input",
+                        "name": "12154872-9c6c-4684-b4cc-aff089670983maqindex",
+                        "size": 118456
+                    },
+                    {
+                        "link": "input",
+                        "name": "769b403a-f2ff-46d7-b584-543eb9cb42b6.bfa",
+                        "size": 46944392
+                    },
+                    {
+                        "link": "output",
+                        "name": "d1035ec5-8a56-40bc-9e27-e3d39ded8cb8.map",
+                        "size": 17429
+                    }
+                ]
+            },
+            {
+                "name": "mapMerge_00000006",
+                "type": "compute",
+                "runtime": 1.871,
+                "parents": [
+                    "map_00000005"
+                ],
+                "children": [
+                    "mapMerge_00000007"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "d1035ec5-8a56-40bc-9e27-e3d39ded8cb8.map",
+                        "size": 17429
+                    },
+                    {
+                        "link": "input",
+                        "name": "0d372fee-6a35-4532-95ee-9377b31c0c5dmaq",
+                        "size": 171256
+                    },
+                    {
+                        "link": "input",
+                        "name": "29974f34-3275-4316-bf2a-0fe9fd850594maqindex",
+                        "size": 118456
+                    },
+                    {
+                        "link": "output",
+                        "name": "bcbf36dc-a035-47b0-b960-d347ef566698.map",
+                        "size": 8972748
+                    }
+                ]
+            },
+            {
+                "name": "mapMerge_00000007",
+                "type": "compute",
+                "runtime": 37.253,
+                "parents": [
+                    "mapMerge_00000006"
+                ],
+                "children": [
+                    "chr21_00000008"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "bcbf36dc-a035-47b0-b960-d347ef566698.map",
+                        "size": 8972748
+                    },
+                    {
+                        "link": "input",
+                        "name": "8c889033-3f49-4e59-92ec-034fa6bdf13emaq",
+                        "size": 171256
+                    },
+                    {
+                        "link": "input",
+                        "name": "f7669c26-09f3-467f-9d53-bc869516ddc2maqindex",
+                        "size": 118456
+                    },
+                    {
+                        "link": "output",
+                        "name": "eca04d49-57b7-4ea2-9c66-3db27299cf6c.map",
+                        "size": 8972748
+                    }
+                ]
+            },
+            {
+                "name": "chr21_00000008",
+                "type": "compute",
+                "runtime": 3.404,
+                "parents": [
+                    "mapMerge_00000007"
+                ],
+                "children": [
+                    "pileup_00000009"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "eca04d49-57b7-4ea2-9c66-3db27299cf6c.map",
+                        "size": 8972748
+                    },
+                    {
+                        "link": "input",
+                        "name": "d1dbc2cd-caee-4d28-a3b8-e45c775d9c18maq",
+                        "size": 171256
+                    },
+                    {
+                        "link": "input",
+                        "name": "777c1240-5d8c-41ab-8565-34db9af6f203maqindex",
+                        "size": 118456
+                    },
+                    {
+                        "link": "output",
+                        "name": "f1f8ece8-ae00-4677-9934-40ea88e6bf35.map",
+                        "size": 8974436
+                    }
+                ]
+            },
+            {
+                "name": "pileup_00000009",
+                "type": "compute",
+                "runtime": 23.112,
+                "parents": [
+                    "chr21_00000008"
+                ],
+                "children": [],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "f1f8ece8-ae00-4677-9934-40ea88e6bf35.map",
+                        "size": 8974436
+                    },
+                    {
+                        "link": "input",
+                        "name": "1694bb7a-4a4d-452c-b461-250c8329503amaq",
+                        "size": 171256
+                    },
+                    {
+                        "link": "input",
+                        "name": "b0e1115f-41c2-42f3-9dce-5a92cdf9e1b4maqindex",
+                        "size": 118456
+                    },
+                    {
+                        "link": "input",
+                        "name": "43262cf6-85fe-4980-864b-5583c3f797b6.bfa",
+                        "size": 46944392
+                    },
+                    {
+                        "link": "output",
+                        "name": "1107d919-41a2-47bc-aad9-a3a877a29fa9.pileup",
+                        "size": 4595783
+                    }
+                ]
+            }
+        ]
+    }
+}

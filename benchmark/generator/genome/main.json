@@ -1,0 +1,139 @@
+{
+    "name": "1000Genome-synthetic-trace",
+    "description": "Trace generated with WorkflowHub - https://workflowhub.org",
+    "createdAt": "2020-11-28T08:30:40.907432",
+    "schemaVersion": "1.0",
+    "author": {
+        "name": "gls",
+        "email": "support@workflowhub.org"
+    },
+    "wms": {
+        "name": "WorkflowHub",
+        "version": "0.3",
+        "url": "https://workflowhub.readthedocs.io/en/v0.3/"
+    },
+    "workflow": {
+        "executedAt": "20201128T163040+0800",
+        "makespan": 0.0,
+        "machines": [
+            {
+                "nodeName": "fake-1",
+                "system": "linux",
+                "cpu": {
+                    "count": 1,
+                    "speed": 1
+                }
+            }
+        ],
+        "jobs": [
+            {
+                "name": "individuals_merge_00000001",
+                "type": "compute",
+                "runtime": 39.497,
+                "parents": [],
+                "children": [
+                    "mutation_overlap_00000003",
+                    "frequency_00000004"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "9797c868-efb8-4d4c-bb93-be9d5d6eeb9b.gz",
+                        "size": 27275
+                    },
+                    {
+                        "link": "output",
+                        "name": "d5780c65-e19d-494b-9b4b-60ce427a2266.gz",
+                        "size": 24180
+                    }
+                ]
+            },
+            {
+                "name": "sifting_00000002",
+                "type": "compute",
+                "runtime": 1.548,
+                "parents": [],
+                "children": [
+                    "mutation_overlap_00000003",
+                    "frequency_00000004"
+                ],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "f44808d6-d5fe-41f4-88f3-cdeee177d5eb.vcf",
+                        "size": 267806263
+                    },
+                    {
+                        "link": "output",
+                        "name": "415ca52a-4940-47b1-9a05-a6f0c60518ac.txt",
+                        "size": 231958
+                    }
+                ]
+            },
+            {
+                "name": "mutation_overlap_00000003",
+                "type": "compute",
+                "runtime": 4.661,
+                "parents": [
+                    "individuals_merge_00000001",
+                    "sifting_00000002"
+                ],
+                "children": [],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "d5780c65-e19d-494b-9b4b-60ce427a2266.gz",
+                        "size": 24180
+                    },
+                    {
+                        "link": "input",
+                        "name": "415ca52a-4940-47b1-9a05-a6f0c60518ac.txt",
+                        "size": 231958
+                    },
+                    {
+                        "link": "input",
+                        "name": "7d1692dd-0f5d-49ab-86da-e68506905897ALL",
+                        "size": 28000
+                    },
+                    {
+                        "link": "output",
+                        "name": "72c11234-276e-4741-9353-c8e18010b1b3.gz",
+                        "size": 172605
+                    }
+                ]
+            },
+            {
+                "name": "frequency_00000004",
+                "type": "compute",
+                "runtime": 76.023,
+                "parents": [
+                    "individuals_merge_00000001",
+                    "sifting_00000002"
+                ],
+                "children": [],
+                "files": [
+                    {
+                        "link": "input",
+                        "name": "d5780c65-e19d-494b-9b4b-60ce427a2266.gz",
+                        "size": 24180
+                    },
+                    {
+                        "link": "input",
+                        "name": "415ca52a-4940-47b1-9a05-a6f0c60518ac.txt",
+                        "size": 231958
+                    },
+                    {
+                        "link": "input",
+                        "name": "6525f0d8-0517-45c9-8163-864b7eab0d70ALL",
+                        "size": 28000
+                    },
+                    {
+                        "link": "output",
+                        "name": "4036d422-c40b-47d7-a523-92bb0ba55f28.gz",
+                        "size": 217409
+                    }
+                ]
+            }
+        ]
+    }
+}
