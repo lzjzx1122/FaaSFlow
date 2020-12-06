@@ -1,0 +1,624 @@
+version: v1
+type: flow
+steps:
+- type: task
+  name: fastqSplit_00000001
+  resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+  inputMappings:
+  - target: runtime
+    source: 4.281
+  - target: files
+    source:
+    - link: input
+      name: file0
+      size: 9316
+    - link: output
+      name: file1
+      size: 32
+    - link: output
+      name: file2
+      size: 32
+    - link: output
+      name: file3
+      size: 32
+    - link: output
+      name: file4
+      size: 32
+  - target: file0
+    source: eiem6ajhjcnow65v3lajr81kdio8grrpekqanyyb10lqfqalryeqjiz5tjra15q7sh0k2jox31qj5ax5gut4d71d8eclx7fpsq1jyywjtzasteqf3vjoovtl7tqv9sfl9ae0r99pqnrq8kgxuc8aqh4do1gdmxxx7hev5au31hhfkny9gylbf72psyu4y8ra2deocmjmy4c7cae1yl7hb681mwigr9gvk8jxwxrz9ukzbicq3094farxyniyq3nr9qmz43g099iviyatpole8vwo3rs04bkqldptkevylbjrjtowa9466vno6fd8qm6v1y85vosx7t1i4u9bptdun4lwp1o3qjazgxznrhsyg5xz1kfikn1eiegoeyovr15s73pbam6fy07164k0idz708rj8td3kv78tyl8s884osoijjv0y7bv4i5pcdvux1oph5wnjft6nrgz43hju13tle69ai2a9z4epdgvqqyb48p7ei6upft3anat5az9eohp58zxe9ab8oxex7926w8t1o1rhpt1nn1sqr4gdvaizqjodz61iigg5xsu3mftlqjauwy3ymtuz01bnkysk94chwwan7fr11u2ljyq42edhpthnpc67hr6zlfhlh4jcbhk8n0g1ef2rvj27c0t8nzqoeqemafshyolmleuxvlvb9k2z94chzgl0fna7hasbq0n1q5kncz6pae082794xztdcqrtv6towl8wxb4yyoroh64jwxnsvobcmfcwfz1ava1djdg7k042mjwnmkscxozgbi7ev44gd4pbzsuancbwqu0orcg2j0t7m9dxmmzep098jyu26i9ox3cfwh9w6c33t68bny9z9lca2r719qsv2fi6gnxczvu98nex2ie1e3lx84uso8mpeyb9vncefgg6gtlxbzrvc2tfn9u2erknatncvhd1p63kg2gv4bondwpud8jsbkt4ll0dxzy711dyupord6zmhb93s19f40l810n4h5rhzidqlfwmbq5gnle0qmpp4ltw4l47e0ermmtfr03rtakjuh4khsogzkryg2hd8x7gdip0tng302cwbkwikpt75717em0v8v49keawisq486lofcba81uacdw37bxos15zqdop45dggv5eku4jdlms4rne6q4cc6y033cyq2x728bgokjpc8tu5acz32m4zaxii1lo6d3qs3nexv3d5cyxs0dus031cbo2jstrt4qt5o4d6xv41hb8bfptiu0jdfo9yqgoixzyisc5e51yufzdlzy71obcjf5xp36u43cj2o0lzx0hakriy3rxqjinu7wd5z6z2k80n62irs66r8llczd7ni8ugyym5cjycdfrmty3ib6hdoue3senhypa090egtrwytx8dzaykd8zpmvyy0qls3ofnj38a50dxzyqryw7y2o9zdrwvtmusfnn97olzx62mx1kgjd9c0egyjf583fvdkxzk7b92lj89rh8jhsifr5hlqm5jalan3x6l7akz2ffnp0csfpwi4w59oug5fsxmwgba3hk3ypagm5ocs3b9d4odv8jhx4iz058t2a27y3gyk0iihhustghxpup9ywvpybo4wmkezviuwmsxfbjkw27qdw5z7pshk01oeqs92f3nzi3oasgsf0qubqsimswxghpnopgnzsym6rp6p3f0pumv0myb4zmi7172muub8nl6d3cl2uguroyto14jpghx354x7o4ona5y17kqzdpiqcfljywpsaco24ldxxhf3xsg3npbxpl7mn4dj6st6trq0kj0cnaquj5l6hy52ad0ww1hzmb1o05o8zelqp666vrorjbiu1s5cnv37g5nxg95nrf5bm980tzzji7xbube99ukmuqkq1r4xb85tiw9bbdn2b0upnlhtrv70mq3elxf7f1ljo8bq4aqo8btqjrfrqslcqcjtog6i473qbq04qts8esefqnavp5rhoewxghwnn9yo152x62hrq504i06r9yg15n4xfez9bi05e76jin55jsnbhvp6p6bwve7s1uvn4kcuygcsmics3w2q2s6f3w1b844jye69pxaoe719ncd648rdk280gw9bvaidodj3ezt9yy1dxbkwxc73qw84i4ylj629osovctqd0ddos73w06y8162g6j5b70s4egwk8lgndr3alqehhq18ebjqma87kmdiuddmiz6eh9asjsf253kg0ju6bzrtaaka1jxoyd1kcambj94u4l7ei9k3jcwdq2ayhlt88dgmxpwhwk3f8qjdj7dtngca76fn5b0rdrpxpyb0xq3oaz7mt8tlh9f5pcxl7ew3roqn9k53o810xiq4qadmerwmo1z3swkrfxxydvbs0pj07makl3amulhv3qkey0eve5fetg45ar4hxyde6av0atxf5ipxw73a2b6z69ihi8yb1c47rkndkd8ehshavo6no4p7d18j07diju5z3qjjd3up2cz7xet9j7id3xspp3isqza0hvkln1e6qy2mhkuenyvrkso97m12bcgogb73j2sfelcodnz7i8jvprr7ayq61ie207ka96thquky8c88uxtncyr7wndr3988q6rm95q8duer65djgfe15b95quvvvv0wj25n3gvh681ddkeiy0i6w851oc1mv98yvh3nhknftvuijveiziv5lkna9ixzqrrug1csps57p83tao6gn7oa2a7i47mtaz8812wqprpe599vy4b8g9jgt0efspusu460bfafs5np96yfch547zwzb86cksgs9niimhkwwdojn5aly5as433cd1y18cjp38vw4bjlblpiu54kfm35hzpdxp9dkphcwqu0vft7aqvxhxn4djjcc0pc3y241w8hrzr570ikryao1kgihvoi0wzd23bgeptajrr843xiakophzwbcas9gb2qth173t7pbw5nbnecc2ubimmi2qkaubocq9554o747uokdb9oym1qaa1f6in4ziqdl78coyoemiiuqmso9uftsemkbp9n473rbg2gy7sgq4g87xtru6t6pfv0dqwhkdnu2v13qrp0zkorpxjxrga7j7byolfuunx4jmxgjzfutu7cmkhdqznkg0om6p9565c8yb3nlicmg46z7bhguyckdt1cy2hxj69bf0m0uzmyylvoc9kb00bfle7u5rsvz7pblyj3unsdmrpcpifetrx3w6ime7dzgxx3m9ownopet28tb2njfm9g8bxyhx13mtjksvnts3sc5re92c8dfracyy8z6nnkp2ph6zgq0auiu2tuf0y9pt4vofkuci7sc72g5i6uq7fs9a8dknkxgiu0aocgugmul8cd0tlkfxtwng15o3ghc5koog185qcv0xw2exdjwrs6ktc230ofrvm0g9iryefiiuk2pf0v10u8xa1cfelzkne9a0xkiwel53p1zcdwswtxhxumhetrgoiit7aac1hbjvizxmnra5d346l9ap1v39w2lz9sle2k56nkcjky4po0k8hsnaj4lfma8319kzes25nkpjauyj9u785ynq2wqpftf6a0f4dgcnyu4lqo372m6mmde58amj4mawzjver6a8vn8egrccu7z68plj1tqo98m6vvmatzp8rr7suy4mqcu300d0qnqg6hs974it7sie4xpypxrl93pp7e2vxbfrzju43e2u8yz6w0qvhyqq9kqryolm4u2ngb635dh43hb3i1ilb73k19tfxh5xsx1o9gug85mdoa4aygp01eo21pwh31t32394ivo1lxzaxtvo9mwwmqlj5xzr2gigtkdvpf63lzlv81fufn7gndcex3cgfu3w3pp1hivjnqhnrks7byfugmpwpq0i3ixdue94i63burnukhoxh4kkdjrd026f7rsyw6jcsd9g2wjrqloj9dspdvqaj8zxpxd46s3wjf7aglbfkffk6uw0m1kfa88j390zu4v1n4k0smibw2e7y7r6d7gxur06godgxvxeqqw7bdv19f4jqi77g0u14mwl254njf9fvpigia5j83i8ydh3im3njmc1g7ws1kpoo1a6kh3n8mnt5lalwpwwtl4zfkxegzwlxjq2dc5yvbxc9vsw63pztba36spn3tyyk1z5ws8tsg6rql25l5zviu6gzd0gfrp63klzyaasiq2cx9zmccebyzmyfae8h7909wgwqwe31m08amc0stoyvz77mwxvs33i2ev54jmyldlqdm1pwki0wyfm0hntzqkak3q6jjz45sj6gmw5b6nhiv1akteppwsi2cch663a1cbysc9sg633tyz1dxhhxderjy9eryn4ll8iz0x68y88eglgge0nciu3n942lor1hm5uqfne5cazpl56p7fcm84dxs132u1hplwflbol7egk0glgzaoz7ywktegnzamwx0zapuj52vvduktxqa0aikera2q3vqaleyokpr3geku5yd1e4cgw31edyohlqqo9307f58xg8grd8muxi53q8ebh7qjoyib6wrr0lacprtelrj0h5564zbnek7lap1c8qlqbtvdnumgvr81ex9fvkke6ve97ueqcx5uw89ts5clv4niuegsvkq3ddxje6c9snwnmtwufhyw4qqsuzm4vclggqely1vgnv0s8ripexib2krqym2dwkv8kdrjff46bwqalwh7h883vqa3kvoifln1bsyozrwqpr38okmhwu079x3abdrogjtdie87a1uja5c7ap1k48okt630q798bsirev4jhvyl83gfu6clccr6q44bvmxysplg2vep7kylcytj9hwypmr7i1orod3ku9h0ukla4tq3w14ngsm45rgig235eyto9xwzhinns3508b6aq54qe6d8nrpt204n4aebh6fcq091xxospno9bnuxfrzct3vyozfr0cquehsl5msqq75hfw49rp6h21l2stxk981gtrxc5aeiywxgf71rwl3ymavju6fpz3j7aozpunthd0pv0o05c6s2tq60zpf8ipjlsfosf08ogka2otjpprvtbub6t7g5fmtkgtrznnpkoni53oy53ecc5nltomv1x8aq784duwiwv6l5mknisem9y9frbcf11y193aae3ldzafcszkt95w21volopwgvejwnc5xobmmy6u58e1xljhs0ynqjyr30ohy2z0yqzq8746hlgvlbrfw8oldq1hj6k4ivmvvu0ad3ns01jwhyl4akmgh8rhx1a6580y5uwwh7j1g9k4dxr9kz8y5jgqzm4vxpwouwxgiyac5uxpej3wxs0atm1rv5cw81uqek7hf47nmha17c0ng901lv6snnvha4vjjkxif1b6b9wgx44gs1f4jn68x5z7o0151xcgazvf8rj5cbfq9wvmtv4squ8auci570o9kcgvu80v0nbpg1uksecc1pdqvaa60j6bdggxdws31gizeaxj87xrh4m8tyrpd49efnmijzn89ezyncwfrai0wlqnmfhf12frsom0ljy8pyikdothedhap75tdtga0ficspl11alxnng1uypr3vi311daghccmq5z3cbgrpcbrfo40asthh2brqd5y2xzuesglmco3rn068nbcdsd8bi7sj3omh0lzxvsykxgmsgx6omzk29qhi5xfrspj8mx1ufs4ybk70m9ozn9mqo2zzxuzxcmg3m8yam2ugz2ph3ev9qf4g4t8w9hlqu441j7niu1mc3y11zw1p3fouoxb7wk3hjxn6vlr7ki6nsumb2buj2p3m5q9xvbhebgb2vbv8hhgjsv3wi62c39660grqard5sxmwf36y8eo26zdckar7kft4kqvq7g93lww4m8zipx6jy1j8hx62e676wjvud1s7oeeaf006ft41hen9e55ebdcmkdb551xxzsh2l055uf41ybzjatp3b3gc0yfpb9x1ralx07v0vq8l1fnqcqblo1tm0wr2tfn155e058vcpqb1j5b8ui1izkzfmqubdddeyt2d83a8b7mbbhwmdp9ny9z21c5f5oyzymrfcfslm8r4ywr308tiek5oib1mvrnji6f0b3e65u4s02f8gqicrie2ereny328gmj75ztz4aofus8m6ew86mdep58i6immjr9m8xsgzgtz7kexe4csxlrp7wxpmvb17a9o0641lvpeay9nyowzozhulizf8z07ic62ewvip3lw3h3zdf1h9ibz6qj1kf1ykqx3r4yw5y8ewrksy5a255kk7yqf0g1wcnd1o92qd5549vapvm5idlb9h3xerp7d573s2j57h6j4m4gml5tzl600y737720pw0frckwpcspi5v34fgh9rdlj86b359i1ywyfl18o6byupihidyqkqjdh5v7570p5nr4akcevo5irvi4m7bljcdwap4ilr0iafzj3j6rsp8tkbkmevnguit0h624fx7b6yucafhcqo0r3fp5r56l1pljnrzauj00pm0p0amatgxipzwof869yerok98askvm0rm0r0fshoz6uo2gotovfg12hcfopxmawszog4rkaan9ckxwvhux64678mh4ok1bk19u2sgx9pk0hgdsu2zo7gl44fe3ocl5rq8y9ip2k8n0267wztdownwnsc5hh5eerjkyyjgrue5xjh1otp5qepav1z1xmuzdobs8ghgcm9svsdtw6wi7dc3lxexd4smdgw0r1r041j2sntlwg0qvrzudtcdzkc44p1vezg4gmbkw7typodi0cgkbuio0jrbn8oecxlhs1gdiz9rgn13qwgwfq9odw947kznfyffv5edl7f4aaptai2cmwpsa1rp5nkgpy9c80gn7z3s1qenn2todyz3o741bozaugdpef8zoqdedd2lwo9kux8yu6n7rcixxu3zedabeyaa6esniiinthvou6gao0x3ahb2bwqgi2gijrzh2calrilazws43zek0kfj4vun82kolvbexbgzbif3z9dmzpctn2nncjef0avs36okp7mirpy8ggs8q0gk43jg49wfmq332hth4l5qo2w06bl5ywfy4vnw7qsdzx20vw604jc5kleq4g8rksqls5d8rmd300rd76fj9d6cw7l7ni620cvdtk3xmudpa0srg4em12dpdp7nogk03f3fmg5njza0gg66i4k4arhk2onf1yj6nwnexbt5hezrrduiix4ueyjgnf1pwufphwh8ii84qryafis7m90mdfr6466vfaxw3s4cdpz76qw8rox1rq2gvqdi5rh79qwtjyx9afe8oxf4u3q39k8g1t94zydg7cjt08qg1nhsbmg03tfidgsyp1xz4fsaytbjgbm5vr2srovdxshtpr1g8y2f6t9ditnnhplsax7sivw3pqpteo1veayx5i3944ugqqtvixjn4iqd9aopg9un7kqjfstku6bxo0sr90o8k0svbcnfpjt8rsj0fg2yctkndre6xyvu4nurs4ar2cp1xx9nahrrr3ez6my6825ehspd1taqr9b683qsgblca81ry8sxu1vcg0hkhvglzjguddl3e1d2i2zr46o894cqkipdi0yu3ugwrhitpse9dus23kyg69ayyu271o1sejr39qg7gbrnpf7xwmrsmc4p00wc2rw49x8m1tfdf0acw2k0wttfc2mmh0w3v48bjjj343m64tsb19gv9nbfs25gae64fu782xwgh6850upuzhep9qrrw948fttecnp8m8pzza3kcedl3fxnytlhyznfin58md4gasmixs4gzk7h3wpkpm2hatoenzto19pu2lijzge5uw5uiszh6knz5bj75l6g6s3wn6mbisk0q4y6cz2uxeg3orlq4aljbavvhtdtg6yq5gfav1r9jiiblclok6sc2u1d93kzvb5gak6odse5nbc06v7b0nersu0ry17x27bnfycw3psy9x16vjsif2n3zsrfavmlzase1wjl80p5pj29s99iy06y7bo21pi4ozqjbkwfdsy8avqf0g9dpsnfj4g18o1pvx7oyqca6w858imgfa8e5l2eziqb5p5z7f7imidt3b9d2wxo3bnxifdss1too52sjgod4jp6bscqrfgbil41zos4ok6n1hlmfsmh5ulok6ij5u3ih0y3xym0mzueog3igwucr687rb4lsq6p2p8albo1bqqjlc8wpxbq54vj8si2v71ay5bfitj29vsyokdzjrflhv4122ayymyfpcstt9ict7iddm1sub3ebtjjurvh50hduhl85h30eaie59b38gwvlle74ro3wdz503wa0bbxqjyq0coblhdav75nuuocmsc6yu0ns2kwi069mbkhfpqbxal0nuzd80o06xn4zu9xq5fh9m61n5caf1the0lxvi332jjt0nhvklsmuuxc0s0gkz3twge0qphx3qfuss6n9etwdkd2t9bobonxln7uihrpsyjj29196xm2gcg9ldxsyjtnofnm0ugf26t9j0xgpy67c4ru81s6hxapma0yqj6791gib71nck28xqa5xrzj85vxh6djcwlgk152oo3kglrcbvjcs99t3a8e3l6pssyyhzoje5jbre03cjkw8qow29x7tmem7ruqwdwdegx1cp1wc7vcsk3i0xbbjfzymqhcwy78v5bt00yi5bjjaund1usiudw66ez13sooiwopv2zrsqn8tjjr3py9zkhzeot5nr69ykvii7vrvv9yvtouqn6grpt1sp1mvfgngcf0b30onzjl849bvucoeem78u7mti43xmjbvt0ksshdp2faxcrnwfml7psxsgqms6wlow7blwo464uezdxso7d61kn9mzcsm4dwdxe7ah101l76cec0el6344wmalutrqf4xevv2r4qtieg8ccl9azv0jfa7oo250mvg1x38n41az18tqi489o8yjrsalreh7kf4vfq11kac1hmj1353w1k7xjwfizt0rw94md0u3jvc9ozy3pjss2bieo301b2bezddpyfn8cegeb6201lvubx4f55l8lnrxhxc1hd6uh5blrg1iydo3o89qetmwfogfuq15l2pvvqqyn5gdrd2djooosy8m463c7ryt7fm75otqsaj3lx5beyz7j79go82evxy3eq7chema136vxy4vyhxcjze7wjk4up9jvayhi5z7pwwkvz2tphczj2d75hdlwgby3q31ir1lj1y9dkaxkrd092ya21vie08kta7a30gyeqpq8bjxwylrnmls
+  outputMappings:
+  - target: file1
+    source: $local.file1
+  - target: file2
+    source: $local.file2
+  - target: file3
+    source: $local.file3
+  - target: file4
+    source: $local.file4
+- type: parallel
+  name: myparallel
+  branches:
+  - steps:
+    - type: task
+      name: filterContams_00000002
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 0.923
+      - target: files
+        source:
+        - link: input
+          name: file1
+          size: 32
+        - link: output
+          name: file5
+          size: 32
+      - target: file1
+        source: $input.file1
+      outputMappings:
+      - target: file5
+        source: $local.file5
+    - type: task
+      name: sol2sanger_00000003
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 0.256
+      - target: files
+        source:
+        - link: input
+          name: file5
+          size: 32
+        - link: input
+          name: file6
+          size: 14
+        - link: input
+          name: file7
+          size: 10
+        - link: output
+          name: file8
+          size: 24
+      - target: file5
+        source: $local.file5
+      - target: file6
+        source: ko2pg6dofpqjdq
+      - target: file7
+        source: ktl1bwqxji
+      outputMappings:
+      - target: file8
+        source: $local.file8
+    - type: task
+      name: fast2bfq_00000004
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 4.818
+      - target: files
+        source:
+        - link: input
+          name: file8
+          size: 24
+        - link: input
+          name: file9
+          size: 14
+        - link: input
+          name: file10
+          size: 10
+        - link: output
+          name: file11
+          size: 6
+      - target: file8
+        source: $local.file8
+      - target: file9
+        source: t0rfrdjfqrayry
+      - target: file10
+        source: bywbqmuzju
+      outputMappings:
+      - target: file11
+        source: $local.file11
+    - type: task
+      name: map_00000005
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 52.479
+      - target: files
+        source:
+        - link: input
+          name: file11
+          size: 6
+        - link: input
+          name: file12
+          size: 14
+        - link: input
+          name: file13
+          size: 10
+        - link: input
+          name: file14
+          size: 3996
+        - link: output
+          name: file15
+          size: 1
+      - target: file11
+        source: $local.file11
+      - target: file12
+        source: 9lti95qoou86rt
+      - target: file13
+        source: 4xfup60k33
+      - target: file14
+        source: cmsutsr6b6p3mdhy0454unobe68wtojlm8uwshg4cc5ejkxkr2ifyh6uw2rse5xrjskozwkh16x4h6cv7rpvray8lhefu19u5qqcwgupkq23bypc2aghg0qz3l2l8ml1mk3bytlcre117sni9mkcmdq22f878h282207aoajaviasckcwf5kdd6i8p04jmw4t2tfvndx80x1qffas15s9gd271nxhy8aa71yvu8r3dlks81bz57ud1p8y0d7yuychhqetihnq6n8mm1t32z9da9g2aonrs7jq5z1cxwihimc85z6nokfhl5uuedkzwkdng34zkcuiby8951ja1qfbqxtcmtmav6mjwcfcxzcg51qn4lk9udf26x5h6swebjk4vquzvu9it1ra1ykuolhexyhlvqfpeuquut3cd5mnhdbmvb1rjh6k6k34uxlr6wcp5qdd2wnfpj4dgknsajuvkdpo7negwj1f5op7pubs59hglelcpfrbe34fgkuh2rtarkoz9uwni2mhqtf1v8f1bjo87gc1g6mf54mx2g0ysqoe6kia23d6vaahhf8b676rlgv44xew62d0w7uzw0facvhhdu64wvhs74rgxowryiigfbfn26cssrhbms6zb3dibthd0uxm9yfoxifwvjmd553134n7q9hxfk5jiwbn2mpjdibwf6nb4gt8lxookdptbrbz3knu1za4x5ax6i3e8qq8qqb3mddghzc6z4kun72ttzj35x61f8m31505y7snwuz8k74clsmrvz8m7huo7lby54ctit605qyvttzx67nqjuidmf1o7tmfw0r8f8ky9tg34jynml37ljb0s6dm7owa4dyy7h7r46m0sm153jz15071l6v39s3csggr66ku4mp5cr6id82di8ked2lp6n3q654pbfrpn9yiyacpvszhhto2h4jzwi5ouu8fs8xeckaejuk656snfmxx4j02m9wexu3wvaxcp88i8brlgvmc4y3i17swd9t91gwt04dwi4ldst6kfg9okjwv4opzba8jp06m7mc8e34au4reqejgj0cxqaww9r8iiyv4xqxr5njj4t12vf1q7zdhm9cco2jhgklzsyo3s0yxiwvrvmjgsbr490npuikja39b0gidx66b24ayw1rvkjg2wf2u62r55bkjmjmiq28k9f4u0pkwuqqrgrsbz4trdex785razctzbwxna9dmwz7038kdm694c021zje7eyhbbkd998ulam281wwq8j94erlhno0l32v780rcl731jq97xsmhv0h17i3vmj2qn5wuerxa4fjmh8yd25wenu7d8j2hdfmc0q8xjzofi12dijf3ahv8b7tkyrhwipalqthl61op9ae77frrzmfh6xweyg35qbejgmuiem2bm7ijxp4rs9yu3ex5ln81k8uu3ajdgtpiucs5b6xnca7amh27y3h6lgkukv79wwwq6uq1fij2fdvsdj0jgu5mp0c5wzhmryflc6dwrkn72xaly0vj0ottbxls22pfy5qbwkv3hocedvmhjxkvpizzkqodjst08f5h21domi9smjvrlbuye5ylcvmlt32aikmjouuaauzkjrhx8lvxhkuhz0ab116mqnm00pq34yikzdzhlts3hpysthyq8ugg5zdds6vcswibw1dtez4057qezs8y6xomzm1n8u3sl27fsw8833g3tlxv2bwcv4qtamwn0nlzsi7kle41538p8rzeoyorq0lma9p2njn8lqo9k0gywqt0t7dod7oly8uvekr20fsifepoks7j3afgugmelj3udt1vvzmh43ura6nqu1en02zcptnjdlkoi974s2h43t8c8fr9g42na245d1pabotncv93476w9aoq3p6rb25ckqzpaalaea3oirpxza01ygyc3kuhbscv6wjhv38lnovbiehg95lhogmnlyqf1a2bvdqorf7bswylxidl91hbz18nlyvupca03snvqli1uxqpklovei0781y3ukii36yxr2825673me9ko9y9lqhxx31na1h52idznpg32jeodjdrrt4wu15172nz7701ii2v5wgbvxmcitka77856tp8q7u3q4ia4psimgek27e32jvecmal6id0x088okty5ym87jl4tqwzxkdjzp305kobbvucx20f458zy6c0ruytlbzv5wonanlq0bf0eld1dpmkzsvruayra3h26lq9hogcpq67as8k5zxviej91jqgxja9jnvt9iikoa4rpwdb2dkgio2u0wwkdjp841uform0k5vjxbq2v188n3i882pwk6x5qenglljpqz4wiznrj38b5sn2bvhwrvencl8rbfsp37rk2pfb489xtufi7ctr0l4123jvnvnmvjkwj9eo8rttwb3ykggs84e3ywvvc73n8w8zyz4ovialen4aqhnj4sjwc3ai0s1o6ha11rzgq3sezkvok3vbc9d2q5wxwcue7cecjnwk7nmh8kya8ofyq2yf4vbvvw6oaguqtv40z9odx2qzi7p9o5rx39uztiz18ym8e6wwy80zce7u1e1m0wpq648djgxceirbh55x7mqflbdor84ea6nl5b3xgghg6o27wyrkfuwnrq31e3jz6ssv8q38w0fdeskv2vsnqwkgy9y8agseforh852l52g2ma7wxqmng4sy8vq00hz9yc1spntr06gbecdfke3oox45aavgbpxusmm06qgmjvll7exdfy8c8dvv7kb8h5dsxobiu6i4rhv9piw53pz46qe2xugylgauzksia6j5oh3cndfa9xgrwjveyy9sc5i7afguknu5tml4z42nkqukhh3hruk14tasktiq3b9lxr603smcil2xcarfr1h3omki1i3uh2mug0lqcfheh2p8sxswjn5x76ywub90w63dftzwd6n99c1y9hyihn8lu27eywvbv2sv6vquts3popx1xit36e79undjav84qucip87hwjrnxhrqfz1isxbsgjs6riiosrgwg8a8tkz580xz6jtrep0vkasmiitx7ninb14m83ctbxtqo98184t7fhyncwfclzxttsor0w96rn2rh2xfnbx1gq3ihfa2t6mtqd6z5to2sqdgrhph9owv608vyokpfonanehtsbamu2mz6z7thn4qxnuggttjlqn9iym13f8chm5j6psg8mfkuqvlc65xh23vrww136v3dlepvdubdsptvcqm3s9negyzn7qcxvr6qfcoq3zqja8opqhd3rbescz68nkg8qlonrbl57nqomwap9swq178sk368b1y5g8iqdxwvjcl4twb2f0ygj91nuvqdpdf0mzl5f4cnda8pksjhkcfwmmz21x425qiseabiynlkr2mv5c4qmuz6mlzcfgvgbk3tghnb87lmjest1hx23kakt369ic36cvezrj1a7sa29keug31wl37kiry8fbplt143hlgisda64cxnsp7pnwobthgr53vmp3nq6nnfxy2ad02rqt28vh59g4uv5ezw1dltqcz3b6zk5k9gfz84a6ufy8w53y2rdas1kpa4ikzpeity5mdcacdffw3iv3j4i8ewdagmj9jv9rnwvlvba5xn0ebkmkdzwjgd58jg2he0e5xnuaij3fydimi4kk6nchxmq34xsyggu4qplqq0mov2df0dnlxifv6ciccnni7s9spbpm07x1p7y0gsqvsiecxu0x2hm69k4sp1b9rc2ny4buo6d2juqyqr1v8eov5oxrx6nfvmtnj1n3wd9lbacj9lrvfax2ywpkmk5j5yt8ybdb51w6qw9n5cpukykq4uz45z7tcpe0dzqoybl6f5q93lwu8vw7hon43vxc5bj4r3wh2867qamjppctqh4l272feh3bspcph9gsrp0xtg4x2kz6x71nykhakin6zob6ttu2oi48w0mi4urva45a3q3483r2m64x
+      outputMappings:
+      - target: file15
+        source: $local.file15
+  - steps:
+    - type: task
+      name: filterContams_00000006
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 0.339
+      - target: files
+        source:
+        - link: input
+          name: file2
+          size: 32
+        - link: output
+          name: file16
+          size: 32
+      - target: file2
+        source: $input.file2
+      outputMappings:
+      - target: file16
+        source: $local.file16
+    - type: task
+      name: sol2sanger_00000007
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 0.024
+      - target: files
+        source:
+        - link: input
+          name: file16
+          size: 32
+        - link: input
+          name: file17
+          size: 14
+        - link: input
+          name: file18
+          size: 10
+        - link: output
+          name: file19
+          size: 24
+      - target: file16
+        source: $local.file16
+      - target: file17
+        source: veo15s2kpz9gts
+      - target: file18
+        source: somre3xzaj
+      outputMappings:
+      - target: file19
+        source: $local.file19
+    - type: task
+      name: fast2bfq_00000008
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 2.855
+      - target: files
+        source:
+        - link: input
+          name: file19
+          size: 24
+        - link: input
+          name: file20
+          size: 14
+        - link: input
+          name: file21
+          size: 10
+        - link: output
+          name: file22
+          size: 6
+      - target: file19
+        source: $local.file19
+      - target: file20
+        source: ws9b9qvuu9hahx
+      - target: file21
+        source: ri8wra3pzl
+      outputMappings:
+      - target: file22
+        source: $local.file22
+    - type: task
+      name: map_00000009
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 65.524
+      - target: files
+        source:
+        - link: input
+          name: file22
+          size: 6
+        - link: input
+          name: file23
+          size: 14
+        - link: input
+          name: file24
+          size: 10
+        - link: input
+          name: file25
+          size: 3996
+        - link: output
+          name: file26
+          size: 1
+      - target: file22
+        source: $local.file22
+      - target: file23
+        source: eswlz9re76z426
+      - target: file24
+        source: gnobwnq9m3
+      - target: file25
+        source: she6n8iz0fw7tdn9pqbs6gtsvlj4nwazjdp3wotmh85rlsab4dqi5fk8ucd3pvj34vnu2vamqhx7jpsma2z66w5m0rurr3iwsvqwkrhp0mibzimxh79jlddpbyfniu9zdefaal04ognapqg6f5mof3vsqwrcxudnz2vlhuyhryplbnwv0y2knwljv1bdavyvxjvx6tyic51ii88e835j9hrqbnqf1o8is5i3qly72qa7nx1l33plih7vvgwfdcmrco5v7o7ks8b67j7js1nq7n33jaba640mjdvb7wbn6ypk255xnmpf58col0g7c5z1852jz53mszaax26ew8nqpbrf6tjn1z78vl4j0r1zwodduxob4oq12k229xpx7cksz5w5y3ehfy3yxfwfr1zfttb5f524jauotwd7gj1ijh06z3ynh8lln3bv14nrnz8zw5l7zn4zhgzh203lb8iqwrq7p7zmeljuclqmmq0emp3v5sl55wai2hb1z9q6ph8ljk6um7fqrpyyy8k02krnu7xf7496o39an3slxjq05sau1rlvjs5pp8rab964utm6143oy5smnkiqnciph9nxoxiwq81ys5i39i6v5a5nm3z0du78lcbqe4xq8ht8up84ix4u9chy6fgntv4hoqejum87ew86nq173zu9z65myw1unvvkvrsy0857fpa1sfq3g90zdoptaulgllnoeydv7io2d8lmrcus4qockct0uro6aqxmamudwn668w9nbieo2mt9xr12r63ioby2o2u51bm9t54t0d464atos216hnxxpcl057jv7andga2iqalmuicib0f0uhb14ahfdghpa8s0as9e987soki64i2m0fe05jmx32w7tysz73a4v2icgle2dkbmt1vmrcvb550si2ae7p1gcc5ihwvp6u1sxma7ozwpgsb99s54v6xjy1scjod3ys34l1u7be5gqawmnrdxlblslj6gpqp43is0q1hdayryotfeg37elbyt9vyftb1i1io9589n3umer2fydt8fr3r5e076vb8qegc5b8nfjjkv1uklytfez3ijl9bo63vg8wx55l0hb135p67r59tsme2hp63fdv8as05hcane1tsrfzekg4bshzctc05h3ku1qof1jhvt7ypxku0kvg2xnfcypu0uzc68lxnys97c22mdobls4r6nn9kl4699kw5kb76wt5ic53xd08z389m0qbahjqwn384gpxgamnqec71pxpy8l909kcnb2n42dlxhtdtlspa5e4hlwrhoowlz3fhu4i9qptzl7ft2rpkojgn5rpursyaz0v9nkdvae47ivx6b9ud0ql3wtp482c2rn7qjwvrnfzi59xhqydypouczlcrxuj2frjlf04k7aylsx2x5iawyvzn8oephmnvqk1uzihygs2hdhnpa68c8tsxcomk8wh5d1g9w6vj4x66sy0n3c55p8ebxb281yctyme6tzzxj3tn1w8rpsiijev7x87g0o8f61r8ob6j2u5q2oxitw0h9shwv4l550n07s4fr8h6pcs63ee2mwaassfo6xr4quyx0jzicn28rsien8e6mdsvfdtrfze5th0dxr0n3u1jw42z1pbqykd9e1u9ximd57tnt61fk9j8ftsiqx1ko11vxjhu56tv7roz4pe1yliu7s40nzsp65ooz2sp6jwzd87um9u11g02n3r2ybgg7cs8oxf9jjrkzgpbuehgvicztj8ipopk7wl8upj2i78uzrgg7pb2d0pctgz1e2nyo94vswfwistlqmrbvkhm48c5kx3twi4hne9l7h16edwzx7lez69059hhrzxwrqsif1hq057odggjs93sqbf5uvhb26a0kimtsu1gmeb265cgeai8hetu4luzx8ciqunewj7l646payiofxhwx9m8var3y1ak2h23244zeu5uz0vmh53vbe0bifcdrsxua7bkafreywwtm6anmcvb0e1mmwqr8ud5fi165t0cu9l0l9dsgdbz60fdqcf2fqqfr6yeqbt4gcwugy73jhlkmywf1phittlfpv8lsgqk5hc5dak38e27jowxwj0igtl26mlmvjwrr94yyouv6qli8ktnkr3r2vj7c3ep7c7ns5ygi4rc2skz0bm3m8zippxstqje0x7gp5fac3sx018o1ksr86o1erhx85bk08ay1sgfbbc65amhjlouen3vkaz6gnh5b49t3e8f6q3heb1tijvyhh8mwb9h48g6mkwns74md29zf96chxl7cbz7o39llp7iorh3cqczw15kzesite731rj0zl0okzft3i517ry7fvpytldxs9o34tngpvzv7lgb6mp27cbnjocmlwh86r55cx02p9kv9n94r7j5eeylmkl6x0z0go2zovsfqkoziod5qivl3l8oefos7iv1dvc9rlas6xkqwt7q2jmzptwx74w6ibp9kaszfy27gl18trmjdpuczbmhpnjn10kvjoij49l4qd71tftiyz4ssmnt9dzrp1jj9m01uzl4m3ivx1seutzw721ubi8lp2f7ng2ct0bt6v7kmib1ki1u1d071llh1y6cc57kdsbw0xyl7et3uy2pi37jb39vznbxkiwtf77tatt56vn5intcoo3pwg1vmghroo6050i1bvaz6nje6js6v74mhv9jx9s5acr7ruszwxhtldrgpvbneml9t22te1uu6smvbwszulg3izbpxi8pr6zu9jozihj0pqnkiw578frj0r78enbassu17cuz2c40142cujfpt9sjuxvf1zenthdx523gtnytzjcbzwnora30l286h6mxs5i62ck2ssgumqriyqlijx61bcy4a8fsfl84eko494tv4i0t9t3drjuj6d2b1kql88mmcnd5f28hsjeqxp5regzyyc7plkurcn9atzanq6ac6gz14d3wxcq9kjzknnfnlvojk5dsg9vy3qct03awwfj81zv9by9jreypvoddec4501e3rab8b4rumlnpbovgt438wpooguyusqb01ba8wuevpmdehqkvjuz5bl0viode9g7zcktvixd6ttculm89shammuhjc9o3yibbrdd51tchwzeswtpd15bagwt5hyf1ktexqp5hamoifm12vft0b5cjprb09t74auvafzw2136i5dal5a4izvprp22s57ns3jrg6uor66x49rryeyd93pwnt7knetbkabl1mruuvjszfqafptnjlxlw3qi1w9teedq5reuth7vq9gb7syz9xspuwlt1f7gtnzbc1xynlpk75kavc076htxjyjo205kqwmdsft7fhtgpdtu9dh7au2cvtnm4146pvls3z6ci0fqhbui1bzeclzldt310g54c0ghtxc4rsg53edrzt67fkhoa05uzob2k6g08lcws0ciu18h4g3gt925d80g7lg9n0y1d16f4b419yfh3f0q83ke28xlfrlfwdh8fmg8rkyvut5741axppl5we7yx9vouu0k8ujdqv1cr29ucjw2x44la2cdsgbzhy0ll50hrwusn1bimy5wcjsfcf7760xxwfm47t34889hvogvxb3raixrg452zlkjuo4vjsj0hx8z713wjg2elbkmcj750izdmwo1tks0nikfoqnvkka55m314ukvs0ko7qfusqhqvvjpyrhdyxzix2vbgr570vmxvolcsfmhn8og2995y5g3ivn25ydrpqjd7hcdy30p3t0ttqa0imgzo8ac1xrca12x4qrhd60uu38enl368gif1ytcbmh944m3db3r8mykax4jfqp3xcws2xjfrtfy4xj0i0b1tcurd5m6qejol4vtezkx2cbok9fre1tgdlumpdx882hu3chi9np9qh89doq3t6jhozis80jh8i65c1q5xu7qw7q71wuf9i8m7uszl4grjkyqpmtmh3gen50hchwtn41he0
+      outputMappings:
+      - target: file26
+        source: $local.file26
+  - steps:
+    - type: task
+      name: filterContams_00000010
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 5.311
+      - target: files
+        source:
+        - link: input
+          name: file3
+          size: 32
+        - link: output
+          name: file27
+          size: 32
+      - target: file3
+        source: $input.file3
+      outputMappings:
+      - target: file27
+        source: $local.file27
+    - type: task
+      name: sol2sanger_00000011
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 6.138
+      - target: files
+        source:
+        - link: input
+          name: file27
+          size: 32
+        - link: input
+          name: file28
+          size: 14
+        - link: input
+          name: file29
+          size: 10
+        - link: output
+          name: file30
+          size: 24
+      - target: file27
+        source: $local.file27
+      - target: file28
+        source: 6u8oujvl6ifvqn
+      - target: file29
+        source: a0gnzrgvsp
+      outputMappings:
+      - target: file30
+        source: $local.file30
+    - type: task
+      name: fast2bfq_00000012
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 0.388
+      - target: files
+        source:
+        - link: input
+          name: file30
+          size: 24
+        - link: input
+          name: file31
+          size: 14
+        - link: input
+          name: file32
+          size: 10
+        - link: output
+          name: file33
+          size: 6
+      - target: file30
+        source: $local.file30
+      - target: file31
+        source: yzg6omoy4n9z7s
+      - target: file32
+        source: 556039jxge
+      outputMappings:
+      - target: file33
+        source: $local.file33
+    - type: task
+      name: map_00000013
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 67.812
+      - target: files
+        source:
+        - link: input
+          name: file33
+          size: 6
+        - link: input
+          name: file34
+          size: 14
+        - link: input
+          name: file35
+          size: 10
+        - link: input
+          name: file36
+          size: 3996
+        - link: output
+          name: file37
+          size: 1
+      - target: file33
+        source: $local.file33
+      - target: file34
+        source: tser2x2ivuzjfk
+      - target: file35
+        source: hevrh28hqv
+      - target: file36
+        source: nds95jcbgef095a199g616t34xai76c3jj7sd6k8qu0qupzyrffukjvtf4zp7gwiwuwtvyhdvnvmx6k3i5xsstfclaw5l9809r2tijsthvfougz8pabh2pmdslq018wj1s3jpi9iz1wl215kh8bduqfrgdj2c9x3uktimcvxtmf4q9w525ahk8qmbl29z70467ossh8t7lslq6rogc0k0jj1y7gjq54u41j5jlkf8b4b70gx928mv7pu4hu3bs7huvt6i3mlos4rl1jy0mcdjbvcnnj520fnr1tmuhavmd5kq6m6nb06axd7ubk1ktan6435d1sj2aul1myvygh2le2dewkw4w5abnp9ccucc41do8s4kvrtifi7qcbcpp5mb4eu9dp61xxkggsldawcza37w220nj3vcxuk4jw3ozcwor488ip7b91dq33qfib0ual5x04dcmehj79cvnstmwj1v4fk02sztnza4xype8uwxgzbks2fdq6iv7n8auhoadfb4bso1azkaiyx03yif7mlmnzp05g37k9l9cxrvjlu8ul1x17l1dqvqejc2ucq0ukpc2lfdr55b2l6v53t86t2klaiqfr76zmjfrnidkhjahl7pl4axw1j14blwik4z5946b0w9yjzxkjs75vsvq0tuef9qmze8iiqn5ztq0p2fe3gk8b20qb9pawd9agpl4q7wxj57es9h3d36vsoaa353tmsi60hisowf0nlbzfn3kzt8xqfetm14vkhef5clxg9w6ohqi1s3t0e2ufx5t491vvyoh16ljoj6x0f2vrocu7l5kiznj1d17102gzu0jjikbc4n5p6kx2fd12l86b661ct8dwni4knxhretlcb6ikv81d3uqrk0mu0hc4hee6yqp4p42nloi6wlqcq7cdbbn9ejlbo72ri2s3mxc9pf6orin2dgg13s978y8tcieqar2bw78bph8gmd9rv7halw2r7j2212z1pta53e0pjbd2t5nfsn7axq2nss3jnz3dlobmo5i5n71p45ejjb8fjvm866c0a4bwsytpw5yp14tsiibr3weufnk984koggcywvy42r7fluh27qcfjaigpq8k7jymypw8fue08kwd0lc0pl3e2q9swz1uelodv6kmrbslo5sk6nfqw4mgyy74hp122woudkidatdp7xcy1blimqkalnoz9qccrai4s4k407proloecb4w1oykf82jo3ob5k741iuio3bibntawu4m88uri2ksp7h4h5yhv4802hvdsvn1u8aqstmjxhp5v74hxgmexsh61h2a15uid9r9f6pbpvthrwtc93vz72ax1vtsd3d2to4eqhc9hfnwt2wzlgpaft408772eiigi096ol0ryb3mhyudouzixf3h0p71tvdl3x5l0pxysi4xok78xumxadk6z41y0hsgxsoo3m8705whgh3edtfa8dfdycdl1riwbkeclwpbio0d8v8z7r4jwgcjlyo5h4sioqwbrn7fnxfo346yirxdfwsgzdehmehj947zdo8xs0mgsa14fttmxla1xt392epuccbqe39ktdps5veqra2yrwzap10vu7ev5fvkwnuf98pz77qz876m4pfh0ywvgf7dvzwjjgsp9i48sjpxn5be7nzeitzu4xq7qadetirc5nz52lkvsc1uts0xwt4t2vcoot6q31lmhj09pbk7lpvbod1l9r58mheth0if0zpuhx46yicu4gmch7kco8h4gix5n6ubtx38wnvoeo38d2rgy7br9lkfnbl98lt7ku6gcf2uw9epklsq7bbpvy3ak3abm0124i2r8h4k0dkaa4g8bydjivy36tsa4x77amk60kk9mdypczv9xpw6rhlzy3dopiusc4wuwc24c8ac5abq6t7xtz863d14wsgiku3fdikz9vlz48j2hfqw3f3m6s67fepe0syv4nccyld9aqw3xt7epn699h7m8ay5y9urfplm8s4sms6c20cm2tm12ojmdzzz5sl9ws8lg5mwwubxtkr86yxmhp4vnskcb5twi9e8j9kqo60mxgrzy287iy4mmpbuzjh0xg2kao1owqss3lwutsoadqqfldaqusxddrjuf1y7a8fegeemz9guogjxc9hf6wekfnsgn8edi0tfbiz85uc5jjzcy5doji5zy2jk1nf89spj2k8q7qa7dk4fe06q1uafjrk1s49vsmphwt9pkyhgc20hi96i8ve4sgx8mbgjiidrwnw9uz6sczx9hqy6b04eqebbf0pn8t9figlqizo9d5fkq6d3le69voeif9vwt2vtdv1vctiub4n2hd6uziyqn285nwn76r1wt5bc6uf2iqbrmy8ghcl2vudf0cn5agt02ls6g9rcf5pj1gayet078kocuaqvkzfn56uc63iq6a60skb3qwss5ndi976d5qz2j3lzpfshv7ue7hg3zz8kgdz8ywhkbu5wwaj01jp8g949z5uhe1cvd46x2ncuwctmi4i5k9oqns2bpyjwikklppsar5xdvpilnmm7betsxt0yumyfjcz0hggerkzmqbvq7zuexmosm8k78dot15hrmqq7fivtv943tlsevmlq1m819nhcq5cil378124tkgwawkr5o91o9whv07koldaybuydbgv28xmyy3zz5jhyu3jz43oryabnr7a0va1f2mgi97liykyvu8nq1mz6w2r0ambo1e8tfyhlafnl79rz6e5qc88gsyjwl79rqxy6byw6cs3kftlappeue812t9swkgwkynuw54g1y4apgb7go4qhjdhrovyeylab90vpx32hntmp2dly3xvzt55zv5j5yzu1nybw842s5sxh26muj69zh7xk89mt3j3ubfe39mfzveianfkaxu1b4fou3yd297495yhiqg3c4y7rj89imn0q0yn6fipu94u9i528263syr4f6kh6tyo0nn2dtk667fatkoudlmr7vw47w4on2vc5aeemvu7xseweaqqme6hqauo258z8bvf6yjlt3qd1oomxx3wnx9dah8ptw1b603zg5rz0rg1mydcgcjp77c8ah3duyky7r2b4e95jtr1etkz9c66rlhv8nmwe3ebrutcom2gv1o06zhof1esmb9or59x1hwzmwl6qyyrw5uscv5nh0v0r5vhci5mozdqafkaylf0xsiex5kz8x62vb8s82s3jb6lyzvqts6496qwvlvb6ife9lbhprh9yt0gi2wjq4he05iizvv7592gltrx9nrkchtihmhtybwup9qarc1v6bcaz1y1oljall2ymotce6ns3dw8dlkeaeekb4p51pfwxzsr0qe2b158ge6m7h0y9i5hkmrbea3oc6tjysl0soer840aszyufccvm7njt3e3a58fg1wxwgk7r9cpi5dj20bgrnuky2hcs8uvm8h2tjxha1p25gaci6losect4c9smmun9pdpvzjkb63jy6ns193di3vhozqnws0b78drgvaybabq3sjav4taige5bv08ft03rjdp0pp523hmuywwmk0q91xlxk9bwea2yg6ncbj77vf44oi6s1jbkxd138zn5zo2s29xlolw3l6pahun2423gltckujlbzgs7aiu9r8or1iwulew6vwvampc1ch1uw7t8jpomzx7uhvjals34ku2md7jzdikeubnuc8dgufsuagqusevv6pvyjiawjm5bfykd3x1nmmo368oxhxmr8qm7057uhys74flm4a5jl2c5qx5v7nod50h18wj58mxq5ygxpv3px5m189xw42fb72h68xfuvupv7sqib59m7inejbvh9hi1k5vvenw3wgat6ryrq0xxyz3k5pmwigi86rgswy0asku1hq1zr5mxtfhhv3jmclcmwycztc844h3orfjqjqfvkr3rjdz8qqwxdm85lvv0ases2l9yz9e01bhapphplxtgbpule
+      outputMappings:
+      - target: file37
+        source: $local.file37
+  - steps:
+    - type: task
+      name: filterContams_00000014
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 0.164
+      - target: files
+        source:
+        - link: input
+          name: file4
+          size: 32
+        - link: output
+          name: file38
+          size: 32
+      - target: file4
+        source: $input.file4
+      outputMappings:
+      - target: file38
+        source: $local.file38
+    - type: task
+      name: sol2sanger_00000015
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 0.253
+      - target: files
+        source:
+        - link: input
+          name: file38
+          size: 32
+        - link: input
+          name: file39
+          size: 14
+        - link: input
+          name: file40
+          size: 10
+        - link: output
+          name: file41
+          size: 24
+      - target: file38
+        source: $local.file38
+      - target: file39
+        source: qrqvaghwyng4ce
+      - target: file40
+        source: 1j6g5hiq6f
+      outputMappings:
+      - target: file41
+        source: $local.file41
+    - type: task
+      name: fast2bfq_00000016
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 1.811
+      - target: files
+        source:
+        - link: input
+          name: file41
+          size: 24
+        - link: input
+          name: file42
+          size: 14
+        - link: input
+          name: file43
+          size: 10
+        - link: output
+          name: file44
+          size: 6
+      - target: file41
+        source: $local.file41
+      - target: file42
+        source: t6ll8emech8qje
+      - target: file43
+        source: fpeatkzcic
+      outputMappings:
+      - target: file44
+        source: $local.file44
+    - type: task
+      name: map_00000017
+      resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+      inputMappings:
+      - target: runtime
+        source: 75.291
+      - target: files
+        source:
+        - link: input
+          name: file44
+          size: 6
+        - link: input
+          name: file45
+          size: 14
+        - link: input
+          name: file46
+          size: 10
+        - link: input
+          name: file47
+          size: 3996
+        - link: output
+          name: file48
+          size: 1
+      - target: file44
+        source: $local.file44
+      - target: file45
+        source: 7asvje1vqxa88i
+      - target: file46
+        source: i70lsv467g
+      - target: file47
+        source: knoc5ubvp5uekhi3bbjf3dddglwfyu9da7kf89ln6kcqau8ydv4rl3jaavjxq5m8mmijgjsnvyjrma1hc62vjwqvemm34tstq3zi033v9804jweersk65e7ue7qmrsgskhn9sypbc1m1ht91ku1ijpex0srsdiqxw4x25wv9upvij41a02oom3tfwgekj5z6f54s5nbbx5g73i412u8f2xwrnvyfiew1sdk36ni7re83tn3dgz9emkev63bjbm7jfykfftn9rf73bctv1mo84exyb5gmj3s8ms6pzx2tz26uhmo0w4cow8h4qb1626v46locoogdmlp8gd6a5hxm9roui0rtqopow7gk2idfntvmbfaksj38kopvm96qyz511if751syjs1nfjeynrywjeppwoj90ae2jof99niljkyefx3tv5tpn4r8hntssnazfglwduxgte72r5lwvtlb1v0mapr19yo4eqgswzho4e74tugy6xonr8j4k263d753hxc2obwkl8679d6q03vhz3asb2v75w3h5stw0ptsgo85z0k6dyz9misi8e4fph7zbncc0itzudua4jbsdyng6mu6iwmnxi28jz0t9fuzrdby1wlgeimtyr0ywk5w3d17crjbwgxc767x5phb7xikyzk59d64k4okdeajmalqlncpqx3sxilz7w7lr5nubkyseql0e727jbi9vm8kl1s1221fb3dzsnlgba0va9su9r64gvl9h3xomodhxcp61dbab3a7q7xyf94u0qjf30lczc1ox3iy1r8mw8sk3dq7d6etdgnm695de30a0tieeswnbpfp3kry20bkkx08wlhwonmhuwag111ykz54z7aajrk17nuends8lxzl2fbwnolndf6wtfjgyukr44tdjptw76z73d8wyr4jrm8ydw2izqw5a0yzbhsra0ad5ckvivr4cbrmnr6ngrya78wt9kv2esknyj31nktm548vn1kf1hqwv7t74lba44r9lznjn3qyyxfwrwltanqm6zlh66h97baofjdp8ixu092mjo2mv2qex5n41wk1jgrr91qcbgcqigg0uut42uzz137qnrh89lyyjwwwp5izsryxjdsmzmsch4kgilo2iryswdfsct4vgy4cvp2gnuzpumpdlf76y53m2t12vjo6j7a2a59xs9lrin40wyymsgsovspmrfvdhl7k5cp43xp5quvyg6vok8hbjletjza0z6x77hcu7hcjpjtxg0f0nou7ax01tmciv74pw9wuxhflbvnvkenus9ct94yjr813tllnoo29oyen5cmugvqtvjp7alxnr78eejzu6bd20f5t974caeo3i3k0jhkzn2w0bwmraqf5ipkmhcfuyjej1xjh7z39clqxyq7bty4qj8yqmh123695myhmbc7nlwbvt64dgtx2m2ytvkl8318i1c1y9q6pg704tebblhunye2gi9iwvfrsgdfydz0bibps3xhk33onsa1zt56cekvg4lumnejd30830v6rbovp8hl09ttqgb9agb5y2u307jal404ihjjkjam75145o9h6uwfgu6no398vo9pm7tpf0omou5sfd1xpktoudj6e4mtoexqlbxl9ulj3q6n6dyjezftw8gt41yatp9yw5fhlvgfmk4c7x26rn66sv1s8po8jccvrw62cg9kq3iy3jkbiabqqk9l22t1c1sudzs3mnpwwic0j03yyzonxwctkh3xpoxytr1y440q1d2sa9g2n29d1eqlt5rm726o3u22o4412ckn368lcxby7xpfaf5prgskahqd6jc70p1rmu7mrle1eedr7iftxfuj4e93xz2qxlrxfg1yvns7l7qtbink0zvan9j1v2caw32rf6sm5wmtet6xc243iefx4xicsqx5ydsir7f20uvgavfej877twee9unvljq8onw3lobr6n3gcnepv7cxvbijcp8m5a9z612x77wkc86zc8ydly0srsdbl8j1pqgczeb2xou64flmrk7zhnyhhid25mgx0e9qm2i8cv9cvd611w4il1ye19vovurbq51vcngm00fdx0whlv0bqapwqxqcfd68p774z4iasgupdxrgmhtqv2eg7idl4mr25q5yyxrftvjceb7b6j60vsinga0tt33g5ro2ppto2dt5r5ceecdeipkkfmu66s7rswnk6ueup0tq60yctuxpisa18dvqtzkmgazaxl0hq8gefxd166ksi5plvvi7cnpgxyv3xn5y94zyu5ud5t98qd9k69qasusxuupry11f6g35uwp84dpsqmhhvsdqxd9vrsylo8a8ysiow51c2aaxmj6wnnitu553jhsea8k0mal1umaciij06thg218n0eqtl49sbf1ks4125abxxon9sxqiwx7tzl3pr7u6dgwovc4t87zy878k46adrz1mulabp8odxmy1ztw8iqnulb8c3zzgp3xts69nmbfezo5bdoaqwmqxsm6tdgwbroopa60mp79p781diyzgjrbbevlbtpbv8e7jzp9kk1d4ij918cvo5518nk0uaz4v1msb08rk3cneb81adi14cyv7n2m59pdz5go2ifb9itjmzjsdyupswlj0aqd1tb46pdq6422u1rnhklb8atc2ej53xww52dqhflgd6f27f95kejrpeuu6rjbcj3v9ztfryu3270sypq4entxs204pjbprc8z16yni8cd2wykgsr85umjv9yzqv8i2iagrb9f7ayve851vlq8hmhteyjxguuc160hqrdfe50lot1v8rjq32tndabkkujd6i3lm2o2ej2r27ncnamck4k4e7cbdgfxvptw280ek5d862l0jnps9pi09q7ydgq7i6628d94stuw5qbqx529773nnlinf14pw6id2wn63tlcjixvxq62j8jcaagruc09vslt7tna4q84ttwrj7d7k6v6d2bk2yf7ktk5tgegc9xcgvlc7g960eq0i7bsiaksqsiq870uoo6chozb7q7zxhul75vhp2ebehw8dv1wjkevlw7j7uk6jx9zl936kixtdcanyybxq0vjqfbo2cs863jp1muvdoen1cmjmrxnwjba2fln2hccny0ynsowy5ds8cp29qds71q0s9wtb0kz8crp312kgifi9k3944ya5yclauieo9o2j11s2zpqk2llf8vtts1jvw58bx8xzskryvmqn4i9jzymgonixnybg4w95a5vkk1atg766fq2s4dje5cn6ov22ba3r30xa92ouyq2xp110qeh4ng7ip4y35q62lry1n99o5qcodzojznywpcq5hi5e3ke43itjuog7aslycgotn5mxvjd8tv602o8wczey87as5ozfcar3supd5s0f8p7qa1i0k4ivjkwc2wxkzfqmnlcyrjquud1xkyumj36t87h5kzh10drn5z1vpay6gwhqbhsm53wdqzjaha0dss1cpajbogfri6c11tudzoxm9n38h49jea79gowyer9coi7j9p05a0uau9ycrod61wliwej3haghsr1ydld8b2jwat0vv2mg4sw3aln1ga91iy34nbm9jwsdukwgipoeburwux32w5x3r1u3pllp02dre5ii0f32b3n2z5ya8yiep1yq9gdotpnugwquo01dz4j73939uwxhh92yd36m0e5s4pnm0s3cuqfkxtd9r4h0ejxx5o055hpuwqg1vi5fx4llqpbut2qu8rzs41r4hqjev9rkj1jhl3462olb371igbx3qe5sm7ri1rthkmwat95u0z4cuqia20nfd429qdo1ytd6fxff1wdg6e87yfiq4tbxri1xc9y8kmd7sr211xa02nxjuc8qpbnw6hvt1dtytc8h9dh6acpnply2qrm19ev92aae1v8kvcx9l6bgv1dpwg74hog86jgyej4jmpti7q0q2suva4lzq0dfran0w
+      outputMappings:
+      - target: file48
+        source: $local.file48
+- type: task
+  name: mapMerge_00000018
+  resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+  inputMappings:
+  - target: runtime
+    source: 20.86
+  - target: files
+    source:
+    - link: input
+      name: file15
+      size: 1
+    - link: input
+      name: file26
+      size: 1
+    - link: input
+      name: file37
+      size: 1
+    - link: input
+      name: file48
+      size: 1
+    - link: input
+      name: file49
+      size: 14
+    - link: input
+      name: file50
+      size: 10
+    - link: output
+      name: file51
+      size: 763
+  - target: file15
+    source: $local.file15
+  - target: file26
+    source: $local.file26
+  - target: file37
+    source: $local.file37
+  - target: file48
+    source: $local.file48
+  - target: file49
+    source: xqsmhofv3xebm5
+  - target: file50
+    source: hm6pclwjb8
+  outputMappings:
+  - target: file51
+    source: $local.file51
+- type: task
+  name: mapMerge_00000019
+  resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+  inputMappings:
+  - target: runtime
+    source: 2.419
+  - target: files
+    source:
+    - link: input
+      name: file51
+      size: 763
+    - link: input
+      name: file52
+      size: 14
+    - link: input
+      name: file53
+      size: 10
+    - link: output
+      name: file54
+      size: 763
+  - target: file51
+    source: $local.file51
+  - target: file52
+    source: ec5yqj451cff4b
+  - target: file53
+    source: cew8k89983
+  outputMappings:
+  - target: file54
+    source: $local.file54
+- type: task
+  name: chr21_00000020
+  resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+  inputMappings:
+  - target: runtime
+    source: 2.115
+  - target: files
+    source:
+    - link: input
+      name: file54
+      size: 763
+    - link: input
+      name: file55
+      size: 14
+    - link: input
+      name: file56
+      size: 10
+    - link: output
+      name: file57
+      size: 764
+  - target: file54
+    source: $local.file54
+  - target: file55
+    source: 6cl1e9lrskixcw
+  - target: file56
+    source: f2yh7sj8fp
+  outputMappings:
+  - target: file57
+    source: $local.file57
+- type: task
+  name: pileup_00000021
+  resourceArn: acs:fc:cn-hangzhou:1065690032410086:services/utility.LATEST/functions/utility
+  inputMappings:
+  - target: runtime
+    source: 24.578
+  - target: files
+    source:
+    - link: input
+      name: file57
+      size: 764
+    - link: input
+      name: file58
+      size: 14
+    - link: input
+      name: file59
+      size: 10
+    - link: input
+      name: file60
+      size: 3996
+    - link: output
+      name: file61
+      size: 391
+  - target: file57
+    source: $local.file57
+  - target: file58
+    source: j5gwzbeu7s90og
+  - target: file59
+    source: 544kzp0tn7
+  - target: file60
+    source: lnk2uk5k8wz57qhw6k8jc0wclcdl3o0s04kxnqbzl1fhozxuhawy3z03j1jtpc9szxni47l5oz4k8jzf4y66ncq6qiut4cwj65zu89xuidw7xejzw9fhj64ne4gl2kbb63dfm3o5ggb35uc85ipnxsajvxrknytff2c70gkbi866c8qyjv9sr8ystbsui94iao2mm2olqioa4ow17uy0204kg5ma5sbeqn11s6exl6c9340tsm390ekrs0vqsvnyi9oezj0dfkbr12elwlrztoujenbhiyuumns1ivlv280yjdwlzs3lfgqe9pbaa3jtln5xjupv00k48jg7vfpvmp1bpkeeyoqkeu42na78wo7y4k3t2mti88anx4dgv77zmtlhmsdy04so6tjxtxj15b58hr6afayt2kjj1dq3juapvj3kar9687g6ht3u6tk6rrulluzxyaxjer7ybx2v8p62on4n9i26arkiuw7aem0x647jhjb3s70cvea95iel3k95xwspvmcr80djzfc5kzj6dcu0gtv81yyx2zhhxixj4jt0h74axn3us6n9fpairad7y838mt6l2h0lp6jufm2krviow5286mes8l0jwss18lqc8a8wyf1zedw3ustvfr75e624d1h1p8qal6ddqeox4y8b43qexjuufce3qywvi1a41snw2wzbd0vqhk8d3z6o5ijdxo3o9s701waua7lu93hvgowrier1ibyrg4ndakekq6wvn2skczley0hql9xtxjodubbb1wx1eabm0mp7phybxqxsk95i1e1wycl04omqyw1g260i0bufu3cwgjb2mugz8t82kjhjj8qhzbwhe02ml18t1929qrvag8tlj3f7gb3l75ckgp2j1nj637dbi4a1ud7clxuzxnzbrontz1o15hk7vl7r5ndh8ukpv3cywj5istmgb2ajagp1xs85kpcfcxknmq0x6h7cfdzpsebk0nrqf0y91h8nw03vcf7hgkymbo2d7a66b2vzg4t566k57jfmbnwdj6j4ar4n6hw8qi99yqbab9kib55z8eg47fgqtx3wtq1agsycopj3ztglmj9cc8em6eqy835fkr9o0v1d4ek9f26k8aew4e1twkevgkhpnuk2pxuvzj8uwdq662g7w8hleo6fokr41fraorr7crq6i71uxlsnilvahrxxcoctv399h80px8yyg79e5x9xhwi60zw6x62uggg0d6wpteuq2tfd9ylbou6nznyt666trigx40nrc6gldxea60x0pug6e6bi1nfza71817q53gv1f6zv966xycb3d3plwwciwtwwde2vef7ezick38eb2h3dcldda3cvmegujlgtea4ilwvyghaxbnv02orfszvhfu8ov7uzm13gywt6yub0490v3j8nxch3pcz9hcg3wgbvo5c0d7794eefwwxt2hcuc7rnxt7gqwr87806x3hxvibtyznu1ozbph63p46u2prdma5g8925uavkpn0keqmjrny4jfavylu370rdppnziayrtddjywj3vy5s26dpkofilcuasmiwh6kidcrgnwb4wjvutn7uq8kwxz4v5r1jpgo0mzzszpw150dr87tr76f7fti6o47a2okyk6de3p4ln1nvstqbf04f23sl3wupdmgn7nzgoc3scaly3do93wfs9rh9sr8v0osh0kjpe5sx5yr05nn51m88o2c4omo3z4t5vxlr6420ijeb6g5r6xfslurll67jkdw23wlj8xie5vpr4w8ttww0ioekh33d4pmvhwmuebdjdkrqzvi0viztwyhgru415xg6nouwro5qu00azs7gtqaoas1z3fas1geaej41edqqdilyvpzoy3qayq8fe1hzgv3sg7t97a0a8rent8vzey6670a7bjyrmrl36ltgxa2s736qklkkeqcoqx80nuz2ps90jvxo6khjpceg1wxmzeb0suhmm142n578218bjqtccxzmqxma4xcixsma3n1aaqvnee2po230padb0vunq5htko59f7juzt14udqpf3kcjnqgtnq8y35sj7p11qw6pe23muob4i4zr72ez1mv8dkf18yenc69spc0i482wts9mvhjt71klt4zdt1v8d7xt4j7h1pbi0yituspsdl7qlt5pkekfr5c4kpbt83m4nzrhp0rn11q2z51pttos1zsrf4mxs62dydx19ne2jcjbsjnvo2quxya8iriw17z8g90y01gh53jhk6ibb6nd1xun1sld1iqt4lzzqnr5sq7tysymelyok6270zf188hror1mcemb4pn4m48azcmgdfyn4vtptuc1b7nnrzd481zx6c97jmncutde3n6lqt1j0yktaetmhoeu8ysgn0avxp4kwjyyzne7ha69t8nfekb551fq1qbt4lmf6vupcrtmd15wdv3y2nnzrg0roe6ixt1rauqukiyt3i5bdt3fb69ee25sba46yx3y40qicl3ic2isaivb47rh7vapszwqjrgaqarmkjn53ro9v6182n1f83csarj5xhwyzeq2dghrbqv1ukli0boxmevg1y5rs4fhf9ag43x9ud3u6wb5ry8ohrqz11fw80rgw8gx8y4xwphbh2j38181nzjcf371mfm9c9v54t8md6n1gtxdozai6yxqlm0zqcpbv5o29u2bsov2gq7kvcmclv9cmz7j3tpyso7503cd8i56hf7yfzdw4xwts07im530fnm6nscqru3c9o2ns44frkuck7s9zjwy6apap9usf0u355oescgf6obazyk89h8q79f8zeb38vlfpis1u2953zxjm3s5e192hggascwfxo7lbzffa44r4a2agkanmtnv0zecjs0336ye07fopmga2v1q352xou3kpabx72jgvq0iv11khdux7gtsoow2eyh6rd3lem16y8ogs76gptvtk7t1tr26q68de0zy7q8gvkoqhben7376vw4pkett6t1vkacxkimowyc22das3wd05u13c5775rsghvlycb6vfcobkj9hg8dsgv7h9zkufylm3mnnebyaga1mk0t2qhln5td07s48bln7h7lcf3luhoh2pie73q9utgqqo5qo1oos738ijmst7pawi2e80mlzj39q2j64hpr40xd2jtb5cn9smiiqnzmu3pgqbj9dd9l008abnz878exzydm83t317aol1bjpptm4whhzxps2bkogbdqzau4u2vhgqi3wjkt462cpr8i5wvbybm76dd72kmorwmx23uqzopskdts0njmqntwnnashkv08ufw3luqy0psxey9ezppuqvceuehhi45bxouhr8eg75oeq23shtdn0hy02qr6svpou1rb2h758aqigihpoe3xtkwe7iroqh6st70z44fyb87vv25oo2rkfljz2pp0zwv6q54k5mrxeyo1khskqjyiv4sgck8hcdm9dwu4i4nk4e9dn29m8ky0b581yndgx468lafbmmys70emf2q9kh2xjd1a1se1cep5n66hdmgrmxzuzflfz1c9c2069456tjfyl98t8v7h6x0gmjmmffof5ucc0hhqgtocapog5fzwlqd06vn3f4l9nljjdz5fuxcphnpw4f4rod68nvss71dp3g4jxmwkqxlferqru0wedyhdvr7etp1dc7ne6px6yuaqxh59ru7cqj02rdfvvlj58elohag4rqu1je26viddhgck8yoqvsz23ylwzq8b81stsjqqjwwsduom4jac2yn2btju441z4qb8247la5sz2rc5y67fzmtitbqpwnepxxkdfug5z81wzhj2a4jflr335hm402t6g4eao248wmzqhhlrdl5k4jufuoxc878zxh014qixwgjlzzgreqxh1cbcdf3r605qhl1olc2hm8kma7yxr77mglf9wff1qtr98k7lhlnnxn1hkcmbbleivek29z6
+  outputMappings:
+  - target: file61
+    source: $local.file61
