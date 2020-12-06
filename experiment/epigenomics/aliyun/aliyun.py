@@ -38,7 +38,7 @@ for job in jobs:
             file_count += 1
             size_sum += size
 for name in size_map.keys():
-    size_map[name]['size'] = size_map[name]['size'] * 32768 // size_sum
+    size_map[name]['size'] = size_map[name]['size'] * 32768 * 3 // size_sum
 for job in jobs:
     for f in job['files']:
         name = f['name']
