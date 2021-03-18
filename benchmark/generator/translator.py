@@ -5,7 +5,7 @@ import sys
 workflow_name = sys.argv[1]
 utility = 'utility.py' # sys.argv[2]
 
-f = open(workflow_name + '/main.json')
+f = open(workflow_name + '/main_500.json')
 data = json.load(f)
 jobs = data['workflow']['jobs'] 
 
@@ -45,5 +45,5 @@ for job in jobs:
                                      'runtime': job['runtime'], 'files': job['files'], 'next': job['children']})
 
 yaml_data = {'main': yaml_data}
-f = open(workflow_name + '/main.yaml', 'w', encoding = 'utf-8')
+f = open(workflow_name + '/main_500.yaml', 'w', encoding = 'utf-8')
 yaml.dump(yaml_data, f, sort_keys=False)

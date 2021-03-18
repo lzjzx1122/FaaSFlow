@@ -1,0 +1,40 @@
+main:
+  type: workflow
+  start: f1
+  end: f5
+  nodes:
+    - name: f1
+      type: function
+      source: f1
+      next:
+        - f2
+        - f3
+      time:
+        - 4
+        - 6
+    - name: f2
+      type: function
+      source: f2
+      next:
+        - f3
+      time:
+        - 1
+    - name: f3
+      type: function
+      source: f3
+      next:
+        - f4
+        - f5
+      time:
+        - 3
+        - 6
+    - name: f4
+      type: function
+      source: f4
+      next:
+        - f5
+      time:
+        - 2
+    - name: f5
+      type: function
+      source: f5
