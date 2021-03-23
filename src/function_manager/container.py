@@ -45,8 +45,8 @@ class Container:
         return r.json()
 
     # initialize the container
-    def init(self, function_name, pwd):
-        data = { 'function': function_name, 'pwd': pwd}
+    def init(self, function_name):
+        data = { 'function': function_name}
         r = requests.post(base_url.format(self.port, 'init'), json=data)
         self.lasttime = time.time()
         return r.status_code == 200

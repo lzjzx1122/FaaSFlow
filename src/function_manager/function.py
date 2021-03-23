@@ -2,9 +2,9 @@ import docker
 import time
 import math
 import gevent
+from gevent import event
 from container import Container
 from function_info import FunctionInfo
-from idle_container_algorithm import idle_status_check
 
 update_rate = 0.65 # the update rate of lambda and mu
 
@@ -13,7 +13,7 @@ class RequestInfo:
     def __init__(self, request_id, data):
         self.request_id = request_id
         self.data = data
-        self.result = gevent.event.AsyncResult()
+        self.result = event.AsyncResult()
         self.arrival = time.time()
 
 class Function:
@@ -82,7 +82,7 @@ class Function:
         # 1.3 create a new containerZ
         if container is None:
             container = self.create_container()
-        
+           
         # the number of exec container hits limit
         if container is None:
             self.num_processing -= 1
@@ -133,7 +133,8 @@ class Function:
         
         try:
             container = Container.create(self.client, self.info.img_name, self.port_manager.get(), 'exec')
-        except Exception:
+        except Exception as e:
+            print("e:", e)
             return None
 
         self.num_exec += 1
@@ -204,7 +205,7 @@ class Function:
 
     # do the function specific initialization work
     def init_container(self, container):
-        container.init(self.info.function_name, self.info.pwd)
+        container.init(self.info.function_name)
 
     # update stat info for idle alg
     def update_statistics(self):
