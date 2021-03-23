@@ -3,7 +3,7 @@ import time
 import math
 import gevent
 from container import Container
-from action_info import ActionInfo
+from function_info import FunctionInfo
 from idle_container_algorithm import idle_status_check
 
 update_rate = 0.65 # the update rate of lambda and mu
@@ -16,11 +16,11 @@ class RequestInfo:
         self.result = gevent.event.AsyncResult()
         self.arrival = time.time()
 
-class Action:
-    def __init__(self, client, database, action_info, port_manager):
+class Function:
+    def __init__(self, client, database, function_info, port_manager):
         self.client = client
         self.db = database
-        self.info = action_info
+        self.info = function_info
         self.port_manager = port_manager
         
         self.num_processing = 0
@@ -60,10 +60,10 @@ class Action:
 
     # receive a request from upper layer
     # the precedence of container source:
-    #   1. action's executant pool
-    #   2. action's renter pool
-    #   3. action's lender pool
-    #   4. other actions' lender container
+    #   1. function's executant pool
+    #   2. function's renter pool
+    #   3. function's lender pool
+    #   4. other functions' lender container
     #   5. create new container
     def dispatch_request(self):
         # no request to dispatch
@@ -73,7 +73,7 @@ class Action:
         
         # 1.1 try to get a workable container from pool
         container = self.self_container()
-        # 1.2 try to get a renter container from interaction controller
+        # 1.2 try to get a renter container from interfunction controller
         # rent_start = time.time()
         # if container is None:
         #     container = self.rent_container()
@@ -111,11 +111,11 @@ class Action:
         
         return res
 
-    # rent a container from interaction controller
+    # rent a container from interfunction controller
     # if no container can be rented, return None
     # def rent_container(self):
     #     start_time = time.time()
-    #     res = self.action_manager.rent(self.name)
+    #     res = self.function_manager.rent(self.name)
     #     if res is None:
     #         return None
         
@@ -128,7 +128,7 @@ class Action:
     def create_container(self):
         # do not create new exec container
         # when the number of execs hits the limit
-        if self.num_exec > self.info.max_container:
+        if self.num_exec > self.info.max_containers:
             return None
         
         try:
@@ -155,13 +155,13 @@ class Action:
     #     container.destroy()
 
     #     if self.pack_img_name is None:
-    #         self.pack_img_name = self.action_manager.create_pack_image(self.name)
+    #         self.pack_img_name = self.function_manager.create_pack_image(self.name)
         
     #     container = Container.create(self.client, self.pack_img_name, container.port, 'lender')
     #     self.init_container(container)
     #     return container
 
-    # give out a lender container to interaction controller
+    # give out a lender container to interfunction controller
     # if there's no lender container, return None
     # def giveout_container(self):
     #     # no container in lender pool
@@ -202,9 +202,9 @@ class Action:
     #     for c in lenders:
     #         self.remove_container(c)
 
-    # do the action specific initialization work
+    # do the function specific initialization work
     def init_container(self, container):
-        container.init(self.info.action_name, self.info.pwd)
+        container.init(self.info.function_name, self.info.pwd)
 
     # update stat info for idle alg
     def update_statistics(self):
@@ -260,9 +260,9 @@ class Action:
         #     self.lender_pool.append(repack_container)
             
         # if len(self.lender_pool) == 1:
-        #     self.action_manager.have_lender(self.name)
+        #     self.function_manager.have_lender(self.name)
         # elif len(self.lender_pool) == 0:
-        #     self.action_manager.no_lender(self.name)
+        #     self.function_manager.no_lender(self.name)
 
 def favg(a):
     return math.fsum(a) / len(a)

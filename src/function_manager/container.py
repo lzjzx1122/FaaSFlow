@@ -45,13 +45,13 @@ class Container:
         return r.json()
 
     # initialize the container
-    def init(self, action_name, pwd):
-        data = { 'action': action_name, 'pwd': pwd}
+    def init(self, function_name, pwd):
+        data = { 'function': function_name, 'pwd': pwd}
         r = requests.post(base_url.format(self.port, 'init'), json=data)
         self.lasttime = time.time()
         return r.status_code == 200
 
     # kill and remove the container
     def destroy(self):
-        print("################################## destory: ", self.port)
+        # print("################################## destory: ", self.port)
         self.container.remove(force=True)
