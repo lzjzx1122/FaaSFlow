@@ -1,0 +1,8 @@
+functions:
+  - name: utility
+    qos_time: 100
+    qos_requirement: 0.99
+    max_containers : 10
+    packages:
+      - numpy
+      - scipy

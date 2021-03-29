@@ -3,10 +3,10 @@
 # FROM python:3.7-alpine
 FROM python:3.7-slim
 
+COPY pip.conf /etc/pip.conf
+
 # fulfill the structure requirement of proxy
-RUN mkdir /proxy && \
-    mkdir /proxy/exec && \
-    mkdir /proxy/actions
+RUN mkdir /proxy
 
 # copy the proxy server
 COPY proxy.py /proxy/
