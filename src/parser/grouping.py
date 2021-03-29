@@ -1,8 +1,11 @@
 import parser_with_time
 import queue
-import time
+import uuid
+import json
 
 inter_communication_time = 0.1
+node_cnt = 10
+node_ip = ['', '', '', '', '', '', '', '', '', '']
 
 
 def init_graph(workflow, group_set):
@@ -89,6 +92,16 @@ def merge_node(crit_vec, group_set, group_size):
     return merge_flag
 
 
+def get_prerequisite(workflow):
+    result = []
+    for node in workflow.nodes:
+        prerequisite = []
+        for pre_node in node.prev:
+            prerequisite.append(pre_node.name)
+        result.append({'name': node.name, 'prerequisite': prerequisite})
+    return result
+
+
 def grouping(req_id, workflow):
     topo_search_cnt = 0
     group_set = list()
@@ -116,29 +129,18 @@ def grouping(req_id, workflow):
             group_size = group_size + 1
             merge_node(crit_vec, group_set, group_size)
 
-    group_detail = list()
+    group_detail = []
     for node_set in group_set:
-        group_detail.append(list(node_set))
+        group_id = str(uuid.uuid4())
+        for node in node_set:
+            group_detail.append({'name': node, 'group_id': group_id, 'node_id': hash(group_id) % node_cnt})
+    prerequisite = get_prerequisite(workflow)
     group_size = 1 if topo_search_cnt == 1 else group_size
     ratio = crit_length / no_latency_crit_length
 
-    group_result = dict()
-    group_result['ratio'] = ratio
-    group_result['crit_length'] = crit_length
-    group_result['no_latency_crit_length'] = no_latency_crit_length
-    group_result['group_size'] = group_size
-    group_result['total_node_cnt'] = total_node_cnt
-    group_result['group_detail'] = group_detail
-    return group_result
+    return json.dumps(group_detail), json.dumps(prerequisite)
 
 
-start_time = time.time()
-grouping_result = grouping('0', parser_with_time.mainObject)
-end_time = time.time()
-print('ratio: ', grouping_result['ratio'])
-print('optimized_critical_path: ', grouping_result['crit_length'])
-print('no_latency_critical_path: ', grouping_result['no_latency_crit_length'])
-print('optimized_group_size: ', grouping_result['group_size'])
-print('total_node: ', grouping_result['total_node_cnt'])
-print('group_result: ', grouping_result['group_detail'])
-print('total_time: ', end_time - start_time)
+detail, requisite = grouping('0', parser_with_time.mainObject)
+print(detail)
+print(requisite)
