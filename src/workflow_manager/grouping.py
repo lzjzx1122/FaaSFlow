@@ -1,7 +1,7 @@
 import parser_with_time
 import queue
-import uuid
 import json
+import repository
 
 inter_communication_time = 0.1
 node_cnt = 10
@@ -102,7 +102,7 @@ def get_prerequisite(workflow):
     return result
 
 
-def grouping(req_id, workflow):
+def grouping(workflow):
     topo_search_cnt = 0
     group_set = list()
     in_degree_vec = init_graph(workflow, group_set)
@@ -129,18 +129,58 @@ def grouping(req_id, workflow):
             group_size = group_size + 1
             merge_node(crit_vec, group_set, group_size)
 
-    group_detail = []
-    for node_set in group_set:
-        group_id = str(uuid.uuid4())
-        for node in node_set:
-            group_detail.append({'name': node, 'group_id': group_id, 'node_id': hash(group_id) % node_cnt})
-    prerequisite = get_prerequisite(workflow)
-    group_size = 1 if topo_search_cnt == 1 else group_size
-    ratio = crit_length / no_latency_crit_length
-
-    return json.dumps(group_detail), json.dumps(prerequisite)
+    print(crit_length, no_latency_crit_length)
+    print(group_size)
+    return group_set
 
 
-detail, requisite = grouping('0', parser_with_time.mainObject)
-print(detail)
-print(requisite)
+def get_type(name, node, group_detail, mode):
+    if mode == 'input':
+        for prev_node in node.prev:
+            if name in prev_node.output_files:
+                node_set = find_set(prev_node.name, group_detail)
+                return 'MEM' if node.name in node_set else 'DB'
+        return 'DB'
+    else:
+        could_be_in_mem = False
+        just_in_mem = True
+        for next_node in node.next:
+            if name in next_node.input_files:
+                node_set = find_set(next_node.name, group_detail)
+                could_be_in_mem = True
+                if node.name not in node_set:
+                    just_in_mem = False
+        return 'MEM' if could_be_in_mem and just_in_mem else 'DB'
+
+
+def save_function_info():
+    file_set = set()
+    output_file_set = set()
+    group_detail = grouping(parser_with_time.mainObject)
+    function_info_list = list()
+    for node in parser_with_time.mainObject.nodes:
+        function_info = {'function_name': node.name, 'runtime': node.runtime}
+        function_input = dict()
+        for input_file in node.input_files:
+            file_set.add(input_file)
+            function_input[input_file] = {'type': get_type(input_file, node, group_detail, 'input'),
+                                          'size': node.input_files[input_file]}
+        function_output = dict()
+        for output_file in node.output_files:
+            file_set.add(output_file)
+            output_file_set.add(output_file)
+            function_output[output_file] = {'type': get_type(output_file, node, group_detail, 'output'),
+                                            'size': node.output_files[output_file]}
+        function_next = list()
+        for next_node in node.next:
+            function_next.append(next_node.name)
+        function_info['input'] = function_input
+        function_info['output'] = function_output
+        function_info['next'] = function_next
+        function_info_list.append(function_info)
+    return function_info_list, list(file_set - output_file_set)
+
+
+info_list, input_file_list = save_function_info()
+repository.save_function_info(info_list)
+repository.save_basic_input(input_file_list)
