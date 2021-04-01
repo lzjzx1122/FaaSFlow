@@ -6,13 +6,15 @@ FROM python:3.7-slim
 COPY pip.conf /etc/pip.conf
 
 # fulfill the structure requirement of proxy
-RUN mkdir /proxy
+RUN mkdir /proxy && \
+    mkdir /exec && \
+    mkdir /results
 
 # copy the proxy server
 COPY proxy.py /proxy/
 
 # the work dir of proxy is under exec/
-WORKDIR /proxy/exec
+WORKDIR /exec
 
 # proxy server runs under port 5000
 EXPOSE 5000
@@ -23,6 +25,6 @@ EXPOSE 5000
 #     pip install --no-cache-dir gevent flask && \
 #     apk del .build-deps
 
-RUN pip3 install --no-cache-dir gevent flask
+RUN pip3 install --no-cache-dir gevent flask couchdb
 
 CMD [ "python3", "/proxy/proxy.py" ]

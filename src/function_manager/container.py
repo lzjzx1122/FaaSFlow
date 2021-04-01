@@ -2,16 +2,28 @@ import requests
 import docker
 import time
 import gevent
+from docker.types import Mount
 
 base_url = 'http://127.0.0.1:{}/{}'
+result_dir = '/results'
 
 class Container:
     # create a new container and return the wrapper
     @classmethod
     def create(cls, client, image_name, port, attr):
-        container = client.containers.run(image_name, detach=True, ports={'5000/tcp': str(port)})
+        #print("mount begin")
+        mount = Mount(result_dir, '/var/run/workflow_results', type='bind')
+        #print("mount end")
+        container = client.containers.run(image_name,
+                                          detach=True,
+                                          ports={'5000/tcp': str(port)},
+                                          labels=['workflow'],
+                                          mounts=[mount])
+        #print("run end")
         res = cls(container, port, attr)
+        #print("wait begin")
         res.wait_start()
+        #print("wait end")
         return res
 
     # get the wrapper of an existed container

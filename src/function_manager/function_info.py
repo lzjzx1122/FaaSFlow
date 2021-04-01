@@ -18,7 +18,7 @@ def generate_image(config_path, function_name, packages):
         requirements += " " + package
     with open(dockerfile_path, "w") as f:
         f.write("FROM workflow_base\n")
-        f.write('COPY main.py /proxy/main.py\n')
+        f.write('COPY main.py /exec/main.py\n')
         if requirements != "":
             f.write("RUN pip3 --no-cache-dir install{}".format(requirements))
     os.system("cd {} && docker build --no-cache -t {}_image .".format(function_path, function_name))
@@ -31,12 +31,14 @@ def parse(config_path):
         for c in config['functions']:
             function_name = c['name']
             packages = c['packages'] if 'packages' in c else [] 
-            # generate_image(config_path, function_name, packages)
             
             # clear previous containers.
+            print("Clearing previous containers.")
             os.system('docker stop $(docker ps -a | grep \"' + function_name + '_image' + '\" | awk \'{print $1}\')')
             os.system('docker rm $(docker ps -a | grep \"' + function_name + '_image' + '\" | awk \'{print $1}\')')
 
+            generate_image(config_path, function_name, packages)
+            
             info = FunctionInfo(function_name,
                               function_name + "_image",
                               c['max_containers'],

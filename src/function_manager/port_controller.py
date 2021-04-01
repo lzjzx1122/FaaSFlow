@@ -1,4 +1,4 @@
-class PortManager:
+class PortController:
     def __init__(self, min_port, max_port):
         self.port_resource = list(range(min_port, max_port))
 
