@@ -154,16 +154,21 @@ def get_type(name, node, group_detail, mode):
 
 
 def save_function_info():
+    file_set = set()
+    output_file_set = set()
     group_detail = grouping(parser_with_time.mainObject)
     function_info_list = list()
     for node in parser_with_time.mainObject.nodes:
         function_info = {'function_name': node.name, 'runtime': node.runtime}
         function_input = dict()
         for input_file in node.input_files:
+            file_set.add(input_file)
             function_input[input_file] = {'type': get_type(input_file, node, group_detail, 'input'),
                                           'size': node.input_files[input_file]}
         function_output = dict()
         for output_file in node.output_files:
+            file_set.add(output_file)
+            output_file_set.add(output_file)
             function_output[output_file] = {'type': get_type(output_file, node, group_detail, 'output'),
                                             'size': node.output_files[output_file]}
         function_next = list()
@@ -173,8 +178,9 @@ def save_function_info():
         function_info['output'] = function_output
         function_info['next'] = function_next
         function_info_list.append(function_info)
-    return function_info_list
+    return function_info_list, list(file_set - output_file_set)
 
 
-info_list = save_function_info()
+info_list, input_file_list = save_function_info()
 repository.save_function_info(info_list)
+repository.save_basic_input(input_file_list)

@@ -34,9 +34,17 @@ class WorkflowManager:
             if repository.has_files(file_name_list, self.request_id):
                 gevent.spawn(self.run_function(name))
 
+    def prepare_basic_input(self):
+        basic_input = repository.get_basic_input()
+        file_info_list = list()
+        for doc in basic_input:
+            file_info_list.append({'file_name': doc['file_name'], 'type': 'DB',
+                                   'location': doc['_id']})
+        repository.put_file_info(file_info_list, self.request_id)
+
     def run_workflow(self):
         repository.create_result_db(self.request_id)
-        gevent.spawn(self.run_function('mProject_00000001'))
+        gevent.spawn(self.run_function('start_node'))
 
 
 workflow = WorkflowManager('1')
