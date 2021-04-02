@@ -12,18 +12,17 @@ db = db_server.create(db_name)
 
 manager = FunctionManager("functions")
 
-for _ in range(10):
+for _ in range(1):
     function_name = 'utility'
-    request_id = uuid.uuid4().hex
+    request_id = "123344"
 
     # input
     doc = request_id + "_" + function_name + "_file1"
-    db[doc] = {"key": "file1", "value": "fsdfkshfshj"}
     runtime = 1
-    input = {"file1" : {"type": "DB", "value": doc}, "file2": {"type": "MEM", "value": "0d169826ba974399b70badc049470fed_utility_file3.json"}}
+    input = {"file1" : {"type": "MEM"}, "file2": {"type": "MEM"}}
 
     # output
-    output = {"file3": {"type": "DB", "size" : 100}, "file4": {"type": "MEM", "size": 200}}
+    output = {"file3": {"type": "DB+MEM", "size" : 100}, "file4": {"type": "DB+MEM", "size": 200}}
 
     res = manager.run(function_name, request_id, runtime, input, output)
     print(res)

@@ -45,7 +45,6 @@ def get_fileNameExt(filename):
 @print_excute_time
 def main(event):
     evt = json.loads(event)
-    # split video key, locate in nas
     input_path = evt['split_keys']
     fileDir, shortname, extension = get_fileNameExt(input_path)
 

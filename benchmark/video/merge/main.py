@@ -99,4 +99,4 @@ def main(event,context):
     }
     return res
 
-main('{"split_keys": ["/home/openwhisk/Workflow/benchmark/video/1/split_output/split_test_piece_00.mp4", "/home/openwhisk/Workflow/benchmark/video/1/split_output/split_test_piece_01.mp4"], "video_proc_dir": "/home/openwhisk/Workflow/benchmark/video/1/split_output","video_key":"/home/openwhisk/Workflow/benchmark/video/test.mp4","output_prefix": "neo","target_type":"avi"}',1)
+main('{"split_keys": ["/home/openwhisk/Workflow/benchmark/video/1/split_output/split_test_piece_00.mp4", "/home/openwhisk/Workflow/benchmark/video/1/split_output/split_test_piece_01.mp4"], "video_proc_dir": "/home/openwhisk/Workflow/benchmark/video/1/split_output","video_key":"/home/openwhisk/Workflow/benchmark/video/1/test.mp4","output_prefix": "neo","target_type":"avi"}',1)

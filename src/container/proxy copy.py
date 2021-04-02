@@ -56,14 +56,14 @@ class Store:
     def init(self, function):
         self.function = function
 
-    def fetch(self, request_id, input):
+    def fetch(self, input):
         input_res = {}
         for (k, v) in input.items():
             if v['type'] == 'DB':
-                doc = request_id + "_" + k
+                doc = v['value']
                 input_res[k] = self.db[doc]
             else: # MEM
-                path = request_id + "_" + k + ".json"
+                path = v['value']
                 with open(os.path.join(result_dir, path), "r") as f:
                     json_file = json.load(f)
                     input_res[k] = json_file['value']
@@ -71,14 +71,19 @@ class Store:
         
     def put(self, request_id, output, output_res):
         for (k, v) in output_res.items():
-            if 'DB' in output[k]['type']:
-                doc = request_id + "_" + k
+            # MEM
+            path = request_id + "_" + self.function + "_" + k + ".json"
+            json_file = {"key": k, "value": v}
+            with open(os.path.join(result_dir, path), "w") as f:
+                json.dump(json_file, f)
+            output[k]['value'] = path
+            
+            if output[k]['type'] == 'DB':
+                doc = request_id + "_" + self.function + "_" + k
                 self.db[doc] = {"key": k, "value": v}
-            if 'MEM' in output[k]['type']:
-                path = request_id + "_" + k + ".json"
-                json_file = {"key": k, "value": v}
-                with open(os.path.join(result_dir, path), "w") as f:
-                    json.dump(json_file, f)
+                output[k]['value'] = doc
+            
+        return output
 
 proxy = Flask(__name__)
 proxy.status = 'new'
@@ -115,19 +120,20 @@ def run():
     runtime = inp['runtime']
     input = inp['input']
     output = inp['output']
-    input_res = store.fetch(request_id, input)
+    input_res = store.fetch(input)
 
     # record the execution time
     start = time.time()
     output_res = runner.run(runtime, input_res, output)
     end = time.time()
 
-    store.put(request_id, output, output_res)
+    output = store.put(request_id, output, output_res)
     
     res = {
         "start_time": start,
         "end_time": end,
-        "duration": end - start
+        "duration": end - start,
+        "output": output
     }
     
     proxy.status = 'ok'

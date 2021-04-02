@@ -60,7 +60,7 @@ class Function:
         self.request_log['duration'].append(res['duration'])
         self.request_log['alltime'].append(end - start)
 
-        return res['output']
+        return res
 
     # receive a request from upper layer
     # the precedence of container source:
