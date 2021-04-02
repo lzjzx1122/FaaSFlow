@@ -15,34 +15,6 @@ def get_function_info(function_name):
         return item
 
 
-def create_result_db(request_id):
-    couch = couchdb.Server('http://admin:admin@localhost:5984')
-    couch.create('results_log_' + request_id)
-
-
-def get_file_by_name(file_name, request_id):
-    couch = couchdb.Server('http://admin:admin@localhost:5984')
-    db = couch['results_log_' + request_id]
-    for item in db.find({'selector': {'file_name': file_name}}):
-        return item
-
-
-def put_file_info(file_info_list, request_id):
-    couch = couchdb.Server('http://admin:admin@localhost:5984')
-    db = couch['results_log_' + request_id]
-    for file_info in file_info_list:
-        db.save(file_info)
-
-
-def has_files(file_name_list, request_id):
-    couch = couchdb.Server('http://admin:admin@localhost:5984')
-    db = couch['results_log_' + request_id]
-    for file_name in file_name_list:
-        if len(db.find({'selector': {'file_name': file_name}})) == 0:
-            return False
-    return True
-
-
 def save_basic_input(input_file_list):
     couch = couchdb.Server('http://admin:admin@localhost:5984')
     db = couch['basic_input']
@@ -54,3 +26,10 @@ def get_basic_input():
     couch = couchdb.Server('http://admin:admin@localhost:5984')
     db = couch['basic_input']
     return db.find({})
+
+
+def prepare_basic_file(file_list):
+    couch = couchdb.Server('http://admin:admin@localhost:5984')
+    db = couch['basic_input']
+    for file in file_list:
+        db[file['request_id'] + '_' + file['file_name']] = {'key': file['file_name'], 'value': file['value']}
