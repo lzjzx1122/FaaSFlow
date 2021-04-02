@@ -1,11 +1,12 @@
 import json
 import yaml
 import sys
+import random
 
-workflow_name = sys.argv[1]
+workflow_name = './cycles'
 utility = 'utility.py' # sys.argv[2]
 
-f = open(workflow_name + '/main_500.json')
+f = open(workflow_name + '/main_7.json')
 data = json.load(f)
 jobs = data['workflow']['jobs'] 
 
@@ -35,9 +36,11 @@ else:
             job['children'].append('end_node')
 
 for job in jobs:
+    runtime = random.randint(0, 5)
+    job['runtime'] = runtime
     if len(job['children']) == 0:
         yaml_data['nodes'].append({'name': job['name'], 'type': 'function', 'source': utility, \
-                                    'parameters': {'runtime': job['runtime']}, \
+                                    'parameters': {'runtime': job['runtime'] }, \
                                     'runtime': job['runtime'], 'files': job['files']})
     else:
          yaml_data['nodes'].append({'name': job['name'], 'type': 'function', 'source': utility, \
@@ -45,5 +48,5 @@ for job in jobs:
                                      'runtime': job['runtime'], 'files': job['files'], 'next': job['children']})
 
 yaml_data = {'main': yaml_data}
-f = open(workflow_name + '/main_500.yaml', 'w', encoding = 'utf-8')
+f = open(workflow_name + '/main_7.yaml', 'w', encoding = 'utf-8')
 yaml.dump(yaml_data, f, sort_keys=False)
