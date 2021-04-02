@@ -15,19 +15,24 @@ class WorkflowManager:
         return self.function_info[function_name]
 
     def run_function(self, function_name):
+        # prepare params
         function_info = self.get_function_info(function_name)
         param = {'function_name': function_info['function_name'], 'request': self.request_id,
                  'runtime': function_info['runtime'], 'input': function_info['input'],
                  'output': function_info['output']}
+        # prepare each file's location
         for input_file_name in param['input']:
             input_file = repository.get_file_by_name(input_file_name, self.request_id)
-            param['input']['value'] = input_file['location']
+            param['input'][input_file_name]['value'] = input_file['location']
+        # run function
         response = function_proxy.run(json.dumps(param))
+        # log each function's output
         file_info_list = list()
         for output_file_name in response:
             file_info_list.append({'file_name': output_file_name, 'type': response[output_file_name]['type'],
                                    'location': response[output_file_name]['value']})
         repository.put_file_info(file_info_list, self.request_id)
+        # check if any function has enough input to be able to fire
         for name in function_info['next']:
             next_function_info = self.get_function_info(name)
             file_name_list = next_function_info['input'].keys()
@@ -44,6 +49,7 @@ class WorkflowManager:
 
     def run_workflow(self):
         repository.create_result_db(self.request_id)
+        self.prepare_basic_input()
         gevent.spawn(self.run_function('start_node'))
 
 
