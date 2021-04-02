@@ -1,210 +1,104 @@
 main:
-  type: workflow
-  start: baseline_cycles_00000001
   end: end_node
   nodes:
   - name: end_node
-    type: function
-    source: utility.py
-    parameters:
-      runtime: 0
+    parameters: {runtime: 0}
     runtime: 0
-  - name: baseline_cycles_00000001
-    type: function
     source: utility.py
-    parameters:
-      runtime: 2
-    runtime: 2
-    files:
-    - link: input
-      name: 855b586b-7bd4-427a-96d3-e3bd7d0914d0.soil
-      size: 739
-    - link: input
-      name: f63a97b7-99e7-406c-a4b4-d6654e2fa63b.weather
-      size: 276092
-    - link: input
-      name: b126d334-3148-4e34-ae62-a3299c976d5f.operation
-      size: 1805
-    - link: input
-      name: e96dd001-060c-42e8-84f5-93a0cd1ec783.ctrl
-      size: 766
-    - link: input
-      name: 7152eb1b-a6f8-4b72-8416-f47452da76dbcycles_exe
-      size: 694648
-    - link: input
-      name: 68cfb3de-aaed-4dde-8f05-fb71f9a1f8de.crop
-      size: 14434
-    - link: output
-      name: af4296ed-f97f-43d0-b716-6ed3fc23d972.dat
-      size: 1808674
-    - link: output
-      name: 83d8a4fc-6f75-4d6f-87b1-00c397c89569.csv
-      size: 28
-    - link: output
-      name: f1e2531b-4cb5-42e2-9f2d-c8f6557efdee.zip
-      size: 1124621
-    next:
-    - cycles_00000002
-    - fertilizer_increase_cycles_00000003
-  - name: cycles_00000002
     type: function
-    source: utility.py
-    parameters:
-      runtime: 3
-    runtime: 3
-    files:
-    - link: input
-      name: af4296ed-f97f-43d0-b716-6ed3fc23d972.dat
-      size: 1808674
-    - link: input
-      name: 83d8a4fc-6f75-4d6f-87b1-00c397c89569.csv
-      size: 28
-    - link: input
-      name: f1e2531b-4cb5-42e2-9f2d-c8f6557efdee.zip
-      size: 1124621
-    - link: input
-      name: b7c27eb4-61f4-4150-bd94-0a400bb01b8d.soil
-      size: 739
-    - link: input
-      name: e072c1f1-ea86-4684-a8bf-40b542307729.weather
-      size: 441960
-    - link: input
-      name: d0d7a519-c900-4c05-b3bd-6b1d06e51f8a.operation
-      size: 1805
-    - link: input
-      name: 65893e36-bd74-4f6f-b32c-e3c9c918e775.ctrl
-      size: 766
-    - link: input
-      name: beb72a5d-faf7-43f4-808c-051559d195d1cycles_exe
-      size: 694648
-    - link: input
-      name: 842ca32d-0a72-4b08-ba75-6ccb27ac45ad.crop
-      size: 14434
-    - link: output
-      name: e5fca286-3e95-4577-a229-561907824596.zip
-      size: 447626
-    - link: output
-      name: 79b905fe-f9e8-4fb1-88e7-4bce9b0029ec.dat
-      size: 1808674
-    - link: output
-      name: 82e752e5-619b-46ec-aa14-41abb54cc492.csv
-      size: 177
-    next:
-    - cycles_output_summary_00000005
-  - name: fertilizer_increase_cycles_00000003
-    type: function
-    source: utility.py
-    parameters:
-      runtime: 4
-    runtime: 4
-    files:
-    - link: input
-      name: af4296ed-f97f-43d0-b716-6ed3fc23d972.dat
-      size: 1808674
-    - link: input
-      name: 83d8a4fc-6f75-4d6f-87b1-00c397c89569.csv
-      size: 28
-    - link: input
-      name: f1e2531b-4cb5-42e2-9f2d-c8f6557efdee.zip
-      size: 1124621
-    - link: input
-      name: 7f12c9d6-b0e4-4cc4-9490-af22bee13f76.soil
-      size: 739
-    - link: input
-      name: 9095dfa7-61f3-4f40-8a43-7598d112c9cc.weather
-      size: 508886
-    - link: input
-      name: 230fe67a-2b90-411f-9734-710558dcfab1.operation
-      size: 1805
-    - link: input
-      name: ef61cefa-d7c1-48b8-aaaa-58e89592198e.ctrl
-      size: 766
-    - link: input
-      name: 41a0c464-9c75-4a7f-94c7-e2238f9d1bf5cycles_exe
-      size: 694648
-    - link: input
-      name: a17669e2-625d-48bf-9602-ef81c9838f60.crop
-      size: 14434
-    - link: output
-      name: cfa8071e-54c8-4469-a0ce-06cd072948ef.csv
-      size: 209
-    - link: output
-      name: d6d4464c-95b9-4e89-a5d9-09b4a174e12c.dat
-      size: 1808674
-    - link: output
-      name: 7e610115-edab-4f16-982a-7aef065df2a9.zip
-      size: 448675
-    next:
-    - cycles_fertilizer_increase_output_parser_00000004
-  - name: cycles_fertilizer_increase_output_parser_00000004
-    type: function
-    source: utility.py
-    parameters:
-      runtime: 3
-    runtime: 3
-    files:
-    - link: input
-      name: cfa8071e-54c8-4469-a0ce-06cd072948ef.csv
-      size: 209
-    - link: input
-      name: d6d4464c-95b9-4e89-a5d9-09b4a174e12c.dat
-      size: 1808674
-    - link: input
-      name: 7e610115-edab-4f16-982a-7aef065df2a9.zip
-      size: 448675
-    - link: output
-      name: 97b14c79-6b33-4060-9fbc-d356c78039a1.csv
-      size: 4691
-    next:
-    - cycles_fertilizer_increase_output_summary_00000006
-  - name: cycles_output_summary_00000005
-    type: function
-    source: utility.py
-    parameters:
-      runtime: 0
-    runtime: 0
-    files:
-    - link: input
-      name: e5fca286-3e95-4577-a229-561907824596.zip
-      size: 447626
-    - link: input
-      name: 79b905fe-f9e8-4fb1-88e7-4bce9b0029ec.dat
-      size: 1808674
-    - link: input
-      name: 82e752e5-619b-46ec-aa14-41abb54cc492.csv
-      size: 177
-    - link: output
-      name: 682aac94-3ce9-4ebd-b9c1-98470869b177.csv
-      size: 257366
-    next:
-    - cycles_plots_00000007
-  - name: cycles_fertilizer_increase_output_summary_00000006
-    type: function
-    source: utility.py
-    parameters:
-      runtime: 0
-    runtime: 0
-    files:
-    - link: input
-      name: 97b14c79-6b33-4060-9fbc-d356c78039a1.csv
-      size: 4691
-    - link: output
-      name: 0fab0221-38d4-45db-bb71-dfcaed953c71.csv
-      size: 422954
-    next:
-    - end_node
-  - name: cycles_plots_00000007
-    type: function
-    source: utility.py
-    parameters:
-      runtime: 1
+  - files:
+    - {link: input, name: 855b586b-7bd4-427a-96d3-e3bd7d0914d0.soil, size: 739}
+    - {link: input, name: f63a97b7-99e7-406c-a4b4-d6654e2fa63b.weather, size: 276092}
+    - {link: input, name: b126d334-3148-4e34-ae62-a3299c976d5f.operation, size: 1805}
+    - {link: input, name: e96dd001-060c-42e8-84f5-93a0cd1ec783.ctrl, size: 766}
+    - {link: input, name: 7152eb1b-a6f8-4b72-8416-f47452da76dbcycles_exe, size: 694648}
+    - {link: input, name: 68cfb3de-aaed-4dde-8f05-fb71f9a1f8de.crop, size: 14434}
+    - {link: output, name: af4296ed-f97f-43d0-b716-6ed3fc23d972.dat, size: 1808674}
+    - {link: output, name: 83d8a4fc-6f75-4d6f-87b1-00c397c89569.csv, size: 28}
+    - {link: output, name: f1e2531b-4cb5-42e2-9f2d-c8f6557efdee.zip, size: 1124621}
+    name: baseline_cycles_00000001
+    next: [cycles_00000002, fertilizer_increase_cycles_00000003]
+    parameters: {runtime: 1}
     runtime: 1
-    files:
-    - link: input
-      name: 682aac94-3ce9-4ebd-b9c1-98470869b177.csv
-      size: 257366
-    - link: output
-      name: 4f4aebd5-d180-47eb-ada6-d56123ac3e70.gif
-      size: 2015064
-    next:
-    - end_node
+    source: utility.py
+    type: function
+  - files:
+    - {link: input, name: af4296ed-f97f-43d0-b716-6ed3fc23d972.dat, size: 1808674}
+    - {link: input, name: 83d8a4fc-6f75-4d6f-87b1-00c397c89569.csv, size: 28}
+    - {link: input, name: f1e2531b-4cb5-42e2-9f2d-c8f6557efdee.zip, size: 1124621}
+    - {link: input, name: b7c27eb4-61f4-4150-bd94-0a400bb01b8d.soil, size: 739}
+    - {link: input, name: e072c1f1-ea86-4684-a8bf-40b542307729.weather, size: 441960}
+    - {link: input, name: d0d7a519-c900-4c05-b3bd-6b1d06e51f8a.operation, size: 1805}
+    - {link: input, name: 65893e36-bd74-4f6f-b32c-e3c9c918e775.ctrl, size: 766}
+    - {link: input, name: beb72a5d-faf7-43f4-808c-051559d195d1cycles_exe, size: 694648}
+    - {link: input, name: 842ca32d-0a72-4b08-ba75-6ccb27ac45ad.crop, size: 14434}
+    - {link: output, name: e5fca286-3e95-4577-a229-561907824596.zip, size: 447626}
+    - {link: output, name: 79b905fe-f9e8-4fb1-88e7-4bce9b0029ec.dat, size: 1808674}
+    - {link: output, name: 82e752e5-619b-46ec-aa14-41abb54cc492.csv, size: 177}
+    name: cycles_00000002
+    next: [cycles_output_summary_00000005]
+    parameters: {runtime: 2}
+    runtime: 2
+    source: utility.py
+    type: function
+  - files:
+    - {link: input, name: af4296ed-f97f-43d0-b716-6ed3fc23d972.dat, size: 1808674}
+    - {link: input, name: 83d8a4fc-6f75-4d6f-87b1-00c397c89569.csv, size: 28}
+    - {link: input, name: f1e2531b-4cb5-42e2-9f2d-c8f6557efdee.zip, size: 1124621}
+    - {link: input, name: 7f12c9d6-b0e4-4cc4-9490-af22bee13f76.soil, size: 739}
+    - {link: input, name: 9095dfa7-61f3-4f40-8a43-7598d112c9cc.weather, size: 508886}
+    - {link: input, name: 230fe67a-2b90-411f-9734-710558dcfab1.operation, size: 1805}
+    - {link: input, name: ef61cefa-d7c1-48b8-aaaa-58e89592198e.ctrl, size: 766}
+    - {link: input, name: 41a0c464-9c75-4a7f-94c7-e2238f9d1bf5cycles_exe, size: 694648}
+    - {link: input, name: a17669e2-625d-48bf-9602-ef81c9838f60.crop, size: 14434}
+    - {link: output, name: cfa8071e-54c8-4469-a0ce-06cd072948ef.csv, size: 209}
+    - {link: output, name: d6d4464c-95b9-4e89-a5d9-09b4a174e12c.dat, size: 1808674}
+    - {link: output, name: 7e610115-edab-4f16-982a-7aef065df2a9.zip, size: 448675}
+    name: fertilizer_increase_cycles_00000003
+    next: [cycles_fertilizer_increase_output_parser_00000004]
+    parameters: {runtime: 3}
+    runtime: 3
+    source: utility.py
+    type: function
+  - files:
+    - {link: input, name: cfa8071e-54c8-4469-a0ce-06cd072948ef.csv, size: 209}
+    - {link: input, name: d6d4464c-95b9-4e89-a5d9-09b4a174e12c.dat, size: 1808674}
+    - {link: input, name: 7e610115-edab-4f16-982a-7aef065df2a9.zip, size: 448675}
+    - {link: output, name: 97b14c79-6b33-4060-9fbc-d356c78039a1.csv, size: 4691}
+    name: cycles_fertilizer_increase_output_parser_00000004
+    next: [cycles_fertilizer_increase_output_summary_00000006]
+    parameters: {runtime: 5}
+    runtime: 5
+    source: utility.py
+    type: function
+  - files:
+    - {link: input, name: e5fca286-3e95-4577-a229-561907824596.zip, size: 447626}
+    - {link: input, name: 79b905fe-f9e8-4fb1-88e7-4bce9b0029ec.dat, size: 1808674}
+    - {link: input, name: 82e752e5-619b-46ec-aa14-41abb54cc492.csv, size: 177}
+    - {link: output, name: 682aac94-3ce9-4ebd-b9c1-98470869b177.csv, size: 257366}
+    name: cycles_output_summary_00000005
+    next: [cycles_plots_00000007]
+    parameters: {runtime: 4}
+    runtime: 4
+    source: utility.py
+    type: function
+  - files:
+    - {link: input, name: 97b14c79-6b33-4060-9fbc-d356c78039a1.csv, size: 4691}
+    - {link: output, name: 0fab0221-38d4-45db-bb71-dfcaed953c71.csv, size: 422954}
+    name: cycles_fertilizer_increase_output_summary_00000006
+    next: [end_node]
+    parameters: {runtime: 5}
+    runtime: 5
+    source: utility.py
+    type: function
+  - files:
+    - {link: input, name: 682aac94-3ce9-4ebd-b9c1-98470869b177.csv, size: 257366}
+    - {link: output, name: 4f4aebd5-d180-47eb-ada6-d56123ac3e70.gif, size: 2015064}
+    name: cycles_plots_00000007
+    next: [end_node]
+    parameters: {runtime: 3}
+    runtime: 3
+    source: utility.py
+    type: function
+  start: baseline_cycles_00000001
+  type: workflow

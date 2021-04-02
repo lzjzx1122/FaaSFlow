@@ -1,11 +1,12 @@
 functions:
-  - name: start_node
-    qos_time: 1
-    qos_requirement: 0.99
-    max_containers : 10
-    packages:
-      - numpy
-  - name: funb
-    qos_time: 1
-    qos_requirement: 0.99
-    max_containers : 10
+- {max_containers: 10, name: baseline_cycles_00000001, qos_requirement: 0.99, qos_time: 1}
+- {max_containers: 10, name: cycles_00000002, qos_requirement: 0.99, qos_time: 1}
+- {max_containers: 10, name: fertilizer_increase_cycles_00000003, qos_requirement: 0.99,
+  qos_time: 1}
+- {max_containers: 10, name: cycles_fertilizer_increase_output_parser_00000004, qos_requirement: 0.99,
+  qos_time: 1}
+- {max_containers: 10, name: cycles_output_summary_00000005, qos_requirement: 0.99,
+  qos_time: 1}
+- {max_containers: 10, name: cycles_fertilizer_increase_output_summary_00000006, qos_requirement: 0.99,
+  qos_time: 1}
+- {max_containers: 10, name: cycles_plots_00000007, qos_requirement: 0.99, qos_time: 1}
