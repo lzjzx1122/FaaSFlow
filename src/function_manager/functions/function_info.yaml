@@ -1,7 +1,11 @@
 functions:
-  - name: utility
+  - name: start_node
     qos_time: 1
     qos_requirement: 0.99
     max_containers : 10
     packages:
       - numpy
+  - name: funb
+    qos_time: 1
+    qos_requirement: 0.99
+    max_containers : 10

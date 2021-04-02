@@ -283,7 +283,7 @@ def check_next(obj):
 
 
 # __name__ == '__main__'
-filename = sys.argv[1]
+filename = '../../experiment/naive_test.yaml'
 data = yaml.load(open(filename))
 mainObject = None
 objectMap = dict()

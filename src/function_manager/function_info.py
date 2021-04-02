@@ -21,7 +21,7 @@ def generate_image(config_path, function_name, packages):
         f.write('COPY main.py /exec/main.py\n')
         if requirements != "":
             f.write("RUN pip3 --no-cache-dir install{}".format(requirements))
-    os.system("cd {} && docker build --no-cache -t {}_image .".format(function_path, function_name))
+    os.system("cd {} && docker build --no-cache -t image_{} .".format(function_path, function_name))
 
 def parse(config_path):
     function_info = []
@@ -34,13 +34,14 @@ def parse(config_path):
             
             # clear previous containers.
             print("Clearing previous containers.")
-            os.system('docker stop $(docker ps -a | grep \"' + function_name + '_image' + '\" | awk \'{print $1}\')')
-            os.system('docker rm $(docker ps -a | grep \"' + function_name + '_image' + '\" | awk \'{print $1}\')')
+            os.system('docker stop $(docker ps -a | grep \"' + 'image_' + function_name + '\" | awk \'{print $1}\')')
+            os.system('docker rm $(docker ps -a | grep \"' + 'image_' + function_name  + '\" | awk \'{print $1}\')')
 
+            print("generate:", function_name)
             generate_image(config_path, function_name, packages)
             
             info = FunctionInfo(function_name,
-                              function_name + "_image",
+                              'image_' + function_name,
                               c['max_containers'],
                               float(c['qos_time']),
                               float(c['qos_requirement']))

@@ -20,13 +20,10 @@ class FunctionManager:
     def __init__(self, config_path):
         self.function_info = parse(config_path)
         self.db_server = couchdb.Server(couchdb_url)
-        if db_name in self.db_server:
-            db = self.db_server[db_name]
-        else:
-            db = self.db_server.create(db_name)
+        db = self.db_server[db_name]
         #os.system("curl -X DELETE " + couchdb_url + db_name)
         #if db_name in self.db_server:
-        #    self.db_server.delete(db_name)
+        # self.db_server.delete(db_name)
 
         self.port_controller = PortController(10080, 30000)
         self.client = docker.from_env()
@@ -50,6 +47,7 @@ class FunctionManager:
             gevent.spawn(function.dispatch_request)
     
     def run(self, function_name, request_id, runtime, input, output):
+        print('run', function_name, request_id, runtime, input, output)
         if function_name not in self.functions:
             raise Exception("No such function!")
         return self.functions[function_name].send_request(request_id, runtime, input, output)
