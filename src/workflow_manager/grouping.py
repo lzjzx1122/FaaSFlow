@@ -142,15 +142,21 @@ def get_type(name, node, group_detail, mode):
                 return 'MEM' if node.name in node_set else 'DB'
         return 'DB'
     else:
-        could_be_in_mem = False
-        just_in_mem = True
+        not_in_same_set = False
+        in_same_set = False
         for next_node in node.next:
             if name in next_node.input_files:
                 node_set = find_set(next_node.name, group_detail)
-                could_be_in_mem = True
                 if node.name not in node_set:
-                    just_in_mem = False
-        return 'MEM' if could_be_in_mem and just_in_mem else 'DB'
+                    not_in_same_set = True
+                else:
+                    in_same_set = True
+        if not_in_same_set and in_same_set:
+            return 'DB+MEM'
+        elif in_same_set:
+            return 'MEM'
+        else:
+            return 'DB'
 
 
 def save_function_info():
