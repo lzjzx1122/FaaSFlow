@@ -17,12 +17,13 @@ class RequestInfo:
         self.arrival = time.time()
 
 class Function:
-    def __init__(self, client, database, function_info, port_manager):
+    def __init__(self, client, database, function_info, port_controller, function_name):
         self.client = client
         self.db = database
         self.info = function_info
-        self.port_manager = port_manager
-        
+        self.port_controller = port_controller
+        self.function_name = function_name
+
         self.num_processing = 0
         self.rq = []
 
@@ -45,18 +46,21 @@ class Function:
         }
     
     # put the request into request queue
-    def send_request(self, request_id, data):
+    def send_request(self, request_id, runtime, input, output):
         start = time.time()
         self.request_log['start'].append(start)
 
+        data = {'request_id': request_id, 'runtime': runtime, 'input': input, 'output': output}
         req = RequestInfo(request_id, data)
         self.rq.append(req)
         res = req.result.get()
-        self.db[request_id] = res
+        self.db[request_id + "_" + self.function_name] = res
 
         end = time.time()
         self.request_log['duration'].append(res['duration'])
         self.request_log['alltime'].append(end - start)
+
+        return res['output']
 
     # receive a request from upper layer
     # the precedence of container source:
@@ -79,7 +83,7 @@ class Function:
         #     container = self.rent_container()
         # rent_end = time.time()
         
-        # 1.3 create a new containerZ
+        # 1.3 create a new container
         if container is None:
             container = self.create_container()
            
@@ -132,9 +136,8 @@ class Function:
             return None
         
         try:
-            container = Container.create(self.client, self.info.img_name, self.port_manager.get(), 'exec')
+            container = Container.create(self.client, self.info.img_name, self.port_controller.get(), 'exec')
         except Exception as e:
-            print("e:", e)
             return None
 
         self.num_exec += 1
@@ -180,7 +183,7 @@ class Function:
     # its port should be give back to port manager
     def remove_container(self, container):
         container.destroy()
-        self.port_manager.put(container.port)
+        self.port_controller.put(container.port)
     
     # return the status of all container pools
     def get_status(self):
