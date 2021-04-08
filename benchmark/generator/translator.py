@@ -26,6 +26,8 @@ else:
     yaml_data['start'] = 'start_node'
     yaml_data['nodes'].append({'name': 'start_node', 'type': 'function', 'source': utility, \
                               'parameters': {'runtime': 0}, 'runtime': 0, 'next': zero_in})
+
+'''
 if len(zero_out) == 1:
     yaml_data['end'] = zero_out[0]
 else:
@@ -35,10 +37,8 @@ else:
     for job in jobs:
         if job['name'] in zero_out:
             job['children'].append('end_node')
-
-names = []
+'''
 for job in jobs:
-    names.append(job['name'])
     runtime = random.randint(0, 5)
     job['runtime'] = runtime
     if len(job['children']) == 0:
@@ -54,6 +54,9 @@ yaml_data = {'main': yaml_data}
 f = open(workflow_name + '/main_7.yaml', 'w', encoding = 'utf-8')
 yaml.dump(yaml_data, f, sort_keys=False)
 
+names = []
+for node in yaml_data['main']['nodes']:
+	names.append(node['name'])
 os.system('rm -rf ../../src/function_manager/functions')
 os.system('mkdir ../../src/function_manager/functions')
 yaml_data2 = {"functions": []}

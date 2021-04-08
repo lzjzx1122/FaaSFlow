@@ -104,11 +104,11 @@ def checkWorkflow(data, name):
     if type(start) is not str:
         raise Exception('The key \'start\' of \'{}\' should be a str.'.format(name))
 
-    end = dataAtIndex(data, 'end')
-    if end is None:
-        raise Exception('The key \'end\' should be in \'{}\'.'.format(name))
-    if type(end) is not str:
-        raise Exception('The key \'end\' of \'{}\' should be a str.'.format(name))
+    # end = dataAtIndex(data, 'end')
+    # if end is None:
+    #    raise Exception('The key \'end\' should be in \'{}\'.'.format(name))
+    # if type(end) is not str:
+    #     raise Exception('The key \'end\' of \'{}\' should be a str.'.format(name))
 
     nodes = dataAtIndex(data, 'nodes')
     if nodes is None:
@@ -222,7 +222,8 @@ def parseWorkflow(data, name):
         nextDis = [nextDis]
 
     start = dataAtIndex(data, 'start')
-    end = dataAtIndex(data, 'end')
+    # end = dataAtIndex(data, 'end')
+    # end = 'end'
 
     nodes = dataAtIndex(data, 'nodes')
     nodes_str = []
@@ -233,7 +234,7 @@ def parseWorkflow(data, name):
             nodes_str.append(node['name'])
             parse(node, node['name'])
 
-    res =  Workflow(name, next, nextDis, start, end, nodes_str)
+    res =  Workflow(name, next, nextDis, start, dict(), nodes_str)
     objectMap[name] = res
     return res
 # ---------------------------------------- Enumrating Ends. -----------------------------------------
@@ -250,7 +251,7 @@ def strToObj(obj):
 
     if type(obj) is Workflow:
         obj.start = objectMap[obj.start]
-        obj.end = objectMap[obj.end]
+        # obj.end = objectMap[obj.end]
         for k in range(len(obj.nodes)):
             node = objectMap[obj.nodes[k]]
             obj.nodes[k] = node

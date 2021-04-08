@@ -102,6 +102,16 @@ def get_prerequisite(workflow):
     return result
 
 
+def get_longest_dis(workflow, dist_vec):
+	dist = 0
+	node_name = ''
+	for node in workflow.nodes:
+		if dist_vec[node.name][0] > dist:
+			dist = dist_vec[node.name][0]
+			node_name = node.name
+	return dist, node_name
+
+
 def grouping(workflow):
     topo_search_cnt = 0
     group_set = list()
@@ -109,18 +119,19 @@ def grouping(workflow):
     group_size = 2
     total_node_cnt = len(workflow.nodes)
     no_latency_dist_vec, _ = topo_search(workflow, in_degree_vec.copy(), group_set, True)
-    no_latency_crit_length = no_latency_dist_vec[workflow.end.name][0]
+	# no_latency_crit_length = no_latency_dist_vec[workflow.end.name][0]
+    no_latency_crit_length, _ = get_longest_dis(workflow, no_latency_dist_vec)
 
     while True:
         dist_vec, prev_vec = topo_search(workflow, in_degree_vec.copy(), group_set, False)
         topo_search_cnt = topo_search_cnt + 1
-        crit_length = dist_vec[workflow.end.name][0]
+        # crit_length = dist_vec[workflow.end.name][0]
+        crit_length, tmp_node_name = get_longest_dis(workflow, dist_vec)
         if crit_length < no_latency_crit_length * penalty_rate:
             break
         elif group_size == total_node_cnt:
             break
         crit_vec = dict()
-        tmp_node_name = workflow.end.name
         while tmp_node_name != workflow.start.name:
             crit_vec[tmp_node_name] = prev_vec[tmp_node_name]
             tmp_node_name = prev_vec[tmp_node_name][0]
@@ -188,5 +199,7 @@ def save_function_info():
 
 
 info_list, input_file_list = save_function_info()
+print(info_list, input_file_list)
 repository.save_function_info(info_list)
+repository.save_start_node_name(parser_with_time.mainObject.start.name)
 repository.save_basic_input(input_file_list)

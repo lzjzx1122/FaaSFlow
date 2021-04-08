@@ -12,7 +12,7 @@ dispatch_interval = 0.005 # 200 qps at most
 
 username = 'openwhisk'
 password = 'openwhisk'
-couchdb_url = f'http://{username}:{password}@127.0.0.1:5984/'
+couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
 db_name = 'results'
 
 # the class for scheduling functions' inter-operations

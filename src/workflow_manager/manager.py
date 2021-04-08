@@ -11,10 +11,12 @@ class WorkflowManager:
         self.request_id = request_id
         self.function_info = dict()
         self.file_exist = set()
+        repository.create_result_db()
         self.function_manager = FunctionManager("../function_manager/functions")
 
     def get_function_info(self, function_name):
         if function_name not in self.function_info:
+            print('function_name: ', function_name)
             self.function_info[function_name] = repository.get_function_info(function_name)
         return self.function_info[function_name]
 
@@ -25,7 +27,7 @@ class WorkflowManager:
         #         'runtime': function_info['runtime'], 'input': function_info['input'],
         #         'output': function_info['output']}
         # run function
-        
+        # print('function_info:', function_info)
         self.function_manager.run(function_info['function_name'], self.request_id, 
             function_info['runtime'], function_info['input'], function_info['output'])
         # save each function's file location
@@ -49,16 +51,16 @@ class WorkflowManager:
         basic_input = repository.get_basic_input()
         file_list = list()
         for doc in basic_input:
-            print(doc)
+        #    print(doc)
             file_list.append({'request_id': self.request_id, 'file_name': doc['file_name'], 'value': '0'})
             self.file_exist.add(doc['file_name'])
         repository.prepare_basic_file(file_list)
 
     def run_workflow(self):
-        repository.create_result_db()
         self.prepare_basic_input()
-        gevent.spawn(self.run_function('start_node'))
-
+        start_node_name = repository.get_start_node_name()
+        print(start_node_name)
+        gevent.spawn(self.run_function(start_node_name))
 
 workflow = WorkflowManager('123')
 workflow.run_workflow()

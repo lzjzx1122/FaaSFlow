@@ -49,7 +49,7 @@ class Store:
         username = 'openwhisk'
         password = 'openwhisk'
         hostname = '10.2.64.8'
-        couchdb_url = f'http://{username}:{password}@{hostname}:5984/'
+        couchdb_url = 'http://openwhisk:openwhisk@172.20.185.136:5984/'
         db_server = couchdb.Server(couchdb_url)
         self.db = db_server['results']
     
