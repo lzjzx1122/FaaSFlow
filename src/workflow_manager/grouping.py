@@ -175,31 +175,42 @@ def save_function_info():
     output_file_set = set()
     group_detail = grouping(parser_with_time.mainObject)
     function_info_list = list()
+    function_info_list_raw = list()
     for node in parser_with_time.mainObject.nodes:
         function_info = {'function_name': node.name, 'runtime': node.runtime}
+        function_info_raw = {'function_name': node.name, 'runtime': node.runtime}
         function_input = dict()
+        function_input_raw = dict()
         for input_file in node.input_files:
             file_set.add(input_file)
             function_input[input_file] = {'type': get_type(input_file, node, group_detail, 'input'),
                                           'size': node.input_files[input_file]}
+            function_input_raw[input_file] = {'type': 'DB', 'size': node.input_files[input_file]}
         function_output = dict()
+        function_output_raw = dict()
         for output_file in node.output_files:
             file_set.add(output_file)
             output_file_set.add(output_file)
             function_output[output_file] = {'type': get_type(output_file, node, group_detail, 'output'),
                                             'size': node.output_files[output_file]}
+            function_output_raw[output_file] = {'type': 'DB', 'size': node.output_files[output_file]}
         function_next = list()
         for next_node in node.next:
             function_next.append(next_node.name)
         function_info['input'] = function_input
         function_info['output'] = function_output
         function_info['next'] = function_next
+        function_info_raw['input'] = function_input_raw
+        function_info_raw['output'] = function_output_raw
+        function_info_raw['next'] = function_next
         function_info_list.append(function_info)
-    return function_info_list, list(file_set - output_file_set)
+        function_info_list_raw.append(function_info_raw)
+    return function_info_list, function_info_list_raw, list(file_set - output_file_set)
 
 
-info_list, input_file_list = save_function_info()
-print(info_list, input_file_list)
-repository.save_function_info(info_list)
-repository.save_start_node_name(parser_with_time.mainObject.start.name)
+info_list, info_list_raw, input_file_list = save_function_info()
+repository.save_function_info(info_list, 'function_info')
+repository.save_start_node_name(parser_with_time.mainObject.start.name, 'function_info')
+repository.save_function_info(info_list_raw, 'function_info_raw')
+repository.save_start_node_name(parser_with_time.mainObject.start.name, 'function_info_raw')
 repository.save_basic_input(input_file_list)
