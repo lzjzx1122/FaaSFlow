@@ -5,24 +5,15 @@ import random
 import aiofiles
 import threading
 import gevent
-import couchdb
-
-username = 'openwhisk'
-password = 'openwhisk'
-couchdb_url = f'http://{username}:{password}@127.0.0.1:5984/'
-db_name = 'test'
-
- if db_name in self.db_server:
-            db = self.db_server[db_name]
-        else:
-            db = self.db_server.create(db_name)
 
 dir = '/var/run/workflow_results/'
 #dir = 'data/'
 async def open_file(file):
-    async with aiofiles.open(dir + file, mode='w') as f:
-        await f.write()
-    
+    async with aiofiles.open(dir + file, mode='r') as f:
+        content = await f.read()
+        print(len(content))
+    return len(content)
+
 async def open_all_files(files):
     tasks = []
     for file in files:
@@ -30,10 +21,10 @@ async def open_all_files(files):
         tasks.append(task)
     contents = await asyncio.gather(*tasks, return_exceptions=True)
     
-files = ['file1_', 'file2_', 'file3_', 'file4_', 'file5_', 'file6_', 'file7_', 'file8_', 'file9_', 'file10_']
-sizes = [10000, 10199, 19919, 11991, 9999, 10000, 10199, 19091, 11990, 9999]
+files = ['file1', 'file2', 'file3', 'file4', 'file5', 'file6', 'file7', 'file8', 'file9', 'file10']
 
-def write1():
+def write():
+    sizes = [1000090] * 10
     for i in range(10):
         file = files[i]
         size = sizes[i]
@@ -41,7 +32,13 @@ def write1():
             result = ''.join(random.choices(string.ascii_lowercase + string.digits, k = size))
             f.write(result)
 
-def write2():
+def read1():
+    for file in files:
+        with open(dir + file, 'r') as f:
+            result = f.read()
+            print(len(result))
+
+def read2():
     event_loop = asyncio.get_event_loop()
     event_loop.run_until_complete(open_all_files(files))
 
@@ -62,8 +59,6 @@ def read3():
 
 if __name__ == "__main__":    
     start_time = time.time()
-    #write()
-    #for i in range(10):
-    write1()
+    read1()
     duration = time.time() - start_time
     print("duration:", duration)

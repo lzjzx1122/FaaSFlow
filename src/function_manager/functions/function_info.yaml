@@ -1,29 +1,29 @@
 functions:
-- max_containers: 10
-  qos_requirement: 0.99
+- name: baseline_cycles_00000001
   qos_time: 1
-  name: baseline_cycles_00000001
-- max_containers: 10
   qos_requirement: 0.99
+  max_containers: 10
+- name: cycles_00000002
   qos_time: 1
-  name: cycles_00000002
-- max_containers: 10
   qos_requirement: 0.99
+  max_containers: 10
+- name: fertilizer_increase_cycles_00000003
   qos_time: 1
-  name: fertilizer_increase_cycles_00000003
-- max_containers: 10
   qos_requirement: 0.99
+  max_containers: 10
+- name: cycles_fertilizer_increase_output_parser_00000004
   qos_time: 1
-  name: cycles_fertilizer_increase_output_parser_00000004
-- max_containers: 10
   qos_requirement: 0.99
+  max_containers: 10
+- name: cycles_output_summary_00000005
   qos_time: 1
-  name: cycles_output_summary_00000005
-- max_containers: 10
   qos_requirement: 0.99
+  max_containers: 10
+- name: cycles_fertilizer_increase_output_summary_00000006
   qos_time: 1
-  name: cycles_fertilizer_increase_output_summary_00000006
-- max_containers: 10
   qos_requirement: 0.99
+  max_containers: 10
+- name: cycles_plots_00000007
   qos_time: 1
-  name: cycles_plots_00000007
+  qos_requirement: 0.99
+  max_containers: 10
