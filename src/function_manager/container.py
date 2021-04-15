@@ -11,19 +11,20 @@ class Container:
     # create a new container and return the wrapper
     @classmethod
     def create(cls, client, image_name, port, attr):
-        #print("mount begin")
+        # print("mount begin")
         mount = Mount(result_dir, '/var/run/workflow_results', type='bind')
-        #print("mount end", image_name)
+        # print("mount end", image_name)
+        print(port)
         container = client.containers.run(image_name,
                                           detach=True,
                                           ports={'5000/tcp': str(port)},
                                           labels=['workflow'],
                                           mounts=[mount])
-        #print("run end")
+        # print("run end")
         res = cls(container, port, attr)
-        #print("wait begin")
+        # print("wait begin")
         res.wait_start()
-        #print("wait end")
+        # print("wait end")
         return res
 
     # get the wrapper of an existed container

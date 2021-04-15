@@ -7,7 +7,7 @@ import random
 workflow_name = './cycles'
 utility = 'utility.py' # sys.argv[2]
 
-f = open(workflow_name + '/main_7.json')
+f = open(workflow_name + '/main_50.json')
 data = json.load(f)
 jobs = data['workflow']['jobs'] 
 
@@ -51,7 +51,7 @@ for job in jobs:
                                      'runtime': job['runtime'], 'files': job['files'], 'next': job['children']})
 
 yaml_data = {'main': yaml_data}
-f = open(workflow_name + '/main_7.yaml', 'w', encoding = 'utf-8')
+f = open(workflow_name + '/main_50.yaml', 'w', encoding = 'utf-8')
 yaml.dump(yaml_data, f, sort_keys=False)
 
 names = []
@@ -62,7 +62,7 @@ os.system('mkdir ../../src/function_manager/functions')
 yaml_data2 = {"functions": []}
 for name in names:
     os.system('mkdir ../../src/function_manager/functions/' + name)
-    os.system('cp ../../src/function_manager/utility.py ../../src/function_manager/functions/' + name + "/main.py")
+    os.system('cp ../../src/function_manager/function_utility/main.py ../../src/function_manager/functions/' + name + "/main.py")
     yaml_data2["functions"].append({'name': name, 'qos_time': 1, 'qos_requirement': 0.99, 'max_containers' : 10})
 f = open('../../src/function_manager/functions/function_info.yaml', 'w', encoding = 'utf-8')
 yaml.dump(yaml_data2, f, sort_keys=False)

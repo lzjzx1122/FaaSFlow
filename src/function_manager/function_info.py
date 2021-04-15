@@ -5,7 +5,7 @@ import os
 class FunctionInfo:
     def __init__(self, function_name, img_name, max_containers, qos_time, qos_requirement):
         self.function_name = function_name
-        self.img_name = img_name
+        self.img_name = 'workflow_base'
         self.max_containers = max_containers
         self.qos_time = qos_time
         self.qos_requirement = qos_requirement
@@ -30,15 +30,15 @@ def parse(config_path):
         config = yaml.safe_load(f)
         for c in config['functions']:
             function_name = c['name']
-            packages = c['packages'] if 'packages' in c else [] 
             
             # clear previous containers.
-            print("Clearing previous containers.")
-            os.system('docker stop $(docker ps -a | grep \"' + 'image_' + function_name + '\" | awk \'{print $1}\')')
-            os.system('docker rm $(docker ps -a | grep \"' + 'image_' + function_name  + '\" | awk \'{print $1}\')')
+            # print("Clearing previous containers.")
+            # os.system('docker stop $(docker ps -a | grep \"' + 'image_' + function_name + '\" | awk \'{print $1}\')')
+            # os.system('docker rm $(docker ps -a | grep \"' + 'image_' + function_name  + '\" | awk \'{print $1}\')')
 
-            print("generate:", function_name)
-            generate_image(config_path, function_name, packages)
+            # print("generate:", function_name)
+            # packages = c['packages'] if 'packages' in c else [] 
+            #generate_image(config_path, function_name, packages)
             
             info = FunctionInfo(function_name,
                               'image_' + function_name,

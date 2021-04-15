@@ -14,10 +14,10 @@ main:
     files:
     - link: input
       name: file_1
-      size: 57
+      size: 5000001
     - link: output
       name: file_2
-      size: 465
+      size: 5000002
   - name: funb
     type: function
     source: utility.py
@@ -27,7 +27,7 @@ main:
     files:
     - link: input
       name: file_2
-      size: 465
+      size: 5000002
     - link: output
       name: file_3
-      size: 4600
+      size: 5000003

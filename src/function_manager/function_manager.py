@@ -33,6 +33,10 @@ class FunctionManager:
         self.init()
        
     def init(self):
+        print("Clearing previous containers.")
+        os.system('docker stop $(docker ps -a | grep \"' + 'workflow_base' + '\" | awk \'{print $1}\')')
+        os.system('docker rm $(docker ps -a | grep \"' + 'workflow_base'  + '\" | awk \'{print $1}\')')
+
         gevent.spawn_later(repack_clean_interval, self._clean_loop)
         gevent.spawn_later(dispatch_interval, self._dispatch_loop)
     

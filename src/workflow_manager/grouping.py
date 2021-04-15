@@ -116,17 +116,24 @@ def grouping(workflow):
     topo_search_cnt = 0
     group_set = list()
     in_degree_vec = init_graph(workflow, group_set)
-    group_size = 2
+    group_size = 1
     total_node_cnt = len(workflow.nodes)
     no_latency_dist_vec, _ = topo_search(workflow, in_degree_vec.copy(), group_set, True)
 	# no_latency_crit_length = no_latency_dist_vec[workflow.end.name][0]
     no_latency_crit_length, _ = get_longest_dis(workflow, no_latency_dist_vec)
+    init_flag = True
+    init_crit_length = 0
 
     while True:
         dist_vec, prev_vec = topo_search(workflow, in_degree_vec.copy(), group_set, False)
         topo_search_cnt = topo_search_cnt + 1
         # crit_length = dist_vec[workflow.end.name][0]
         crit_length, tmp_node_name = get_longest_dis(workflow, dist_vec)
+        print('crit_length: ', crit_length)
+        print('barrier: ', no_latency_crit_length * penalty_rate)
+        if init_flag:
+            init_crit_length = crit_length
+            init_flag = False
         if crit_length < no_latency_crit_length * penalty_rate:
             break
         elif group_size == total_node_cnt:
@@ -139,8 +146,7 @@ def grouping(workflow):
         if not merge_node(crit_vec, group_set, group_size):
             group_size = group_size + 1
             merge_node(crit_vec, group_set, group_size)
-
-    print(crit_length, no_latency_crit_length)
+    print(init_crit_length, crit_length, no_latency_crit_length)
     print(group_size)
     return group_set
 

@@ -7,11 +7,14 @@ COPY pip.conf /etc/pip.conf
 
 # fulfill the structure requirement of proxy
 RUN mkdir /proxy && \
-    mkdir /exec && \
     mkdir /results
 
 # copy the proxy server
-COPY proxy.py /proxy/
+COPY proxy.py /proxy/proxy.py
+
+COPY function_utility/main.py /proxy/main.py
+
+COPY function_utility/Store.py /proxy/Store.py
 
 # the work dir of proxy is under exec/
 WORKDIR /exec

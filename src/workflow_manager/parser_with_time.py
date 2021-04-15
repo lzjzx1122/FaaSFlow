@@ -164,12 +164,11 @@ def parseFunction(data, name):
             if dataAtIndex(file, 'link'):
                 file_size = dataAtIndex(file, 'size')
                 file_name = dataAtIndex(file, 'name')
-                send_byte += file_size
                 if dataAtIndex(file, 'link') == 'input':
                     input_files[file_name] = file_size
                 else:
                     output_files[file_name] = file_size
-
+                    send_byte += file_size
         send_time = send_byte / bandwidth
     for _ in next:
         nextDis.append(send_time)
@@ -284,7 +283,8 @@ def check_next(obj):
 
 
 # __name__ == '__main__'
-filename = '../../benchmark/generator/cycles/main_7.yaml'
+# filename = '../../experiment/naive_test.yaml'
+filename = '../../benchmark/generator/cycles/main_50.yaml'
 data = yaml.load(open(filename))
 mainObject = None
 objectMap = dict()

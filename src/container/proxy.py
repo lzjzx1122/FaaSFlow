@@ -11,8 +11,7 @@ from flask import Flask, request
 from gevent.pywsgi import WSGIServer
 
 default_file = 'main.py'
-work_dir = '/exec'
-result_dir = "/results"
+work_dir = '/proxy'
   
 class functionRunner:
     def __init__(self):
@@ -36,81 +35,20 @@ class functionRunner:
 
         return True
 
-    def run(self, runtime, input, output):
+    def run(self, request_id, runtime, input, output):
         # run the function
+        self.ctx['function'] = self.function
+        self.ctx['request_id'] = request_id
         self.ctx['runtime'] = runtime
         self.ctx['input'] = input
         self.ctx['output'] = output
-        out = eval('main(runtime, input, output)', self.ctx)
+        out = eval('main(function, request_id, runtime, input, output)', self.ctx)
         return out
-
-class Store:
-    def __init__(self):
-        couchdb_url = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
-        db_server = couchdb.Server(couchdb_url)
-        self.db = db_server['results']
-        self.fetch_dict = {}
-        self.put_dict = {}
-    
-    def init(self, function):
-        self.function = function
-
-    def fetch_from_mem(self, path, key):
-        with open(path, "r") as f:
-            json_file = json.load(f)
-            self.fetch_dict[key] = json_file['value']
-
-    def fetch_from_db(self, doc, key):
-        self.fetch_dict[key] = self.db[doc]['value']
-
-    def fetch(self, request_id, input):
-        self.fetch_dict = {}
-        threads = []
-        for (k, v) in input.items():
-            if v['type'] == 'DB': #DB
-                doc = request_id + "_" + k
-                thread_ = threading.Thread(target=self.fetch_from_db, args=(doc, k,))
-                threads.append(thread_)
-            else: # MEM
-                path = os.path.join(result_dir, request_id + "_" + k + ".json")
-                thread_ = threading.Thread(target=self.fetch_from_mem, args=(path, k,))
-                threads.append(thread_)
-        for thread_ in threads:
-            thread_.start()
-        for thread_ in threads:
-            thread_.join()
-        return self.fetch_dict
-
-    def put_to_mem(self, path, key):
-        with open(path, "w") as f:
-            json_file = {"key": key, "value": self.put_dict[key]}
-            json.dump(json_file, f)
-    
-    def put_to_db(self, doc, key):
-        self.db[doc] = {"key": key, "value":  self.put_dict[key]}
-
-    def put(self, request_id, output, output_res):
-        self.put_dict = output_res 
-        threads = []
-        for (k, v) in output_res.items():
-            if 'DB' in output[k]['type']:
-                doc = request_id + "_" + k
-                thread_ = threading.Thread(target=self.put_to_db, args=(doc, k,))
-                threads.append(thread_)
-            if 'MEM' in output[k]['type']:
-                path = os.path.join(result_dir, request_id + "_" + k + ".json")
-                thread_ = threading.Thread(target=self.put_to_mem, args=(path, k,))
-                threads.append(thread_)
-        for thread_ in threads:
-            thread_.start()
-        for thread_ in threads:
-            thread_.join()
 
 proxy = Flask(__name__)
 proxy.status = 'new'
 proxy.debug = False
 runner = functionRunner()
-store = Store()
 
 @proxy.route('/status', methods=['GET'])
 def status():
@@ -127,8 +65,7 @@ def init():
 
     inp = request.get_json(force=True, silent=True)
     runner.init(inp['function'])
-    store.init(inp['function'])
-
+    
     proxy.status = 'ok'
     return ('OK', 200)
 
@@ -141,15 +78,12 @@ def run():
     runtime = inp['runtime']
     input = inp['input']
     output = inp['output']
-    input_res = store.fetch(request_id, input)
 
     # record the execution time
     start = time.time()
-    output_res = runner.run(runtime, input_res, output)
+    runner.run(request_id, runtime, input, output)
     end = time.time()
 
-    store.put(request_id, output, output_res)
-    
     res = {
         "start_time": start,
         "end_time": end,

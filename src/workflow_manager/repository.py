@@ -31,9 +31,9 @@ def get_start_node_name():
             return doc['start_node_name']
 
 
-def get_function_info(function_name):
+def get_function_info(function_name, mode):
     couch = couchdb.Server(couchdb_url)
-    db = couch['function_info']
+    db = couch[mode]
     for item in db.find({'selector': {'function_name': function_name}}):
         return item
 

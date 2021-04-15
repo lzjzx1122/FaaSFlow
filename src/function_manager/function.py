@@ -47,7 +47,7 @@ class Function:
     
     # put the request into request queue
     def send_request(self, request_id, runtime, input, output):
-        print('send_request', request_id, runtime)
+        # print('send_request', request_id, runtime)
         start = time.time()
         self.request_log['start'].append(start)
 

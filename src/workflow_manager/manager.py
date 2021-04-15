@@ -1,26 +1,32 @@
+from gevent import monkey
+monkey.patch_all()
 import gevent
 import repository
 import function_proxy
 import sys
+import time
 sys.path.append('../function_manager')
 from function_manager import FunctionManager
 
 
 class WorkflowManager:
-    def __init__(self, request_id):
+    def __init__(self, request_id, mode):
         self.request_id = request_id
         self.function_info = dict()
         self.file_exist = set()
+        self.executed = set()
         repository.create_result_db()
         self.function_manager = FunctionManager("../function_manager/functions")
+        self.mode = mode
 
     def get_function_info(self, function_name):
         if function_name not in self.function_info:
             print('function_name: ', function_name)
-            self.function_info[function_name] = repository.get_function_info(function_name)
+            self.function_info[function_name] = repository.get_function_info(function_name, self.mode)
         return self.function_info[function_name]
 
     def run_function(self, function_name):
+        self.executed.add(function_name)
         # prepare params
         function_info = self.get_function_info(function_name)
         #param = {'function_name': function_info['function_name'], 'request_id': self.request_id,
@@ -43,8 +49,8 @@ class WorkflowManager:
                 if file_name not in self.file_exist:
                     file_satisfied = False
                     break
-            if file_satisfied:
-                jobs.append(gevent.spawn(self.run_function(name)))
+            if file_satisfied and name not in self.executed:
+                jobs.append(gevent.spawn(self.run_function, name))
         gevent.joinall(jobs)      
 
     def prepare_basic_input(self):
@@ -59,10 +65,13 @@ class WorkflowManager:
     def run_workflow(self):
         self.prepare_basic_input()
         start_node_name = repository.get_start_node_name()
-        print(start_node_name)
-        gevent.spawn(self.run_function(start_node_name))
+        start = time.time()
+        job = gevent.spawn(self.run_function, start_node_name)
+        gevent.joinall([job])
+        end = time.time()
+        print('mode: ', self.mode, 'execution time: ', end - start)
 
-workflow = WorkflowManager('123')
+workflow = WorkflowManager('123', 'function_info_raw')
 workflow.run_workflow()
 # db[request_id + "_" + function + "_" + file_name] = {"key" : "file1", "value" : "****"}
 # without function, just filename

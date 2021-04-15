@@ -1,7 +1,7 @@
 main:
   type: workflow
   start: start_node
-  end: end_node
+  end: null
   nodes:
   - name: start_node
     type: function
@@ -30,18 +30,12 @@ main:
     - individuals_00000033
     - individuals_00000034
     - sifting_00000036
-  - name: end_node
-    type: function
-    source: utility.py
-    parameters:
-      runtime: 0
-    runtime: 0
   - name: individuals_00000001
     type: function
     source: utility.py
     parameters:
-      runtime: 7.852
-    runtime: 7.852
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 6c56739e-538b-4ed9-a78a-f9788476cae9.txt
@@ -58,8 +52,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 6.645
-    runtime: 6.645
+      runtime: 1
+    runtime: 1
     files:
     - link: input
       name: e1f87fe3-9ad0-43dd-90e9-05daf735ffbe.txt
@@ -76,8 +70,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 3.447
-    runtime: 3.447
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: c1f4f74c-b390-4e78-b20b-b11800537828.txt
@@ -94,8 +88,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 3.694
-    runtime: 3.694
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: 23c24251-cf45-4500-9811-7ad0e67eac54.txt
@@ -112,8 +106,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 0.961
-    runtime: 0.961
+      runtime: 0
+    runtime: 0
     files:
     - link: input
       name: d4d8e5dd-8f5c-4ca7-8ddd-98ae6b80c4b5.txt
@@ -130,8 +124,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 5.307
-    runtime: 5.307
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: 24c8ee53-60bd-418c-8c5a-030e954a4b74.txt
@@ -148,8 +142,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 5.054
-    runtime: 5.054
+      runtime: 5
+    runtime: 5
     files:
     - link: input
       name: 0b51b735-1589-4877-b010-aea2c4cb5231.txt
@@ -166,8 +160,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 0.961
-    runtime: 0.961
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: 7f5d7a5f-5882-4d8e-8d60-1ce013f9f0f8.txt
@@ -184,8 +178,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 2.394
-    runtime: 2.394
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 0ce6e685-e166-4878-a50b-be895b749830.txt
@@ -202,8 +196,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 2.301
-    runtime: 2.301
+      runtime: 0
+    runtime: 0
     files:
     - link: input
       name: 48ae5918-a643-4afc-8e2c-feb0506df5b5.gz
@@ -254,8 +248,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 0.309
-    runtime: 0.309
+      runtime: 1
+    runtime: 1
     files:
     - link: input
       name: 49786adb-b8c0-4e4e-a3ac-5d1d930dd5bd.vcf
@@ -282,8 +276,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 2.844
-    runtime: 2.844
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -297,14 +291,12 @@ main:
     - link: output
       name: 25ac523b-94fe-429b-b3de-feb7eed500ce.gz
       size: 6589
-    next:
-    - end_node
   - name: mutation_overlap_00000013
     type: function
     source: utility.py
     parameters:
-      runtime: 2.009
-    runtime: 2.009
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -318,14 +310,12 @@ main:
     - link: output
       name: 2cf15fa1-3f0f-4138-abba-f00c4ecefed8.gz
       size: 5103
-    next:
-    - end_node
   - name: mutation_overlap_00000014
     type: function
     source: utility.py
     parameters:
-      runtime: 1.412
-    runtime: 1.412
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -339,14 +329,12 @@ main:
     - link: output
       name: 884cccb4-9195-4d6a-b5d5-8b4fc808a928.gz
       size: 3527
-    next:
-    - end_node
   - name: mutation_overlap_00000015
     type: function
     source: utility.py
     parameters:
-      runtime: 0.461
-    runtime: 0.461
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -360,14 +348,12 @@ main:
     - link: output
       name: 3ad61de1-fa5f-4d94-9c6a-e3f267e75e1e.gz
       size: 6806
-    next:
-    - end_node
   - name: mutation_overlap_00000016
     type: function
     source: utility.py
     parameters:
-      runtime: 1.496
-    runtime: 1.496
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -381,14 +367,12 @@ main:
     - link: output
       name: 1537b995-38c8-42e3-af4f-d2bb4acff1b4.gz
       size: 863
-    next:
-    - end_node
   - name: mutation_overlap_00000017
     type: function
     source: utility.py
     parameters:
-      runtime: 0.461
-    runtime: 0.461
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -402,14 +386,12 @@ main:
     - link: output
       name: fa9bdf6a-ba03-469d-a625-ffb67e96ed9d.gz
       size: 4543
-    next:
-    - end_node
   - name: mutation_overlap_00000018
     type: function
     source: utility.py
     parameters:
-      runtime: 2.932
-    runtime: 2.932
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -423,14 +405,12 @@ main:
     - link: output
       name: b55a77ad-d406-4916-863b-e212e3c6f572.gz
       size: 1560
-    next:
-    - end_node
   - name: frequency_00000019
     type: function
     source: utility.py
     parameters:
-      runtime: 3.464
-    runtime: 3.464
+      runtime: 5
+    runtime: 5
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -444,14 +424,12 @@ main:
     - link: output
       name: ba9d0d4e-d043-4529-a2f4-11d44a42e117.gz
       size: 2473
-    next:
-    - end_node
   - name: frequency_00000020
     type: function
     source: utility.py
     parameters:
-      runtime: 1.191
-    runtime: 1.191
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -465,14 +443,12 @@ main:
     - link: output
       name: 01fedbe1-9dd7-4519-b74e-74cae23ddf2f.gz
       size: 10226
-    next:
-    - end_node
   - name: frequency_00000021
     type: function
     source: utility.py
     parameters:
-      runtime: 1.191
-    runtime: 1.191
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -486,14 +462,12 @@ main:
     - link: output
       name: 525cc14d-f2c0-4b74-9faa-45fec0f42a7a.gz
       size: 11040
-    next:
-    - end_node
   - name: frequency_00000022
     type: function
     source: utility.py
     parameters:
-      runtime: 3.046
-    runtime: 3.046
+      runtime: 1
+    runtime: 1
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -507,14 +481,12 @@ main:
     - link: output
       name: 7ad2cf7f-014b-4311-b704-565a8ab11865.gz
       size: 1492
-    next:
-    - end_node
   - name: frequency_00000023
     type: function
     source: utility.py
     parameters:
-      runtime: 1.191
-    runtime: 1.191
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -528,14 +500,12 @@ main:
     - link: output
       name: e8e91a28-d236-4c41-ae2c-9ab77540ab91.gz
       size: 12212
-    next:
-    - end_node
   - name: frequency_00000024
     type: function
     source: utility.py
     parameters:
-      runtime: 5.511
-    runtime: 5.511
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -549,14 +519,12 @@ main:
     - link: output
       name: 416cd5fb-423c-4c2c-a7d4-9343293b5070.gz
       size: 1492
-    next:
-    - end_node
   - name: frequency_00000025
     type: function
     source: utility.py
     parameters:
-      runtime: 5.988
-    runtime: 5.988
+      runtime: 0
+    runtime: 0
     files:
     - link: input
       name: 305840cf-4253-40e4-914a-bc0c4047cac8.gz
@@ -570,14 +538,12 @@ main:
     - link: output
       name: bdcc3505-882d-4c4d-ade1-ba8d9282dc0c.gz
       size: 7277
-    next:
-    - end_node
   - name: individuals_00000026
     type: function
     source: utility.py
     parameters:
-      runtime: 0.961
-    runtime: 0.961
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: a25d0360-eb1b-4f33-b9b2-bbb6b66df87c.txt
@@ -594,8 +560,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 3.397
-    runtime: 3.397
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: 67d4706c-05b9-4dd7-a094-e2cb2a428463.txt
@@ -612,8 +578,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 7.011
-    runtime: 7.011
+      runtime: 1
+    runtime: 1
     files:
     - link: input
       name: 5d8b603a-969c-40bd-951a-787aa7fa259b.txt
@@ -630,8 +596,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 0.974
-    runtime: 0.974
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: ca5249bf-73b9-417d-ba5e-10382af0fd46.txt
@@ -648,8 +614,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 5.713
-    runtime: 5.713
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: 7465dade-da93-44d6-bbcb-99fe96dfa3b6.txt
@@ -666,8 +632,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 0.961
-    runtime: 0.961
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: 1c7405cc-da24-472b-b212-17c5e9063b3e.txt
@@ -684,8 +650,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 0.961
-    runtime: 0.961
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: f7ef1ad8-c57d-4b99-85ed-724e5d246b97.txt
@@ -702,8 +668,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 9.043
-    runtime: 9.043
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 1b81c2c0-76c6-4b92-9209-0f7344b0cd41.txt
@@ -720,8 +686,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 2.571
-    runtime: 2.571
+      runtime: 0
+    runtime: 0
     files:
     - link: input
       name: ae6d0c31-e5c9-4e8c-aca6-17cb8f867f97.txt
@@ -738,8 +704,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 2.473
-    runtime: 2.473
+      runtime: 5
+    runtime: 5
     files:
     - link: input
       name: 5f6bb716-308a-456f-b22f-9571fb367733.gz
@@ -790,8 +756,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 0.471
-    runtime: 0.471
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: eb4ad303-ccc2-47bb-8074-5aef5d27339f.vcf
@@ -818,8 +784,8 @@ main:
     type: function
     source: utility.py
     parameters:
-      runtime: 2.137
-    runtime: 2.137
+      runtime: 4
+    runtime: 4
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -833,14 +799,12 @@ main:
     - link: output
       name: 74f0a7ab-204f-4214-9538-765ef7965059.gz
       size: 7818
-    next:
-    - end_node
   - name: mutation_overlap_00000038
     type: function
     source: utility.py
     parameters:
-      runtime: 2.091
-    runtime: 2.091
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -854,14 +818,12 @@ main:
     - link: output
       name: 9e1e5c35-a248-4ca1-841d-30470b0ab7e0.gz
       size: 2416
-    next:
-    - end_node
   - name: mutation_overlap_00000039
     type: function
     source: utility.py
     parameters:
-      runtime: 0.461
-    runtime: 0.461
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -875,14 +837,12 @@ main:
     - link: output
       name: 912848db-4a84-4fcd-bef0-f9f28a8d45c5.gz
       size: 4807
-    next:
-    - end_node
   - name: mutation_overlap_00000040
     type: function
     source: utility.py
     parameters:
-      runtime: 1.678
-    runtime: 1.678
+      runtime: 5
+    runtime: 5
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -896,14 +856,12 @@ main:
     - link: output
       name: 9bdb84b4-430d-4b0d-95e9-0c884d284423.gz
       size: 6450
-    next:
-    - end_node
   - name: mutation_overlap_00000041
     type: function
     source: utility.py
     parameters:
-      runtime: 2.676
-    runtime: 2.676
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -917,14 +875,12 @@ main:
     - link: output
       name: 5776fde3-d894-4abb-85ac-42fbd38eb79c.gz
       size: 6597
-    next:
-    - end_node
   - name: mutation_overlap_00000042
     type: function
     source: utility.py
     parameters:
-      runtime: 0.461
-    runtime: 0.461
+      runtime: 5
+    runtime: 5
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -938,14 +894,12 @@ main:
     - link: output
       name: 1468963a-73ae-4909-ad89-852f249285fb.gz
       size: 4773
-    next:
-    - end_node
   - name: mutation_overlap_00000043
     type: function
     source: utility.py
     parameters:
-      runtime: 3.016
-    runtime: 3.016
+      runtime: 0
+    runtime: 0
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -959,14 +913,12 @@ main:
     - link: output
       name: fb458b94-e76f-4ca3-beb8-a8322af770c5.gz
       size: 2803
-    next:
-    - end_node
   - name: frequency_00000044
     type: function
     source: utility.py
     parameters:
-      runtime: 3.906
-    runtime: 3.906
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -980,14 +932,12 @@ main:
     - link: output
       name: 319af9c5-024f-4550-9cb9-790788ec257b.gz
       size: 12812
-    next:
-    - end_node
   - name: frequency_00000045
     type: function
     source: utility.py
     parameters:
-      runtime: 8.46
-    runtime: 8.46
+      runtime: 1
+    runtime: 1
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -1001,14 +951,12 @@ main:
     - link: output
       name: b53ba46c-fdb2-4a06-ae59-b9345a0c6a24.gz
       size: 10258
-    next:
-    - end_node
   - name: frequency_00000046
     type: function
     source: utility.py
     parameters:
-      runtime: 5.379
-    runtime: 5.379
+      runtime: 0
+    runtime: 0
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -1022,14 +970,12 @@ main:
     - link: output
       name: d7c5d398-c776-4509-af32-39e9c22d1c58.gz
       size: 10241
-    next:
-    - end_node
   - name: frequency_00000047
     type: function
     source: utility.py
     parameters:
-      runtime: 9.119
-    runtime: 9.119
+      runtime: 3
+    runtime: 3
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -1043,14 +989,12 @@ main:
     - link: output
       name: 95b45002-9b27-4a9a-8ca8-b46c8f34200b.gz
       size: 9231
-    next:
-    - end_node
   - name: frequency_00000048
     type: function
     source: utility.py
     parameters:
-      runtime: 1.191
-    runtime: 1.191
+      runtime: 0
+    runtime: 0
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -1064,14 +1008,12 @@ main:
     - link: output
       name: 8df034fa-564e-40f3-b85c-a1b856b21b9f.gz
       size: 1492
-    next:
-    - end_node
   - name: frequency_00000049
     type: function
     source: utility.py
     parameters:
-      runtime: 1.203
-    runtime: 1.203
+      runtime: 2
+    runtime: 2
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -1085,14 +1027,12 @@ main:
     - link: output
       name: dc023072-9a38-43fa-9ddb-2214e6b788a5.gz
       size: 11551
-    next:
-    - end_node
   - name: frequency_00000050
     type: function
     source: utility.py
     parameters:
-      runtime: 1.191
-    runtime: 1.191
+      runtime: 5
+    runtime: 5
     files:
     - link: input
       name: 493bee6d-dc50-4a32-b0f8-ff56436b25b8.gz
@@ -1106,5 +1046,3 @@ main:
     - link: output
       name: fd72dd5f-ec4d-4f7c-9390-7465f818f2e0.gz
       size: 3484
-    next:
-    - end_node
