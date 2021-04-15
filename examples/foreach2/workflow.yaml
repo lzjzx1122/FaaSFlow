@@ -1,0 +1,53 @@
+name: main
+type: pass
+steps:
+  - name: rand
+    type: function
+    source: rand
+    inputMappings:
+      - target: count
+        source: INPUT.count
+  - name: my_foreach
+    type: foreach
+    inputMappings:
+      - target: x
+        source: LOCAL.rand_result1[*]
+      - target: y
+        source: LOCAL.rand_result2[*]
+    task:
+      name: my_switch
+      type: switch
+      choices:
+        - condition: LOCAL.x < LOCAL.y
+          go:
+            name: invalid
+            type: function
+            source: invalid
+        - condition: default
+          go: 
+            name: my_pass
+            type: pass
+            steps:
+              - name: sub
+                type: function
+                source: sub
+              - name: sqrt
+                type: function
+                source: sqrt
+                inputMappings:
+                  - target: x
+                    source: LOCAL.sub_result
+    outputMappings:
+      - target: result
+        source: LOCAL[*].sqrt_result  
+outputMappings:
+  - target: result
+    source: LOCAL.result
+      
+# rand ------------(x>=y)-->---sub--->----sqrt--->----|
+#              |                                      |
+#              |                                     END
+#              |                                      |
+#              |---(x<y)--->---invalid----->----------|
+
+# The final output will be {"result": [sqrt(rand1[0] - rand2[0]), invalid, ...]}

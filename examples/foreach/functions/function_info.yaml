@@ -1,0 +1,4 @@
+actions:
+- {image: image_rand, name: rand, qos_requirement: 0.95, qos_time: 100}
+- {image: image_square, name: square, qos_requirement: 0.95, qos_time: 100}
+max_container: 10

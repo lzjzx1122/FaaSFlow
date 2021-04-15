@@ -14,7 +14,6 @@ class Container:
         # print("mount begin")
         mount = Mount(result_dir, '/var/run/workflow_results', type='bind')
         # print("mount end", image_name)
-        print(port)
         container = client.containers.run(image_name,
                                           detach=True,
                                           ports={'5000/tcp': str(port)},

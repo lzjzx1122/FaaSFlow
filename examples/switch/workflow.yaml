@@ -1,0 +1,49 @@
+name: main
+type: switch
+choices:
+  - condition: INPUT.input1 < INPUT.input2
+    go:
+      name: invalid
+      type: function
+      source: invalid
+  - condition: default
+    go: 
+      name: my_pass
+      type: pass
+      steps:
+        - name: sub
+          type: function
+          source: sub
+          inputMappings:
+            - target: x
+              source: LOCAL.input1
+            - target: y
+              source: LOCAL.input2
+        - name: sqrt
+          type: function
+          source: sqrt
+          inputMappings:
+            - target: x
+              source: LOCAL.sub_result
+outputMappings:
+  - target: result
+    source: LOCAL.sub_result  
+
+#  calculate sqrt(x-y)
+#  |-----------------------------------------------------|
+#  |                    input x, y                       |
+#  |                       |                             |
+#  |           |-----------|-----------|                 |
+#  |           |                       |                 |
+#  |          x<y                     x>=y               |
+#  |           |                       ↓                 |
+#  |           |              |-------------------|      |
+#  |         invalid          |       sub         |      |
+#  |           |              |        ↓          |      |
+#  |           |              |       sqrt        |      |
+#  |           |              |-------------------|      |
+#  |           |                        |                |
+#  |           |------------------------|                | 
+#  |                       ↓                             |
+#  |                      END                            |
+#  |-----------------------------------------------------|

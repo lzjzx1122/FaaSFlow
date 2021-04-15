@@ -37,12 +37,12 @@ class functionRunner:
 
     def run(self, request_id, runtime, input, output):
         # run the function
-        self.ctx['function'] = self.function
+        self.ctx['function_name'] = self.function
         self.ctx['request_id'] = request_id
         self.ctx['runtime'] = runtime
         self.ctx['input'] = input
         self.ctx['output'] = output
-        out = eval('main(function, request_id, runtime, input, output)', self.ctx)
+        out = eval('main(function_name, request_id, runtime, input, output)', self.ctx)
         return out
 
 proxy = Flask(__name__)

@@ -1,0 +1,41 @@
+name: main
+type: pass
+steps:
+  - name: rand
+    type: function
+    source: rand
+  - name: my_parallel
+    type: parallel
+    branches:
+      - name: square
+        type: function
+        source: square
+        inputMappings:
+          - target: x
+            soruce: LOCAL.rand_result
+      - name: cube
+        type: function
+        source: cube
+        inputMappings:
+          - target: x
+            soruce: LOCAL.rand_result
+    outputMappings:
+      - target: x
+        source: LOCAL.square_result
+      - target: y
+        source: LOCAL.cube_result 
+  - name: add
+    type: function
+    source: add
+outputMappings:
+  - target: result
+    source: LOCAL.add_result
+
+#   ------------> square  ------------|
+#   |                                 ↓
+#  rand                              add
+#   |                                 ↑ 
+#   |-----------> cube    ------------|
+
+# Since we define outputMappings for `main`, 
+# the final output will be {"result": ...}.
