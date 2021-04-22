@@ -1,0 +1,55 @@
+- name: virtual1
+  source: VIRTUAL
+  next:
+    type: switch
+    nodes:
+    - invalid
+    - sub
+- name: invalid
+  source: invalid
+  input:
+    input2:
+      type: pass
+      value:
+        function: INPUT
+        parameter: input2
+    input1:
+      type: pass
+      value:
+        function: INPUT
+        parameter: input1
+  next:
+    type: pass
+    nodes:
+    - virtual2
+- name: sub
+  source: sub
+  input:
+    x:
+      type: pass
+      value:
+        function: INPUT
+        parameter: input1
+    y:
+      type: pass
+      value:
+        function: INPUT
+        parameter: input2
+  next:
+    type: pass
+    nodes:
+    - sqrt
+- name: sqrt
+  source: sqrt
+  input:
+    x:
+      type: pass
+      value:
+        function: sub
+        parameter: sub_result
+  next:
+    type: pass
+    nodes:
+    - virtual2
+- name: virtual2
+  source: VIRTUAL

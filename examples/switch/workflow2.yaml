@@ -20,9 +20,9 @@ choices:
             - sub_result
           inputMappings:
             - target: x
-              source: INPUT.input1
+              source: LOCAL.input1
             - target: y
-              source: INPUT.input2
+              source: LOCAL.input2
         - name: sqrt
           type: function
           source: sqrt

@@ -4,38 +4,42 @@ steps:
   - name: rand
     type: function
     source: rand
+    output:
+      - rand_result
   - name: my_parallel
     type: parallel
     branches:
       - name: square
         type: function
         source: square
+        output:
+          - square_result
         inputMappings:
           - target: x
-            soruce: LOCAL.rand_result
+            source: LOCAL.rand_result
       - name: cube
         type: function
         source: cube
+        output:
+          - cube_result
         inputMappings:
           - target: x
-            soruce: LOCAL.rand_result
-    outputMappings:
-      - target: x
-        source: LOCAL.square_result
-      - target: y
-        source: LOCAL.cube_result 
+            source: LOCAL.rand_result
   - name: add
     type: function
     source: add
-outputMappings:
-  - target: result
-    source: LOCAL.add_result
-
+    output:
+      - add_result
+    inputMappings:
+      - target: x
+        source: LOCAL.square_result
+      - target: y
+        source: LOCAL.cube_result
+      
 #   ------------> square  ------------|
 #   |                                 ↓
 #  rand                              add
 #   |                                 ↑ 
 #   |-----------> cube    ------------|
 
-# Since we define outputMappings for `main`, 
-# the final output will be {"result": ...}.
+# The final output will be {"rand_result": ..., "square_result": ..., "cube_result": ..., "add_result": ...}

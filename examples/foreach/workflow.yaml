@@ -4,6 +4,8 @@ steps:
   - name: rand
     type: function
     source: rand
+    output:
+      - rand_result
     inputMappings:
       - target: count
         source: INPUT.count
@@ -16,6 +18,8 @@ steps:
       name: square
       type: function
       source: square
+      output:
+        - square_result
     outputMappings:
       - target: result
         source: LOCAL[*].square_result

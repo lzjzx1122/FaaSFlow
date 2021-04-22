@@ -1,0 +1,32 @@
+- name: rand
+  source: rand
+  input:
+    count:
+      type: pass
+      value:
+        function: INPUT
+        parameter: count
+  next:
+    type: pass
+    nodes:
+    - virtual1
+- name: virtual1
+  source: VIRTUAL
+  next:
+    type: foreach
+    nodes:
+    - square
+- name: square
+  source: square
+  input:
+    x:
+      type: pass
+      value:
+        function: rand
+        parameter: rand_result
+  next:
+    type: pass
+    nodes:
+    - virtual2
+- name: virtual2
+  source: VIRTUAL
