@@ -1,12 +1,6 @@
 - name: rand
   source: rand
   next:
-    type: pass
-    nodes:
-    - virtual1
-- name: virtual1
-  source: VIRTUAL
-  next:
     type: parallel
     nodes:
     - square
@@ -22,7 +16,7 @@
   next:
     type: pass
     nodes:
-    - virtual2
+    - add
 - name: cube
   source: cube
   input:
@@ -31,12 +25,6 @@
       value:
         function: rand
         parameter: rand_result
-  next:
-    type: pass
-    nodes:
-    - virtual2
-- name: virtual2
-  source: VIRTUAL
   next:
     type: pass
     nodes:

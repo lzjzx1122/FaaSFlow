@@ -24,6 +24,8 @@ def get_virtual_node():
  
 global_input = dict()
 
+all_functions = []
+
 class Base(object):
     def __init__(self, name, type, inputMappings, outputMappings):
         self.name = name
@@ -33,11 +35,13 @@ class Base(object):
         self.start = self
         self.end = self
         self.next = {'type': None, 'nodes': []}
+        self.prev = []
         self.input = None
     
     def link(self, node):
         # print('#### link', self.name, node.name, self.end.name, node.start.name)
         self.end.next['nodes'].append(node.start)
+        node.start.prev.append(self.end)
 
     def get_output(self, local):
         pass
@@ -71,7 +75,7 @@ class Pass(Base):
                 else:
                     local[target] = global_input[source_split[1]]
                     
-        print('Pass input:', self.name, local)
+        # print('Pass input:', self.name, local)
         self.input = deep_copy(local)
 
         for step in self.steps:
@@ -80,7 +84,7 @@ class Pass(Base):
                 local[k] = v
         
         if self.outputMappings == None:
-            print('Pass output:', self.name, local)
+            # print('Pass output:', self.name, local)
             return local
         else:
             output = dict()
@@ -90,7 +94,7 @@ class Pass(Base):
                 source_split = source.split('.')
                 assert len(source_split) == 2 and source_split[0] == 'LOCAL'
                 output[target] = local[source_split[1]]
-            print('Pass output:', self.name, output)
+            # print('Pass output:', self.name, output)
             return output
 
     def set_start_and_end(self):
@@ -132,7 +136,7 @@ class Parallel(Base):
                 else:
                     local[target] = global_input[source_split[1]]
 
-        print('Parallel input:', self.name, local)
+        # print('Parallel input:', self.name, local)
         self.input = deep_copy(local)
         
         sub_outputs = []
@@ -143,7 +147,7 @@ class Parallel(Base):
             for sub_output in sub_outputs:
                 for (k, v) in sub_output.items():
                     local[k] = v
-            print('Parallel output:', self.name, local) 
+            # print('Parallel output:', self.name, local) 
             return local
         else:
             output = dict()
@@ -162,7 +166,7 @@ class Parallel(Base):
                     for sub_output in sub_outputs:
                         if source_split[1] in sub_output:
                             output[target] = {'type': 'parallel', 'value': sub_output[source_split[1]]['value']}
-            print('Parallel output:', self.name, output)
+            # print('Parallel output:', self.name, output)
             return output
 
     def set_start_and_end(self):
@@ -174,6 +178,8 @@ class Parallel(Base):
     def flatten(self):
         self.start.next['type'] = 'parallel'
         self.end.next['type'] = 'pass'
+        self.start.flatten()
+        self.end.flatten()
         for branch in self.branches:
             self.start.link(branch)
             branch.link(self.end)
@@ -208,7 +214,7 @@ class Switch(Base):
                 else:
                     local[target] = global_input[source_split[1]]
 
-        print('Switch input:', self.name, local)
+        # print('Switch input:', self.name, local)
         self.input = deep_copy(local)
         
         sub_outputs = []
@@ -219,7 +225,7 @@ class Switch(Base):
             for sub_output in sub_outputs:
                 for (k, v) in sub_output.items():
                     local[k] = v
-            print('Switch output:', self.name, local)
+            # print('Switch output:', self.name, local)
             return local
         else:
             output = dict()
@@ -232,7 +238,7 @@ class Switch(Base):
                 for sub_output in sub_outputs:
                     if source_split[1] in sub_output:
                         output[target]['value'].append(sub_output[source_split[1]]['value'])
-            print('Switch output:', self.name, output)
+            # print('Switch output:', self.name, output)
             return output
     
     def set_start_and_end(self):
@@ -244,6 +250,8 @@ class Switch(Base):
     def flatten(self):
         self.start.next['type'] = 'switch'
         self.end.next['type'] = 'pass'
+        self.start.flatten()
+        self.end.flatten()
         for choice in self.choices:
             self.start.link(choice['go'])
             choice['go'].link(self.end)
@@ -281,7 +289,7 @@ class Foreach(Base):
                 else:
                     local[target] = global_input[source_split[1]]
                     
-        print('Foreach input:', self.name, local)
+        # print('Foreach input:', self.name, local)
         self.input = deep_copy(local)
         
         sub_output = self.task.get_output(deep_copy(local))
@@ -289,7 +297,7 @@ class Foreach(Base):
             local[k] = v
         
         if self.outputMappings == None:
-            print('Foreach output:', self.name, local)
+            # print('Foreach output:', self.name, local)
             return local
         else:
             output = dict()
@@ -302,7 +310,7 @@ class Foreach(Base):
                     output[target] = {'type': 'pass', 'value': local[source_split[1]]}
                 else:
                     output[target] = {'type': 'foreach', 'value': sub_output[source_split[1]]['value']}
-            print('Pass output:', self.name, output)
+            # print('Pass output:', self.name, output)
             return output
 
     def set_start_and_end(self):
@@ -316,6 +324,8 @@ class Foreach(Base):
         self.task.next['type'] = 'pass'
         self.start.link(self.task)
         self.task.link(self.end)
+        self.start.flatten()
+        self.end.flatten()
         self.task.flatten()
 
     def get_yaml(self):
@@ -331,7 +341,8 @@ class Function(Base):
         self.source = source
         self.output = output
         self.is_virtual = is_virtual
-        
+        self.is_removed = False
+
     def get_output(self, input):
         if self.inputMappings == None:
             local = input
@@ -355,7 +366,7 @@ class Function(Base):
                 local[parameter] = {'type': 'pass', 'value': {'function': self.name, 'parameter': parameter}}
         
         if self.outputMappings == None:
-            print('Function output:', self.name, local)
+            # print('Function output:', self.name, local)
             return local
         else:
             output = dict()
@@ -365,7 +376,7 @@ class Function(Base):
                 source_split = source.split('.')
                 assert len(source_split) == 2 and source_split[0] == 'LOCAL'
                 output[target] = local[source_split[1]]
-            print('Function output:', self.name, output)
+            # print('Function output:', self.name, output)
             return output
 
     def set_start_and_end(self):
@@ -373,9 +384,12 @@ class Function(Base):
         self.end = self
     
     def flatten(self):
+        all_functions.append(self)
         pass
 
     def get_yaml(self):
+        if self.is_removed == True:
+            return []
         function = {'name': self.name}
         if self.is_virtual:
             function['source'] = 'VIRTUAL'

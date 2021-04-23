@@ -7,12 +7,6 @@
         function: INPUT
         parameter: count
   next:
-    type: pass
-    nodes:
-    - virtual1
-- name: virtual1
-  source: VIRTUAL
-  next:
     type: foreach
     nodes:
     - square
@@ -24,9 +18,3 @@
       value:
         function: rand
         parameter: rand_result
-  next:
-    type: pass
-    nodes:
-    - virtual2
-- name: virtual2
-  source: VIRTUAL

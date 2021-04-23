@@ -18,10 +18,6 @@
       value:
         function: INPUT
         parameter: input1
-  next:
-    type: pass
-    nodes:
-    - virtual2
 - name: sub
   source: sub
   input:
@@ -47,9 +43,3 @@
       value:
         function: sub
         parameter: sub_result
-  next:
-    type: pass
-    nodes:
-    - virtual2
-- name: virtual2
-  source: VIRTUAL

@@ -7,6 +7,7 @@ from hierarchy import Switch
 from hierarchy import Foreach
 from hierarchy import Function
 from hierarchy import global_input
+from hierarchy import all_functions
 
 # ------------------------- Checking validity of yaml data ------------------------
 names = set()
@@ -169,7 +170,7 @@ def parseFunction(data):
     return Function(name, inputMappings, outputMappings, source, output, False)
 # ---------------------------- Parse ends. ----------------------------------
 
-def generate_global_input(path):
+def fetch_global_input(path):
     for path, dir_list, file_list in os.walk(os.path.join(path, 'input')):  
         for file_name in file_list:  
             global_input[file_name] = {'type': 'pass', 'value': {'function': 'INPUT', 'parameter': file_name}}
@@ -181,13 +182,71 @@ def parse(path):
     checkBase(data)
     return parseBase(data)
 
+def flatten_and_simplify(main):
+    main.set_start_and_end()
+    main.flatten()
+    changed = True
+    while changed:
+        changed = False
+        all_functions_ = []
+        for i in range(len(all_functions)):
+            current = all_functions[i]
+            if current != None and current.is_virtual:
+                if current.next['type'] == 'pass' and len(current.next['nodes']) == 1: 
+                    next = current.next['nodes'][0]
+                    if len(next.prev) == 1:
+                    # case 1 for simplification
+                    # The current virtual node has only one next node.
+                        print('#remove:', current.name, next.name)
+                        changed = True
+                        current.is_removed = True
+                        all_functions[i] = None
+                        next.prev = []
+                        for prev in current.prev:
+                            next.prev.append(prev)
+                            for j in range(len(prev.next['nodes'])):
+                                if prev.next['nodes'][j] == current:
+                                    prev.next['nodes'][j] = next
+                elif len(current.next['nodes']) == 0: 
+                # case 2 for simplification
+                # The current virtual node has no next node.
+                    print('#remove:', current.name)
+                    changed = True
+                    current.is_removed = True
+                    all_functions[i] = None
+                    for prev in current.prev:
+                        prev.next['nodes'].remove(current)
+                elif len(current.prev) == 1:
+                    prev = current.prev[0]
+                    if prev.next['type'] == 'pass' and len(prev.next['nodes']) == 1:
+                    # case 3 for simplification
+                    # The current virtual node has only one prev node, which has one next node.
+                        print('#remove:', current.name)
+                        changed = True
+                        current.is_removed = True
+                        all_functions[i] = None
+                        prev.next = current.next
+                        for next in current.next['nodes']:
+                            assert len(next.prev) == 1
+                            next.prev[0] = prev
+                     
+
 path = '../../examples/parallel'
-generate_global_input(path)
+# Step 1. Fetch all inputs from path.
+fetch_global_input(path)
+
+# Step 2. Parse workflow.yaml to a object with hierarchical struture.
 main = parse(path)
+
+# Step 3. Inference all input of functions and the final output.
 output = main.get_output(global_input)
 print('final:', output)
-main.set_start_and_end()
-main.flatten()
+
+# Step 4. Flatten the hierarchical struture to a flat one by adding some virtual nodes.
+#         Simplify the flat struture by removing some redundant virtual nodes.
+flatten_and_simplify(main)
+
+# Step 5. Print the flat struture.
 yaml_data = main.get_yaml()
 with open(os.path.join(path, 'flat_workflow.yaml'), 'w', encoding = 'utf-8') as f:
     yaml.dump(yaml_data, f, sort_keys=False)
