@@ -1,3 +1,10 @@
+global_input:
+  count:
+    type: pass
+    value:
+      function: INPUT
+      parameter: count
+fuctions:
 - name: rand
   source: rand
   input:
@@ -18,3 +25,9 @@
       value:
         function: rand
         parameter: rand_result
+global_output:
+  result:
+    type: foreach
+    value:
+      function: square
+      parameter: square_result

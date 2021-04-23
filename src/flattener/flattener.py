@@ -8,6 +8,7 @@ from hierarchy import Foreach
 from hierarchy import Function
 from hierarchy import global_input
 from hierarchy import all_functions
+from hierarchy import deep_copy
 
 # ------------------------- Checking validity of yaml data ------------------------
 names = set()
@@ -231,16 +232,16 @@ def flatten_and_simplify(main):
                             next.prev[0] = prev
                      
 
-path = '../../examples/switch'
+path = '../../examples/parallel'
 # Step 1. Fetch all inputs from path.
 fetch_global_input(path)
 
 # Step 2. Parse workflow.yaml to a object with hierarchical struture.
 main = parse(path)
 
-# Step 3. Inference all input of functions and the final output.
-output = main.get_output(global_input)
-print('final:', output)
+# Step 3. Inference all input of functions and the global output.
+global_output = main.get_output(deep_copy(global_input))
+print('final:', global_output)
 
 # Step 4. Flatten the hierarchical struture to a flat one by adding some virtual nodes.
 #         Simplify the flat struture by removing some redundant virtual nodes.
@@ -248,5 +249,6 @@ flatten_and_simplify(main)
 
 # Step 5. Print the flat struture. 
 yaml_data = main.get_yaml()
+yaml_data = {'global_input': global_input, 'fuctions': yaml_data, 'global_output': global_output}
 with open(os.path.join(path, 'flat_workflow.yaml'), 'w', encoding = 'utf-8') as f:
     yaml.dump(yaml_data, f, sort_keys=False)

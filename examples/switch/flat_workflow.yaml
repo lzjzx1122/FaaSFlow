@@ -1,3 +1,15 @@
+global_input:
+  input2:
+    type: pass
+    value:
+      function: INPUT
+      parameter: input2
+  input1:
+    type: pass
+    value:
+      function: INPUT
+      parameter: input1
+fuctions:
 - name: virtual1
   source: VIRTUAL
   next:
@@ -43,3 +55,11 @@
       value:
         function: sub
         parameter: sub_result
+global_output:
+  result:
+    type: switch
+    value:
+    - function: invalid
+      parameter: sqrt_result
+    - function: sqrt
+      parameter: sqrt_result

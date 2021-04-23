@@ -18,7 +18,7 @@ fuctions:
   next:
     type: pass
     nodes:
-    - add
+    - virtual3
 - name: cube
   source: cube
   input:
@@ -30,6 +30,37 @@ fuctions:
   next:
     type: pass
     nodes:
+    - virtual3
+- name: virtual3
+  source: VIRTUAL
+  next:
+    type: parallel
+    nodes:
+    - square2
+    - cube2
+- name: square2
+  source: square
+  input:
+    x:
+      type: pass
+      value:
+        function: cube
+        parameter: cube_result
+  next:
+    type: pass
+    nodes:
+    - add
+- name: cube2
+  source: cube
+  input:
+    x:
+      type: pass
+      value:
+        function: square
+        parameter: square_result
+  next:
+    type: pass
+    nodes:
     - add
 - name: add
   source: add
@@ -37,12 +68,12 @@ fuctions:
     x:
       type: pass
       value:
-        function: square
+        function: square2
         parameter: square_result
     y:
       type: pass
       value:
-        function: cube
+        function: cube2
         parameter: cube_result
 global_output:
   result:

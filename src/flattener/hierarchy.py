@@ -234,7 +234,7 @@ class Switch(Base):
                 source = outputMapping['source']
                 source_split = source.split('.')
                 assert len(source_split) == 2 and source_split[0] == 'LOCAL'
-                output[target] = {'type': 'parallel', 'value': []}
+                output[target] = {'type': 'switch', 'value': []}
                 for sub_output in sub_outputs:
                     if source_split[1] in sub_output:
                         output[target]['value'].append(sub_output[source_split[1]]['value'])
