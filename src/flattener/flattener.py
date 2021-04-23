@@ -231,7 +231,7 @@ def flatten_and_simplify(main):
                             next.prev[0] = prev
                      
 
-path = '../../examples/parallel'
+path = '../../examples/switch'
 # Step 1. Fetch all inputs from path.
 fetch_global_input(path)
 
@@ -246,7 +246,7 @@ print('final:', output)
 #         Simplify the flat struture by removing some redundant virtual nodes.
 flatten_and_simplify(main)
 
-# Step 5. Print the flat struture.
+# Step 5. Print the flat struture. 
 yaml_data = main.get_yaml()
 with open(os.path.join(path, 'flat_workflow.yaml'), 'w', encoding = 'utf-8') as f:
     yaml.dump(yaml_data, f, sort_keys=False)
