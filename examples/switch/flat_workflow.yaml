@@ -4,16 +4,22 @@ global_input:
     value:
       function: INPUT
       parameter: input2
+    size: ???
   input1:
     type: pass
     value:
       function: INPUT
       parameter: input1
-fuctions:
+fuctions: ???typo
 - name: virtual1
   source: VIRTUAL
+  runtime: ???
   next:
     type: switch
+    conditions:
+      - ???
+      - ???
+      - 与nodes顺序一样
     nodes:
     - invalid
     - sub
@@ -25,6 +31,7 @@ fuctions:
       value:
         function: INPUT
         parameter: input2
+      size: ???
     input1:
       type: pass
       value:

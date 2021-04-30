@@ -1,4 +1,4 @@
-import parser_with_time
+import parser
 import queue
 import json
 import repository
@@ -15,13 +15,13 @@ def init_graph(workflow, group_set):
     group_set.append({workflow.start.name})
     while q.empty() is False:
         node = q.get()
-        for next_node in node.next:
-            if next_node.name not in in_degree_vec:
-                in_degree_vec[next_node.name] = 1
-                q.put(next_node)
-                group_set.append({next_node.name})
+        for next_node_name in node.next:
+            if next_node_name not in in_degree_vec:
+                in_degree_vec[next_node_name] = 1
+                q.put(workflow.nodes[next_node_name])
+                group_set.append({next_node_name})
             else:
-                in_degree_vec[next_node.name] += 1
+                in_degree_vec[next_node_name] += 1
     return in_degree_vec
 
 
@@ -44,7 +44,7 @@ def topo_search(workflow, in_degree_vec, group_set, no_net_latency):
         pre_dist = dist_vec[node.name]
         prev_name = node.name
         for index in range(len(node.next)):
-            next_node = node.next[index]
+            next_node = workflow.nodes[node.next[index]]
             w = node.nextDis[index]
             next_node_name = next_node.name
             if no_net_latency is True:
@@ -92,24 +92,14 @@ def merge_node(crit_vec, group_set, group_size):
     return merge_flag
 
 
-def get_prerequisite(workflow):
-    result = []
-    for node in workflow.nodes:
-        prerequisite = []
-        for pre_node in node.prev:
-            prerequisite.append(pre_node.name)
-        result.append({'name': node.name, 'prerequisite': prerequisite})
-    return result
-
-
 def get_longest_dis(workflow, dist_vec):
-	dist = 0
-	node_name = ''
-	for node in workflow.nodes:
-		if dist_vec[node.name][0] > dist:
-			dist = dist_vec[node.name][0]
-			node_name = node.name
-	return dist, node_name
+    dist = 0
+    node_name = ''
+    for node in workflow.nodes:
+        if dist_vec[node.name][0] > dist:
+            dist = dist_vec[node.name][0]
+            node_name = node.name
+    return dist, node_name
 
 
 def grouping(workflow):
@@ -119,7 +109,7 @@ def grouping(workflow):
     group_size = 1
     total_node_cnt = len(workflow.nodes)
     no_latency_dist_vec, _ = topo_search(workflow, in_degree_vec.copy(), group_set, True)
-	# no_latency_crit_length = no_latency_dist_vec[workflow.end.name][0]
+    # no_latency_crit_length = no_latency_dist_vec[workflow.end.name][0]
     no_latency_crit_length, _ = get_longest_dis(workflow, no_latency_dist_vec)
     init_flag = True
     init_crit_length = 0
@@ -177,46 +167,47 @@ def get_type(name, node, group_detail, mode):
 
 
 def save_function_info():
-    file_set = set()
-    output_file_set = set()
-    group_detail = grouping(parser_with_time.mainObject)
+    group_detail = grouping(parser.workflow)
     function_info_list = list()
     function_info_list_raw = list()
-    for node in parser_with_time.mainObject.nodes:
-        function_info = {'function_name': node.name, 'runtime': node.runtime}
-        function_info_raw = {'function_name': node.name, 'runtime': node.runtime}
-        function_input = dict()
-        function_input_raw = dict()
+    for node_name in parser.workflow.nodes:
+        node = parser.workflow.nodes[node_name]
+        function_info = {'function_name': node.name, 'runtime': node.runtime,
+                         'parent_cnt': parser.workflow.parent_cnt[node.name], 'conditions': node.conditions}
+        function_info_raw = {'function_name': node.name, 'runtime': node.runtime,
+                             'parent_cnt': parser.workflow.parent_cnt[node.name], 'conditions': node.conditions}
+        function_input = list()
+        function_input_raw = list()
         for input_file in node.input_files:
-            file_set.add(input_file)
-            function_input[input_file] = {'type': get_type(input_file, node, group_detail, 'input'),
-                                          'size': node.input_files[input_file]}
-            function_input_raw[input_file] = {'type': 'DB', 'size': node.input_files[input_file]}
-        function_output = dict()
-        function_output_raw = dict()
+            function_input.append({'type': get_type(input_file, node, group_detail, 'input'),
+                                   'size': input_file['size'],
+                                   'function': input_file['function'],
+                                   'parameter': input_file['parameter']})
+            function_input_raw.append({'type': 'DB', 'size': input_file['size'],
+                                       'function': input_file['function'], 'parameter': input_file['parameter']})
+        function_output = list()
+        function_output_raw = list()
         for output_file in node.output_files:
-            file_set.add(output_file)
-            output_file_set.add(output_file)
-            function_output[output_file] = {'type': get_type(output_file, node, group_detail, 'output'),
-                                            'size': node.output_files[output_file]}
-            function_output_raw[output_file] = {'type': 'DB', 'size': node.output_files[output_file]}
-        function_next = list()
-        for next_node in node.next:
-            function_next.append(next_node.name)
+            function_output.append({'type': get_type(output_file, node, group_detail, 'output'),
+                                    'size': output_file['size'],
+                                    'function': output_file['function'],
+                                    'parameter': output_file['parameter']})
+            function_output_raw.append({'type': 'DB', 'size': output_file['size'],
+                                        'function': output_file['function'], 'parameter': output_file['parameter']})
         function_info['input'] = function_input
         function_info['output'] = function_output
-        function_info['next'] = function_next
+        function_info['next'] = node.next
         function_info_raw['input'] = function_input_raw
         function_info_raw['output'] = function_output_raw
-        function_info_raw['next'] = function_next
+        function_info_raw['next'] = node.next
         function_info_list.append(function_info)
         function_info_list_raw.append(function_info_raw)
-    return function_info_list, function_info_list_raw, list(file_set - output_file_set)
+    return function_info_list, function_info_list_raw
 
 
-info_list, info_list_raw, input_file_list = save_function_info()
+info_list, info_list_raw = save_function_info()
 repository.save_function_info(info_list, 'function_info')
-repository.save_start_node_name(parser_with_time.mainObject.start.name, 'function_info')
+repository.save_start_node_name(parser.workflow.start.name, 'function_info')
 repository.save_function_info(info_list_raw, 'function_info_raw')
-repository.save_start_node_name(parser_with_time.mainObject.start.name, 'function_info_raw')
-repository.save_basic_input(input_file_list)
+repository.save_start_node_name(parser.workflow.start.name, 'function_info_raw')
+repository.save_basic_input(parser.workflow.global_input)

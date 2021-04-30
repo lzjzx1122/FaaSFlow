@@ -38,29 +38,27 @@ def get_function_info(function_name, mode):
         return item
 
 
-def save_basic_input(input_file_list):
+def save_basic_input(basic_input):
     couch = couchdb.Server(couchdb_url)
     if 'basic_input' in couch:
         couch.delete('basic_input')
     db = couch.create('basic_input')
-    for file in input_file_list:
-        db.save({'file_name': file})
+    db.save(basic_input)
 
 
 def get_basic_input():
     couch = couchdb.Server(couchdb_url)
     db = couch['basic_input']
-    res = []
+    res = None
     for doc in db:
-        res.append(db[doc])
+        res = db[doc]
     return res
 
 
-def prepare_basic_file(file_list):
+def prepare_basic_file(request_id, basic_file):
     couch = couchdb.Server(couchdb_url)
     db = couch['results']
-    for file in file_list:
-        db[file['request_id'] + '_' + file['file_name']] = {'key': file['file_name'], 'value': file['value']}
+    db[request_id + '_INPUT'] = basic_file
 
 
 def create_result_db():
@@ -68,3 +66,12 @@ def create_result_db():
     if "results" in couch:
         couch.delete("results")
     db = couch.create("results")
+
+
+def get_value(request_id, function, parameter):
+    couch = couchdb.Server(couchdb_url)
+    db = couch['results']
+    value = db[request_id + '_' + function][parameter]
+    return int(value)
+
+# db[request_id + '_' + function] = {parameter: value}
