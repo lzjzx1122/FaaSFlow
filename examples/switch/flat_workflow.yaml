@@ -4,64 +4,71 @@ global_input:
     value:
       function: INPUT
       parameter: input2
-    size: ???
+    size: 8
   input1:
     type: pass
     value:
       function: INPUT
       parameter: input1
-fuctions: ???typo
+    size: 8
+functions:
 - name: virtual1
   source: VIRTUAL
-  runtime: ???
+  runtime: 1
   next:
     type: switch
     conditions:
-      - ???
-      - ???
-      - 与nodes顺序一样
+      - INPUT.input1 < INPUT.input2
+      - default
     nodes:
     - invalid
     - sub
 - name: invalid
   source: invalid
+  runtime: 1
   input:
     input2:
       type: pass
       value:
         function: INPUT
         parameter: input2
-      size: ???
+      size: 80000000
     input1:
       type: pass
       value:
         function: INPUT
         parameter: input1
+      size: 80000000
 - name: sub
   source: sub
+  runtime: 1
   input:
     x:
       type: pass
       value:
         function: INPUT
         parameter: input1
+      size: 80000000
     y:
       type: pass
       value:
         function: INPUT
         parameter: input2
+      size: 80000000
   next:
     type: pass
     nodes:
     - sqrt
 - name: sqrt
   source: sqrt
+  runtime: 1
   input:
     x:
       type: pass
       value:
         function: sub
         parameter: sub_result
+      size: 80000000
 global_output:
   result:
     type: switch

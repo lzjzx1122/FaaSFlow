@@ -15,6 +15,7 @@ def parse(filename):
         parameter = data['global_input'][key]['value']['parameter']
         global_input[parameter] = '0'
     functions = data['functions']
+    parent_cnt[functions[0]['name']] = 0
     for function in functions:
         name = function['name']
         source = function['source']
@@ -28,7 +29,7 @@ def parse(filename):
             for key in function['input']:
                 input_files.append({'function': function['input'][key]['value']['function'],
                                     'parameter': function['input'][key]['value']['parameter'],
-                                    'size': function['input'][key]['size']})
+                                    'size': function['input'][key]['size'], 'arg': key})
         if 'output' in function:
             for key in function['output']:
                 output_files.append({'function': function['input'][key]['value']['function'],
@@ -40,21 +41,25 @@ def parse(filename):
         if 'next' in function:
             if function['next']['type'] == 'switch':
                 conditions = function['next']['conditions']
-            for name in function['next']['nodes']:
-                next.append(name)
+            for n in function['next']['nodes']:
+                next.append(n)
                 nextDis.append(send_time)
-                if name not in parent_cnt:
-                    parent_cnt[name] = 1
+                if n not in parent_cnt:
+                    parent_cnt[n] = 1
                 else:
-                    parent_cnt[name] = parent_cnt[name] + 1
-        current_function = component.function(name, next, nextDis, source, runtime,
+                    parent_cnt[n] = parent_cnt[n] + 1
+        current_function = component.function(name, [], next, nextDis, source, runtime,
                                               input_files, output_files, conditions)
         if total == 0:
             start = current_function
-        total = total+1
+        total = total + 1
         nodes[name] = current_function
+    for name in nodes:
+        for next_node in nodes[name].next:
+            nodes[next_node].prev.append(name)
     return component.workflow(start, nodes, global_input, total, parent_cnt)
 
 
-yaml_file = '../../examples/foreach/flat_workflow.yaml'
+yaml_file = '../../examples/switch/flat_workflow.yaml'
 workflow = parse(yaml_file)
+

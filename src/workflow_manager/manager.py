@@ -27,7 +27,6 @@ class ConditionParser:
 
     def get_expr_value(self, expr):
         operator = ['+', '-', '*', '/']
-        pre_index = 0
         current_index = 0
         num_stack = list()
         op_stack = list()
@@ -141,7 +140,7 @@ class WorkflowManager:
     def prepare_basic_input(self):
         basic_input = repository.get_basic_input()
         for parameter in basic_input:
-            basic_input[parameter]['value'] = '0'
+            basic_input[parameter] = '0'
         repository.prepare_basic_file(self.request_id, basic_input)
 
     def run_workflow(self):

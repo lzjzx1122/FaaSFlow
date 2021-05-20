@@ -1,6 +1,7 @@
 class function:
-    def __init__(self, name, next, nextDis, source, runtime, input_files, output_files, conditions):
+    def __init__(self, name, prev, next, nextDis, source, runtime, input_files, output_files, conditions):
         self.name = name
+        self.prev = prev
         self.next = next
         self.nextDis = nextDis
         self.source = source

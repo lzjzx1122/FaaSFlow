@@ -1,8 +1,8 @@
 import couchdb
 
-username = 'openwhisk'
-password = 'openwhisk'
-couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
+username = 'admin'
+password = 'admin'
+couchdb_url = 'http://admin:admin@127.0.0.1:5984/'
 
 
 def save_function_info(function_info_list, db_name):

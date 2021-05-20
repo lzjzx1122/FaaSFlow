@@ -1,4 +1,4 @@
-import parser
+import parse_yaml
 import queue
 import json
 import repository
@@ -95,10 +95,10 @@ def merge_node(crit_vec, group_set, group_size):
 def get_longest_dis(workflow, dist_vec):
     dist = 0
     node_name = ''
-    for node in workflow.nodes:
-        if dist_vec[node.name][0] > dist:
-            dist = dist_vec[node.name][0]
-            node_name = node.name
+    for name in workflow.nodes:
+        if dist_vec[name][0] > dist:
+            dist = dist_vec[name][0]
+            node_name = name
     return dist, node_name
 
 
@@ -136,14 +136,15 @@ def grouping(workflow):
         if not merge_node(crit_vec, group_set, group_size):
             group_size = group_size + 1
             merge_node(crit_vec, group_set, group_size)
-    print(init_crit_length, crit_length, no_latency_crit_length)
-    print(group_size)
+    print('no_latency_crit_length: ', no_latency_crit_length)
+    print(group_set)
     return group_set
 
 
-def get_type(name, node, group_detail, mode):
+def get_type(workflow, name, node, group_detail, mode):
     if mode == 'input':
-        for prev_node in node.prev:
+        for prev_node_name in node.prev:
+            prev_node = workflow.nodes[prev_node_name]
             if name in prev_node.output_files:
                 node_set = find_set(prev_node.name, group_detail)
                 return 'MEM' if node.name in node_set else 'DB'
@@ -166,29 +167,31 @@ def get_type(name, node, group_detail, mode):
             return 'DB'
 
 
-def save_function_info():
-    group_detail = grouping(parser.workflow)
+def save_function_info(workflow):
+    group_detail = grouping(workflow)
     function_info_list = list()
     function_info_list_raw = list()
-    for node_name in parser.workflow.nodes:
-        node = parser.workflow.nodes[node_name]
+    for node_name in workflow.nodes:
+        node = workflow.nodes[node_name]
         function_info = {'function_name': node.name, 'runtime': node.runtime,
-                         'parent_cnt': parser.workflow.parent_cnt[node.name], 'conditions': node.conditions}
+                         'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
         function_info_raw = {'function_name': node.name, 'runtime': node.runtime,
-                             'parent_cnt': parser.workflow.parent_cnt[node.name], 'conditions': node.conditions}
+                             'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
         function_input = list()
         function_input_raw = list()
         for input_file in node.input_files:
-            function_input.append({'type': get_type(input_file, node, group_detail, 'input'),
+            function_input.append({'type': get_type(workflow, input_file, node, group_detail, 'input'),
                                    'size': input_file['size'],
                                    'function': input_file['function'],
-                                   'parameter': input_file['parameter']})
+                                   'parameter': input_file['parameter'],
+                                   'arg': input_file['arg']})
             function_input_raw.append({'type': 'DB', 'size': input_file['size'],
-                                       'function': input_file['function'], 'parameter': input_file['parameter']})
+                                       'function': input_file['function'], 'parameter': input_file['parameter'],
+                                       'arg': input_file['arg']})
         function_output = list()
         function_output_raw = list()
         for output_file in node.output_files:
-            function_output.append({'type': get_type(output_file, node, group_detail, 'output'),
+            function_output.append({'type': get_type(workflow, output_file, node, group_detail, 'output'),
                                     'size': output_file['size'],
                                     'function': output_file['function'],
                                     'parameter': output_file['parameter']})
@@ -205,9 +208,9 @@ def save_function_info():
     return function_info_list, function_info_list_raw
 
 
-info_list, info_list_raw = save_function_info()
+info_list, info_list_raw = save_function_info(parse_yaml.workflow)
 repository.save_function_info(info_list, 'function_info')
-repository.save_start_node_name(parser.workflow.start.name, 'function_info')
+repository.save_start_node_name(parse_yaml.workflow.start.name, 'function_info')
 repository.save_function_info(info_list_raw, 'function_info_raw')
-repository.save_start_node_name(parser.workflow.start.name, 'function_info_raw')
-repository.save_basic_input(parser.workflow.global_input)
+repository.save_start_node_name(parse_yaml.workflow.start.name, 'function_info_raw')
+repository.save_basic_input(parse_yaml.workflow.global_input)
