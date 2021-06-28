@@ -4,30 +4,56 @@ global_input:
     value:
       function: INPUT
       parameter: count
-fuctions:
+    size: 8
+functions:
 - name: rand
   source: rand
+  runtime: 1
   input:
     count:
       type: pass
       value:
         function: INPUT
         parameter: count
+      size: 8
+  output:
+    rand_result:
+      size: 800000000
   next:
     type: foreach
     nodes:
     - square
 - name: square
   source: square
+  runtime: 1
   input:
     x:
-      type: pass
       value:
         function: rand
         parameter: rand_result
+      size: 800000000
+  output:
+    square_result:
+      size: 800000000
+  next:
+    type: pass
+    nodes:
+      - add
+- name: add
+  source: add
+  runtime: 1
+  input:
+    x:
+      value:
+        function: square
+        parameter: square_result
+      size: 800000000
+  output:
+    add_result:
+      size: 800000000
 global_output:
   result:
-    type: foreach
+    type: pass
     value:
-      function: square
-      parameter: square_result
+      function: add
+      parameter: add_result

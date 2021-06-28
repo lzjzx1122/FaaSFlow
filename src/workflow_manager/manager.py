@@ -11,6 +11,8 @@ sys.path.append('../function_manager')
 from function_manager import FunctionManager
 
 
+repo = repository.Repository(clear=False)
+
 class ConditionParser:
     def __init__(self, request_id):
         self.request_id = request_id
@@ -37,7 +39,7 @@ class ConditionParser:
             key = expr[pre_index, current_index].split('.')
             function = key[0]
             parameter = key[1]
-            value = repository.get_value(self.request_id, function, parameter)
+            value = repo.get_value(self.request_id, function, parameter)
             num_stack.append(value)
             if current_index == len(expr):
                 while len(op_stack) != 0:
@@ -96,16 +98,16 @@ class WorkflowManager:
         self.request_id = request_id
         self.function_info = dict()
         self.executed = set()
-        repository.create_result_db()
         self.function_manager = FunctionManager("../function_manager/functions")
         self.mode = mode
         self.parent_executed = dict()
         self.condition_parser = ConditionParser(request_id)
+        self.foreach_functions = []
 
     def get_function_info(self, function_name):
         if function_name not in self.function_info:
             print('function_name: ', function_name)
-            self.function_info[function_name] = repository.get_function_info(function_name, self.mode)
+            self.function_info[function_name] = repo.get_function_info(function_name, self.mode)
         return self.function_info[function_name]
 
     def run_function(self, function_name):
@@ -122,9 +124,21 @@ class WorkflowManager:
                     break
             gevent.joinall(jobs)
             return
+        # current node is under foreach
+        if function_name in self.foreach_functions:
+            foreach_cnt = 0
+            jobs = []
+            for k in function_info['input']:
+                foreach_cnt = repo.get_len(self.request_id, function_name, k)
+                break
+            for i in range(foreach_cnt):
+                jobs.append(gevent.spawn(self.function_manager.run, function_info['function_name'], self.request_id,
+                                         function_info['runtime'], function_info['input'], function_info['output'], i))
+            gevent.joinall(jobs)
         # otherwise...
-        self.function_manager.run(function_info['function_name'], self.request_id,
-                                  function_info['runtime'], function_info['input'], function_info['output'])
+        else:
+            self.function_manager.run(function_info['function_name'], self.request_id,
+                                      function_info['runtime'], function_info['input'], function_info['output'])
         # check if any function has enough input to be able to fire
         jobs = []
         for name in function_info['next']:
@@ -138,14 +152,15 @@ class WorkflowManager:
         gevent.joinall(jobs)
 
     def prepare_basic_input(self):
-        basic_input = repository.get_basic_input()
+        basic_input = repo.get_basic_input()
         for parameter in basic_input:
             basic_input[parameter] = '0'
-        repository.prepare_basic_file(self.request_id, basic_input)
+        repo.prepare_basic_file(self.request_id, basic_input)
 
     def run_workflow(self):
         self.prepare_basic_input()
-        start_node_name = repository.get_start_node_name()
+        start_node_name = repo.get_start_node_name()
+        self.foreach_functions = repo.get_foreach_functions()
         start = time.time()
         job = gevent.spawn(self.run_function, start_node_name)
         gevent.joinall([job])

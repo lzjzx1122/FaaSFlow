@@ -3,9 +3,10 @@ import string
 import random
 from Store import Store
 
-def main(function_name, request_id, runtime, input, output):
+def main(function_name, request_id, runtime, input, output, foreach_id):
+
     store = Store(function_name, request_id)
-    input_res = store.fetch(input)
+    input_res = store.fetch(input, foreach_id)
     
     for k in input_res.keys():
         print(k)
@@ -18,4 +19,4 @@ def main(function_name, request_id, runtime, input, output):
     
     time.sleep(runtime)
     
-    store.put(output, output_res)
+    store.put(output, output_res, foreach_id)

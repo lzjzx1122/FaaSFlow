@@ -35,14 +35,15 @@ class functionRunner:
 
         return True
 
-    def run(self, request_id, runtime, input, output):
+    def run(self, request_id, runtime, input, output, foreach_id):
         # run the function
         self.ctx['function_name'] = self.function
         self.ctx['request_id'] = request_id
         self.ctx['runtime'] = runtime
         self.ctx['input'] = input
         self.ctx['output'] = output
-        out = eval('main(function_name, request_id, runtime, input, output)', self.ctx)
+        self.ctx['foreach_id'] = foreach_id
+        out = eval('main(function_name, request_id, runtime, input, output, foreach_id)', self.ctx)
         return out
 
 proxy = Flask(__name__)
@@ -78,10 +79,13 @@ def run():
     runtime = inp['runtime']
     input = inp['input']
     output = inp['output']
+    foreach_id = None
+    if 'foreach_id' in inp:
+        foreach_id = inp
 
     # record the execution time
     start = time.time()
-    runner.run(request_id, runtime, input, output)
+    runner.run(request_id, runtime, input, output, foreach_id)
     end = time.time()
 
     res = {

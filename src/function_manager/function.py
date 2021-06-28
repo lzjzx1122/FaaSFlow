@@ -46,12 +46,14 @@ class Function:
         }
     
     # put the request into request queue
-    def send_request(self, request_id, runtime, input, output):
+    def send_request(self, request_id, runtime, input, output, foreach_id):
         # print('send_request', request_id, runtime)
         start = time.time()
         self.request_log['start'].append(start)
 
         data = {'request_id': request_id, 'runtime': runtime, 'input': input, 'output': output}
+        if foreach_id:
+            data['foreach_id'] = foreach_id
         req = RequestInfo(request_id, data)
         self.rq.append(req)
         res = req.result.get()
