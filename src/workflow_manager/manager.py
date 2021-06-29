@@ -98,11 +98,12 @@ class WorkflowManager:
         self.request_id = request_id
         self.function_info = dict()
         self.executed = set()
-        self.function_manager = FunctionManager("../function_manager/functions")
+        self.function_manager = FunctionManager("../examples/foreach/functions")
         self.mode = mode
         self.parent_executed = dict()
         self.condition_parser = ConditionParser(request_id)
         self.foreach_functions = []
+        self.after_foreach = False
 
     def get_function_info(self, function_name):
         if function_name not in self.function_info:
@@ -140,11 +141,16 @@ class WorkflowManager:
                                          function_info['runtime'], function_info['input'], function_info['output'],
                                          function_info['to'], keys))
             gevent.joinall(jobs)
+            self.after_foreach = True
         # otherwise...
         else:
+            all_keys = {}
+            if self.after_foreach:
+                all_keys = repo.get_keys(self.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
+                self.after_foreach = False
             self.function_manager.run(function_info['function_name'], self.request_id,
                                       function_info['runtime'], function_info['input'], function_info['output'],
-                                      function_info['to'], {})
+                                      function_info['to'], all_keys)
         # check if any function has enough input to be able to fire
         jobs = []
         for name in function_info['next']:

@@ -47,9 +47,9 @@ class Store:
         for k in input_keys:
             param = self.input[k]['parameter']  # supporting inputMapping
             if param in self.keys:  # if it's a foreach key
-                self.fetch_dict[k] = self.keys[k]
+                self.fetch_dict[k] = self.keys[param]
             else:  # regular keys
-                path = os.path.join(result_dir, self.request_id + '_' + k)
+                path = os.path.join(result_dir, self.request_id + '_' + param)
                 if os.path.exists(path):  # if exists in file system
                     thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, path, 'regular'))
                 elif os.path.exists(path + '.json'):  # if exists in file system
