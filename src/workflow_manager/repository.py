@@ -55,10 +55,21 @@ class Repository:
             res = db[doc]
         return res
 
-    def prepare_basic_file(self, request_id, basic_file):
-        db = self.couch['results']
-        for k in basic_file:
-            db['INPUT_' + request_id + '_' + k] = {'key': k, 'value': basic_file[k]}
+    # def prepare_basic_file(self, request_id, basic_file):
+    #     db = self.couch['results']
+    #     for k in basic_file:
+    #         db['INPUT_' + request_id + '_' + k] = {'key': k, 'value': basic_file[k]}
+
+    def create_request_doc(self, request_id):
+        self.couch['results'][request_id] = {}
+
+    def get_keys(self, request_id):
+        keys = dict()
+        doc = self.couch['results'][request_id]
+        for k in doc:
+            if k != '_id' and k != '_rev' and k != '_attachments':
+                keys[k] = doc[k]
+        return keys
 
     def get_value(self, request_id, function, parameter):
         db = self.couch['results']

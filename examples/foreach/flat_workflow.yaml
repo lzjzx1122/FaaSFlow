@@ -11,13 +11,17 @@ functions:
   runtime: 1
   input:
     count:
-      type: pass
+      type: normal
       value:
         function: INPUT
         parameter: count
       size: 8
   output:
+    split_keys:
+      type: keys
+      size: 8
     rand_result:
+      type: normal
       size: 800000000
   next:
     type: foreach
@@ -28,12 +32,20 @@ functions:
   runtime: 1
   input:
     x:
+      type: key
+      value:
+        function: rand
+        parameter: split_keys
+      size: 8
+    content:
+      type: normal
       value:
         function: rand
         parameter: rand_result
       size: 800000000
   output:
     square_result:
+      type: normal
       size: 800000000
   next:
     type: pass
@@ -44,12 +56,20 @@ functions:
   runtime: 1
   input:
     x:
+      type: key
+      value:
+        function: rand
+        parameter: split_keys
+      size: 800000000
+    content:
+      type: normal
       value:
         function: square
         parameter: square_result
       size: 800000000
   output:
     add_result:
+      type: normal
       size: 800000000
 global_output:
   result:

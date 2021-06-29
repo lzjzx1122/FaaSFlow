@@ -30,10 +30,11 @@ def parse(filename):
             for key in function['input']:
                 input_files[key] = {'function': function['input'][key]['value']['function'],
                                     'parameter': function['input'][key]['value']['parameter'],
-                                    'size': function['input'][key]['size'], 'arg': key}
+                                    'size': function['input'][key]['size'], 'arg': key,
+                                    'type': function['input'][key]['type']}
         if 'output' in function:
             for key in function['output']:
-                output_files[key] = {'size': function['output'][key]['size']}
+                output_files[key] = {'size': function['output'][key]['size'], 'type': function['output'][key]['type']}
                 send_byte += function['output'][key]['size']
         send_time = send_byte / network_bandwidth
         conditions = list()
