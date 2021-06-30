@@ -98,7 +98,7 @@ class WorkflowManager:
         self.request_id = request_id
         self.function_info = dict()
         self.executed = set()
-        self.function_manager = FunctionManager("../examples/foreach/functions")
+        self.function_manager = FunctionManager("../../examples/foreach/functions")
         self.mode = mode
         self.parent_executed = dict()
         self.condition_parser = ConditionParser(request_id)
@@ -163,15 +163,15 @@ class WorkflowManager:
                 jobs.append(gevent.spawn(self.run_function, name))
         gevent.joinall(jobs)
 
-    def prepare_basic_input(self):
+    # def prepare_basic_input(self):
         # basic_input = repo.get_basic_input()
         # for parameter in basic_input:
         #     basic_input[parameter] = '0'
         # repo.prepare_basic_file(self.request_id, basic_input)
-        repo.create_request_doc(self.request_id)
+        # repo.create_request_doc(self.request_id)
 
     def run_workflow(self):
-        self.prepare_basic_input()
+        # self.prepare_basic_input()
         start_node_name = repo.get_start_node_name()
         self.foreach_functions = repo.get_foreach_functions()
         start = time.time()
@@ -181,6 +181,6 @@ class WorkflowManager:
         print('mode: ', self.mode, 'execution time: ', end - start)
 
 
-workflow = WorkflowManager('123', 'function_info')
+workflow = WorkflowManager('124', 'function_info_raw')
 workflow.run_workflow()
 # db[request_id + "_" + function] = {"parameter1" : "...", "parameter2" : "..."}

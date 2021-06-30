@@ -21,6 +21,7 @@ class functionRunner:
         self.ctx = None
 
     def init(self, function):
+        print('init...')
         # update function status
         self.function = function
 
@@ -33,7 +34,7 @@ class functionRunner:
 
         self.ctx = {}
         exec(code, self.ctx)
-
+        print('init finished...')
         return True
 
     def run(self, request_id, runtime, input, output, to, keys):
@@ -45,6 +46,7 @@ class functionRunner:
         self.ctx['output'] = output
         self.ctx['to'] = to
         self.ctx['keys'] = keys
+        print('running... context: ', self.ctx)
         out = eval('main(function_name, request_id, runtime, input, output, to, keys)', self.ctx)
         return out
 
@@ -96,7 +98,8 @@ def run():
     res = {
         "start_time": start,
         "end_time": end,
-        "duration": end - start
+        "duration": end - start,
+        "inp": inp
     }
 
     proxy.status = 'ok'

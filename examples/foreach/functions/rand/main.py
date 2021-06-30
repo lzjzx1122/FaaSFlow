@@ -8,10 +8,9 @@ def main(function_name, request_id, runtime, input, output, to, keys):
     param = store.fetch(['count'])
     count = int(param['count'])
     split_keys = []
+    res = {}
     for i in range(count):
-        split_keys.append(i)
-    rand_result = []
-    for _ in range(count):
-        rand_result.append(random.randrange(0, 10))
-    res = {'rand_result': rand_result, 'split_keys': split_keys}
+        split_keys.append('a' + str(i))
+        res['a' + str(i)] = random.randrange(0, 10)
+    res['split_keys'] = split_keys
     store.put(res, {})

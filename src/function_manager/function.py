@@ -47,7 +47,7 @@ class Function:
     
     # put the request into request queue
     def send_request(self, request_id, runtime, input, output, to, keys):
-        # print('send_request', request_id, runtime)
+        print('send_request', request_id, runtime)
         start = time.time()
         self.request_log['start'].append(start)
 
@@ -55,7 +55,7 @@ class Function:
         req = RequestInfo(request_id, data)
         self.rq.append(req)
         res = req.result.get()
-        self.db[request_id + "_" + self.function_name] = res
+        # self.db[request_id + "_" + self.function_name] = res
 
         end = time.time()
         self.request_log['duration'].append(res['duration'])
@@ -135,12 +135,10 @@ class Function:
         # when the number of execs hits the limit
         if self.num_exec > self.info.max_containers:
             return None
-        
         try:
             container = Container.create(self.client, self.info.img_name, self.port_controller.get(), 'exec')
         except Exception as e:
             return None
-
         self.num_exec += 1
         self.init_container(container)
         return container

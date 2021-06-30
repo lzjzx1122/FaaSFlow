@@ -12,7 +12,7 @@ dispatch_interval = 0.005 # 200 qps at most
 
 username = 'openwhisk'
 password = 'openwhisk'
-couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
+couchdb_url = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 db_name = 'results'
 
 # the class for scheduling functions' inter-operations
@@ -51,7 +51,7 @@ class FunctionManager:
             gevent.spawn(function.dispatch_request)
     
     def run(self, function_name, request_id, runtime, input, output, to, keys):
-        print('run', function_name, request_id, runtime, input, output)
+        print('run', function_name, request_id, runtime, input, output, to, keys)
         if function_name not in self.functions:
             raise Exception("No such function!")
         return self.functions[function_name].send_request(request_id, runtime, input, output, to, keys)

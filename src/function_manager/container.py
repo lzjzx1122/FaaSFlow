@@ -13,12 +13,13 @@ class Container:
     def create(cls, client, image_name, port, attr):
         # print("mount begin")
         mount = Mount(result_dir, '/var/run/workflow_results', type='bind')
-        # print("mount end", image_name)
+        # print("creating container ", image_name, port, attr)
         container = client.containers.run(image_name,
                                           detach=True,
                                           ports={'5000/tcp': str(port)},
                                           labels=['workflow'],
                                           mounts=[mount])
+        # print('create finished')
         # print("run end")
         res = cls(container, port, attr)
         # print("wait begin")

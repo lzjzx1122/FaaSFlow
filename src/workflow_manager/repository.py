@@ -3,10 +3,10 @@ import couchdb
 
 class Repository:
     def __init__(self, clear):
-        couchdb_url = 'http://admin:admin@127.0.0.1:5984/'
+        couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
         self.couch = couchdb.Server(couchdb_url)
         if clear:
-            db_list = ['function_info', 'function_info_raw', 'workflow_metadata', 'basic_input', 'results']
+            db_list = ['function_info', 'function_info_raw', 'workflow_metadata', 'basic_input']
             for db in db_list:
                 if db in self.couch:
                     self.couch.delete(db)

@@ -201,7 +201,7 @@ def save_function_info(workflow):
         to = get_type(workflow, node, group_detail)
         function_info = {'function_name': node.name, 'runtime': node.runtime, 'to': to,
                          'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
-        function_info_raw = {'function_name': node.name, 'runtime': node.runtime, 'to': to,
+        function_info_raw = {'function_name': node.name, 'runtime': node.runtime, 'to': 'DB',
                              'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
         function_input = dict()
         function_input_raw = dict()

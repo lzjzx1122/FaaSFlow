@@ -26,7 +26,7 @@ class Store:
 
     def fetch_from_mem(self, k, path, content_type):
         with open(path, 'r') as f:
-            if content_type == 'text/plain':
+            if content_type == 'application/json':
                 self.fetch_dict[k] = json.load(f)
             else:
                 self.fetch_dict[k] = f.read()
@@ -42,10 +42,14 @@ class Store:
 
     # input_keys: specify the keys you want
     def fetch(self, input_keys):
+        print('fetching...', input_keys)
         self.fetch_dict = {}
         threads = []
         for k in input_keys:
-            param = self.input[k]['parameter']  # supporting inputMapping
+            if k in self.input:
+                param = self.input[k]['parameter']  # supporting inputMapping
+            else:
+                param = k
             if param in self.keys:  # if it's a foreach key
                 self.fetch_dict[k] = self.keys[param]
             else:  # regular keys
@@ -54,7 +58,7 @@ class Store:
                     thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, path, 'regular'))
                 elif os.path.exists(path + '.json'):  # if exists in file system
                     json_path = path + '.json'
-                    thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, json_path, 'text/plain'))
+                    thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, json_path, 'application/json'))
                 else:  # if not
                     thread_ = threading.Thread(target=self.fetch_from_db, args=(k, param,))
                 threads.append(thread_)
@@ -62,10 +66,11 @@ class Store:
             thread_.start()
         for thread_ in threads:
             thread_.join()
+        print('fetch results...', self.fetch_dict)
         return self.fetch_dict
 
     def put_to_mem(self, k, content_type):
-        if content_type == 'text/plain':
+        if content_type == 'application/json':
             path = os.path.join(result_dir, self.request_id + '_' + k + '.json')
             with open(path, 'w') as f:
                 json.dump(self.put_dict[k], f)
@@ -75,10 +80,10 @@ class Store:
                 f.write(self.put_dict[k])
 
     def put_to_db(self, k, content_type):
-        if content_type == 'text/plain':
+        if content_type == 'application/json':
             filename = k + '.json'
             self.db.put_attachment(self.db[self.request_id], json.dumps(self.put_dict[k]),
-                                   filename=filename, content_type=content_type)
+                                   filename=filename)
         else:
             self.db.put_attachment(self.db[self.request_id], self.put_dict[k],
                                    filename=k, content_type=content_type)
@@ -89,29 +94,36 @@ class Store:
         self.db.save(doc)
 
     # output_result: {'k1': ...(dict-like), 'k2': ...(byte stream)}
-    # output_content_type: default text/plain, just specify one when you need to
+    # output_content_type: default application/json, just specify one when you need to
     def put(self, output_result, output_content_type):
+        print('putting...', output_result)
         for k in output_result:
             if k not in output_content_type:
-                output_content_type[k] = 'text/plain'  # default: dict-like, should be stored in json style
+                output_content_type[k] = 'application/json'  # default: dict-like, should be stored in json style
         self.put_dict = output_result
-        threads = []
+        # threads = []
+        for k in output_result:
+            if k in self.output and self.output[k]['type'] == 'keys':  # it's the keys for foreach
+                self.put_keys(k)
+                # thread_ = threading.Thread(target=self.put_keys, args=(k,))
+                # threads.append(thread_)
         if 'DB' in self.to:
             for k in output_result:
-                if k in self.output and self.output[k]['type'] == 'keys':  # it's the keys for foreach
-                    thread_ = threading.Thread(target=self.put_keys, args=(k,))
-                else:
-                    thread_ = threading.Thread(target=self.put_to_db, args=(k, output_content_type[k]))
-                threads.append(thread_)
+                if k not in self.output or self.output[k]['type'] != 'keys':
+                    self.put_to_db(k, output_content_type[k])
+                    # thread_ = threading.Thread(target=self.put_to_db, args=(k, output_content_type[k]))
+                    # threads.append(thread_)
         if 'MEM' in self.to:
             for k in output_result:
                 if k not in self.output or self.output[k]['type'] != 'keys':
-                    thread_ = threading.Thread(target=self.put_to_mem, args=(k, output_content_type[k]))
-                    threads.append(thread_)
-        for thread_ in threads:
-            thread_.start()
-        for thread_ in threads:
-            thread_.join()
+                    self.put_to_mem(k, output_content_type[k])
+                    # thread_ = threading.Thread(target=self.put_to_mem, args=(k, output_content_type[k]))
+                    # threads.append(thread_)
+        # for thread_ in threads:
+        #     thread_.start()
+        # for thread_ in threads:
+        #     thread_.join()
+        print('put result...')
 
     # def naive_fetch(self, input):
     #     input_res = {}

@@ -4,7 +4,7 @@ import random
 from Store import Store
 
 
-def main(function_name, request_id, runtime, input, output, to, keys):
+def main(function_name, request_id, runtime, input, output, to, keys, input_res):
     store = Store(function_name, request_id, input, output, to, keys)
     input_res = store.fetch(input, foreach_id)
 

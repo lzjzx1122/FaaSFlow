@@ -11,4 +11,3 @@ def main(function_name, request_id, runtime, input, output, to, keys):
     new_key = foreach_key + '_result'
     res = {new_key: x * x}
     store.put(res, {})
-

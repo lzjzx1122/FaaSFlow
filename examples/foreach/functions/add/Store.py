@@ -26,7 +26,7 @@ class Store:
 
     def fetch_from_mem(self, k, path, content_type):
         with open(path, 'r') as f:
-            if content_type == 'text/plain':
+            if content_type == 'application/json':
                 self.fetch_dict[k] = json.load(f)
             else:
                 self.fetch_dict[k] = f.read()
@@ -54,7 +54,7 @@ class Store:
                     thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, path, 'regular'))
                 elif os.path.exists(path + '.json'):  # if exists in file system
                     json_path = path + '.json'
-                    thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, json_path, 'text/plain'))
+                    thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, json_path, 'application/json'))
                 else:  # if not
                     thread_ = threading.Thread(target=self.fetch_from_db, args=(k, param,))
                 threads.append(thread_)
@@ -65,7 +65,7 @@ class Store:
         return self.fetch_dict
 
     def put_to_mem(self, k, content_type):
-        if content_type == 'text/plain':
+        if content_type == 'application/json':
             path = os.path.join(result_dir, self.request_id + '_' + k + '.json')
             with open(path, 'w') as f:
                 json.dump(self.put_dict[k], f)
@@ -75,7 +75,7 @@ class Store:
                 f.write(self.put_dict[k])
 
     def put_to_db(self, k, content_type):
-        if content_type == 'text/plain':
+        if content_type == 'application/json':
             filename = k + '.json'
             self.db.put_attachment(self.db[self.request_id], json.dumps(self.put_dict[k]),
                                    filename=filename, content_type=content_type)
@@ -89,11 +89,11 @@ class Store:
         self.db.save(doc)
 
     # output_result: {'k1': ...(dict-like), 'k2': ...(byte stream)}
-    # output_content_type: default text/plain, just specify one when you need to
+    # output_content_type: default application/json, just specify one when you need to
     def put(self, output_result, output_content_type):
         for k in output_result:
             if k not in output_content_type:
-                output_content_type[k] = 'text/plain'  # default: dict-like, should be stored in json style
+                output_content_type[k] = 'application/json'  # default: dict-like, should be stored in json style
         self.put_dict = output_result
         threads = []
         if 'DB' in self.to:
