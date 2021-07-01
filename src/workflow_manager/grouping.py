@@ -192,16 +192,22 @@ def get_type(workflow, node, group_detail):
         return 'DB'
 
 
-def save_function_info(workflow):
+def save_function_info(workflow, ip_list):
     group_detail = grouping(workflow)
+    ip_index = 0
+    function_ip = {}
+    for group in group_detail:
+        for function in group:
+            function_ip[function] = ip_list[ip_index]
+        ip_index = (ip_index + 1) % len(ip_list)
     function_info_list = list()
     function_info_list_raw = list()
     for node_name in workflow.nodes:
         node = workflow.nodes[node_name]
         to = get_type(workflow, node, group_detail)
-        function_info = {'function_name': node.name, 'runtime': node.runtime, 'to': to,
+        function_info = {'function_name': node.name, 'runtime': node.runtime, 'to': to, 'ip': function_ip[node.name],
                          'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
-        function_info_raw = {'function_name': node.name, 'runtime': node.runtime, 'to': 'DB',
+        function_info_raw = {'function_name': node.name, 'runtime': node.runtime, 'to': 'DB', 'ip': ip_list[hash(node.name) % len(ip_list)],
                              'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
         function_input = dict()
         function_input_raw = dict()
@@ -232,7 +238,8 @@ def save_function_info(workflow):
     return function_info_list, function_info_list_raw
 
 
-info_list, info_list_raw = save_function_info(parse_yaml.workflow)
+ip_list = ['192.168.0.1', '192.168.0.2', '192.168.0.3']
+info_list, info_list_raw = save_function_info(parse_yaml.workflow, ip_list)
 repo = repository.Repository(clear=True)
 repo.save_function_info(info_list, 'function_info')
 repo.save_function_info(info_list_raw, 'function_info_raw')
