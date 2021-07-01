@@ -141,62 +141,92 @@ def grouping(workflow):
     return group_set
 
 
-def get_type(workflow, name, node, group_detail, mode):
-    if mode == 'input':
-        for prev_node_name in node.prev:
-            prev_node = workflow.nodes[prev_node_name]
-            if name in prev_node.output_files:
-                node_set = find_set(prev_node.name, group_detail)
-                return 'MEM' if node.name in node_set else 'DB'
-        return 'DB'
-    else:
-        not_in_same_set = False
-        in_same_set = False
-        for next_node in node.next:
-            if name in next_node.input_files:
-                node_set = find_set(next_node.name, group_detail)
-                if node.name not in node_set:
-                    not_in_same_set = True
-                else:
-                    in_same_set = True
-        if not_in_same_set and in_same_set:
-            return 'DB+MEM'
-        elif in_same_set:
-            return 'MEM'
+# def get_type(workflow, name, node, group_detail, mode):
+#     if mode == 'input':
+#         for prev_node_name in node.prev:
+#             prev_node = workflow.nodes[prev_node_name]
+#             if name in prev_node.output_files:
+#                 node_set = find_set(prev_node.name, group_detail)
+#                 type = 'MEM' if node.name in node_set else 'DB'
+#                 return type
+#         return 'DB'
+#     else:
+#         not_in_same_set = False
+#         in_same_set = False
+#         for next_node_name in node.next:
+#             next_node = workflow.nodes[next_node_name]
+#             in_next = False
+#             for arg in next_node.input_files:
+#                 if name == next_node.input_files[arg]['parameter']:
+#                     in_next = True
+#                     break
+#             if in_next:
+#                 node_set = find_set(next_node.name, group_detail)
+#                 if node.name not in node_set:
+#                     not_in_same_set = True
+#                 else:
+#                     in_same_set = True
+#         if not_in_same_set and in_same_set:
+#             return 'DB+MEM'
+#         elif in_same_set:
+#             return 'MEM'
+#         else:
+#             return 'DB'
+
+# define the output destination at function level, instead of one per key/file
+def get_type(workflow, node, group_detail):
+    not_in_same_set = False
+    in_same_set = False
+    for next_node_name in node.next:
+        next_node = workflow.nodes[next_node_name]
+        node_set = find_set(next_node.name, group_detail)
+        if node.name not in node_set:
+            not_in_same_set = True
         else:
-            return 'DB'
+            in_same_set = True
+    if not_in_same_set and in_same_set:
+        return 'DB+MEM'
+    elif in_same_set:
+        return 'MEM'
+    else:
+        return 'DB'
 
 
-def save_function_info(workflow):
+def save_function_info(workflow, ip_list):
     group_detail = grouping(workflow)
+    ip_index = 0
+    function_ip = {}
+    for group in group_detail:
+        for function in group:
+            function_ip[function] = ip_list[ip_index]
+        ip_index = (ip_index + 1) % len(ip_list)
     function_info_list = list()
     function_info_list_raw = list()
     for node_name in workflow.nodes:
         node = workflow.nodes[node_name]
-        function_info = {'function_name': node.name, 'runtime': node.runtime,
+        to = get_type(workflow, node, group_detail)
+        function_info = {'function_name': node.name, 'runtime': node.runtime, 'to': to, 'ip': function_ip[node.name],
                          'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
-        function_info_raw = {'function_name': node.name, 'runtime': node.runtime,
+        function_info_raw = {'function_name': node.name, 'runtime': node.runtime, 'to': 'DB', 'ip': ip_list[hash(node.name) % len(ip_list)],
                              'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
-        function_input = list()
-        function_input_raw = list()
-        for input_file in node.input_files:
-            function_input.append({'type': get_type(workflow, input_file, node, group_detail, 'input'),
-                                   'size': input_file['size'],
-                                   'function': input_file['function'],
-                                   'parameter': input_file['parameter'],
-                                   'arg': input_file['arg']})
-            function_input_raw.append({'type': 'DB', 'size': input_file['size'],
-                                       'function': input_file['function'], 'parameter': input_file['parameter'],
-                                       'arg': input_file['arg']})
-        function_output = list()
-        function_output_raw = list()
-        for output_file in node.output_files:
-            function_output.append({'type': get_type(workflow, output_file, node, group_detail, 'output'),
-                                    'size': output_file['size'],
-                                    'function': output_file['function'],
-                                    'parameter': output_file['parameter']})
-            function_output_raw.append({'type': 'DB', 'size': output_file['size'],
-                                        'function': output_file['function'], 'parameter': output_file['parameter']})
+        function_input = dict()
+        function_input_raw = dict()
+        for arg in node.input_files:
+            # type = get_type(workflow, node.input_files[arg]['parameter'], node, group_detail, 'input')
+            function_input[arg] = {'size': node.input_files[arg]['size'],
+                                   'function': node.input_files[arg]['function'],
+                                   'parameter': node.input_files[arg]['parameter'],
+                                   'type': node.input_files[arg]['type']}
+            function_input_raw[arg] = {'size': node.input_files[arg]['size'],
+                                       'function': node.input_files[arg]['function'],
+                                       'parameter': node.input_files[arg]['parameter'],
+                                       'type': node.input_files[arg]['type']}
+        function_output = dict()
+        function_output_raw = dict()
+        for arg in node.output_files:
+            # type = get_type(workflow, arg, node, group_detail, 'output')
+            function_output[arg] = {'size': node.output_files[arg]['size'], 'type': node.output_files[arg]['type']}
+            function_output_raw[arg] = {'size': node.output_files[arg]['size'], 'type': node.output_files[arg]['type']}
         function_info['input'] = function_input
         function_info['output'] = function_output
         function_info['next'] = node.next
@@ -208,9 +238,11 @@ def save_function_info(workflow):
     return function_info_list, function_info_list_raw
 
 
-info_list, info_list_raw = save_function_info(parse_yaml.workflow)
-repository.save_function_info(info_list, 'function_info')
-repository.save_start_node_name(parse_yaml.workflow.start.name, 'function_info')
-repository.save_function_info(info_list_raw, 'function_info_raw')
-repository.save_start_node_name(parse_yaml.workflow.start.name, 'function_info_raw')
-repository.save_basic_input(parse_yaml.workflow.global_input)
+ip_list = ['192.168.0.1', '192.168.0.2', '192.168.0.3']
+info_list, info_list_raw = save_function_info(parse_yaml.workflow, ip_list)
+repo = repository.Repository(clear=True)
+repo.save_function_info(info_list, 'function_info')
+repo.save_function_info(info_list_raw, 'function_info_raw')
+repo.save_basic_input(parse_yaml.workflow.global_input, 'basic_input')
+repo.save_start_node_name(parse_yaml.workflow.start.name, 'workflow_metadata')
+repo.save_foreach_functions(parse_yaml.workflow.foreach_functions, 'workflow_metadata')

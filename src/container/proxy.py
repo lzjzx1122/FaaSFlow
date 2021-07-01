@@ -12,14 +12,16 @@ from gevent.pywsgi import WSGIServer
 
 default_file = 'main.py'
 work_dir = '/proxy'
-  
+
+
 class functionRunner:
     def __init__(self):
         self.code = None
         self.function = None
         self.ctx = None
-        
+
     def init(self, function):
+        print('init...')
         # update function status
         self.function = function
 
@@ -32,23 +34,28 @@ class functionRunner:
 
         self.ctx = {}
         exec(code, self.ctx)
-
+        print('init finished...')
         return True
 
-    def run(self, request_id, runtime, input, output):
+    def run(self, request_id, runtime, input, output, to, keys):
         # run the function
         self.ctx['function_name'] = self.function
         self.ctx['request_id'] = request_id
         self.ctx['runtime'] = runtime
         self.ctx['input'] = input
         self.ctx['output'] = output
-        out = eval('main(function_name, request_id, runtime, input, output)', self.ctx)
+        self.ctx['to'] = to
+        self.ctx['keys'] = keys
+        print('running... context: ', self.ctx)
+        out = eval('main(function_name, request_id, runtime, input, output, to, keys)', self.ctx)
         return out
+
 
 proxy = Flask(__name__)
 proxy.status = 'new'
 proxy.debug = False
 runner = functionRunner()
+
 
 @proxy.route('/status', methods=['GET'])
 def status():
@@ -59,15 +66,17 @@ def status():
         res['function'] = runner.function
     return res
 
+
 @proxy.route('/init', methods=['POST'])
 def init():
     proxy.status = 'init'
 
     inp = request.get_json(force=True, silent=True)
     runner.init(inp['function'])
-    
+
     proxy.status = 'ok'
     return ('OK', 200)
+
 
 @proxy.route('/run', methods=['POST'])
 def run():
@@ -78,20 +87,24 @@ def run():
     runtime = inp['runtime']
     input = inp['input']
     output = inp['output']
+    to = inp['to']
+    keys = inp['keys']
 
     # record the execution time
     start = time.time()
-    runner.run(request_id, runtime, input, output)
+    runner.run(request_id, runtime, input, output, to, keys)
     end = time.time()
 
     res = {
         "start_time": start,
         "end_time": end,
-        "duration": end - start
+        "duration": end - start,
+        "inp": inp
     }
-    
+
     proxy.status = 'ok'
     return res
+
 
 if __name__ == '__main__':
     server = WSGIServer(('0.0.0.0', 5000), proxy)

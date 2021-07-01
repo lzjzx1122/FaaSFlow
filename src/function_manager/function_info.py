@@ -5,7 +5,7 @@ import os
 class FunctionInfo:
     def __init__(self, function_name, img_name, max_containers, qos_time, qos_requirement):
         self.function_name = function_name
-        self.img_name = 'workflow_base'
+        self.img_name = img_name
         self.max_containers = max_containers
         self.qos_time = qos_time
         self.qos_requirement = qos_requirement
@@ -28,6 +28,7 @@ def parse(config_path):
     config_file = os.path.join(config_path, "function_info.yaml")
     with open(config_file, 'r') as f:
         config = yaml.safe_load(f)
+        max_containers = config['max_containers']
         for c in config['functions']:
             function_name = c['name']
             
@@ -42,8 +43,9 @@ def parse(config_path):
             
             info = FunctionInfo(function_name,
                               'image_' + function_name,
-                              c['max_containers'],
+                              max_containers,
                               float(c['qos_time']),
                               float(c['qos_requirement']))
+            print('img_name', info.img_name)
             function_info.append(info)
     return function_info

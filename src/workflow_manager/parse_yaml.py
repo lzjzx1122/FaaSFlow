@@ -11,6 +11,7 @@ def parse(filename):
     start = None
     nodes = dict()
     parent_cnt = dict()
+    foreach_functions = set()
     for key in data['global_input']:
         parameter = data['global_input'][key]['value']['parameter']
         global_input[parameter] = '0'
@@ -20,28 +21,32 @@ def parse(filename):
         name = function['name']
         source = function['source']
         runtime = function['runtime']
-        input_files = list()
-        output_files = list()
+        input_files = dict()
+        output_files = dict()
         next = list()
         nextDis = list()
         send_byte = 0
         if 'input' in function:
             for key in function['input']:
-                input_files.append({'function': function['input'][key]['value']['function'],
+                input_files[key] = {'function': function['input'][key]['value']['function'],
                                     'parameter': function['input'][key]['value']['parameter'],
-                                    'size': function['input'][key]['size'], 'arg': key})
+                                    'size': function['input'][key]['size'], 'arg': key,
+                                    'type': function['input'][key]['type']}
         if 'output' in function:
             for key in function['output']:
-                output_files.append({'function': function['input'][key]['value']['function'],
-                                     'parameter': function['input'][key]['value']['parameter'],
-                                     'size': function['output'][key]['size']})
+                output_files[key] = {'size': function['output'][key]['size'], 'type': function['output'][key]['type']}
                 send_byte += function['output'][key]['size']
         send_time = send_byte / network_bandwidth
         conditions = list()
         if 'next' in function:
+            foreach_flag = False
             if function['next']['type'] == 'switch':
                 conditions = function['next']['conditions']
+            elif function['next']['type'] == 'foreach':
+                foreach_flag = True
             for n in function['next']['nodes']:
+                if foreach_flag:
+                    foreach_functions.add(n)
                 next.append(n)
                 nextDis.append(send_time)
                 if n not in parent_cnt:
@@ -57,9 +62,8 @@ def parse(filename):
     for name in nodes:
         for next_node in nodes[name].next:
             nodes[next_node].prev.append(name)
-    return component.workflow(start, nodes, global_input, total, parent_cnt)
+    return component.workflow(start, nodes, global_input, total, parent_cnt, foreach_functions)
 
 
 yaml_file = '../../examples/switch/flat_workflow.yaml'
 workflow = parse(yaml_file)
-

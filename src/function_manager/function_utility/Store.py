@@ -12,6 +12,7 @@ from gevent.pywsgi import WSGIServer
 
 result_dir = "/results"
 
+
 class Store:
     def __init__(self, function_name, request_id):
         couchdb_url = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
@@ -33,11 +34,11 @@ class Store:
         self.fetch_dict = {}
         threads = []
         for (k, v) in input.items():
-            if v['type'] == 'DB': #DB
+            if v['type'] == 'DB':  # DB
                 doc = self.prefix + "_" + k
                 thread_ = threading.Thread(target=self.fetch_from_db, args=(doc, k,))
                 threads.append(thread_)
-            else: # MEM
+            else:  # MEM
                 path = os.path.join(result_dir, self.prefix + "_" + k + ".json")
                 thread_ = threading.Thread(target=self.fetch_from_mem, args=(path, k,))
                 threads.append(thread_)
@@ -51,12 +52,12 @@ class Store:
         with open(path, "w") as f:
             json_file = {"key": key, "value": self.put_dict[key]}
             json.dump(json_file, f)
-    
+
     def put_to_db(self, doc, key):
-        self.db[doc] = {"key": key, "value":  self.put_dict[key]}
+        self.db[doc] = {"key": key, "value": self.put_dict[key]}
 
     def put(self, output, output_res):
-        self.put_dict = output_res 
+        self.put_dict = output_res
         threads = []
         for k in output_res.keys():
             if 'DB' in output[k]['type']:
@@ -71,20 +72,20 @@ class Store:
             thread_.start()
         for thread_ in threads:
             thread_.join()
-    
+
     def naive_fetch(self, input):
         input_res = {}
         for (k, v) in input.items():
             if v['type'] == 'DB':
                 doc = self.prefix + "_" + k
                 input_res[k] = self.db[doc]['value']
-            else: # MEM
+            else:  # MEM
                 path = self.prefix + "_" + k + ".json"
                 with open(os.path.join(result_dir, path), "r") as f:
                     json_file = json.load(f)
                     input_res[k] = json_file['value']
         return input_res
-        
+
     def naive_put(self, output, output_res):
         for (k, v) in output_res.items():
             if 'DB' in output[k]['type']:
@@ -95,4 +96,3 @@ class Store:
                 json_file = {"key": k, "value": v}
                 with open(os.path.join(result_dir, path), "w") as f:
                     json.dump(json_file, f)
-

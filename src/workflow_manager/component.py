@@ -12,9 +12,10 @@ class function:
 
 
 class workflow:
-    def __init__(self, start, nodes, global_input, total, parent_cnt):
+    def __init__(self, start, nodes, global_input, total, parent_cnt, foreach_functions):
         self.start = start
         self.nodes = nodes  # dict: {name: function()}
         self.global_input = global_input
         self.total = total
         self.parent_cnt = parent_cnt  # dict: {name: parent_cnt}
+        self.foreach_functions = foreach_functions
