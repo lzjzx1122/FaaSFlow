@@ -1,9 +1,13 @@
 import couchdb
+import docker
+import redis
+import json
 
 
 class Repository:
     def __init__(self, clear):
         couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
+        self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
         if clear:
             db_list = ['function_info', 'function_info_raw', 'workflow_metadata', 'basic_input']
@@ -15,7 +19,7 @@ class Repository:
     def save_function_info(self, function_info_list, db_name):
         db = self.couch[db_name]
         for info in function_info_list:
-            db.save(info)
+            db[info['function_name']] = info
 
     def save_foreach_functions(self, foreach_functions, db_name):
         db = self.couch[db_name]
@@ -71,12 +75,47 @@ class Repository:
                 keys[k] = doc[k]
         return keys
 
-    def get_value(self, request_id, function, parameter):
-        db = self.couch['results']
-        value = db[request_id + '_' + function + '_' + parameter]['value']
-        return int(value)
-
     def get_len(self, request_id, function, parameter):
         db = self.couch['results']
         len = db[request_id + '_' + function + '_' + parameter]['len']
         return int(len)
+
+
+    # fetch result from couchdb/redis
+    def fetch_from_mem(self, redis_key, content_type):
+        if content_type == 'application/json':
+            redis_value = self.redis[redis_key].decode()
+            return json.loads(redis_value)
+        else:
+            return self.redis[redis_key]
+
+    def fetch_from_db(self, request_id, key):
+        db = self.couch['results']
+        f = db.get_attachment(request_id, filename=key, default='no attachment')
+        if f != 'no attachment':
+            return f.read()
+        else:
+            filename = key + '.json'
+            f = db.get_attachment(request_id, filename=filename, default='no attachment')
+            return json.load(f)
+
+    def fetch(self, request_id, key):
+        print('fetching...', key)
+        redis_key_1 = request_id + '_' + key
+        redis_key_2 = request_id + '_' + key + '.json'
+        value = None
+        if redis_key_1 in self.redis:
+            value = self.fetch_from_mem(redis_key_1, 'bytes')
+        elif redis_key_2 in self.redis:
+            value = self.fetch_from_mem(redis_key_2, 'application/json')
+        else:  # if not
+            value = self.fetch_from_db(request_id, key)
+        print('fetched value: ', value)
+        return value
+    
+    def clear_mem(self, request_id):
+        keys = self.redis.keys()
+        for key in keys:
+            key_str = key.decode()
+            if key_str.startswith(request_id):
+                self.redis.delete(key)

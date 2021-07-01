@@ -3,6 +3,7 @@ import os
 import threading
 
 import couchdb
+import redis
 
 result_dir = "/results"
 
@@ -11,9 +12,10 @@ class Store:
     def __init__(self, function_name, request_id, input, output, to, keys):
         # to: where to store for outputs
         # keys: foreach key (split_key) specified by workflow_manager
-        couchdb_url = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
+        couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
         db_server = couchdb.Server(couchdb_url)
         self.db = db_server['results']
+        self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.fetch_dict = {}
         self.put_dict = {}
         # self.prefix = function_name + '_' + request_id
@@ -24,12 +26,17 @@ class Store:
         self.to = to
         self.keys = keys
 
-    def fetch_from_mem(self, k, path, content_type):
-        with open(path, 'r') as f:
-            if content_type == 'application/json':
-                self.fetch_dict[k] = json.load(f)
-            else:
-                self.fetch_dict[k] = f.read()
+    def fetch_from_mem(self, k, redis_key, content_type):
+        # with open(path, 'r') as f:
+        #     if content_type == 'application/json':
+        #         self.fetch_dict[k] = json.load(f)
+        #     else:
+        #         self.fetch_dict[k] = f.read()
+        if content_type == 'application/json':
+            redis_value = self.redis[redis_key].decode()
+            self.fetch_dict[k] = json.loads(redis_value)
+        else:
+            self.fetch_dict[k] = self.redis[redis_key]
 
     def fetch_from_db(self, k, param):
         f = self.db.get_attachment(self.request_id, filename=param, default='no attachment')
@@ -53,12 +60,12 @@ class Store:
             if param in self.keys:  # if it's a foreach key
                 self.fetch_dict[k] = self.keys[param]
             else:  # regular keys
-                path = os.path.join(result_dir, self.request_id + '_' + param)
-                if os.path.exists(path):  # if exists in file system
-                    thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, path, 'regular'))
-                elif os.path.exists(path + '.json'):  # if exists in file system
-                    json_path = path + '.json'
-                    thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, json_path, 'application/json'))
+                redis_key_1 = self.request_id + '_' + param
+                redis_key_2 = self.request_id + '_' + param + '.json'
+                if redis_key_1 in self.redis:
+                    thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, redis_key_1, 'bytes'))
+                elif redis_key_2 in self.redis:
+                    thread_ = threading.Thread(target=self.fetch_from_mem, args=(k, redis_key_2, 'application/json'))
                 else:  # if not
                     thread_ = threading.Thread(target=self.fetch_from_db, args=(k, param,))
                 threads.append(thread_)
@@ -71,13 +78,17 @@ class Store:
 
     def put_to_mem(self, k, content_type):
         if content_type == 'application/json':
-            path = os.path.join(result_dir, self.request_id + '_' + k + '.json')
-            with open(path, 'w') as f:
-                json.dump(self.put_dict[k], f)
+            # path = os.path.join(result_dir, self.request_id + '_' + k + '.json')
+            # with open(path, 'w') as f:
+            #     json.dump(self.put_dict[k], f)
+            redis_key = self.request_id + '_' + k + '.json'
+            self.redis[redis_key] = json.dumps(self.put_dict[k])
         else:
-            path = os.path.join(result_dir, self.request_id + '_' + k)
-            with open(path, 'w') as f:
-                f.write(self.put_dict[k])
+            # path = os.path.join(result_dir, self.request_id + '_' + k)
+            # with open(path, 'w') as f:
+            #     f.write(self.put_dict[k])
+            redis_key = self.request_id + '_' + k
+            self.redis[redis_key] = self.put_dict[k]
 
     def put_to_db(self, k, content_type):
         if content_type == 'application/json':

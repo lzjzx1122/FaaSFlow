@@ -65,6 +65,5 @@ def parse(filename):
     return component.workflow(start, nodes, global_input, total, parent_cnt, foreach_functions)
 
 
-yaml_file = '../../examples/foreach/flat_workflow.yaml'
+yaml_file = '../../examples/switch/flat_workflow.yaml'
 workflow = parse(yaml_file)
-

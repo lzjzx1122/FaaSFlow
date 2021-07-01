@@ -13,6 +13,7 @@ from function_manager import FunctionManager
 repo = repository.Repository(clear=False)
 
 
+# not ready for calculations, just for comparation
 class ConditionParser:
     def __init__(self, request_id):
         self.request_id = request_id
@@ -30,44 +31,47 @@ class ConditionParser:
     def get_expr_value(self, expr):
         operator = ['+', '-', '*', '/']
         current_index = 0
-        num_stack = list()
-        op_stack = list()
-        while current_index < len(expr):
-            pre_index = current_index
-            while current_index < len(expr) and expr[current_index] not in operator:
-                current_index = current_index + 1
-            key = expr[pre_index, current_index].split('.')
-            function = key[0]
-            parameter = key[1]
-            value = repo.get_value(self.request_id, function, parameter)
-            num_stack.append(value)
-            if current_index == len(expr):
-                while len(op_stack) != 0:
-                    a = num_stack.pop()
-                    b = num_stack.pop()
-                    op = op_stack.pop()
-                    num_stack.append(self.calculate(a, b, op))
-                break
-            elif len(op_stack) == 0:
-                num_stack.append(value)
-                op_stack.append(expr[current_index])
-            else:
-                op = expr[current_index]
-                if op == '+' or op == '-':
-                    a = num_stack.pop()
-                    b = num_stack.pop()
-                    op2 = op_stack.pop()
-                    num_stack.append(self.calculate(a, b, op2))
-                    op_stack.append(op)
-                else:
-                    if op_stack[-1] == '*' or op_stack[-1] == '/':
-                        a = num_stack.pop()
-                        b = num_stack.pop()
-                        op2 = op_stack.pop()
-                        num_stack.append(self.calculate(a, b, op2))
-                        op_stack.append(op)
-                    else:
-                        op_stack.append(op)
+        # num_stack = list()
+        # op_stack = list()
+        # while current_index < len(expr):
+        #     pre_index = current_index
+        #     while current_index < len(expr) and expr[current_index] not in operator:
+        #         current_index = current_index + 1
+
+        key = expr.split('.')
+        function = key[0]
+        parameter = key[1]
+        value = repo.fetch(self.request_id, parameter)
+        return value
+
+            # num_stack.append(value)
+            # if current_index == len(expr):
+            #     while len(op_stack) != 0:
+            #         a = num_stack.pop()
+            #         b = num_stack.pop()
+            #         op = op_stack.pop()
+            #         num_stack.append(self.calculate(a, b, op))
+            #     break
+            # elif len(op_stack) == 0:
+            #     num_stack.append(value)
+            #     op_stack.append(expr[current_index])
+            # else:
+            #     op = expr[current_index]
+            #     if op == '+' or op == '-':
+            #         a = num_stack.pop()
+            #         b = num_stack.pop()
+            #         op2 = op_stack.pop()
+            #         num_stack.append(self.calculate(a, b, op2))
+            #         op_stack.append(op)
+            #     else:
+            #         if op_stack[-1] == '*' or op_stack[-1] == '/':
+            #             a = num_stack.pop()
+            #             b = num_stack.pop()
+            #             op2 = op_stack.pop()
+            #             num_stack.append(self.calculate(a, b, op2))
+            #             op_stack.append(op)
+            #         else:
+            #             op_stack.append(op)
         return 0
 
     def parse_condition(self, condition):
@@ -90,25 +94,30 @@ class ConditionParser:
             right_value = self.get_expr_value(condition[place + 2:])
             return left_value == right_value
         else:
-            return False
+            return self.get_expr_value(condition)
 
+function_manager = FunctionManager("../../examples/switch/functions") # demonstrate workflow definition(computation graph, code...)
 
+# mode: 'optimized' vs 'normal'
 class WorkflowManager:
     def __init__(self, request_id, mode):
         self.request_id = request_id
         self.function_info = dict()
         self.executed = set()
-        self.function_manager = FunctionManager("../../examples/foreach/functions")
-        self.mode = mode
         self.parent_executed = dict()
         self.condition_parser = ConditionParser(request_id)
         self.foreach_functions = []
         self.after_foreach = False
+        self.mode = mode
+        if mode == 'optimized':
+            self.meta_db = 'function_info'
+        else:
+            self.meta_db = 'function_info_raw'
 
     def get_function_info(self, function_name):
         if function_name not in self.function_info:
             print('function_name: ', function_name)
-            self.function_info[function_name] = repo.get_function_info(function_name, self.mode)
+            self.function_info[function_name] = repo.get_function_info(function_name, self.meta_db)
         return self.function_info[function_name]
 
     def run_function(self, function_name):
@@ -137,7 +146,7 @@ class WorkflowManager:
                 keys = {}  # {'split_keys': '1', 'split_keys_2': '2'}
                 for k in foreach_keys:
                     keys[k] = all_keys[k][i]
-                jobs.append(gevent.spawn(self.function_manager.run, function_info['function_name'], self.request_id,
+                jobs.append(gevent.spawn(function_manager.run, function_info['function_name'], self.request_id,
                                          function_info['runtime'], function_info['input'], function_info['output'],
                                          function_info['to'], keys))
             gevent.joinall(jobs)
@@ -148,7 +157,7 @@ class WorkflowManager:
             if self.after_foreach:
                 all_keys = repo.get_keys(self.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
                 self.after_foreach = False
-            self.function_manager.run(function_info['function_name'], self.request_id,
+            function_manager.run(function_info['function_name'], self.request_id,
                                       function_info['runtime'], function_info['input'], function_info['output'],
                                       function_info['to'], all_keys)
         # check if any function has enough input to be able to fire
@@ -177,10 +186,10 @@ class WorkflowManager:
         start = time.time()
         job = gevent.spawn(self.run_function, start_node_name)
         gevent.joinall([job])
+        repo.clear_mem(self.request_id)
         end = time.time()
         print('mode: ', self.mode, 'execution time: ', end - start)
 
-
-workflow = WorkflowManager('124', 'function_info_raw')
-workflow.run_workflow()
-# db[request_id + "_" + function] = {"parameter1" : "...", "parameter2" : "..."}
+## examples of how to run workflow_manager
+manager = WorkflowManager('123', 'optimized')
+manager.run_workflow()
