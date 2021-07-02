@@ -30,4 +30,8 @@ EXPOSE 5000
 
 RUN pip3 install --no-cache-dir gevent flask couchdb redis
 
+# ffmpeg
+RUN apt-get update
+RUN apt-get -y --force-yes install yasm ffmpeg
+
 CMD [ "python3", "/proxy/proxy.py" ]

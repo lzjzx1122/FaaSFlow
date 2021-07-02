@@ -1,0 +1,213 @@
+global_input:
+  video_name:
+    type: pass
+    value:
+      function: INPUT
+      parameter: video_name
+    size: 8
+  user_name:
+    type: pass
+    value:
+      function: INPUT
+      parameter: user_name
+    size: 8
+  segment_time:
+    type: pass
+    value:
+      function: INPUT
+      parameter: segment_time
+    size: 8
+  target_type:
+    type: pass
+    value:
+      function: INPUT
+      parameter: target_type
+    size: 8
+  split:
+    type: pass
+    value:
+      function: INPUT
+      parameter: split
+    size: 8
+functions:
+- name: upload
+  source: upload
+  runtime: 1
+  input:
+    video_name:
+      type: pass
+      value:
+        function: INPUT
+        parameter: video_name
+      size: 8
+    user_name:
+      type: pass
+      value:
+        function: INPUT
+        parameter: user_name
+      size: 8
+    segment_time:
+      type: pass
+      value:
+        function: INPUT
+        parameter: segment_time
+      size: 8
+    target_type:
+      type: pass
+      value:
+        function: INPUT
+        parameter: target_type
+      size: 8
+  output:
+    output_prefix:
+      type: normal
+      size: 8
+    preview_name:
+      type: normal
+      size: 8
+    gif:
+      type: normal
+      size: 8
+  next:
+    type: pass
+    nodes:
+      - virtual1
+- name: virtual1
+  source: VIRTUAL
+  runtime: 1
+  next:
+    type: switch
+    conditions:
+      - INPUT.split
+      - default
+    nodes:
+      - split
+      - simple_process
+- name: simple_process
+  source: simple_process
+  runtime: 1
+  input:
+    user_name:
+      type: pass
+      value:
+        function: INPUT
+        parameter: user_name
+      size: 8
+    video_name:
+      type: pass
+      value:
+        function: INPUT
+        parameter: video_name
+      size: 8
+    target_type:
+      type: pass
+      value:
+        function: INPUT
+        parameter: target_type
+      size: 8
+  output:
+    content:
+      type: normal
+      size: 8
+- name: split
+  source: split
+  runtime: 1
+  input:
+    user_name:
+      type: pass
+      value:
+        function: INPUT
+        parameter: user_name
+      size: 8
+    video_name:
+      type: pass
+      value:
+        function: INPUT
+        parameter: video_name
+      size: 8
+    segment_time:
+      type: pass
+      value:
+        function: INPUT
+        parameter: segment_time
+      size: 8
+  output:
+    split_keys:
+      type: keys
+      size: 8
+    content:
+      type: pass
+      size: 800000000
+  next:
+    type: foreach
+    nodes:
+      - transcode
+- name: transcode
+  source: transcode
+  runtime: 1
+  input:
+    user_name:
+      type: pass
+      value:
+        function: INPUT
+        parameter: user_name
+      size: 8
+    split_keys:
+      type: key
+      value:
+        function: split
+        parameter: split_keys
+      size: 8
+    target_type:
+      type: pass
+      value:
+        function: INPUT
+        parameter: target_type
+      size: 8
+  output:
+    content:
+      type: pass
+      size: 800000000
+  next:
+    type: pass
+    nodes:
+      - merge
+- name: merge
+  source: merge
+  runtime: 1
+  input:
+    user_name:
+      type: pass
+      value:
+        function: INPUT
+        parameter: user_name
+      size: 8
+    split_keys:
+      type: key
+      value:
+        function: split
+        parameter: split_keys
+      size: 8
+    target_type:
+      type: pass
+      value:
+        function: INPUT
+        parameter: target_type
+      size: 8
+    output_prefix:
+      type: pass
+      value:
+        function: upload
+        parameter: output_prefix
+      size: 8
+    video_name:
+      type: pass
+      value:
+        function: INPUT
+        parameter: video_name
+      size: 8
+  output:
+    content:
+      type: pass
+      size: 8
+global_output:

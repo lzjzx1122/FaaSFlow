@@ -96,7 +96,7 @@ class ConditionParser:
         else:
             return self.get_expr_value(condition)
 
-function_manager = FunctionManager("../../examples/switch/functions") # demonstrate workflow definition(computation graph, code...)
+function_manager = FunctionManager("../../benchmark/video") # demonstrate workflow definition(computation graph, code...)
 
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:

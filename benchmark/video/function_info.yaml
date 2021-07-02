@@ -1,0 +1,7 @@
+functions:
+- {image: image_upload, name: upload, qos_requirement: 0.95, qos_time: 100}
+- {image: image_simple_process, name: simple_process, qos_requirement: 0.95, qos_time: 100}
+- {image: image_split, name: split, qos_requirement: 0.95, qos_time: 100}
+- {image: image_transcode, name: transcode, qos_requirement: 0.95, qos_time: 100}
+- {image: image_merge, name: merge, qos_requirement: 0.95, qos_time: 100}
+max_containers: 10

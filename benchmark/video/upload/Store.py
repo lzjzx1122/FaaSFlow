@@ -25,9 +25,6 @@ class Store:
         self.output = output
         self.to = to
         self.keys = keys
-        if os.path.exists('work'):
-            os.system('rm -rf work')
-        os.mkdir('work')
 
     def fetch_from_mem(self, k, redis_key, content_type):
         # with open(path, 'r') as f:
@@ -52,6 +49,7 @@ class Store:
 
     # input_keys: specify the keys you want
     def fetch(self, input_keys):
+        print('fetching...', input_keys)
         self.fetch_dict = {}
         threads = []
         for k in input_keys:
@@ -75,6 +73,7 @@ class Store:
             thread_.start()
         for thread_ in threads:
             thread_.join()
+        print('fetch results...', self.fetch_dict)
         return self.fetch_dict
 
     def put_to_mem(self, k, content_type):
@@ -91,20 +90,14 @@ class Store:
             redis_key = self.request_id + '_' + k
             self.redis[redis_key] = self.put_dict[k]
 
-    def put_attachment_wrapper(self, k, content_type):
-        try:
-            if content_type == 'application/json':
-                filename = k + '.json'
-                self.db.put_attachment(self.db[self.request_id], json.dumps(self.put_dict[k]), filename=filename, content_type=content_type)
-            else:
-                self.db.put_attachment(self.db[self.request_id], self.put_dict[k], filename=k, content_type=content_type)               
-            return 0
-        except Exception:
-            return 1
-
     def put_to_db(self, k, content_type):
-        while self.put_attachment_wrapper(k, content_type) == 1:
-            pass
+        if content_type == 'application/json':
+            filename = k + '.json'
+            self.db.put_attachment(self.db[self.request_id], json.dumps(self.put_dict[k]),
+                                   filename=filename)
+        else:
+            self.db.put_attachment(self.db[self.request_id], self.put_dict[k],
+                                   filename=k, content_type=content_type)
 
     def put_keys(self, k):
         doc = self.db[self.request_id]
@@ -114,6 +107,7 @@ class Store:
     # output_result: {'k1': ...(dict-like), 'k2': ...(byte stream)}
     # output_content_type: default application/json, just specify one when you need to
     def put(self, output_result, output_content_type):
+        print('putting...', output_result)
         for k in output_result:
             if k not in output_content_type:
                 output_content_type[k] = 'application/json'  # default: dict-like, should be stored in json style
@@ -140,6 +134,7 @@ class Store:
         #     thread_.start()
         # for thread_ in threads:
         #     thread_.join()
+        print('put result...')
 
     # def naive_fetch(self, input):
     #     input_res = {}
