@@ -1,12 +1,11 @@
 import couchdb
-import docker
 import redis
 import json
 
+couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
 
 class Repository:
     def __init__(self, clear):
-        couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
         if clear:

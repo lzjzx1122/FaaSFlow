@@ -24,9 +24,10 @@ def cond_exec(req_id, cond):
         return True
 
     values = {}
+    res = None
     while True:
         try:
-            res = eval(cond)
+            res = eval(cond, values)
             break
         except NameError as e:
             name = str(e).split("'")[1]
@@ -128,6 +129,7 @@ class WorkflowManager:
         # repo.prepare_basic_file(self.request_id, basic_input)
         # repo.create_request_doc(self.request_id)
 
+    # for test only
     def run_workflow(self):
         # self.prepare_basic_input()
         start_node_name = repo.get_start_node_name()
