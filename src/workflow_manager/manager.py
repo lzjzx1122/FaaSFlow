@@ -1,25 +1,25 @@
-from gevent import monkey
-monkey.patch_all()
-
 import time
 import sys
 import repository
 import gevent
+import gevent.lock
+from typing import Any, Dict, List, Literal
+import requests
 
 sys.path.append('../function_manager')
 from function_manager import FunctionManager
 
 repo = repository.Repository(clear=False)
 class FakeFunc:
-    def __init__(self, req_id, func):
+    def __init__(self, req_id: str, func_name: str):
         self.req_id = req_id
-        self.func = func
+        self.func = func_name
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         return repo.fetch(self.req_id, name)
 
 
-def cond_exec(req_id, cond):
+def cond_exec(req_id: str, cond: str) -> Any:
     if cond.startswith('default'):
         return True
 
@@ -35,112 +35,140 @@ def cond_exec(req_id, cond):
 
     return res
 
-
 class WorkflowState:
-    def __init__(self, workflow, grouping, host, req_id):
-        self.workflow = workflow
-        self.grouping = grouping
-        self.parent_executed = {}
-        for func, node in grouping.items():
-            if node == host:
-                self.parent_executed[func] = 0
-        self.req_id = req_id
+    def __init__(self, request_id: str, all_func: List[str]):
+        self.request_id = request_id
+        self.lock = gevent.lock.BoundedSemaphore() # guard the whole state
+
+        self.executed: Dict[str, bool] = {}
+        self.parent_executed: Dict[str, int] = {}
+        for f in all_func:
+            self.executed[f] = False
+            self.parent_executed[f] = 0
 
 function_manager = FunctionManager("../../examples/switch/functions") # demonstrate workflow definition(computation graph, code...)
 
 # mode: 'optimized' vs 'normal'
+ModeT = Literal['optimized', 'raw']
 class WorkflowManager:
-    def __init__(self, request_id, mode):
-        self.request_id = request_id
-        self.function_info = dict()
-        self.executed = set()
-        self.parent_executed = dict()
-        self.foreach_functions = []
-        self.after_foreach = False
+    def __init__(self, host_addr: str, workflow_name: str, mode: ModeT):
+        self.lock = gevent.lock.BoundedSemaphore() # guard self.states
+        self.host_addr = host_addr
+        self.workflow_name = workflow_name
+        self.states: Dict[str, WorkflowState] = {}
+        self.function_info: Dict[str, dict] = {}
+
+        self.func = [] # TODO: get all the functions *run on this host*
+        self.foreach_func = repo.get_foreach_functions()
+        self.merge_func = [] # TODO: get the merge functions
+        
         self.mode = mode
         if mode == 'optimized':
             self.meta_db = 'function_info'
         else:
             self.meta_db = 'function_info_raw'
 
-    def get_function_info(self, function_name):
+    # return the workflow state of the request
+    def get_state(self, request_id: str) -> WorkflowState:
+        self.lock.acquire()
+        if request_id not in self.states:
+            self.states[request_id] = WorkflowState(request_id, self.func)
+        state = self.states[request_id]
+        self.lock.release()
+        return state
+
+    # get function's info from database
+    # the result is cached
+    def get_function_info(self, function_name: str) -> Any:
         if function_name not in self.function_info:
             print('function_name: ', function_name)
             self.function_info[function_name] = repo.get_function_info(function_name, self.meta_db)
         return self.function_info[function_name]
 
-    def run_function(self, function_name):
-        self.executed.add(function_name)
-        # prepare params
-        function_info = self.get_function_info(function_name)
-        # current node is virtual, with a switch condition
+    # trigger the function when one of its parent is finished
+    # function may run or not, depending on if all its parents were finished
+    # function could be local or remote
+    def trigger_function(self, state: WorkflowState, function_name: str) -> None:
+        func_info = self.get_function_info(function_name)
+        if func_info['ip'] == self.host_addr:
+            # function runs on local
+            self.trigger_function_local(state, function_name)
+        else:
+            # function runs on remote machine
+            self.trigger_function_remote(function_name, func_info['ip'])
+
+    # trigger a function that runs on local
+    def trigger_function_local(self, state: WorkflowState, function_name: str) -> None:
+        state.lock.acquire()
+        state.parent_executed[function_name] += 1
+        runnable = self.check_runnable(state, function_name)
+        # remember to release state.lock
+        if runnable:
+            state.executed[function_name] = True
+            state.lock.release()
+            self.run_function(state, function_name)
+        else:
+            state.lock.release()
+
+    # trigger a function that runs on remote machine
+    def trigger_function_remote(self, state: WorkflowState, function_name: str, remote_addr: str) -> None:
+        remote_url = 'http://{}/request'.format(remote_addr)
+        data = {
+            'request_id': state.request_id,
+            'workflow_name': self.workflow_name,
+            'function_name': function_name,
+        }
+        requests.post(remote_url, json=data)
+
+    # check if a function's parents are all finished
+    def check_runnable(self, state: WorkflowState, function_name: str) -> bool:
+        info = self.get_function_info(function_name)
+        return state.parent_executed[function_name] == info['parent_cnt'] and not state.executed[function_name]
+
+    # run a function on local
+    def run_function(self, state: WorkflowState, function_name: str):
+        info = self.get_function_info(function_name)
+
+        # switch functions
         if function_name.startswith('virtual'):
-            jobs = []
-            for index in range(len(function_info['next'])):
-                condition = function_info['conditions'][index]
-                if cond_exec(self.request_id, condition):
-                    jobs.append(gevent.spawn(self.run_function,
-                                function_info['next'][index]))
+            for i, next_func in enumerate(info['next']):
+                cond = info['conditions'][i]
+                if cond_exec(self.request_id, cond):
+                    self.run_function(state, next_func)
                     break
-            gevent.joinall(jobs)
-            return
-        # current node is under foreach
-        if function_name in self.foreach_functions:
+            return # do not need to check next
+        
+        # foreach functions
+        if function_name in self.foreach_func:
             all_keys = repo.get_keys(self.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
             foreach_keys = []  # ['split_keys', 'split_keys_2']
-            for arg in function_info['input']:
-                if function_info['input'][arg]['type'] == 'key':
-                    foreach_keys.append(function_info['input'][arg]['parameter'])
+            for arg in info['input']:
+                if info['input'][arg]['type'] == 'key':
+                    foreach_keys.append(info['input'][arg]['parameter'])
             jobs = []
             for i in range(len(all_keys[foreach_keys[0]])):
                 keys = {}  # {'split_keys': '1', 'split_keys_2': '2'}
                 for k in foreach_keys:
                     keys[k] = all_keys[k][i]
-                jobs.append(gevent.spawn(function_manager.run, function_info['function_name'], self.request_id,
-                                         function_info['runtime'], function_info['input'], function_info['output'],
-                                         function_info['to'], keys))
+                jobs.append(gevent.spawn(function_manager.run, info['function_name'], self.request_id,
+                                         info['runtime'], info['input'], info['output'],
+                                         info['to'], keys))
             gevent.joinall(jobs)
-            self.after_foreach = True
-        # otherwise...
+        # merge functions
+        elif function_name in self.merge_func:
+            all_keys = repo.get_keys(self.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
+            function_manager.run(info['function_name'], self.request_id,
+                                      info['runtime'], info['input'], info['output'],
+                                      info['to'], all_keys)
+        # normal functions
         else:
-            all_keys = {}
-            if self.after_foreach:
-                all_keys = repo.get_keys(self.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
-                self.after_foreach = False
-            function_manager.run(function_info['function_name'], self.request_id,
-                                      function_info['runtime'], function_info['input'], function_info['output'],
-                                      function_info['to'], all_keys)
-        # check if any function has enough input to be able to fire
-        jobs = []
-        for name in function_info['next']:
-            next_function_info = self.get_function_info(name)
-            if name not in self.parent_executed:
-                self.parent_executed[name] = 1
-            else:
-                self.parent_executed[name] = self.parent_executed[name] + 1
-            if self.parent_executed[name] == next_function_info['parent_cnt'] and name not in self.executed:
-                jobs.append(gevent.spawn(self.run_function, name))
+            function_manager.run(info['function_name'], self.request_id,
+                                      info['runtime'], info['input'], info['output'],
+                                      info['to'], {})
+
+        # trigger next functions
+        jobs = [
+            gevent.spawn(self.trigger_function, state, func)
+            for func in info['next']
+        ]
         gevent.joinall(jobs)
-
-    # def prepare_basic_input(self):
-        # basic_input = repo.get_basic_input()
-        # for parameter in basic_input:
-        #     basic_input[parameter] = '0'
-        # repo.prepare_basic_file(self.request_id, basic_input)
-        # repo.create_request_doc(self.request_id)
-
-    # for test only
-    def run_workflow(self):
-        # self.prepare_basic_input()
-        start_node_name = repo.get_start_node_name()
-        self.foreach_functions = repo.get_foreach_functions()
-        start = time.time()
-        job = gevent.spawn(self.run_function, start_node_name)
-        gevent.joinall([job])
-        repo.clear_mem(self.request_id)
-        end = time.time()
-        print('mode: ', self.mode, 'execution time: ', end - start)
-
-## examples of how to run workflow_manager
-manager = WorkflowManager('123', 'optimized')
-manager.run_workflow()
