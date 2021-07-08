@@ -1,7 +1,6 @@
 import gevent
 import couchdb
 import docker
-import uuid
 import os
 from function_info import parse
 from port_controller import PortController
@@ -34,8 +33,7 @@ class FunctionManager:
        
     def init(self):
         print("Clearing previous containers.")
-        os.system('docker stop $(docker ps -a | grep \"' + 'workflow_base' + '\" | awk \'{print $1}\')')
-        os.system('docker rm $(docker ps -a | grep \"' + 'workflow_base'  + '\" | awk \'{print $1}\')')
+        os.system('docker rm -f $(docker ps -aq --filter ancestor=workflow_base)')
 
         gevent.spawn_later(repack_clean_interval, self._clean_loop)
         gevent.spawn_later(dispatch_interval, self._dispatch_loop)
