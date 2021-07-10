@@ -12,6 +12,7 @@ def parse(filename):
     nodes = dict()
     parent_cnt = dict()
     foreach_functions = set()
+    merge_funtions = set()
     for key in data['global_input']:
         parameter = data['global_input'][key]['value']['parameter']
         global_input[parameter] = '0'
@@ -45,6 +46,8 @@ def parse(filename):
             elif function['next']['type'] == 'foreach':
                 foreach_flag = True
             for n in function['next']['nodes']:
+                if name in foreach_functions:
+                    merge_funtions.add(n)
                 if foreach_flag:
                     foreach_functions.add(n)
                 next.append(n)
@@ -62,7 +65,7 @@ def parse(filename):
     for name in nodes:
         for next_node in nodes[name].next:
             nodes[next_node].prev.append(name)
-    return component.workflow(start, nodes, global_input, total, parent_cnt, foreach_functions)
+    return component.workflow(start, nodes, global_input, total, parent_cnt, foreach_functions, merge_funtions)
 
 
 yaml_file = '../../benchmark/video/flat_workflow.yaml'

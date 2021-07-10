@@ -23,6 +23,10 @@ class Repository:
     def save_foreach_functions(self, foreach_functions, db_name):
         db = self.couch[db_name]
         db.save({'foreach_functions': list(foreach_functions)})
+    
+    def save_merge_functions(self, merge_functions, db_name):
+        db = self.couch[db_name]
+        db.save({'merge_functions': list(merge_functions)})
 
     def get_foreach_functions(self):
         db = self.couch['workflow_metadata']
@@ -30,6 +34,13 @@ class Repository:
             doc = db[item]
             if 'foreach_functions' in doc:
                 return doc['foreach_functions']
+
+    def get_merge_functions(self):
+        db = self.couch['workflow_metadata']
+        for item in db:
+            doc = db[item]
+            if 'merge_functions' in doc:
+                return doc['merge_functions']
 
     def save_start_node_name(self, start_node_name, db_name):
         db = self.couch[db_name]

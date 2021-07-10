@@ -60,7 +60,7 @@ class WorkflowManager:
 
         self.func = [] # TODO: get all the functions *run on this host*
         self.foreach_func = repo.get_foreach_functions()
-        self.merge_func = [] # TODO: get the merge functions
+        self.merge_func = repo.get_merge_functions()
         
         self.mode = mode
         if mode == 'optimized':
