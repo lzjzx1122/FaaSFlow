@@ -5,9 +5,28 @@ import json
 couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
 
 class Repository:
-    def __init__(self):
+    def __init__(self, clear):
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
+        if clear:
+            db_list = ['function_info', 'function_info_raw', 'workflow_metadata', 'basic_input']
+            for db in db_list:
+                if db in self.couch:
+                    self.couch.delete(db)
+                self.couch.create(db)
+
+    def save_function_info(self, function_info_list, db_name):
+        db = self.couch[db_name]
+        for info in function_info_list:
+            db[info['function_name']] = info
+
+    def save_foreach_functions(self, foreach_functions, db_name):
+        db = self.couch[db_name]
+        db.save({'foreach_functions': list(foreach_functions)})
+    
+    def save_merge_functions(self, merge_functions, db_name):
+        db = self.couch[db_name]
+        db.save({'merge_functions': list(merge_functions)})
 
     def get_foreach_functions(self):
         db = self.couch['workflow_metadata']
@@ -23,6 +42,10 @@ class Repository:
             if 'merge_functions' in doc:
                 return doc['merge_functions']
 
+    def save_start_node_name(self, start_node_name, db_name):
+        db = self.couch[db_name]
+        db.save({'start_node_name': start_node_name})
+
     def get_start_node_name(self):
         db = self.couch['workflow_metadata']
         for item in db:
@@ -34,6 +57,22 @@ class Repository:
         db = self.couch[mode]
         for item in db.find({'selector': {'function_name': function_name}}):
             return item
+
+    def save_basic_input(self, basic_input, db_name):
+        db = self.couch[db_name]
+        db.save(basic_input)
+
+    def get_basic_input(self):
+        db = self.couch['basic_input']
+        res = None
+        for doc in db:
+            res = db[doc]
+        return res
+
+    # def prepare_basic_file(self, request_id, basic_file):
+    #     db = self.couch['results']
+    #     for k in basic_file:
+    #         db['INPUT_' + request_id + '_' + k] = {'key': k, 'value': basic_file[k]}
 
     def create_request_doc(self, request_id):
         self.couch['results'][request_id] = {}
