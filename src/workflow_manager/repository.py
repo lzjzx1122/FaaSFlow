@@ -1,3 +1,4 @@
+from typing import Any, List
 import couchdb
 import redis
 import json
@@ -9,36 +10,36 @@ class Repository:
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
 
-    def get_foreach_functions(self):
+    def get_foreach_functions(self) -> List[str]:
         db = self.couch['workflow_metadata']
         for item in db:
             doc = db[item]
             if 'foreach_functions' in doc:
                 return doc['foreach_functions']
 
-    def get_merge_functions(self):
+    def get_merge_functions(self) -> List[str]:
         db = self.couch['workflow_metadata']
         for item in db:
             doc = db[item]
             if 'merge_functions' in doc:
                 return doc['merge_functions']
 
-    def get_start_node_name(self):
+    def get_start_node_name(self) -> List[str]:
         db = self.couch['workflow_metadata']
         for item in db:
             doc = db[item]
             if 'start_node_name' in doc:
                 return doc['start_node_name']
 
-    def get_function_info(self, function_name, mode):
+    def get_function_info(self, function_name: str, mode: str) -> Any:
         db = self.couch[mode]
         for item in db.find({'selector': {'function_name': function_name}}):
             return item
 
-    def create_request_doc(self, request_id):
+    def create_request_doc(self, request_id: str) -> None:
         self.couch['results'][request_id] = {}
 
-    def get_keys(self, request_id):
+    def get_keys(self, request_id: str) -> Any:
         keys = dict()
         doc = self.couch['results'][request_id]
         for k in doc:
@@ -46,7 +47,7 @@ class Repository:
                 keys[k] = doc[k]
         return keys
 
-    def get_len(self, request_id, function, parameter):
+    def get_len(self, request_id: str, function: str, parameter: str) -> int:
         db = self.couch['results']
         len = db[request_id + '_' + function + '_' + parameter]['len']
         return int(len)
