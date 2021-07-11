@@ -15,7 +15,7 @@ for n in start_nodes: # assume that there's only one start node
     url = 'http://{}/request'.format(info['ip'])
     data = {
         'request_id': req_id,
-        'workflow_name': 'test_todo',
+        'workflow_name': 'test',
         'function_name': n,
     }
     start = time.time()

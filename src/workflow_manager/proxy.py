@@ -1,10 +1,11 @@
 from gevent import monkey
 monkey.patch_all()
 
+import sys
 from manager import WorkflowManager
 from flask import Flask, request
 app = Flask(__name__)
-manager = WorkflowManager('127.0.0.1:5001', 'test', 'optimized') # TODO: change the host addr & support multi workflow
+manager = WorkflowManager(sys.argv[1], 'test', 'optimized') # TODO: support multi workflow
 
 # a new request from outside
 # the previous function was done
