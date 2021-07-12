@@ -150,19 +150,19 @@ class WorkflowManager:
                 keys = {}  # {'split_keys': '1', 'split_keys_2': '2'}
                 for k in foreach_keys:
                     keys[k] = all_keys[k][i]
-                jobs.append(gevent.spawn(function_manager.run, info['function_name'], self.request_id,
+                jobs.append(gevent.spawn(function_manager.run, info['function_name'], state.request_id,
                                          info['runtime'], info['input'], info['output'],
                                          info['to'], keys))
             gevent.joinall(jobs)
         # merge functions
         elif function_name in self.merge_func:
             all_keys = repo.get_keys(self.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
-            function_manager.run(info['function_name'], self.request_id,
+            function_manager.run(info['function_name'], state.request_id,
                                       info['runtime'], info['input'], info['output'],
                                       info['to'], all_keys)
         # normal functions
         else:
-            function_manager.run(info['function_name'], self.request_id,
+            function_manager.run(info['function_name'], state.request_id,
                                       info['runtime'], info['input'], info['output'],
                                       info['to'], {})
 

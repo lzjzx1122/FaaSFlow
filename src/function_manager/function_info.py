@@ -23,6 +23,7 @@ def generate_image(config_path, function_name, packages):
             f.write("RUN pip3 --no-cache-dir install{}".format(requirements))
     os.system("cd {} && docker build --no-cache -t image_{} .".format(function_path, function_name))
 
+# get all functions' infomations from configuration file
 def parse(config_path):
     function_info = []
     config_file = os.path.join(config_path, "function_info.yaml")
@@ -31,16 +32,6 @@ def parse(config_path):
         max_containers = config['max_containers']
         for c in config['functions']:
             function_name = c['name']
-            
-            # clear previous containers.
-            # print("Clearing previous containers.")
-            # os.system('docker stop $(docker ps -a | grep \"' + 'image_' + function_name + '\" | awk \'{print $1}\')')
-            # os.system('docker rm $(docker ps -a | grep \"' + 'image_' + function_name  + '\" | awk \'{print $1}\')')
-
-            # print("generate:", function_name)
-            # packages = c['packages'] if 'packages' in c else [] 
-            #generate_image(config_path, function_name, packages)
-            
             info = FunctionInfo(function_name,
                               'image_' + function_name,
                               max_containers,
