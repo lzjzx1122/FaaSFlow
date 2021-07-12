@@ -30,8 +30,9 @@ EXPOSE 5000
 
 RUN pip3 install --no-cache-dir gevent flask couchdb redis
 
-# ffmpeg
-RUN apt-get update
-RUN apt-get -y --force-yes install yasm ffmpeg
+# RUN pip3 install --no-cache-dir gevent flask couchdb redis tensorflow keras pillow opencv-python googletrans==4.0.0-rc1
+# # ffmpeg
+# RUN apt-get update
+# RUN apt-get -y --force-yes install yasm ffmpeg tesseract-ocr
 
 CMD [ "python3", "/proxy/proxy.py" ]

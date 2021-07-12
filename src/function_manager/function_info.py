@@ -31,6 +31,7 @@ def parse(config_path):
         max_containers = config['max_containers']
         for c in config['functions']:
             function_name = c['name']
+            img_name = c['image']
             
             # clear previous containers.
             # print("Clearing previous containers.")
@@ -42,7 +43,7 @@ def parse(config_path):
             #generate_image(config_path, function_name, packages)
             
             info = FunctionInfo(function_name,
-                              'image_' + function_name,
+                              img_name,
                               max_containers,
                               float(c['qos_time']),
                               float(c['qos_requirement']))

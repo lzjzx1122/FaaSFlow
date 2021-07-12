@@ -1,15 +1,17 @@
+from base64 import urlsafe_b64decode
+from os import execl
 import time
 import sys
 import repository
 import gevent
 import gevent.lock
-from typing import Any, Dict, List, Literal
+from typing import Any, Dict, List
 import requests
 
 sys.path.append('../function_manager')
 from function_manager import FunctionManager
 
-repo = repository.Repository(clear=False)
+repo = repository.Repository()
 class FakeFunc:
     def __init__(self, req_id: str, func_name: str):
         self.req_id = req_id
@@ -46,19 +48,21 @@ class WorkflowState:
             self.executed[f] = False
             self.parent_executed[f] = 0
 
-function_manager = FunctionManager("../../benchmark/video") # demonstrate workflow definition(computation graph, code...)
+    def set_state(self, executed, parent_executed):
+        self.executed = executed
+        self.parent_executed = parent_executed
+
+function_manager = FunctionManager("../../benchmark/illgal_recognizer") # demonstrate workflow definition(computation graph, code...)
 
 # mode: 'optimized' vs 'normal'
-ModeT = Literal['optimized', 'raw']
 class WorkflowManager:
-    def __init__(self, host_addr: str, workflow_name: str, mode: ModeT):
+    def __init__(self, host_addr: str, workflow_name: str, mode):
         self.lock = gevent.lock.BoundedSemaphore() # guard self.states
         self.host_addr = host_addr
         self.workflow_name = workflow_name
         self.states: Dict[str, WorkflowState] = {}
         self.function_info: Dict[str, dict] = {}
 
-        self.func = [] # TODO: get all the functions *run on this host*
         self.foreach_func = repo.get_foreach_functions()
         self.merge_func = repo.get_merge_functions()
         
@@ -67,6 +71,7 @@ class WorkflowManager:
             self.meta_db = 'function_info'
         else:
             self.meta_db = 'function_info_raw'
+        self.func = repo.get_all_functions(self.meta_db) # get all the functions *run on this host*
 
     # return the workflow state of the request
     def get_state(self, request_id: str) -> WorkflowState:
@@ -76,6 +81,14 @@ class WorkflowManager:
         state = self.states[request_id]
         self.lock.release()
         return state
+    
+    # set the workflow state (maybe from another workflow manager...)
+    def set_state(self, request_id, executed, parent_executed):
+        self.lock.acquire()
+        if request_id not in self.states:
+            self.states[request_id] = WorkflowState(request_id, self.func)
+        self.states[request_id].set_state(executed, parent_executed)
+        self.lock.release()
 
     # get function's info from database
     # the result is cached
@@ -88,19 +101,20 @@ class WorkflowManager:
     # trigger the function when one of its parent is finished
     # function may run or not, depending on if all its parents were finished
     # function could be local or remote
-    def trigger_function(self, state: WorkflowState, function_name: str) -> None:
+    def trigger_function(self, state: WorkflowState, function_name: str, no_parent_execution = False) -> None:
         func_info = self.get_function_info(function_name)
         if func_info['ip'] == self.host_addr:
             # function runs on local
-            self.trigger_function_local(state, function_name)
+            self.trigger_function_local(state, function_name, no_parent_execution)
         else:
             # function runs on remote machine
-            self.trigger_function_remote(function_name, func_info['ip'])
+            self.trigger_function_remote(state, function_name, func_info['ip'], no_parent_execution)
 
     # trigger a function that runs on local
-    def trigger_function_local(self, state: WorkflowState, function_name: str) -> None:
+    def trigger_function_local(self, state: WorkflowState, function_name: str, no_parent_execution = False) -> None:
         state.lock.acquire()
-        state.parent_executed[function_name] += 1
+        if not no_parent_execution:
+            state.parent_executed[function_name] += 1
         runnable = self.check_runnable(state, function_name)
         # remember to release state.lock
         if runnable:
@@ -111,12 +125,15 @@ class WorkflowManager:
             state.lock.release()
 
     # trigger a function that runs on remote machine
-    def trigger_function_remote(self, state: WorkflowState, function_name: str, remote_addr: str) -> None:
+    def trigger_function_remote(self, state: WorkflowState, function_name: str, remote_addr: str, no_parent_execution = False) -> None:
         remote_url = 'http://{}/request'.format(remote_addr)
         data = {
             'request_id': state.request_id,
             'workflow_name': self.workflow_name,
             'function_name': function_name,
+            'no_parent_execution': no_parent_execution,
+            'executed': state.executed,
+            'parent_executed': state.parent_executed
         }
         requests.post(remote_url, json=data)
 
@@ -127,20 +144,25 @@ class WorkflowManager:
 
     # run a function on local
     def run_function(self, state: WorkflowState, function_name: str):
+
+        if function_name == 'END':
+            return
+
         info = self.get_function_info(function_name)
+        request_id = state.request_id
 
         # switch functions
         if function_name.startswith('virtual'):
             for i, next_func in enumerate(info['next']):
                 cond = info['conditions'][i]
-                if cond_exec(self.request_id, cond):
+                if cond_exec(request_id, cond):
                     self.run_function(state, next_func)
                     break
             return # do not need to check next
         
         # foreach functions
         if function_name in self.foreach_func:
-            all_keys = repo.get_keys(self.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
+            all_keys = repo.get_keys(request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
             foreach_keys = []  # ['split_keys', 'split_keys_2']
             for arg in info['input']:
                 if info['input'][arg]['type'] == 'key':
@@ -150,22 +172,22 @@ class WorkflowManager:
                 keys = {}  # {'split_keys': '1', 'split_keys_2': '2'}
                 for k in foreach_keys:
                     keys[k] = all_keys[k][i]
-                jobs.append(gevent.spawn(function_manager.run, info['function_name'], self.request_id,
+                jobs.append(gevent.spawn(function_manager.run, info['function_name'], request_id,
                                          info['runtime'], info['input'], info['output'],
                                          info['to'], keys))
             gevent.joinall(jobs)
         # merge functions
         elif function_name in self.merge_func:
-            all_keys = repo.get_keys(self.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
-            function_manager.run(info['function_name'], self.request_id,
+            all_keys = repo.get_keys(request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
+            function_manager.run(info['function_name'], request_id,
                                       info['runtime'], info['input'], info['output'],
                                       info['to'], all_keys)
         # normal functions
         else:
-            function_manager.run(info['function_name'], self.request_id,
+            function_manager.run(info['function_name'], request_id,
                                       info['runtime'], info['input'], info['output'],
                                       info['to'], {})
-
+        
         # trigger next functions
         jobs = [
             gevent.spawn(self.trigger_function, state, func)

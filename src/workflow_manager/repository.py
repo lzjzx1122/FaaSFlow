@@ -10,6 +10,20 @@ class Repository:
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
 
+    def get_current_node_functions(self, ip, mode) -> List[str]:
+        db = self.couch[mode]
+        functions = []
+        for item in db.find({'selector': {'ip': ip}}):
+            functions.append(item['function_name'])
+        return functions
+    
+    def get_all_functions(self, mode) -> List[str]:
+        db = self.couch[mode]
+        functions = []
+        for item in db:
+            functions.append(db[item]['function_name'])
+        return functions
+
     def get_foreach_functions(self) -> List[str]:
         db = self.couch['workflow_metadata']
         for item in db:
@@ -24,12 +38,12 @@ class Repository:
             if 'merge_functions' in doc:
                 return doc['merge_functions']
 
-    def get_start_node_name(self) -> List[str]:
+    def get_start_functions(self) -> List[str]:
         db = self.couch['workflow_metadata']
         for item in db:
             doc = db[item]
-            if 'start_node_name' in doc:
-                return doc['start_node_name']
+            if 'start_functions' in doc:
+                return doc['start_functions']
 
     def get_function_info(self, function_name: str, mode: str) -> Any:
         db = self.couch[mode]

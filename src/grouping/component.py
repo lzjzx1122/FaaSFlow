@@ -12,8 +12,8 @@ class function:
 
 
 class workflow:
-    def __init__(self, start, nodes, global_input, total, parent_cnt, foreach_functions, merge_functions):
-        self.start = start
+    def __init__(self, start_functions, nodes, global_input, total, parent_cnt, foreach_functions, merge_functions):
+        self.start_functions = start_functions
         self.nodes = nodes  # dict: {name: function()}
         self.global_input = global_input
         self.total = total

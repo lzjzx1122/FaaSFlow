@@ -11,8 +11,9 @@ node_ip = ['', '', '', '', '', '', '', '', '', '']
 def init_graph(workflow, group_set):
     in_degree_vec = dict()
     q = queue.Queue()
-    q.put(workflow.start)
-    group_set.append({workflow.start.name})
+    for name in workflow.start_functions:
+        q.put(workflow.nodes[name])
+        group_set.append({name})
     while q.empty() is False:
         node = q.get()
         for next_node_name in node.next:
@@ -36,9 +37,10 @@ def topo_search(workflow, in_degree_vec, group_set, no_net_latency):
     dist_vec = dict()  # { name: [dist, max_length] }
     prev_vec = dict()  # { name: [prev_name, length] }
     q = queue.Queue()
-    q.put(workflow.start)
-    dist_vec[workflow.start.name] = [workflow.start.runtime, 0]
-    prev_vec[workflow.start.name] = []
+    for name in workflow.start_functions:
+        q.put(workflow.nodes[name])
+        dist_vec[name] = [workflow.nodes[name].runtime, 0]
+        prev_vec[name] = []
     while q.empty() is False:
         node = q.get()
         pre_dist = dist_vec[node.name]
@@ -129,7 +131,7 @@ def grouping(workflow):
         elif group_size == total_node_cnt:
             break
         crit_vec = dict()
-        while tmp_node_name != workflow.start.name:
+        while tmp_node_name not in workflow.start_functions:
             crit_vec[tmp_node_name] = prev_vec[tmp_node_name]
             tmp_node_name = prev_vec[tmp_node_name][0]
         crit_vec = sorted(crit_vec.items(), key=lambda c: c[1][1], reverse=True)
@@ -238,12 +240,12 @@ def save_function_info(workflow, ip_list):
     return function_info_list, function_info_list_raw
 
 
-ip_list = ['192.168.0.1', '192.168.0.2', '192.168.0.3']
+ip_list = ['127.0.0.1:8000', '127.0.0.1:8001']
 info_list, info_list_raw = save_function_info(parse_yaml.workflow, ip_list)
 repo = repository.Repository(clear=True)
 repo.save_function_info(info_list, 'function_info')
 repo.save_function_info(info_list_raw, 'function_info_raw')
 repo.save_basic_input(parse_yaml.workflow.global_input, 'basic_input')
-repo.save_start_node_name(parse_yaml.workflow.start.name, 'workflow_metadata')
+repo.save_start_functions(parse_yaml.workflow.start_functions, 'workflow_metadata')
 repo.save_foreach_functions(parse_yaml.workflow.foreach_functions, 'workflow_metadata')
 repo.save_merge_functions(parse_yaml.workflow.merge_functions, 'workflow_metadata')

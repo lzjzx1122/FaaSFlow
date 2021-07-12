@@ -35,7 +35,7 @@ class Function:
     def send_request(self, request_id, runtime, input, output, to, keys):
         print('send_request', request_id, runtime)
         start = time.time()
-        self.request_log['start'].append(start)
+        # self.request_log['start'].append(start)
 
         data = {'request_id': request_id, 'runtime': runtime, 'input': input, 'output': output, 'to': to, 'keys': keys}
         req = RequestInfo(request_id, data)
@@ -44,8 +44,8 @@ class Function:
         # self.db[request_id + "_" + self.function_name] = res
 
         end = time.time()
-        self.request_log['duration'].append(res['duration'])
-        self.request_log['alltime'].append(end - start)
+        # self.request_log['duration'].append(res['duration'])
+        # self.request_log['alltime'].append(end - start)
 
         return res
 

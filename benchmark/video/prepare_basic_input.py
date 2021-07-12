@@ -6,7 +6,8 @@ def main(request_id, video_name, user_name, segment_time, target_type, split):
     couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
     db_server = couchdb.Server(couchdb_url)
     db = db_server['results']
-    db.delete(db[request_id])
+    if request_id in db:
+        db.delete(db[request_id])
     db[request_id] = {}
     db.put_attachment(db[request_id], json.dumps(video_name), filename='video_name.json')
     db.put_attachment(db[request_id], json.dumps(user_name), filename='user_name.json')

@@ -42,9 +42,9 @@ class Repository:
             if 'merge_functions' in doc:
                 return doc['merge_functions']
 
-    def save_start_node_name(self, start_node_name, db_name):
+    def save_start_functions(self, start_functions, db_name):
         db = self.couch[db_name]
-        db.save({'start_node_name': start_node_name})
+        db.save({'start_functions': start_functions})
 
     def get_start_node_name(self):
         db = self.couch['workflow_metadata']
