@@ -11,20 +11,14 @@ class Container:
     # create a new container and return the wrapper
     @classmethod
     def create(cls, client, image_name, port, attr):
-        # print("mount begin")
         mount = Mount(result_dir, '/var/run/workflow_results', type='bind')
-        # print("creating container ", image_name, port, attr)
         container = client.containers.run(image_name,
                                           detach=True,
                                           ports={'5000/tcp': str(port)},
                                           labels=['workflow'],
                                           mounts=[mount])
-        # print('create finished')
-        # print("run end")
         res = cls(container, port, attr)
-        # print("wait begin")
         res.wait_start()
-        # print("wait end")
         return res
 
     # get the wrapper of an existed container
@@ -66,5 +60,4 @@ class Container:
 
     # kill and remove the container
     def destroy(self):
-        # print("################################## destory: ", self.port)
         self.container.remove(force=True)

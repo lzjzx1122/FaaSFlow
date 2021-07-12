@@ -23,6 +23,7 @@ def generate_image(config_path, function_name, packages):
             f.write("RUN pip3 --no-cache-dir install{}".format(requirements))
     os.system("cd {} && docker build --no-cache -t image_{} .".format(function_path, function_name))
 
+# get all functions' infomations from configuration file
 def parse(config_path):
     function_info = []
     config_file = os.path.join(config_path, "function_info.yaml")

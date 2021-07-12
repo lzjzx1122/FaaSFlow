@@ -1,3 +1,4 @@
+# a really simple port controller allocating port in a range
 class PortController:
     def __init__(self, min_port, max_port):
         self.port_resource = list(range(min_port, max_port))

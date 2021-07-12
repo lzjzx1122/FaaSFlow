@@ -1,5 +1,5 @@
 .vscode
 __pycache__/
-test/
 *.asc
 .idea
+tmp/

@@ -16,13 +16,12 @@ class RequestInfo:
         self.result = event.AsyncResult()
         self.arrival = time.time()
 
+# manage a function's container pool
 class Function:
-    def __init__(self, client, database, function_info, port_controller, function_name):
+    def __init__(self, client, function_info, port_controller):
         self.client = client
-        self.db = database
         self.info = function_info
         self.port_controller = port_controller
-        self.function_name = function_name
 
         self.num_processing = 0
         self.rq = []
@@ -41,7 +40,6 @@ class Function:
         req = RequestInfo(request_id, data)
         self.rq.append(req)
         res = req.result.get()
-        # self.db[request_id + "_" + self.function_name] = res
 
         end = time.time()
         # self.request_log['duration'].append(res['duration'])
