@@ -15,7 +15,7 @@ def parse(filename):
     total = 0
     for key in data['global_input']:
         parameter = data['global_input'][key]['value']['parameter']
-        global_input[parameter] = '0'
+        global_input[parameter] = data['global_input'][key]['size']
     functions = data['functions']
     parent_cnt[functions[0]['name']] = 0
     for function in functions:
@@ -61,12 +61,13 @@ def parse(filename):
         total = total + 1
         nodes[name] = current_function
     for name in nodes:
-        if parent_cnt[name] == 0:
+        if name not in parent_cnt or parent_cnt[name] == 0:
+            parent_cnt[name] = 0
             start_functions.append(name)
         for next_node in nodes[name].next:
             nodes[next_node].prev.append(name)
     return component.workflow(start_functions, nodes, global_input, total, parent_cnt, foreach_functions, merge_funtions)
 
 
-yaml_file = '../../benchmark/illgal_recognizer/flat_workflow.yaml'
+yaml_file = '../../benchmark/generator/cycles/flat_workflow.yaml'
 workflow = parse(yaml_file)

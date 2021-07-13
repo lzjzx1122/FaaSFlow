@@ -81,14 +81,6 @@ class WorkflowManager:
         state = self.states[request_id]
         self.lock.release()
         return state
-    
-    # set the workflow state (maybe from another workflow manager...)
-    def set_state(self, request_id, executed, parent_executed):
-        self.lock.acquire()
-        if request_id not in self.states:
-            self.states[request_id] = WorkflowState(request_id, self.func)
-        self.states[request_id].set_state(executed, parent_executed)
-        self.lock.release()
 
     # get function's info from database
     # the result is cached
@@ -132,8 +124,6 @@ class WorkflowManager:
             'workflow_name': self.workflow_name,
             'function_name': function_name,
             'no_parent_execution': no_parent_execution,
-            'executed': state.executed,
-            'parent_executed': state.parent_executed
         }
         requests.post(remote_url, json=data)
 

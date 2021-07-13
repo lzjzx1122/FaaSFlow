@@ -9,7 +9,7 @@ class Repository:
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
         if clear:
-            db_list = ['function_info', 'function_info_raw', 'workflow_metadata', 'basic_input']
+            db_list = ['function_info', 'function_info_raw', 'workflow_metadata']
             for db in db_list:
                 if db in self.couch:
                     self.couch.delete(db)

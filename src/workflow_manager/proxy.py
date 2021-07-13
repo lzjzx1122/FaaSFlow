@@ -17,8 +17,6 @@ def req():
     workflow_name = data['workflow_name']
     function_name = data['function_name']
     no_parent_execution = data['no_parent_execution']
-    if 'executed' in data:
-        manager.set_state(request_id, data['executed'], data['parent_executed'])
     # get the corresponding workflow state and trigger the function
     state = manager.get_state(request_id)
     manager.trigger_function(state, function_name, no_parent_execution)
