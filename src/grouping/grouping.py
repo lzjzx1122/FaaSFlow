@@ -240,7 +240,7 @@ def save_function_info(workflow, ip_list):
     return function_info_list, function_info_list_raw
 
 
-ip_list = ['127.0.0.1:8000', '127.0.0.1:8001']
+ip_list = ['127.0.0.1:8000']
 info_list, info_list_raw = save_function_info(parse_yaml.workflow, ip_list)
 repo = repository.Repository(clear=True)
 repo.save_function_info(info_list, 'function_info')

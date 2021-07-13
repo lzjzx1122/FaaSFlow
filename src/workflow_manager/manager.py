@@ -52,7 +52,7 @@ class WorkflowState:
         self.executed = executed
         self.parent_executed = parent_executed
 
-function_manager = FunctionManager("../../benchmark/illgal_recognizer") # demonstrate workflow definition(computation graph, code...)
+function_manager = FunctionManager("../../benchmark/generator/soykb") # demonstrate workflow definition(computation graph, code...)
 
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:
@@ -104,6 +104,7 @@ class WorkflowManager:
 
     # trigger a function that runs on local
     def trigger_function_local(self, state: WorkflowState, function_name: str, no_parent_execution = False) -> None:
+        print('----trying to trigger local function ' + function_name + '----')
         state.lock.acquire()
         if not no_parent_execution:
             state.parent_executed[function_name] += 1
@@ -118,6 +119,7 @@ class WorkflowManager:
 
     # trigger a function that runs on remote machine
     def trigger_function_remote(self, state: WorkflowState, function_name: str, remote_addr: str, no_parent_execution = False) -> None:
+        print('----trying to trigger remote function ' + function_name + '----')
         remote_url = 'http://{}/request'.format(remote_addr)
         data = {
             'request_id': state.request_id,

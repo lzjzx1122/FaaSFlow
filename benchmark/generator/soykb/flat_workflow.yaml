@@ -1,0 +1,4071 @@
+global_input:
+  5e26b4aa-76ed-4a91-b437-e2a9e8ed3f98.dict: &id001
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5e26b4aa-76ed-4a91-b437-e2a9e8ed3f98.dict
+    size: 71
+  0d68ca3b-6008-498a-b736-ce54f80e6ef8.pac: &id002
+    type: pass
+    value:
+      function: INPUT
+      parameter: 0d68ca3b-6008-498a-b736-ce54f80e6ef8.pac
+    size: 122311
+  3a08f4e0-9da1-484b-a0b1-b651b81bbe30.fai: &id003
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3a08f4e0-9da1-484b-a0b1-b651b81bbe30.fai
+    size: 20
+  c96f187d-c088-4ae5-b847-003e452ad718.fastq: &id004
+    type: pass
+    value:
+      function: INPUT
+      parameter: c96f187d-c088-4ae5-b847-003e452ad718.fastq
+    size: 11
+  0041e4b8-ce3a-49ee-b023-7216237d3dcd.fastq: &id005
+    type: pass
+    value:
+      function: INPUT
+      parameter: 0041e4b8-ce3a-49ee-b023-7216237d3dcd.fastq
+    size: 11
+  7880ec1d-7e30-4e3c-b92f-f764af334813.sa: &id006
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7880ec1d-7e30-4e3c-b92f-f764af334813.sa
+    size: 244623
+  1ad36ede-70fd-40c3-9c30-bb83fc765ae3.gz: &id007
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1ad36ede-70fd-40c3-9c30-bb83fc765ae3.gz
+    size: 54494
+  982bc6dd-78a2-43df-b766-235a5e8476d6.amb: &id008
+    type: pass
+    value:
+      function: INPUT
+      parameter: 982bc6dd-78a2-43df-b766-235a5e8476d6.amb
+    size: 129
+  c929bba4-856d-44b1-b247-f8b35e644b0d.fa: &id009
+    type: pass
+    value:
+      function: INPUT
+      parameter: c929bba4-856d-44b1-b247-f8b35e644b0d.fa
+    size: 495372
+  f63e6f55-de95-4aac-a194-9528c5ea144c.ann: &id010
+    type: pass
+    value:
+      function: INPUT
+      parameter: f63e6f55-de95-4aac-a194-9528c5ea144c.ann
+    size: 23
+  ff558153-6f60-4fcb-899c-14cd7954ac4b.bwt: &id011
+    type: pass
+    value:
+      function: INPUT
+      parameter: ff558153-6f60-4fcb-899c-14cd7954ac4b.bwt
+    size: 489247
+  a0d311e3-0c75-40bb-9a6c-c84f92dafb59.txt: &id012
+    type: pass
+    value:
+      function: INPUT
+      parameter: a0d311e3-0c75-40bb-9a6c-c84f92dafb59.txt
+    size: 7
+  c1285a84-e7dd-48ac-9d28-bc20412bd7b8.gz: &id013
+    type: pass
+    value:
+      function: INPUT
+      parameter: c1285a84-e7dd-48ac-9d28-bc20412bd7b8.gz
+    size: 54494
+  71ae05f6-f71f-49fb-a5c9-b3487d8701c2.gz: &id014
+    type: pass
+    value:
+      function: INPUT
+      parameter: 71ae05f6-f71f-49fb-a5c9-b3487d8701c2.gz
+    size: 54494
+  31bf5550-5461-4cd6-9103-cb43644d51b7.gz: &id015
+    type: pass
+    value:
+      function: INPUT
+      parameter: 31bf5550-5461-4cd6-9103-cb43644d51b7.gz
+    size: 54494
+  8bda26f8-9b10-43b9-aafa-d5179f41860c.dict: &id016
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8bda26f8-9b10-43b9-aafa-d5179f41860c.dict
+    size: 71
+  95250fcd-3c1e-4f05-95ff-bd7b101ee8ae.pac: &id017
+    type: pass
+    value:
+      function: INPUT
+      parameter: 95250fcd-3c1e-4f05-95ff-bd7b101ee8ae.pac
+    size: 122311
+  a64cf12f-ae7c-4dba-bb3c-83b456a9828c.fai: &id018
+    type: pass
+    value:
+      function: INPUT
+      parameter: a64cf12f-ae7c-4dba-bb3c-83b456a9828c.fai
+    size: 20
+  49d9c6c5-9583-404a-9a00-7beed22c34fa.sa: &id019
+    type: pass
+    value:
+      function: INPUT
+      parameter: 49d9c6c5-9583-404a-9a00-7beed22c34fa.sa
+    size: 244623
+  02f1c734-0497-4f70-8ff9-0ec43e226147.gz: &id020
+    type: pass
+    value:
+      function: INPUT
+      parameter: 02f1c734-0497-4f70-8ff9-0ec43e226147.gz
+    size: 54494
+  a864af7f-0d27-4641-922b-b824631130d6.amb: &id021
+    type: pass
+    value:
+      function: INPUT
+      parameter: a864af7f-0d27-4641-922b-b824631130d6.amb
+    size: 129
+  ba578c48-49f5-4fdb-aee4-04ea1bfee329.fa: &id022
+    type: pass
+    value:
+      function: INPUT
+      parameter: ba578c48-49f5-4fdb-aee4-04ea1bfee329.fa
+    size: 495372
+  222d5b40-cea5-49b6-be2b-bce13245b192.ann: &id023
+    type: pass
+    value:
+      function: INPUT
+      parameter: 222d5b40-cea5-49b6-be2b-bce13245b192.ann
+    size: 23
+  9701ca6a-7f25-4f30-8b57-d6293ea29afc.bwt: &id024
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9701ca6a-7f25-4f30-8b57-d6293ea29afc.bwt
+    size: 489247
+  2622df3d-749b-4fd4-b39a-5ce8547944ac.txt: &id025
+    type: pass
+    value:
+      function: INPUT
+      parameter: 2622df3d-749b-4fd4-b39a-5ce8547944ac.txt
+    size: 7
+  e29defb3-ed0e-4317-9a36-453ea088194a.dict: &id026
+    type: pass
+    value:
+      function: INPUT
+      parameter: e29defb3-ed0e-4317-9a36-453ea088194a.dict
+    size: 71
+  978e18bf-65b3-4112-a388-01b2316a0c0f.bai: &id027
+    type: pass
+    value:
+      function: INPUT
+      parameter: 978e18bf-65b3-4112-a388-01b2316a0c0f.bai
+    size: 63
+  0aa26828-0c2a-4be9-a43c-25850c223ca0.pac: &id028
+    type: pass
+    value:
+      function: INPUT
+      parameter: 0aa26828-0c2a-4be9-a43c-25850c223ca0.pac
+    size: 122311
+  d2378253-1b39-4bc2-aa93-885a83c21e6e.fai: &id029
+    type: pass
+    value:
+      function: INPUT
+      parameter: d2378253-1b39-4bc2-aa93-885a83c21e6e.fai
+    size: 20
+  77c2e684-0fdf-4d20-98b6-5f77f176528c.sa: &id030
+    type: pass
+    value:
+      function: INPUT
+      parameter: 77c2e684-0fdf-4d20-98b6-5f77f176528c.sa
+    size: 244623
+  edb6f418-cc46-4d77-90df-6b70b12a5b2c.gz: &id031
+    type: pass
+    value:
+      function: INPUT
+      parameter: edb6f418-cc46-4d77-90df-6b70b12a5b2c.gz
+    size: 54494
+  105d13d0-1ac0-4674-9984-58491f2f66f8.amb: &id032
+    type: pass
+    value:
+      function: INPUT
+      parameter: 105d13d0-1ac0-4674-9984-58491f2f66f8.amb
+    size: 129
+  98ac897f-b512-4b72-968d-74dff6feccb5.fa: &id033
+    type: pass
+    value:
+      function: INPUT
+      parameter: 98ac897f-b512-4b72-968d-74dff6feccb5.fa
+    size: 495372
+  3f85e5fa-7010-4e34-a586-e03fbb697123.ann: &id034
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3f85e5fa-7010-4e34-a586-e03fbb697123.ann
+    size: 23
+  4d3f133d-afdc-4070-951f-44d41f8cdf3d.bwt: &id035
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4d3f133d-afdc-4070-951f-44d41f8cdf3d.bwt
+    size: 489247
+  8ad4673e-a0f9-4081-be12-b8da011ca981.bam: &id036
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8ad4673e-a0f9-4081-be12-b8da011ca981.bam
+    size: 1
+  304633e3-833e-402c-acc3-06ccbdb5c1ae.txt: &id037
+    type: pass
+    value:
+      function: INPUT
+      parameter: 304633e3-833e-402c-acc3-06ccbdb5c1ae.txt
+    size: 7
+  1431c433-e750-4e9c-bb0d-c36337db14d1.dict: &id038
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1431c433-e750-4e9c-bb0d-c36337db14d1.dict
+    size: 71
+  032b2a69-c59f-4586-af70-241b9121feb3.pac: &id039
+    type: pass
+    value:
+      function: INPUT
+      parameter: 032b2a69-c59f-4586-af70-241b9121feb3.pac
+    size: 122311
+  38633eee-0b74-4994-b29c-9bd81cebf626.fai: &id040
+    type: pass
+    value:
+      function: INPUT
+      parameter: 38633eee-0b74-4994-b29c-9bd81cebf626.fai
+    size: 20
+  b2924ac6-c1d2-4155-b0f6-ab988ca8817e.sa: &id041
+    type: pass
+    value:
+      function: INPUT
+      parameter: b2924ac6-c1d2-4155-b0f6-ab988ca8817e.sa
+    size: 244623
+  3a13eddd-aeef-4e40-a21d-1db08c4034d7.gz: &id042
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3a13eddd-aeef-4e40-a21d-1db08c4034d7.gz
+    size: 54494
+  fb6de936-afa3-4362-96b9-9a35e7a65bbb.amb: &id043
+    type: pass
+    value:
+      function: INPUT
+      parameter: fb6de936-afa3-4362-96b9-9a35e7a65bbb.amb
+    size: 129
+  17c8044a-2f1c-49e4-9708-e35235b3ecbe.fa: &id044
+    type: pass
+    value:
+      function: INPUT
+      parameter: 17c8044a-2f1c-49e4-9708-e35235b3ecbe.fa
+    size: 495372
+  0a954cff-91b5-489f-8013-0150acb1f274.ann: &id045
+    type: pass
+    value:
+      function: INPUT
+      parameter: 0a954cff-91b5-489f-8013-0150acb1f274.ann
+    size: 23
+  0b96640c-a934-4dc1-b8d5-7fc704f16d60.bwt: &id046
+    type: pass
+    value:
+      function: INPUT
+      parameter: 0b96640c-a934-4dc1-b8d5-7fc704f16d60.bwt
+    size: 489247
+  654c2741-52ef-4d79-b9fd-c8622fbdf01a.txt: &id047
+    type: pass
+    value:
+      function: INPUT
+      parameter: 654c2741-52ef-4d79-b9fd-c8622fbdf01a.txt
+    size: 6
+  c7ad4952-94b4-47db-a755-daf0fbf00b73.dict: &id048
+    type: pass
+    value:
+      function: INPUT
+      parameter: c7ad4952-94b4-47db-a755-daf0fbf00b73.dict
+    size: 71
+  fc75c877-5827-4e3e-888f-c34c696f2690.pac: &id049
+    type: pass
+    value:
+      function: INPUT
+      parameter: fc75c877-5827-4e3e-888f-c34c696f2690.pac
+    size: 122311
+  95254978-0aa4-4fd9-8dc6-53573d16dcae.fai: &id050
+    type: pass
+    value:
+      function: INPUT
+      parameter: 95254978-0aa4-4fd9-8dc6-53573d16dcae.fai
+    size: 20
+  81a7dca7-0d78-46de-be56-a666935f7ecf.sa: &id051
+    type: pass
+    value:
+      function: INPUT
+      parameter: 81a7dca7-0d78-46de-be56-a666935f7ecf.sa
+    size: 244623
+  181bdb58-8a65-44f9-b29e-dba866dcba5c.gz: &id052
+    type: pass
+    value:
+      function: INPUT
+      parameter: 181bdb58-8a65-44f9-b29e-dba866dcba5c.gz
+    size: 54494
+  768046c5-4abd-4ace-9380-12a210fc7fcb.amb: &id053
+    type: pass
+    value:
+      function: INPUT
+      parameter: 768046c5-4abd-4ace-9380-12a210fc7fcb.amb
+    size: 129
+  40b671e4-26b1-40bc-a898-3d49ad97d8e5.fa: &id054
+    type: pass
+    value:
+      function: INPUT
+      parameter: 40b671e4-26b1-40bc-a898-3d49ad97d8e5.fa
+    size: 495372
+  36b7125a-0048-499f-8e5c-bf93522aa598.ann: &id055
+    type: pass
+    value:
+      function: INPUT
+      parameter: 36b7125a-0048-499f-8e5c-bf93522aa598.ann
+    size: 23
+  e62f1a5e-05bf-496f-83cc-bd39df8d4fa1.bwt: &id056
+    type: pass
+    value:
+      function: INPUT
+      parameter: e62f1a5e-05bf-496f-83cc-bd39df8d4fa1.bwt
+    size: 489247
+  6e350ce0-3458-4b80-b512-53ed63490252.txt: &id057
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6e350ce0-3458-4b80-b512-53ed63490252.txt
+    size: 7
+  3b814310-56a7-413d-ae41-c888b553b00c.dict: &id058
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3b814310-56a7-413d-ae41-c888b553b00c.dict
+    size: 71
+  9b2a9bcc-ddd1-4a41-9a74-2d16d83f0c10.pac: &id059
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9b2a9bcc-ddd1-4a41-9a74-2d16d83f0c10.pac
+    size: 122311
+  7374b506-2f53-454e-b01f-5087437755e9.fai: &id060
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7374b506-2f53-454e-b01f-5087437755e9.fai
+    size: 20
+  fac422bd-e0ed-4785-95f8-057a607f25a3.sa: &id061
+    type: pass
+    value:
+      function: INPUT
+      parameter: fac422bd-e0ed-4785-95f8-057a607f25a3.sa
+    size: 244623
+  e35fa2d5-4039-4d68-8617-7613ffedb240.gz: &id062
+    type: pass
+    value:
+      function: INPUT
+      parameter: e35fa2d5-4039-4d68-8617-7613ffedb240.gz
+    size: 54494
+  f1676d50-15df-4383-a6ec-2866b2a60cfd.amb: &id063
+    type: pass
+    value:
+      function: INPUT
+      parameter: f1676d50-15df-4383-a6ec-2866b2a60cfd.amb
+    size: 129
+  b08be32e-f6d7-4bcb-b3fc-50c4414e64bd.fa: &id064
+    type: pass
+    value:
+      function: INPUT
+      parameter: b08be32e-f6d7-4bcb-b3fc-50c4414e64bd.fa
+    size: 495372
+  7b53793a-ffd7-4858-8d69-8156f8530d89.ann: &id065
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7b53793a-ffd7-4858-8d69-8156f8530d89.ann
+    size: 23
+  a0d86737-937d-4242-b163-20532761e0a7.bwt: &id066
+    type: pass
+    value:
+      function: INPUT
+      parameter: a0d86737-937d-4242-b163-20532761e0a7.bwt
+    size: 489247
+  95665461-f112-433a-b5d2-4de1820a2604.txt: &id067
+    type: pass
+    value:
+      function: INPUT
+      parameter: 95665461-f112-433a-b5d2-4de1820a2604.txt
+    size: 3
+  6dd813b2-1716-4317-bc55-e820f227d4a8.dict: &id068
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6dd813b2-1716-4317-bc55-e820f227d4a8.dict
+    size: 71
+  c54a806c-d881-4bfa-a62d-68d65fa09378.pac: &id069
+    type: pass
+    value:
+      function: INPUT
+      parameter: c54a806c-d881-4bfa-a62d-68d65fa09378.pac
+    size: 122311
+  76a9a25c-17ce-45a5-853a-1225fe917dc4.fai: &id070
+    type: pass
+    value:
+      function: INPUT
+      parameter: 76a9a25c-17ce-45a5-853a-1225fe917dc4.fai
+    size: 20
+  43765cbd-9724-4cd4-9380-5b5f407425fd.sa: &id071
+    type: pass
+    value:
+      function: INPUT
+      parameter: 43765cbd-9724-4cd4-9380-5b5f407425fd.sa
+    size: 244623
+  1ec1fb1e-b3d1-4232-8833-580b74a801a0.gz: &id072
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1ec1fb1e-b3d1-4232-8833-580b74a801a0.gz
+    size: 54494
+  ddf29dfc-da74-47e1-82e7-90e20e03a68f.amb: &id073
+    type: pass
+    value:
+      function: INPUT
+      parameter: ddf29dfc-da74-47e1-82e7-90e20e03a68f.amb
+    size: 129
+  eec8e693-c446-46b4-b4d9-8996ac3b9e2b.fa: &id074
+    type: pass
+    value:
+      function: INPUT
+      parameter: eec8e693-c446-46b4-b4d9-8996ac3b9e2b.fa
+    size: 495372
+  3e0ee5c8-3fed-4a75-bc13-8d741f49c162.ann: &id075
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3e0ee5c8-3fed-4a75-bc13-8d741f49c162.ann
+    size: 23
+  5d116e4c-07f1-4c1a-bd22-5b46edd3dbe8.bwt: &id076
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5d116e4c-07f1-4c1a-bd22-5b46edd3dbe8.bwt
+    size: 489247
+  9058e84f-0c4f-4969-a27f-26983cbabed1.txt: &id077
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9058e84f-0c4f-4969-a27f-26983cbabed1.txt
+    size: 4
+  d9b4e01c-7f83-4f6b-a06a-9e2b6fdc182e.dict: &id078
+    type: pass
+    value:
+      function: INPUT
+      parameter: d9b4e01c-7f83-4f6b-a06a-9e2b6fdc182e.dict
+    size: 71
+  5fdf8d03-9195-4fcc-b4f4-ccacb849dd95.pac: &id079
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5fdf8d03-9195-4fcc-b4f4-ccacb849dd95.pac
+    size: 122311
+  64f78102-82ca-4be2-8f2c-6b65bc0b9ee5.fai: &id080
+    type: pass
+    value:
+      function: INPUT
+      parameter: 64f78102-82ca-4be2-8f2c-6b65bc0b9ee5.fai
+    size: 20
+  def4b1b8-34c5-420d-a15d-45bf09c4428c.sa: &id081
+    type: pass
+    value:
+      function: INPUT
+      parameter: def4b1b8-34c5-420d-a15d-45bf09c4428c.sa
+    size: 244623
+  8345d1f8-4d88-4ccf-9b5e-8a9b958ad0ac.gz: &id082
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8345d1f8-4d88-4ccf-9b5e-8a9b958ad0ac.gz
+    size: 54494
+  05da74bf-368a-4526-9742-1c5a4c08cefd.amb: &id083
+    type: pass
+    value:
+      function: INPUT
+      parameter: 05da74bf-368a-4526-9742-1c5a4c08cefd.amb
+    size: 129
+  7bb43272-79dd-4079-84a3-068424834cb3.fa: &id084
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7bb43272-79dd-4079-84a3-068424834cb3.fa
+    size: 495372
+  5c0508b9-1813-4a3e-b4da-3c01718d4a43.ann: &id085
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5c0508b9-1813-4a3e-b4da-3c01718d4a43.ann
+    size: 23
+  3af5f52d-fd7f-41e9-8679-b1e203cc56da.bwt: &id086
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3af5f52d-fd7f-41e9-8679-b1e203cc56da.bwt
+    size: 489247
+  ef3b696c-1ecf-4fda-a0ab-e63b8bd6aa05.txt: &id087
+    type: pass
+    value:
+      function: INPUT
+      parameter: ef3b696c-1ecf-4fda-a0ab-e63b8bd6aa05.txt
+    size: 8
+  fb67cf87-cc05-4b1f-b76c-e33f5bbd9d05.dict: &id088
+    type: pass
+    value:
+      function: INPUT
+      parameter: fb67cf87-cc05-4b1f-b76c-e33f5bbd9d05.dict
+    size: 71
+  8309ab9c-2adf-42d1-ae7b-f1d2ebbff392.pac: &id089
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8309ab9c-2adf-42d1-ae7b-f1d2ebbff392.pac
+    size: 122311
+  7106e382-e3ed-49e8-9aea-f58fad1b1efd.fai: &id090
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7106e382-e3ed-49e8-9aea-f58fad1b1efd.fai
+    size: 20
+  dd5fd67e-4c27-46dd-8fc2-b616560bc70a.sa: &id091
+    type: pass
+    value:
+      function: INPUT
+      parameter: dd5fd67e-4c27-46dd-8fc2-b616560bc70a.sa
+    size: 244623
+  d12923a5-7342-479f-b369-f970340c4d1e.gz: &id092
+    type: pass
+    value:
+      function: INPUT
+      parameter: d12923a5-7342-479f-b369-f970340c4d1e.gz
+    size: 54494
+  6d55cdbe-e112-4955-a2dc-aaa3c19a3eba.amb: &id093
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6d55cdbe-e112-4955-a2dc-aaa3c19a3eba.amb
+    size: 129
+  4be9f05a-e566-41f2-aa68-fbd410ed186e.fa: &id094
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4be9f05a-e566-41f2-aa68-fbd410ed186e.fa
+    size: 495372
+  bc85a4ab-49f4-4482-8e1e-b92828b31a8b.ann: &id095
+    type: pass
+    value:
+      function: INPUT
+      parameter: bc85a4ab-49f4-4482-8e1e-b92828b31a8b.ann
+    size: 23
+  482cbaf9-873f-4ed8-8943-f266181ea2f9.bwt: &id096
+    type: pass
+    value:
+      function: INPUT
+      parameter: 482cbaf9-873f-4ed8-8943-f266181ea2f9.bwt
+    size: 489247
+  aa099150-3bfa-4cb2-bed6-ef4255d2eaae.txt: &id097
+    type: pass
+    value:
+      function: INPUT
+      parameter: aa099150-3bfa-4cb2-bed6-ef4255d2eaae.txt
+    size: 7
+  e73237dc-4ecd-482b-a99e-09cf00f1b6f8.dict: &id098
+    type: pass
+    value:
+      function: INPUT
+      parameter: e73237dc-4ecd-482b-a99e-09cf00f1b6f8.dict
+    size: 71
+  5a9498ad-4a4f-4564-a71c-f65015ea5ebd.pac: &id099
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5a9498ad-4a4f-4564-a71c-f65015ea5ebd.pac
+    size: 122311
+  fe5e900a-a3c3-4fac-b267-71fd8704fbe0.fai: &id100
+    type: pass
+    value:
+      function: INPUT
+      parameter: fe5e900a-a3c3-4fac-b267-71fd8704fbe0.fai
+    size: 20
+  4e355459-0984-4c77-9817-d347bb9bcba1.sa: &id101
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4e355459-0984-4c77-9817-d347bb9bcba1.sa
+    size: 244623
+  ce46e30a-4707-4ec1-bd65-383643cf12f5.gz: &id102
+    type: pass
+    value:
+      function: INPUT
+      parameter: ce46e30a-4707-4ec1-bd65-383643cf12f5.gz
+    size: 54494
+  f4af09dc-1c57-4702-847d-4e23f92e1a5b.amb: &id103
+    type: pass
+    value:
+      function: INPUT
+      parameter: f4af09dc-1c57-4702-847d-4e23f92e1a5b.amb
+    size: 129
+  7f3b1445-90d1-417a-83a5-b94234879e24.fa: &id104
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7f3b1445-90d1-417a-83a5-b94234879e24.fa
+    size: 495372
+  b5185408-6647-424e-9dd8-54e44eae9033.ann: &id105
+    type: pass
+    value:
+      function: INPUT
+      parameter: b5185408-6647-424e-9dd8-54e44eae9033.ann
+    size: 23
+  673adf0c-adfe-4040-85fd-1af74b624424.bwt: &id106
+    type: pass
+    value:
+      function: INPUT
+      parameter: 673adf0c-adfe-4040-85fd-1af74b624424.bwt
+    size: 489247
+  744e4df0-d592-4b06-865c-c4a872ee7208.txt: &id107
+    type: pass
+    value:
+      function: INPUT
+      parameter: 744e4df0-d592-4b06-865c-c4a872ee7208.txt
+    size: 8
+  7712a8e3-bdb9-472e-96b6-21f1792aa6c9.dict: &id108
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7712a8e3-bdb9-472e-96b6-21f1792aa6c9.dict
+    size: 71
+  fcf09a29-4bde-477f-80e3-dceca91a5cb7.pac: &id109
+    type: pass
+    value:
+      function: INPUT
+      parameter: fcf09a29-4bde-477f-80e3-dceca91a5cb7.pac
+    size: 122311
+  93eb5707-acc0-4f5d-b675-385b9c5c89b9.fai: &id110
+    type: pass
+    value:
+      function: INPUT
+      parameter: 93eb5707-acc0-4f5d-b675-385b9c5c89b9.fai
+    size: 20
+  dad9ac57-fe8e-4e7d-9092-3bc39e92351a.sa: &id111
+    type: pass
+    value:
+      function: INPUT
+      parameter: dad9ac57-fe8e-4e7d-9092-3bc39e92351a.sa
+    size: 244623
+  03c3cdbc-738b-4d39-a193-a97183b60d46.gz: &id112
+    type: pass
+    value:
+      function: INPUT
+      parameter: 03c3cdbc-738b-4d39-a193-a97183b60d46.gz
+    size: 54494
+  477dab6f-b9ce-4d64-a4ea-871aaa322781.amb: &id113
+    type: pass
+    value:
+      function: INPUT
+      parameter: 477dab6f-b9ce-4d64-a4ea-871aaa322781.amb
+    size: 129
+  9e6d5016-63ac-43ca-9831-46596b70a0b8.fa: &id114
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9e6d5016-63ac-43ca-9831-46596b70a0b8.fa
+    size: 495372
+  1ef9d151-ac11-412a-a2a3-10dcd820f2d5.ann: &id115
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1ef9d151-ac11-412a-a2a3-10dcd820f2d5.ann
+    size: 23
+  ed67b8e7-5832-48dc-937e-8846701df8b9.bwt: &id116
+    type: pass
+    value:
+      function: INPUT
+      parameter: ed67b8e7-5832-48dc-937e-8846701df8b9.bwt
+    size: 489247
+  53bbd7a9-5afe-4240-bf0d-bdc3661b1f81.txt: &id117
+    type: pass
+    value:
+      function: INPUT
+      parameter: 53bbd7a9-5afe-4240-bf0d-bdc3661b1f81.txt
+    size: 4
+  a5a4848c-5151-4c60-a310-4c04eb1d7e3c.dict: &id118
+    type: pass
+    value:
+      function: INPUT
+      parameter: a5a4848c-5151-4c60-a310-4c04eb1d7e3c.dict
+    size: 71
+  14922c9f-d65c-42c0-844e-905cf0a87651.pac: &id119
+    type: pass
+    value:
+      function: INPUT
+      parameter: 14922c9f-d65c-42c0-844e-905cf0a87651.pac
+    size: 122311
+  add0e448-4358-4528-acd8-4a19a16184c6.fai: &id120
+    type: pass
+    value:
+      function: INPUT
+      parameter: add0e448-4358-4528-acd8-4a19a16184c6.fai
+    size: 20
+  68c29ca6-1ea6-484a-9609-2ebd120a9f1e.fastq: &id121
+    type: pass
+    value:
+      function: INPUT
+      parameter: 68c29ca6-1ea6-484a-9609-2ebd120a9f1e.fastq
+    size: 11
+  7c188cc3-4284-4c4d-956f-61a2bd471511.fastq: &id122
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7c188cc3-4284-4c4d-956f-61a2bd471511.fastq
+    size: 11
+  1e3bd65c-e31d-40dd-a78b-1920bb57d9f3.sa: &id123
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1e3bd65c-e31d-40dd-a78b-1920bb57d9f3.sa
+    size: 244623
+  b0d689b8-4954-4d39-bc4a-8ee94c6c2430.gz: &id124
+    type: pass
+    value:
+      function: INPUT
+      parameter: b0d689b8-4954-4d39-bc4a-8ee94c6c2430.gz
+    size: 54494
+  a5ac996f-5268-4d1d-8f01-13d466fb753a.amb: &id125
+    type: pass
+    value:
+      function: INPUT
+      parameter: a5ac996f-5268-4d1d-8f01-13d466fb753a.amb
+    size: 129
+  07af63ac-ded5-4f1c-bf2b-1a3d1e5d4dc2.fa: &id126
+    type: pass
+    value:
+      function: INPUT
+      parameter: 07af63ac-ded5-4f1c-bf2b-1a3d1e5d4dc2.fa
+    size: 495372
+  cc291a11-62e3-482f-bd19-c3c3f0be4bba.ann: &id127
+    type: pass
+    value:
+      function: INPUT
+      parameter: cc291a11-62e3-482f-bd19-c3c3f0be4bba.ann
+    size: 23
+  75ad42f6-0ee5-4c0a-8b5d-2df03c221c11.bwt: &id128
+    type: pass
+    value:
+      function: INPUT
+      parameter: 75ad42f6-0ee5-4c0a-8b5d-2df03c221c11.bwt
+    size: 489247
+  fb59c5d4-24b1-464c-ae05-70c0261d7379.txt: &id129
+    type: pass
+    value:
+      function: INPUT
+      parameter: fb59c5d4-24b1-464c-ae05-70c0261d7379.txt
+    size: 7
+  14c39218-5301-4705-bcc7-e3e76fb3f272.gz: &id130
+    type: pass
+    value:
+      function: INPUT
+      parameter: 14c39218-5301-4705-bcc7-e3e76fb3f272.gz
+    size: 54494
+  73674467-0d88-444b-9b8c-00b18e3e9e08.gz: &id131
+    type: pass
+    value:
+      function: INPUT
+      parameter: 73674467-0d88-444b-9b8c-00b18e3e9e08.gz
+    size: 54494
+  9aac05bf-1893-468c-8d93-56bbdc5ab751.gz: &id132
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9aac05bf-1893-468c-8d93-56bbdc5ab751.gz
+    size: 54494
+  a1882459-25ec-4b72-9113-0ec08029749d.dict: &id133
+    type: pass
+    value:
+      function: INPUT
+      parameter: a1882459-25ec-4b72-9113-0ec08029749d.dict
+    size: 71
+  6cf166d8-6170-402f-9af2-c9b3b46931e7.pac: &id134
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6cf166d8-6170-402f-9af2-c9b3b46931e7.pac
+    size: 122311
+  c4f1f690-c33e-4792-94ce-28ac7bfbafad.fai: &id135
+    type: pass
+    value:
+      function: INPUT
+      parameter: c4f1f690-c33e-4792-94ce-28ac7bfbafad.fai
+    size: 20
+  e3820977-1ce4-4123-b36a-c2433f6fe248.sa: &id136
+    type: pass
+    value:
+      function: INPUT
+      parameter: e3820977-1ce4-4123-b36a-c2433f6fe248.sa
+    size: 244623
+  ede69379-ed8e-4974-94f7-245b0e168620.gz: &id137
+    type: pass
+    value:
+      function: INPUT
+      parameter: ede69379-ed8e-4974-94f7-245b0e168620.gz
+    size: 54494
+  3d97c74b-9285-4c5f-8169-a707bd5deb31.amb: &id138
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3d97c74b-9285-4c5f-8169-a707bd5deb31.amb
+    size: 129
+  64c9f5e2-06f1-46e9-ae5c-0f8eedfc6e3f.fa: &id139
+    type: pass
+    value:
+      function: INPUT
+      parameter: 64c9f5e2-06f1-46e9-ae5c-0f8eedfc6e3f.fa
+    size: 495372
+  d19a2f74-c1a7-4daa-8421-21e8603af8af.ann: &id140
+    type: pass
+    value:
+      function: INPUT
+      parameter: d19a2f74-c1a7-4daa-8421-21e8603af8af.ann
+    size: 23
+  375c43d9-cf0d-4dd2-9891-fa29d0acc375.bwt: &id141
+    type: pass
+    value:
+      function: INPUT
+      parameter: 375c43d9-cf0d-4dd2-9891-fa29d0acc375.bwt
+    size: 489247
+  604534a9-916d-4b41-aba5-d93a27e222f4.txt: &id142
+    type: pass
+    value:
+      function: INPUT
+      parameter: 604534a9-916d-4b41-aba5-d93a27e222f4.txt
+    size: 7
+  9542d5eb-b672-4258-a638-4d721b237fa4.dict: &id143
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9542d5eb-b672-4258-a638-4d721b237fa4.dict
+    size: 71
+  1e7af736-9ad9-4530-8408-e0414c0a04b8.bai: &id144
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1e7af736-9ad9-4530-8408-e0414c0a04b8.bai
+    size: 63
+  a71e9837-6e57-4940-9b91-27bf1b66e8d1.pac: &id145
+    type: pass
+    value:
+      function: INPUT
+      parameter: a71e9837-6e57-4940-9b91-27bf1b66e8d1.pac
+    size: 122311
+  78efce4e-0441-4345-b839-1317dc60007c.fai: &id146
+    type: pass
+    value:
+      function: INPUT
+      parameter: 78efce4e-0441-4345-b839-1317dc60007c.fai
+    size: 20
+  34a34736-01a6-4282-b693-9596b8a30f68.sa: &id147
+    type: pass
+    value:
+      function: INPUT
+      parameter: 34a34736-01a6-4282-b693-9596b8a30f68.sa
+    size: 244623
+  78920f91-989d-417a-b198-3fc9c3e92531.gz: &id148
+    type: pass
+    value:
+      function: INPUT
+      parameter: 78920f91-989d-417a-b198-3fc9c3e92531.gz
+    size: 54494
+  71bfa08b-fefd-4d69-8ced-3a98968a5f0d.amb: &id149
+    type: pass
+    value:
+      function: INPUT
+      parameter: 71bfa08b-fefd-4d69-8ced-3a98968a5f0d.amb
+    size: 129
+  43314c98-d46c-4d72-ab04-410d4500cab0.fa: &id150
+    type: pass
+    value:
+      function: INPUT
+      parameter: 43314c98-d46c-4d72-ab04-410d4500cab0.fa
+    size: 495372
+  486c4bf1-c9bd-4db7-aaa1-039969d0e124.ann: &id151
+    type: pass
+    value:
+      function: INPUT
+      parameter: 486c4bf1-c9bd-4db7-aaa1-039969d0e124.ann
+    size: 23
+  37acf510-e14e-4946-abe1-f8ef7c7d7c85.bwt: &id152
+    type: pass
+    value:
+      function: INPUT
+      parameter: 37acf510-e14e-4946-abe1-f8ef7c7d7c85.bwt
+    size: 489247
+  b6bc0585-ce5b-4ca7-915b-719bdec2da20.bam: &id153
+    type: pass
+    value:
+      function: INPUT
+      parameter: b6bc0585-ce5b-4ca7-915b-719bdec2da20.bam
+    size: 1
+  57004ee8-088d-4bca-a255-c499c343036a.txt: &id154
+    type: pass
+    value:
+      function: INPUT
+      parameter: 57004ee8-088d-4bca-a255-c499c343036a.txt
+    size: 7
+  5adbebb0-8ad9-48f5-81a1-625723731cbc.dict: &id155
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5adbebb0-8ad9-48f5-81a1-625723731cbc.dict
+    size: 71
+  6195f48b-d889-4f53-a4f5-215dc2bd9553.pac: &id156
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6195f48b-d889-4f53-a4f5-215dc2bd9553.pac
+    size: 122311
+  2698d8c0-d991-4e49-8c2c-5ff872bd16d4.fai: &id157
+    type: pass
+    value:
+      function: INPUT
+      parameter: 2698d8c0-d991-4e49-8c2c-5ff872bd16d4.fai
+    size: 20
+  89e93225-896a-4e32-9242-d104ed2d8bf6.sa: &id158
+    type: pass
+    value:
+      function: INPUT
+      parameter: 89e93225-896a-4e32-9242-d104ed2d8bf6.sa
+    size: 244623
+  79a36cdb-4542-40e3-846a-9ea0f00c4cd2.gz: &id159
+    type: pass
+    value:
+      function: INPUT
+      parameter: 79a36cdb-4542-40e3-846a-9ea0f00c4cd2.gz
+    size: 54494
+  5f31ccb1-65d5-4cb6-9e0c-9a8806326dc6.amb: &id160
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5f31ccb1-65d5-4cb6-9e0c-9a8806326dc6.amb
+    size: 129
+  5cd5f6bf-4d0f-48d3-b08e-5ee923b3d4d5.fa: &id161
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5cd5f6bf-4d0f-48d3-b08e-5ee923b3d4d5.fa
+    size: 495372
+  2d2dbd88-b621-4444-8d63-23e4c49ae77c.ann: &id162
+    type: pass
+    value:
+      function: INPUT
+      parameter: 2d2dbd88-b621-4444-8d63-23e4c49ae77c.ann
+    size: 23
+  5b936d6d-2798-4078-87f6-e832d56f4dd2.bwt: &id163
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5b936d6d-2798-4078-87f6-e832d56f4dd2.bwt
+    size: 489247
+  3cd6cc52-af3c-4317-9ee7-ec8a8764682e.txt: &id164
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3cd6cc52-af3c-4317-9ee7-ec8a8764682e.txt
+    size: 2
+  d7cb7ec5-22c9-4efb-ac43-5764ff48549d.dict: &id165
+    type: pass
+    value:
+      function: INPUT
+      parameter: d7cb7ec5-22c9-4efb-ac43-5764ff48549d.dict
+    size: 71
+  c1cd388e-531a-4f7d-9f7c-78e6288617f8.pac: &id166
+    type: pass
+    value:
+      function: INPUT
+      parameter: c1cd388e-531a-4f7d-9f7c-78e6288617f8.pac
+    size: 122311
+  8de2714a-4f24-4790-a3ca-8a6746e0c508.fai: &id167
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8de2714a-4f24-4790-a3ca-8a6746e0c508.fai
+    size: 20
+  1d453c8f-2520-43cc-9534-03ea34518568.sa: &id168
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1d453c8f-2520-43cc-9534-03ea34518568.sa
+    size: 244623
+  97cf2582-09ce-4d39-9cf8-e917554d1b4a.gz: &id169
+    type: pass
+    value:
+      function: INPUT
+      parameter: 97cf2582-09ce-4d39-9cf8-e917554d1b4a.gz
+    size: 54494
+  cf16c677-d392-4f84-b90b-493d178cb5b8.amb: &id170
+    type: pass
+    value:
+      function: INPUT
+      parameter: cf16c677-d392-4f84-b90b-493d178cb5b8.amb
+    size: 129
+  e83079e7-c2d9-441b-ad34-4e37a5cf12ab.fa: &id171
+    type: pass
+    value:
+      function: INPUT
+      parameter: e83079e7-c2d9-441b-ad34-4e37a5cf12ab.fa
+    size: 495372
+  78a2c423-6f97-4a66-bf89-7794f67f57e6.ann: &id172
+    type: pass
+    value:
+      function: INPUT
+      parameter: 78a2c423-6f97-4a66-bf89-7794f67f57e6.ann
+    size: 23
+  90dd5f2c-e426-4ab4-90bd-de83c732e700.bwt: &id173
+    type: pass
+    value:
+      function: INPUT
+      parameter: 90dd5f2c-e426-4ab4-90bd-de83c732e700.bwt
+    size: 489247
+  9c8abf59-17fe-4bcd-8581-71bd3b0285b5.txt: &id174
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9c8abf59-17fe-4bcd-8581-71bd3b0285b5.txt
+    size: 2
+  216d2acb-07a6-4ebc-b26a-3513c7e168f4.dict: &id175
+    type: pass
+    value:
+      function: INPUT
+      parameter: 216d2acb-07a6-4ebc-b26a-3513c7e168f4.dict
+    size: 71
+  1c74d9df-72bd-4321-b8db-1ae1bc2b6319.pac: &id176
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1c74d9df-72bd-4321-b8db-1ae1bc2b6319.pac
+    size: 122311
+  96e47eac-4e1f-40c6-9d58-cc36a3ed9d4d.fai: &id177
+    type: pass
+    value:
+      function: INPUT
+      parameter: 96e47eac-4e1f-40c6-9d58-cc36a3ed9d4d.fai
+    size: 20
+  03aa454a-9370-4549-a33d-698f98300514.sa: &id178
+    type: pass
+    value:
+      function: INPUT
+      parameter: 03aa454a-9370-4549-a33d-698f98300514.sa
+    size: 244623
+  b509d29c-4aa7-4ef8-acda-e4e6deff5fe5.gz: &id179
+    type: pass
+    value:
+      function: INPUT
+      parameter: b509d29c-4aa7-4ef8-acda-e4e6deff5fe5.gz
+    size: 54494
+  43daca97-131a-446c-98aa-89f0e9a7c7af.amb: &id180
+    type: pass
+    value:
+      function: INPUT
+      parameter: 43daca97-131a-446c-98aa-89f0e9a7c7af.amb
+    size: 129
+  afa8b9c1-4a20-4d2a-9933-77824665e996.fa: &id181
+    type: pass
+    value:
+      function: INPUT
+      parameter: afa8b9c1-4a20-4d2a-9933-77824665e996.fa
+    size: 495372
+  9db2eaca-f41c-4221-bc46-4977a1c0646e.ann: &id182
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9db2eaca-f41c-4221-bc46-4977a1c0646e.ann
+    size: 23
+  ff75d6eb-9d7c-4c4b-bea7-e4a0c7552f31.bwt: &id183
+    type: pass
+    value:
+      function: INPUT
+      parameter: ff75d6eb-9d7c-4c4b-bea7-e4a0c7552f31.bwt
+    size: 489247
+  6089ef29-6423-43df-befa-9969631e8348.txt: &id184
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6089ef29-6423-43df-befa-9969631e8348.txt
+    size: 0
+  31745e13-6ca6-4f83-b645-bafc273b0f49.dict: &id185
+    type: pass
+    value:
+      function: INPUT
+      parameter: 31745e13-6ca6-4f83-b645-bafc273b0f49.dict
+    size: 71
+  6af78634-ba01-4b96-b737-f145e6fe015c.pac: &id186
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6af78634-ba01-4b96-b737-f145e6fe015c.pac
+    size: 122311
+  e4f058a5-0a7b-4ebc-91ae-9bce5a92c2c6.fai: &id187
+    type: pass
+    value:
+      function: INPUT
+      parameter: e4f058a5-0a7b-4ebc-91ae-9bce5a92c2c6.fai
+    size: 20
+  78eb27c5-ba45-4603-8b14-723562f4a9d8.sa: &id188
+    type: pass
+    value:
+      function: INPUT
+      parameter: 78eb27c5-ba45-4603-8b14-723562f4a9d8.sa
+    size: 244623
+  d546c333-c3d6-4e25-a6e4-ab5acd43030a.gz: &id189
+    type: pass
+    value:
+      function: INPUT
+      parameter: d546c333-c3d6-4e25-a6e4-ab5acd43030a.gz
+    size: 54494
+  08333128-07eb-404b-b205-8c2747d4a07d.amb: &id190
+    type: pass
+    value:
+      function: INPUT
+      parameter: 08333128-07eb-404b-b205-8c2747d4a07d.amb
+    size: 129
+  df511b98-e527-44a6-a289-f09edc261177.fa: &id191
+    type: pass
+    value:
+      function: INPUT
+      parameter: df511b98-e527-44a6-a289-f09edc261177.fa
+    size: 495372
+  1896fcb9-e787-4166-814f-e6d13a90ecb5.ann: &id192
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1896fcb9-e787-4166-814f-e6d13a90ecb5.ann
+    size: 23
+  6408795b-9005-4530-8d2e-57724f814920.bwt: &id193
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6408795b-9005-4530-8d2e-57724f814920.bwt
+    size: 489247
+  8c75d213-dbd5-49a1-9eb5-719f635bac49.txt: &id194
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8c75d213-dbd5-49a1-9eb5-719f635bac49.txt
+    size: 7
+  65b94187-3673-4224-962d-749cee0827d2.dict: &id195
+    type: pass
+    value:
+      function: INPUT
+      parameter: 65b94187-3673-4224-962d-749cee0827d2.dict
+    size: 71
+  1d92e756-68e3-47c7-9c28-728dc926719c.pac: &id196
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1d92e756-68e3-47c7-9c28-728dc926719c.pac
+    size: 122311
+  81d31281-4e70-4f8e-a0a1-8131773ca805.fai: &id197
+    type: pass
+    value:
+      function: INPUT
+      parameter: 81d31281-4e70-4f8e-a0a1-8131773ca805.fai
+    size: 20
+  aa907460-2fad-4383-adfc-f9f0ac7ffe3d.sa: &id198
+    type: pass
+    value:
+      function: INPUT
+      parameter: aa907460-2fad-4383-adfc-f9f0ac7ffe3d.sa
+    size: 244623
+  7701a793-7c13-4fd8-a37a-fc3632d6035a.gz: &id199
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7701a793-7c13-4fd8-a37a-fc3632d6035a.gz
+    size: 54494
+  264cb6c0-4f37-4c01-868e-03fa4959d1b1.amb: &id200
+    type: pass
+    value:
+      function: INPUT
+      parameter: 264cb6c0-4f37-4c01-868e-03fa4959d1b1.amb
+    size: 129
+  bb7da3cd-5bd8-4d7e-b1d8-747ccbbe7d9a.fa: &id201
+    type: pass
+    value:
+      function: INPUT
+      parameter: bb7da3cd-5bd8-4d7e-b1d8-747ccbbe7d9a.fa
+    size: 495372
+  fc5f80e3-abeb-4fb2-b9c2-1b933ddbb7c7.ann: &id202
+    type: pass
+    value:
+      function: INPUT
+      parameter: fc5f80e3-abeb-4fb2-b9c2-1b933ddbb7c7.ann
+    size: 23
+  88acdb4e-b764-4955-ada3-a8ed5fe53bfc.bwt: &id203
+    type: pass
+    value:
+      function: INPUT
+      parameter: 88acdb4e-b764-4955-ada3-a8ed5fe53bfc.bwt
+    size: 489247
+  3814aecb-e4db-48e5-80a0-2b6addce2de6.txt: &id204
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3814aecb-e4db-48e5-80a0-2b6addce2de6.txt
+    size: 5
+  da932a61-9fc5-4462-aec2-d29703c46856.dict: &id205
+    type: pass
+    value:
+      function: INPUT
+      parameter: da932a61-9fc5-4462-aec2-d29703c46856.dict
+    size: 71
+  17b91f72-9029-4a51-a6b7-2925a36a075e.pac: &id206
+    type: pass
+    value:
+      function: INPUT
+      parameter: 17b91f72-9029-4a51-a6b7-2925a36a075e.pac
+    size: 122311
+  4b49a9bb-1157-4190-bb32-8d0acab7d341.fai: &id207
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4b49a9bb-1157-4190-bb32-8d0acab7d341.fai
+    size: 20
+  0c51ec65-50e2-4454-9ab5-0b42b52c56a3.sa: &id208
+    type: pass
+    value:
+      function: INPUT
+      parameter: 0c51ec65-50e2-4454-9ab5-0b42b52c56a3.sa
+    size: 244623
+  1187b027-db11-4b31-b5c4-e53e7d9a4cfc.gz: &id209
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1187b027-db11-4b31-b5c4-e53e7d9a4cfc.gz
+    size: 54494
+  3349de10-c519-4197-be75-73997897c80f.amb: &id210
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3349de10-c519-4197-be75-73997897c80f.amb
+    size: 129
+  847a38c6-a4c6-4566-a21c-417d62510e47.fa: &id211
+    type: pass
+    value:
+      function: INPUT
+      parameter: 847a38c6-a4c6-4566-a21c-417d62510e47.fa
+    size: 495372
+  97215ab2-2f92-45f5-b9e3-97f922f863f0.ann: &id212
+    type: pass
+    value:
+      function: INPUT
+      parameter: 97215ab2-2f92-45f5-b9e3-97f922f863f0.ann
+    size: 23
+  c3db126b-40f2-4fbf-9ff1-cdced5bf68bb.bwt: &id213
+    type: pass
+    value:
+      function: INPUT
+      parameter: c3db126b-40f2-4fbf-9ff1-cdced5bf68bb.bwt
+    size: 489247
+  e42b407d-f7ca-44c6-9c19-155ea02055d7.txt: &id214
+    type: pass
+    value:
+      function: INPUT
+      parameter: e42b407d-f7ca-44c6-9c19-155ea02055d7.txt
+    size: 4
+  289f9cf1-79bb-4968-9cde-958e0e43cea1.dict: &id215
+    type: pass
+    value:
+      function: INPUT
+      parameter: 289f9cf1-79bb-4968-9cde-958e0e43cea1.dict
+    size: 71
+  6d9eb0dc-8e5e-4f30-a43f-262a9f625734.pac: &id216
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6d9eb0dc-8e5e-4f30-a43f-262a9f625734.pac
+    size: 122311
+  65b10e14-9b3f-4023-bf37-dac6e7eedf71.fai: &id217
+    type: pass
+    value:
+      function: INPUT
+      parameter: 65b10e14-9b3f-4023-bf37-dac6e7eedf71.fai
+    size: 20
+  d46ba655-168d-40ba-8508-c43f63f47ac4.sa: &id218
+    type: pass
+    value:
+      function: INPUT
+      parameter: d46ba655-168d-40ba-8508-c43f63f47ac4.sa
+    size: 244623
+  a6349d0d-7835-41f2-adab-e14fdad09c54.gz: &id219
+    type: pass
+    value:
+      function: INPUT
+      parameter: a6349d0d-7835-41f2-adab-e14fdad09c54.gz
+    size: 54494
+  1128b6c4-98b6-4591-8d83-96985a48862e.amb: &id220
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1128b6c4-98b6-4591-8d83-96985a48862e.amb
+    size: 129
+  df7d287c-8bef-4d63-93f5-c2480f940754.fa: &id221
+    type: pass
+    value:
+      function: INPUT
+      parameter: df7d287c-8bef-4d63-93f5-c2480f940754.fa
+    size: 495372
+  8db58a82-ee30-4cae-ac8d-257d83c96089.ann: &id222
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8db58a82-ee30-4cae-ac8d-257d83c96089.ann
+    size: 23
+  5fa3309f-9b72-4cee-9a0c-c52d9e9e2667.bwt: &id223
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5fa3309f-9b72-4cee-9a0c-c52d9e9e2667.bwt
+    size: 489247
+  5a9e4b79-e914-4335-9683-791cae627cbf.txt: &id224
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5a9e4b79-e914-4335-9683-791cae627cbf.txt
+    size: 2
+  225a6ee2-bded-43ea-9641-f876db2c983a.dict: &id225
+    type: pass
+    value:
+      function: INPUT
+      parameter: 225a6ee2-bded-43ea-9641-f876db2c983a.dict
+    size: 71
+  1a0c8b37-a8dc-4bac-977d-783dfd8836e6.pac: &id226
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1a0c8b37-a8dc-4bac-977d-783dfd8836e6.pac
+    size: 122311
+  d4907b85-f390-4701-a2b1-e6632835dae7.fai: &id227
+    type: pass
+    value:
+      function: INPUT
+      parameter: d4907b85-f390-4701-a2b1-e6632835dae7.fai
+    size: 20
+  8ab9f22f-8655-47ff-a481-2fa544084627.sa: &id228
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8ab9f22f-8655-47ff-a481-2fa544084627.sa
+    size: 244623
+  4dd5dabd-fc3c-4f88-afc0-a485ec318fb4.gz: &id229
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4dd5dabd-fc3c-4f88-afc0-a485ec318fb4.gz
+    size: 54494
+  662b40e7-6fe0-49e2-a9f5-2209d032124b.amb: &id230
+    type: pass
+    value:
+      function: INPUT
+      parameter: 662b40e7-6fe0-49e2-a9f5-2209d032124b.amb
+    size: 129
+  eb83e4e3-dd03-4374-a02f-f1bc9d337f5a.fa: &id231
+    type: pass
+    value:
+      function: INPUT
+      parameter: eb83e4e3-dd03-4374-a02f-f1bc9d337f5a.fa
+    size: 495372
+  28728830-9d43-4cf5-ab9f-68c4c7ba4ef6.ann: &id232
+    type: pass
+    value:
+      function: INPUT
+      parameter: 28728830-9d43-4cf5-ab9f-68c4c7ba4ef6.ann
+    size: 23
+  4939bec5-f7ff-49d0-9a50-589a43744c9d.bwt: &id233
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4939bec5-f7ff-49d0-9a50-589a43744c9d.bwt
+    size: 489247
+  df0dba06-ffac-4f16-96e2-ea04ae1c8c2a.txt: &id234
+    type: pass
+    value:
+      function: INPUT
+      parameter: df0dba06-ffac-4f16-96e2-ea04ae1c8c2a.txt
+    size: 6
+  d4f30fb8-40f2-49a4-86f2-b67882eaa6ac.txt: &id235
+    type: pass
+    value:
+      function: INPUT
+      parameter: d4f30fb8-40f2-49a4-86f2-b67882eaa6ac.txt
+    size: 2
+  30132bda-4e76-42fa-b3e0-b9c07e90be46.dict: &id236
+    type: pass
+    value:
+      function: INPUT
+      parameter: 30132bda-4e76-42fa-b3e0-b9c07e90be46.dict
+    size: 71
+  4502bb4c-a849-4b5c-8613-b864abca8b5c.amb: &id237
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4502bb4c-a849-4b5c-8613-b864abca8b5c.amb
+    size: 129
+  1820b764-3a25-4453-baca-29c17fb2e945.ann: &id238
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1820b764-3a25-4453-baca-29c17fb2e945.ann
+    size: 23
+  dc4422ed-6626-4546-b170-2a2ba40dbf93.fai: &id239
+    type: pass
+    value:
+      function: INPUT
+      parameter: dc4422ed-6626-4546-b170-2a2ba40dbf93.fai
+    size: 20
+  c9ac0d48-e161-4605-9c1f-5764a763a469.pac: &id240
+    type: pass
+    value:
+      function: INPUT
+      parameter: c9ac0d48-e161-4605-9c1f-5764a763a469.pac
+    size: 122311
+  720aa885-5cc4-4280-893e-be50cfb2cc3f.sa: &id241
+    type: pass
+    value:
+      function: INPUT
+      parameter: 720aa885-5cc4-4280-893e-be50cfb2cc3f.sa
+    size: 244623
+  ba943f0d-6dfd-453a-9732-1bb0af51a844.gz: &id242
+    type: pass
+    value:
+      function: INPUT
+      parameter: ba943f0d-6dfd-453a-9732-1bb0af51a844.gz
+    size: 54494
+  7628310e-cca1-471b-ae92-dc130e515a29.fa: &id243
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7628310e-cca1-471b-ae92-dc130e515a29.fa
+    size: 495372
+  562a203b-fa4c-46f0-85e5-87df46b4bc81.bwt: &id244
+    type: pass
+    value:
+      function: INPUT
+      parameter: 562a203b-fa4c-46f0-85e5-87df46b4bc81.bwt
+    size: 489247
+  06f624b7-f06e-45af-ac94-9bc55ac468db.txt: &id245
+    type: pass
+    value:
+      function: INPUT
+      parameter: 06f624b7-f06e-45af-ac94-9bc55ac468db.txt
+    size: 5
+  1fe12302-6f3e-4603-b31a-3aa5535afb9f.dict: &id246
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1fe12302-6f3e-4603-b31a-3aa5535afb9f.dict
+    size: 71
+  4253911a-4049-4164-adac-7dfeacc4d2c4.amb: &id247
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4253911a-4049-4164-adac-7dfeacc4d2c4.amb
+    size: 129
+  a8f70fea-2332-43d6-b1a7-7e4eccd0c1d3.ann: &id248
+    type: pass
+    value:
+      function: INPUT
+      parameter: a8f70fea-2332-43d6-b1a7-7e4eccd0c1d3.ann
+    size: 23
+  794e3593-a2bb-48b5-a831-f7a24a69612a.fai: &id249
+    type: pass
+    value:
+      function: INPUT
+      parameter: 794e3593-a2bb-48b5-a831-f7a24a69612a.fai
+    size: 20
+  fea54261-cb91-4141-a22c-6be00c4a26a6.pac: &id250
+    type: pass
+    value:
+      function: INPUT
+      parameter: fea54261-cb91-4141-a22c-6be00c4a26a6.pac
+    size: 122311
+  b43479d8-2f85-4d46-88c2-3c53f2f83d8a.sa: &id251
+    type: pass
+    value:
+      function: INPUT
+      parameter: b43479d8-2f85-4d46-88c2-3c53f2f83d8a.sa
+    size: 244623
+  85365bc4-86ed-4629-af26-1b0a0f504b55.gz: &id252
+    type: pass
+    value:
+      function: INPUT
+      parameter: 85365bc4-86ed-4629-af26-1b0a0f504b55.gz
+    size: 54494
+  335162c5-7aff-4f3e-bcc9-f87ad43fc489.fa: &id253
+    type: pass
+    value:
+      function: INPUT
+      parameter: 335162c5-7aff-4f3e-bcc9-f87ad43fc489.fa
+    size: 495372
+  5b6dc77b-eaf9-4092-9a97-5697b7db9773.bwt: &id254
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5b6dc77b-eaf9-4092-9a97-5697b7db9773.bwt
+    size: 489247
+  fb5cafb6-ab2c-44b2-b5f2-7707be7df8e9.txt: &id255
+    type: pass
+    value:
+      function: INPUT
+      parameter: fb5cafb6-ab2c-44b2-b5f2-7707be7df8e9.txt
+    size: 7
+  5e391f9b-8a59-4b2c-b037-b8d146c1f041.dict: &id256
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5e391f9b-8a59-4b2c-b037-b8d146c1f041.dict
+    size: 71
+  eff105c8-2fb5-4e0b-a5d8-d338c22a5f1d.amb: &id257
+    type: pass
+    value:
+      function: INPUT
+      parameter: eff105c8-2fb5-4e0b-a5d8-d338c22a5f1d.amb
+    size: 129
+  5043cdc7-9e3a-4bd9-84bc-90514e8c6c56.ann: &id258
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5043cdc7-9e3a-4bd9-84bc-90514e8c6c56.ann
+    size: 23
+  8cb9469c-1791-4761-9851-1717c94f4c65.fai: &id259
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8cb9469c-1791-4761-9851-1717c94f4c65.fai
+    size: 20
+  a91ca961-4137-4a0d-85b6-c7db4683850c.pac: &id260
+    type: pass
+    value:
+      function: INPUT
+      parameter: a91ca961-4137-4a0d-85b6-c7db4683850c.pac
+    size: 122311
+  2e26eb67-ee15-49b1-b88e-6322a7278cc6.sa: &id261
+    type: pass
+    value:
+      function: INPUT
+      parameter: 2e26eb67-ee15-49b1-b88e-6322a7278cc6.sa
+    size: 244623
+  5da8837e-1e50-417b-9237-2bbdaf43c449.gz: &id262
+    type: pass
+    value:
+      function: INPUT
+      parameter: 5da8837e-1e50-417b-9237-2bbdaf43c449.gz
+    size: 54494
+  74e491ef-82bb-4146-9fba-f7fd81bd60b9.fa: &id263
+    type: pass
+    value:
+      function: INPUT
+      parameter: 74e491ef-82bb-4146-9fba-f7fd81bd60b9.fa
+    size: 495372
+  a7a77eaa-dabe-402c-83f1-341ed480f6e6.bwt: &id264
+    type: pass
+    value:
+      function: INPUT
+      parameter: a7a77eaa-dabe-402c-83f1-341ed480f6e6.bwt
+    size: 489247
+  30f756b6-f176-4e18-8b86-b031e128b89f.txt: &id265
+    type: pass
+    value:
+      function: INPUT
+      parameter: 30f756b6-f176-4e18-8b86-b031e128b89f.txt
+    size: 4
+  53f4f20f-14b7-4032-afbc-36ba9cc18149.dict: &id266
+    type: pass
+    value:
+      function: INPUT
+      parameter: 53f4f20f-14b7-4032-afbc-36ba9cc18149.dict
+    size: 71
+  8c2e52a8-059a-4a62-818e-476a39617774.amb: &id267
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8c2e52a8-059a-4a62-818e-476a39617774.amb
+    size: 129
+  c0faf628-bc78-4078-b817-478e5d7c6aa2.ann: &id268
+    type: pass
+    value:
+      function: INPUT
+      parameter: c0faf628-bc78-4078-b817-478e5d7c6aa2.ann
+    size: 23
+  1e99d893-f1f7-4af9-8c9c-654cdafae2a4.fai: &id269
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1e99d893-f1f7-4af9-8c9c-654cdafae2a4.fai
+    size: 20
+  495dce47-7764-4fe2-ba37-49187ce5b3e9.pac: &id270
+    type: pass
+    value:
+      function: INPUT
+      parameter: 495dce47-7764-4fe2-ba37-49187ce5b3e9.pac
+    size: 122311
+  f9498990-f8b2-4336-b6d2-dbc6ca89420c.sa: &id271
+    type: pass
+    value:
+      function: INPUT
+      parameter: f9498990-f8b2-4336-b6d2-dbc6ca89420c.sa
+    size: 244623
+  e6315e28-bedb-40af-a829-505d49dfc1b3.gz: &id272
+    type: pass
+    value:
+      function: INPUT
+      parameter: e6315e28-bedb-40af-a829-505d49dfc1b3.gz
+    size: 54494
+  66eb6857-e0e1-46d3-8cd6-410c065ff046.fa: &id273
+    type: pass
+    value:
+      function: INPUT
+      parameter: 66eb6857-e0e1-46d3-8cd6-410c065ff046.fa
+    size: 495372
+  59c86ad1-e0bd-4ce2-a865-05038113d16f.bwt: &id274
+    type: pass
+    value:
+      function: INPUT
+      parameter: 59c86ad1-e0bd-4ce2-a865-05038113d16f.bwt
+    size: 489247
+  6341d523-27f7-49c5-9002-536a4417aced.txt: &id275
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6341d523-27f7-49c5-9002-536a4417aced.txt
+    size: 7
+  e9918bad-d0be-4031-8cf2-1d7a8dd6b8b4.dict: &id276
+    type: pass
+    value:
+      function: INPUT
+      parameter: e9918bad-d0be-4031-8cf2-1d7a8dd6b8b4.dict
+    size: 71
+  f0f7e32f-a499-4698-a223-b37e45db5f6a.amb: &id277
+    type: pass
+    value:
+      function: INPUT
+      parameter: f0f7e32f-a499-4698-a223-b37e45db5f6a.amb
+    size: 129
+  bc1fe624-8ea4-427c-934b-2ce8c4d1a823.ann: &id278
+    type: pass
+    value:
+      function: INPUT
+      parameter: bc1fe624-8ea4-427c-934b-2ce8c4d1a823.ann
+    size: 23
+  6d4b2633-1d70-4a0a-9e84-3bee36e05828.fai: &id279
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6d4b2633-1d70-4a0a-9e84-3bee36e05828.fai
+    size: 20
+  6f5168c0-4fa0-4574-9b5e-fd743662c1e5.pac: &id280
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6f5168c0-4fa0-4574-9b5e-fd743662c1e5.pac
+    size: 122311
+  49c81c05-cb8d-48fe-a0ff-0fad1a34a389.sa: &id281
+    type: pass
+    value:
+      function: INPUT
+      parameter: 49c81c05-cb8d-48fe-a0ff-0fad1a34a389.sa
+    size: 244623
+  4e519144-279f-4c62-8512-eaba14264b4b.gz: &id282
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4e519144-279f-4c62-8512-eaba14264b4b.gz
+    size: 54494
+  0d72ee24-5854-452f-bb03-3201cc118aa1.fa: &id283
+    type: pass
+    value:
+      function: INPUT
+      parameter: 0d72ee24-5854-452f-bb03-3201cc118aa1.fa
+    size: 495372
+  99ff9a91-8976-4c56-9b63-5161c4dc68cf.bwt: &id284
+    type: pass
+    value:
+      function: INPUT
+      parameter: 99ff9a91-8976-4c56-9b63-5161c4dc68cf.bwt
+    size: 489247
+  4774da04-3a1d-439b-8aaf-d244c4752865.txt: &id285
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4774da04-3a1d-439b-8aaf-d244c4752865.txt
+    size: 6
+  d93e10f8-ee81-4ea0-a6d9-28eee0c38e83.dict: &id286
+    type: pass
+    value:
+      function: INPUT
+      parameter: d93e10f8-ee81-4ea0-a6d9-28eee0c38e83.dict
+    size: 71
+  71c500f5-8653-4070-b33e-7cd0f3c23c6e.amb: &id287
+    type: pass
+    value:
+      function: INPUT
+      parameter: 71c500f5-8653-4070-b33e-7cd0f3c23c6e.amb
+    size: 129
+  c49fc788-29cb-463a-bc44-91783bb74915.ann: &id288
+    type: pass
+    value:
+      function: INPUT
+      parameter: c49fc788-29cb-463a-bc44-91783bb74915.ann
+    size: 23
+  fc3fcc84-b82c-4a1d-8c60-973172b3a148.fai: &id289
+    type: pass
+    value:
+      function: INPUT
+      parameter: fc3fcc84-b82c-4a1d-8c60-973172b3a148.fai
+    size: 20
+  89bd260b-9ebf-49af-bf01-1de45a591098.pac: &id290
+    type: pass
+    value:
+      function: INPUT
+      parameter: 89bd260b-9ebf-49af-bf01-1de45a591098.pac
+    size: 122311
+  689b96bb-9a7d-4810-9df7-600c9722b518.sa: &id291
+    type: pass
+    value:
+      function: INPUT
+      parameter: 689b96bb-9a7d-4810-9df7-600c9722b518.sa
+    size: 244623
+  7d028f69-7908-4cbd-80f9-6dc5b6d35dd7.gz: &id292
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7d028f69-7908-4cbd-80f9-6dc5b6d35dd7.gz
+    size: 54494
+  ba256aa7-18bd-4f48-8484-4a4f1075c5ff.fa: &id293
+    type: pass
+    value:
+      function: INPUT
+      parameter: ba256aa7-18bd-4f48-8484-4a4f1075c5ff.fa
+    size: 495372
+  39423735-793d-4d9a-afb5-f8fa9f480750.bwt: &id294
+    type: pass
+    value:
+      function: INPUT
+      parameter: 39423735-793d-4d9a-afb5-f8fa9f480750.bwt
+    size: 489247
+  31703e45-a052-4d28-a95b-b54f6cd5f477.txt: &id295
+    type: pass
+    value:
+      function: INPUT
+      parameter: 31703e45-a052-4d28-a95b-b54f6cd5f477.txt
+    size: 8
+  e16c37e6-03ae-4805-9903-7bbb6d508003.dict: &id296
+    type: pass
+    value:
+      function: INPUT
+      parameter: e16c37e6-03ae-4805-9903-7bbb6d508003.dict
+    size: 71
+  7e8934f2-1a56-4df5-90f4-271eeb226404.amb: &id297
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7e8934f2-1a56-4df5-90f4-271eeb226404.amb
+    size: 129
+  8ad30d3a-0869-42db-b256-d0213898f9da.ann: &id298
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8ad30d3a-0869-42db-b256-d0213898f9da.ann
+    size: 23
+  b68a631d-4642-4665-b3fb-46355bfe1723.fai: &id299
+    type: pass
+    value:
+      function: INPUT
+      parameter: b68a631d-4642-4665-b3fb-46355bfe1723.fai
+    size: 20
+  809a29a8-874d-4181-a0f0-e497b76e2f69.pac: &id300
+    type: pass
+    value:
+      function: INPUT
+      parameter: 809a29a8-874d-4181-a0f0-e497b76e2f69.pac
+    size: 122311
+  137a772a-0b7b-49ca-ab9c-5065910bf284.sa: &id301
+    type: pass
+    value:
+      function: INPUT
+      parameter: 137a772a-0b7b-49ca-ab9c-5065910bf284.sa
+    size: 244623
+  2386c00e-89fa-4406-953f-e42345e182d3.gz: &id302
+    type: pass
+    value:
+      function: INPUT
+      parameter: 2386c00e-89fa-4406-953f-e42345e182d3.gz
+    size: 54494
+  45d6cf87-04ae-4eab-b909-fd3e68ec9569.fa: &id303
+    type: pass
+    value:
+      function: INPUT
+      parameter: 45d6cf87-04ae-4eab-b909-fd3e68ec9569.fa
+    size: 495372
+  91f141d0-6d48-457d-9f1f-ce8a6ce1696f.bwt: &id304
+    type: pass
+    value:
+      function: INPUT
+      parameter: 91f141d0-6d48-457d-9f1f-ce8a6ce1696f.bwt
+    size: 489247
+  8497944d-bd17-4a26-9c4a-d352a9833563.txt: &id305
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8497944d-bd17-4a26-9c4a-d352a9833563.txt
+    size: 6
+  9a4fc850-7d9b-4c3f-bea7-1ee51a95104d.dict: &id306
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9a4fc850-7d9b-4c3f-bea7-1ee51a95104d.dict
+    size: 71
+  60da29cf-03cc-479c-9e93-9745a7e6ac32.amb: &id307
+    type: pass
+    value:
+      function: INPUT
+      parameter: 60da29cf-03cc-479c-9e93-9745a7e6ac32.amb
+    size: 129
+  f4f66a08-8611-4f38-9191-bdd4a3a035e7.ann: &id308
+    type: pass
+    value:
+      function: INPUT
+      parameter: f4f66a08-8611-4f38-9191-bdd4a3a035e7.ann
+    size: 23
+  9a9a8c7a-b3bb-46f8-98cb-f3fc6121ac2d.fai: &id309
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9a9a8c7a-b3bb-46f8-98cb-f3fc6121ac2d.fai
+    size: 20
+  26437ca7-f05d-4e7f-901a-f53b21ced4b3.pac: &id310
+    type: pass
+    value:
+      function: INPUT
+      parameter: 26437ca7-f05d-4e7f-901a-f53b21ced4b3.pac
+    size: 122311
+  aa0d6603-d363-4aee-b06b-e8995a2153e8.sa: &id311
+    type: pass
+    value:
+      function: INPUT
+      parameter: aa0d6603-d363-4aee-b06b-e8995a2153e8.sa
+    size: 244623
+  f3383dbc-2302-4426-bdbf-443142ba597a.gz: &id312
+    type: pass
+    value:
+      function: INPUT
+      parameter: f3383dbc-2302-4426-bdbf-443142ba597a.gz
+    size: 54494
+  20c3c497-0e71-46be-b8f1-c563dedf4275.fa: &id313
+    type: pass
+    value:
+      function: INPUT
+      parameter: 20c3c497-0e71-46be-b8f1-c563dedf4275.fa
+    size: 495372
+  962c6409-441f-4db4-8b11-923a5e6ac1ba.bwt: &id314
+    type: pass
+    value:
+      function: INPUT
+      parameter: 962c6409-441f-4db4-8b11-923a5e6ac1ba.bwt
+    size: 489247
+  539833f2-67ae-48cf-92c6-5c63246a3a51.gz: &id315
+    type: pass
+    value:
+      function: INPUT
+      parameter: 539833f2-67ae-48cf-92c6-5c63246a3a51.gz
+    size: 54494
+  27895220-34ed-4256-b429-0f5946573db2.bwt: &id316
+    type: pass
+    value:
+      function: INPUT
+      parameter: 27895220-34ed-4256-b429-0f5946573db2.bwt
+    size: 489247
+  f9ce45b8-3e81-4e00-9b8b-2bee49578acf.txt: &id317
+    type: pass
+    value:
+      function: INPUT
+      parameter: f9ce45b8-3e81-4e00-9b8b-2bee49578acf.txt
+    size: 6
+  8878492c-f4d9-47d3-b9f7-d6b9146cb561.fai: &id318
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8878492c-f4d9-47d3-b9f7-d6b9146cb561.fai
+    size: 20
+  3014250b-5b62-4db4-b036-9b1d40865c8e.pac: &id319
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3014250b-5b62-4db4-b036-9b1d40865c8e.pac
+    size: 122311
+  daef9e79-e2ed-4d4d-b24b-49557114fad4.fa: &id320
+    type: pass
+    value:
+      function: INPUT
+      parameter: daef9e79-e2ed-4d4d-b24b-49557114fad4.fa
+    size: 495372
+  b670594a-48b0-4ee3-8bad-66bd899a8e64.dict: &id321
+    type: pass
+    value:
+      function: INPUT
+      parameter: b670594a-48b0-4ee3-8bad-66bd899a8e64.dict
+    size: 71
+  4a8690d4-88a0-4159-b57c-6cf1ba3f4308.ann: &id322
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4a8690d4-88a0-4159-b57c-6cf1ba3f4308.ann
+    size: 23
+  fdb97e76-fdd2-4efa-80c8-796711cd5a3b.list: &id323
+    type: pass
+    value:
+      function: INPUT
+      parameter: fdb97e76-fdd2-4efa-80c8-796711cd5a3b.list
+    size: 8
+  32442e56-9a0b-4277-96b9-f02e18f5c65b.sa: &id324
+    type: pass
+    value:
+      function: INPUT
+      parameter: 32442e56-9a0b-4277-96b9-f02e18f5c65b.sa
+    size: 244623
+  c8dc33bc-d898-48c9-9455-ad1998c72baf.amb: &id325
+    type: pass
+    value:
+      function: INPUT
+      parameter: c8dc33bc-d898-48c9-9455-ad1998c72baf.amb
+    size: 129
+  0914051b-e019-43ff-8efb-df65e02b647a.txt: &id326
+    type: pass
+    value:
+      function: INPUT
+      parameter: 0914051b-e019-43ff-8efb-df65e02b647a.txt
+    size: 8
+  db08ac6d-4abc-45cb-ae21-d3d230e267c8.dict: &id327
+    type: pass
+    value:
+      function: INPUT
+      parameter: db08ac6d-4abc-45cb-ae21-d3d230e267c8.dict
+    size: 71
+  bc761873-610f-41fb-825d-0ff324ceb4fe.amb: &id328
+    type: pass
+    value:
+      function: INPUT
+      parameter: bc761873-610f-41fb-825d-0ff324ceb4fe.amb
+    size: 129
+  7fcef625-b333-4343-86a5-b5a4bc13a72e.ann: &id329
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7fcef625-b333-4343-86a5-b5a4bc13a72e.ann
+    size: 23
+  28fc9f2d-a00f-4d1c-90ea-8ea4963b45a4.fai: &id330
+    type: pass
+    value:
+      function: INPUT
+      parameter: 28fc9f2d-a00f-4d1c-90ea-8ea4963b45a4.fai
+    size: 20
+  a3f6b60a-8417-4ca6-8e01-1dd51a221c0b.pac: &id331
+    type: pass
+    value:
+      function: INPUT
+      parameter: a3f6b60a-8417-4ca6-8e01-1dd51a221c0b.pac
+    size: 122311
+  f4cd9b76-686e-4de5-bea7-5a5629be717e.sa: &id332
+    type: pass
+    value:
+      function: INPUT
+      parameter: f4cd9b76-686e-4de5-bea7-5a5629be717e.sa
+    size: 244623
+  d94ca2df-213b-43b2-80e0-ca8d309d7fe6.gz: &id333
+    type: pass
+    value:
+      function: INPUT
+      parameter: d94ca2df-213b-43b2-80e0-ca8d309d7fe6.gz
+    size: 54494
+  9d338d78-096c-4c82-b071-4f7502180304.fa: &id334
+    type: pass
+    value:
+      function: INPUT
+      parameter: 9d338d78-096c-4c82-b071-4f7502180304.fa
+    size: 495372
+  e5dd3d01-4bc6-4849-830c-5f2c1e23926d.bwt: &id335
+    type: pass
+    value:
+      function: INPUT
+      parameter: e5dd3d01-4bc6-4849-830c-5f2c1e23926d.bwt
+    size: 489247
+  91fe6b83-06fe-43d3-b68f-ac1414cb55b9.dict: &id336
+    type: pass
+    value:
+      function: INPUT
+      parameter: 91fe6b83-06fe-43d3-b68f-ac1414cb55b9.dict
+    size: 71
+  13c5f4c5-c57a-49e2-9b40-145654957b36.pac: &id337
+    type: pass
+    value:
+      function: INPUT
+      parameter: 13c5f4c5-c57a-49e2-9b40-145654957b36.pac
+    size: 122311
+  20ecba50-85cd-4312-a8ad-89254da06458.fai: &id338
+    type: pass
+    value:
+      function: INPUT
+      parameter: 20ecba50-85cd-4312-a8ad-89254da06458.fai
+    size: 20
+  55fd6ad5-b5da-4d5c-befa-d41ad6f6747f.sa: &id339
+    type: pass
+    value:
+      function: INPUT
+      parameter: 55fd6ad5-b5da-4d5c-befa-d41ad6f6747f.sa
+    size: 244623
+  3f26c7ec-6c68-467c-a90c-c49a32fdeee9.gz: &id340
+    type: pass
+    value:
+      function: INPUT
+      parameter: 3f26c7ec-6c68-467c-a90c-c49a32fdeee9.gz
+    size: 54494
+  db3e3726-1855-47c9-ab00-1a75d4a60b83.amb: &id341
+    type: pass
+    value:
+      function: INPUT
+      parameter: db3e3726-1855-47c9-ab00-1a75d4a60b83.amb
+    size: 129
+  df118f4b-69e4-41ef-9dbd-3909012f34cb.fa: &id342
+    type: pass
+    value:
+      function: INPUT
+      parameter: df118f4b-69e4-41ef-9dbd-3909012f34cb.fa
+    size: 495372
+  8e3530ee-6b0b-4e90-906d-9c6f244f9ad7.ann: &id343
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8e3530ee-6b0b-4e90-906d-9c6f244f9ad7.ann
+    size: 23
+  1f8e1bce-64dd-4315-8a95-d45c45988774.bwt: &id344
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1f8e1bce-64dd-4315-8a95-d45c45988774.bwt
+    size: 489247
+  780652dd-b7bd-47c5-bd8d-33aeae152d89.txt: &id345
+    type: pass
+    value:
+      function: INPUT
+      parameter: 780652dd-b7bd-47c5-bd8d-33aeae152d89.txt
+    size: 8
+  b81b1c51-fa87-4935-a844-731ab38d7337.dict: &id346
+    type: pass
+    value:
+      function: INPUT
+      parameter: b81b1c51-fa87-4935-a844-731ab38d7337.dict
+    size: 71
+  cf310131-b427-4797-a905-cac888e7283e.pac: &id347
+    type: pass
+    value:
+      function: INPUT
+      parameter: cf310131-b427-4797-a905-cac888e7283e.pac
+    size: 122311
+  4aa2ac6a-ae88-4496-aceb-d280cd605048.fai: &id348
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4aa2ac6a-ae88-4496-aceb-d280cd605048.fai
+    size: 20
+  4fd4b5e9-76f8-4fd4-a41b-eca1cbc946b0.sa: &id349
+    type: pass
+    value:
+      function: INPUT
+      parameter: 4fd4b5e9-76f8-4fd4-a41b-eca1cbc946b0.sa
+    size: 244623
+  29f9e0ce-7cfd-4492-91e8-338836654cdd.gz: &id350
+    type: pass
+    value:
+      function: INPUT
+      parameter: 29f9e0ce-7cfd-4492-91e8-338836654cdd.gz
+    size: 54494
+  8cb4bb37-508b-423d-a977-256af9084ee4.amb: &id351
+    type: pass
+    value:
+      function: INPUT
+      parameter: 8cb4bb37-508b-423d-a977-256af9084ee4.amb
+    size: 129
+  b66127c7-becb-46af-a80e-7e42eb049307.fa: &id352
+    type: pass
+    value:
+      function: INPUT
+      parameter: b66127c7-becb-46af-a80e-7e42eb049307.fa
+    size: 495372
+  194245d5-9137-4d10-885b-808cbf189067.ann: &id353
+    type: pass
+    value:
+      function: INPUT
+      parameter: 194245d5-9137-4d10-885b-808cbf189067.ann
+    size: 23
+  201d3f97-8744-4b90-8019-43f3a63a7542.bwt: &id354
+    type: pass
+    value:
+      function: INPUT
+      parameter: 201d3f97-8744-4b90-8019-43f3a63a7542.bwt
+    size: 489247
+  06f71a7f-dec0-4652-9266-97b76fc5be10.txt: &id355
+    type: pass
+    value:
+      function: INPUT
+      parameter: 06f71a7f-dec0-4652-9266-97b76fc5be10.txt
+    size: 12
+  d7aeb802-a315-4b44-8714-af9ca0ef0cdd.dict: &id356
+    type: pass
+    value:
+      function: INPUT
+      parameter: d7aeb802-a315-4b44-8714-af9ca0ef0cdd.dict
+    size: 71
+  2a5be518-4df1-4fc5-ad7f-5bd6c3e1e11a.pac: &id357
+    type: pass
+    value:
+      function: INPUT
+      parameter: 2a5be518-4df1-4fc5-ad7f-5bd6c3e1e11a.pac
+    size: 122311
+  d4f64edf-c757-41aa-a888-2d40db530517.fai: &id358
+    type: pass
+    value:
+      function: INPUT
+      parameter: d4f64edf-c757-41aa-a888-2d40db530517.fai
+    size: 20
+  0814ca48-073a-4a81-86b2-a426e8a574cd.sa: &id359
+    type: pass
+    value:
+      function: INPUT
+      parameter: 0814ca48-073a-4a81-86b2-a426e8a574cd.sa
+    size: 244623
+  361939e5-f66b-4ddd-9640-9369d7ab8f01.gz: &id360
+    type: pass
+    value:
+      function: INPUT
+      parameter: 361939e5-f66b-4ddd-9640-9369d7ab8f01.gz
+    size: 54494
+  6869cb7c-e830-4c5f-be5f-1b78fe076ded.amb: &id361
+    type: pass
+    value:
+      function: INPUT
+      parameter: 6869cb7c-e830-4c5f-be5f-1b78fe076ded.amb
+    size: 129
+  53f038e2-b6df-4d23-8845-89b73d193ada.fa: &id362
+    type: pass
+    value:
+      function: INPUT
+      parameter: 53f038e2-b6df-4d23-8845-89b73d193ada.fa
+    size: 495372
+  34d39870-a525-40b8-acc1-ea3aa65a93c4.ann: &id363
+    type: pass
+    value:
+      function: INPUT
+      parameter: 34d39870-a525-40b8-acc1-ea3aa65a93c4.ann
+    size: 23
+  68917b48-0353-4bff-95d0-e63815904138.bwt: &id364
+    type: pass
+    value:
+      function: INPUT
+      parameter: 68917b48-0353-4bff-95d0-e63815904138.bwt
+    size: 489247
+  7eece883-52e5-4ae6-ac9f-057c9e7dcb23.txt: &id365
+    type: pass
+    value:
+      function: INPUT
+      parameter: 7eece883-52e5-4ae6-ac9f-057c9e7dcb23.txt
+    size: 8
+  f51042ef-b44d-4832-b5af-7dbae9e03870.dict: &id366
+    type: pass
+    value:
+      function: INPUT
+      parameter: f51042ef-b44d-4832-b5af-7dbae9e03870.dict
+    size: 71
+  15580987-8815-46a8-b58d-fa5c7966b10a.pac: &id367
+    type: pass
+    value:
+      function: INPUT
+      parameter: 15580987-8815-46a8-b58d-fa5c7966b10a.pac
+    size: 122311
+  a1e6c59f-5338-4d85-9543-bb5877bf89c8.fai: &id368
+    type: pass
+    value:
+      function: INPUT
+      parameter: a1e6c59f-5338-4d85-9543-bb5877bf89c8.fai
+    size: 20
+  1a53c00c-7aad-4b37-8640-7546765a626c.sa: &id369
+    type: pass
+    value:
+      function: INPUT
+      parameter: 1a53c00c-7aad-4b37-8640-7546765a626c.sa
+    size: 244623
+  2d276bd8-bb79-4d25-8aee-4957dad73164.gz: &id370
+    type: pass
+    value:
+      function: INPUT
+      parameter: 2d276bd8-bb79-4d25-8aee-4957dad73164.gz
+    size: 54494
+  13cc079e-e7a8-47ca-86b0-07c22707f8ab.amb: &id371
+    type: pass
+    value:
+      function: INPUT
+      parameter: 13cc079e-e7a8-47ca-86b0-07c22707f8ab.amb
+    size: 129
+  cef62cad-b37b-43a4-a830-102e8da0bd9e.fa: &id372
+    type: pass
+    value:
+      function: INPUT
+      parameter: cef62cad-b37b-43a4-a830-102e8da0bd9e.fa
+    size: 495372
+  79883b4f-9938-4721-8dcc-85a7daee2ff3.ann: &id373
+    type: pass
+    value:
+      function: INPUT
+      parameter: 79883b4f-9938-4721-8dcc-85a7daee2ff3.ann
+    size: 23
+  2cb78bfc-e060-431c-9426-550c6384272f.bwt: &id374
+    type: pass
+    value:
+      function: INPUT
+      parameter: 2cb78bfc-e060-431c-9426-550c6384272f.bwt
+    size: 489247
+  db5b3f79-86f2-4bb5-ad37-8f469147992e.txt: &id375
+    type: pass
+    value:
+      function: INPUT
+      parameter: db5b3f79-86f2-4bb5-ad37-8f469147992e.txt
+    size: 7
+functions:
+- name: alignment_to_reference_00000001
+  source: alignment_to_reference_00000001
+  runtime: 1
+  input:
+    5e26b4aa-76ed-4a91-b437-e2a9e8ed3f98.dict: *id001
+    0d68ca3b-6008-498a-b736-ce54f80e6ef8.pac: *id002
+    3a08f4e0-9da1-484b-a0b1-b651b81bbe30.fai: *id003
+    c96f187d-c088-4ae5-b847-003e452ad718.fastq: *id004
+    0041e4b8-ce3a-49ee-b023-7216237d3dcd.fastq: *id005
+    7880ec1d-7e30-4e3c-b92f-f764af334813.sa: *id006
+    1ad36ede-70fd-40c3-9c30-bb83fc765ae3.gz: *id007
+    982bc6dd-78a2-43df-b766-235a5e8476d6.amb: *id008
+    c929bba4-856d-44b1-b247-f8b35e644b0d.fa: *id009
+    f63e6f55-de95-4aac-a194-9528c5ea144c.ann: *id010
+    ff558153-6f60-4fcb-899c-14cd7954ac4b.bwt: *id011
+    a0d311e3-0c75-40bb-9a6c-c84f92dafb59.txt: *id012
+  output:
+    78d3a8a7-2c07-4785-9626-f60869e2eb3d.sam:
+      type: normal
+      size: 1125610
+  next:
+    type: pass
+    nodes:
+    - sort_sam_00000002
+- name: sort_sam_00000002
+  source: sort_sam_00000002
+  runtime: 1
+  input:
+    78d3a8a7-2c07-4785-9626-f60869e2eb3d.sam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 78d3a8a7-2c07-4785-9626-f60869e2eb3d.sam
+      size: 1125610
+    c1285a84-e7dd-48ac-9d28-bc20412bd7b8.gz: *id013
+  output:
+    a50b315f-decc-470e-a6a6-0fb2c3de5f1a.bai:
+      type: normal
+      size: 1274240
+    08aab1f5-0e2f-4e3d-a5fe-a05e39e63fbc.bam:
+      type: normal
+      size: 365760
+  next:
+    type: pass
+    nodes:
+    - dedup_00000003
+- name: dedup_00000003
+  source: dedup_00000003
+  runtime: 1
+  input:
+    a50b315f-decc-470e-a6a6-0fb2c3de5f1a.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: a50b315f-decc-470e-a6a6-0fb2c3de5f1a.bai
+      size: 1274240
+    08aab1f5-0e2f-4e3d-a5fe-a05e39e63fbc.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 08aab1f5-0e2f-4e3d-a5fe-a05e39e63fbc.bam
+      size: 365760
+    71ae05f6-f71f-49fb-a5c9-b3487d8701c2.gz: *id014
+  output:
+    7405aacf-042f-4d4b-97b6-3143a164258c.bai:
+      type: normal
+      size: 1274240
+    8dbe2fee-e25a-41f7-b982-050dc342b2c7.bam:
+      type: normal
+      size: 374699
+  next:
+    type: pass
+    nodes:
+    - add_replace_00000004
+- name: add_replace_00000004
+  source: add_replace_00000004
+  runtime: 1
+  input:
+    7405aacf-042f-4d4b-97b6-3143a164258c.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7405aacf-042f-4d4b-97b6-3143a164258c.bai
+      size: 1274240
+    8dbe2fee-e25a-41f7-b982-050dc342b2c7.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 8dbe2fee-e25a-41f7-b982-050dc342b2c7.bam
+      size: 374699
+    31bf5550-5461-4cd6-9103-cb43644d51b7.gz: *id015
+  output:
+    2127af54-a5f9-481f-a185-babfc17cbb6d.bam:
+      type: normal
+      size: 37956
+    d8ced78f-4802-4b99-8e91-fb63a06c3fb4.bai:
+      type: normal
+      size: 1274240
+  next:
+    type: pass
+    nodes:
+    - realign_target_creator_00000005
+- name: realign_target_creator_00000005
+  source: realign_target_creator_00000005
+  runtime: 1
+  input:
+    2127af54-a5f9-481f-a185-babfc17cbb6d.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 2127af54-a5f9-481f-a185-babfc17cbb6d.bam
+      size: 37956
+    d8ced78f-4802-4b99-8e91-fb63a06c3fb4.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: d8ced78f-4802-4b99-8e91-fb63a06c3fb4.bai
+      size: 1274240
+    8bda26f8-9b10-43b9-aafa-d5179f41860c.dict: *id016
+    95250fcd-3c1e-4f05-95ff-bd7b101ee8ae.pac: *id017
+    a64cf12f-ae7c-4dba-bb3c-83b456a9828c.fai: *id018
+    49d9c6c5-9583-404a-9a00-7beed22c34fa.sa: *id019
+    02f1c734-0497-4f70-8ff9-0ec43e226147.gz: *id020
+    a864af7f-0d27-4641-922b-b824631130d6.amb: *id021
+    ba578c48-49f5-4fdb-aee4-04ea1bfee329.fa: *id022
+    222d5b40-cea5-49b6-be2b-bce13245b192.ann: *id023
+    9701ca6a-7f25-4f30-8b57-d6293ea29afc.bwt: *id024
+    2622df3d-749b-4fd4-b39a-5ce8547944ac.txt: *id025
+  output:
+    69fa7a96-ed7c-4eff-9311-168157460589.list:
+      type: normal
+      size: 400
+  next:
+    type: pass
+    nodes:
+    - indel_realign_00000006
+- name: indel_realign_00000006
+  source: indel_realign_00000006
+  runtime: 1
+  input:
+    69fa7a96-ed7c-4eff-9311-168157460589.list:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 69fa7a96-ed7c-4eff-9311-168157460589.list
+      size: 400
+    e29defb3-ed0e-4317-9a36-453ea088194a.dict: *id026
+    978e18bf-65b3-4112-a388-01b2316a0c0f.bai: *id027
+    0aa26828-0c2a-4be9-a43c-25850c223ca0.pac: *id028
+    d2378253-1b39-4bc2-aa93-885a83c21e6e.fai: *id029
+    77c2e684-0fdf-4d20-98b6-5f77f176528c.sa: *id030
+    edb6f418-cc46-4d77-90df-6b70b12a5b2c.gz: *id031
+    105d13d0-1ac0-4674-9984-58491f2f66f8.amb: *id032
+    98ac897f-b512-4b72-968d-74dff6feccb5.fa: *id033
+    3f85e5fa-7010-4e34-a586-e03fbb697123.ann: *id034
+    4d3f133d-afdc-4070-951f-44d41f8cdf3d.bwt: *id035
+    8ad4673e-a0f9-4081-be12-b8da011ca981.bam: *id036
+    304633e3-833e-402c-acc3-06ccbdb5c1ae.txt: *id037
+  output:
+    aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
+      type: normal
+      size: 1274240
+    ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam:
+      type: normal
+      size: 151511
+  next:
+    type: pass
+    nodes:
+    - haplotype_caller_00000007
+    - haplotype_caller_00000008
+    - haplotype_caller_00000009
+    - haplotype_caller_00000010
+    - haplotype_caller_00000011
+    - haplotype_caller_00000012
+    - haplotype_caller_00000013
+    - haplotype_caller_00000014
+- name: haplotype_caller_00000007
+  source: haplotype_caller_00000007
+  runtime: 1
+  input:
+    aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai
+      size: 1274240
+    ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam
+      size: 151511
+    1431c433-e750-4e9c-bb0d-c36337db14d1.dict: *id038
+    032b2a69-c59f-4586-af70-241b9121feb3.pac: *id039
+    38633eee-0b74-4994-b29c-9bd81cebf626.fai: *id040
+    b2924ac6-c1d2-4155-b0f6-ab988ca8817e.sa: *id041
+    3a13eddd-aeef-4e40-a21d-1db08c4034d7.gz: *id042
+    fb6de936-afa3-4362-96b9-9a35e7a65bbb.amb: *id043
+    17c8044a-2f1c-49e4-9708-e35235b3ecbe.fa: *id044
+    0a954cff-91b5-489f-8013-0150acb1f274.ann: *id045
+    0b96640c-a934-4dc1-b8d5-7fc704f16d60.bwt: *id046
+    654c2741-52ef-4d79-b9fd-c8622fbdf01a.txt: *id047
+  output:
+    f51e202f-69b1-4c40-88dc-8308a5270453.vcf:
+      type: normal
+      size: 757280
+    81d34b4f-028e-4518-845e-49aaa0a09ec6.idx:
+      type: normal
+      size: 301596
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000029
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000008
+  source: haplotype_caller_00000008
+  runtime: 1
+  input:
+    aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai
+      size: 1274240
+    ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam
+      size: 151511
+    c7ad4952-94b4-47db-a755-daf0fbf00b73.dict: *id048
+    fc75c877-5827-4e3e-888f-c34c696f2690.pac: *id049
+    95254978-0aa4-4fd9-8dc6-53573d16dcae.fai: *id050
+    81a7dca7-0d78-46de-be56-a666935f7ecf.sa: *id051
+    181bdb58-8a65-44f9-b29e-dba866dcba5c.gz: *id052
+    768046c5-4abd-4ace-9380-12a210fc7fcb.amb: *id053
+    40b671e4-26b1-40bc-a898-3d49ad97d8e5.fa: *id054
+    36b7125a-0048-499f-8e5c-bf93522aa598.ann: *id055
+    e62f1a5e-05bf-496f-83cc-bd39df8d4fa1.bwt: *id056
+    6e350ce0-3458-4b80-b512-53ed63490252.txt: *id057
+  output:
+    11961b35-18ad-41fa-aebc-8503caa1ccc5.vcf:
+      type: normal
+      size: 757280
+    f0ffed08-6f90-4168-948f-6a93d51e986d.idx:
+      type: normal
+      size: 77421
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000030
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000009
+  source: haplotype_caller_00000009
+  runtime: 1
+  input:
+    aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai
+      size: 1274240
+    ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam
+      size: 151511
+    3b814310-56a7-413d-ae41-c888b553b00c.dict: *id058
+    9b2a9bcc-ddd1-4a41-9a74-2d16d83f0c10.pac: *id059
+    7374b506-2f53-454e-b01f-5087437755e9.fai: *id060
+    fac422bd-e0ed-4785-95f8-057a607f25a3.sa: *id061
+    e35fa2d5-4039-4d68-8617-7613ffedb240.gz: *id062
+    f1676d50-15df-4383-a6ec-2866b2a60cfd.amb: *id063
+    b08be32e-f6d7-4bcb-b3fc-50c4414e64bd.fa: *id064
+    7b53793a-ffd7-4858-8d69-8156f8530d89.ann: *id065
+    a0d86737-937d-4242-b163-20532761e0a7.bwt: *id066
+    95665461-f112-433a-b5d2-4de1820a2604.txt: *id067
+  output:
+    5a5924a8-b8bc-47a5-90e9-e499565701a7.vcf:
+      type: normal
+      size: 757280
+    fabbfbee-a407-4a90-a9ab-5c7be0333205.idx:
+      type: normal
+      size: 227573
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000031
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000010
+  source: haplotype_caller_00000010
+  runtime: 1
+  input:
+    aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai
+      size: 1274240
+    ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam
+      size: 151511
+    6dd813b2-1716-4317-bc55-e820f227d4a8.dict: *id068
+    c54a806c-d881-4bfa-a62d-68d65fa09378.pac: *id069
+    76a9a25c-17ce-45a5-853a-1225fe917dc4.fai: *id070
+    43765cbd-9724-4cd4-9380-5b5f407425fd.sa: *id071
+    1ec1fb1e-b3d1-4232-8833-580b74a801a0.gz: *id072
+    ddf29dfc-da74-47e1-82e7-90e20e03a68f.amb: *id073
+    eec8e693-c446-46b4-b4d9-8996ac3b9e2b.fa: *id074
+    3e0ee5c8-3fed-4a75-bc13-8d741f49c162.ann: *id075
+    5d116e4c-07f1-4c1a-bd22-5b46edd3dbe8.bwt: *id076
+    9058e84f-0c4f-4969-a27f-26983cbabed1.txt: *id077
+  output:
+    0fcb6c85-bded-4a5e-9a40-ad4116f0151e.vcf:
+      type: normal
+      size: 757279
+    3bb3a1a4-82d4-4330-9b4c-4cd430f99315.idx:
+      type: normal
+      size: 233043
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000032
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000011
+  source: haplotype_caller_00000011
+  runtime: 1
+  input:
+    aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai
+      size: 1274240
+    ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam
+      size: 151511
+    d9b4e01c-7f83-4f6b-a06a-9e2b6fdc182e.dict: *id078
+    5fdf8d03-9195-4fcc-b4f4-ccacb849dd95.pac: *id079
+    64f78102-82ca-4be2-8f2c-6b65bc0b9ee5.fai: *id080
+    def4b1b8-34c5-420d-a15d-45bf09c4428c.sa: *id081
+    8345d1f8-4d88-4ccf-9b5e-8a9b958ad0ac.gz: *id082
+    05da74bf-368a-4526-9742-1c5a4c08cefd.amb: *id083
+    7bb43272-79dd-4079-84a3-068424834cb3.fa: *id084
+    5c0508b9-1813-4a3e-b4da-3c01718d4a43.ann: *id085
+    3af5f52d-fd7f-41e9-8679-b1e203cc56da.bwt: *id086
+    ef3b696c-1ecf-4fda-a0ab-e63b8bd6aa05.txt: *id087
+  output:
+    81dd04f1-a375-4327-a1e6-13653784750c.vcf:
+      type: normal
+      size: 757279
+    cd408d05-c45e-4cda-8ea0-af28a27784e1.idx:
+      type: normal
+      size: 273438
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000033
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000012
+  source: haplotype_caller_00000012
+  runtime: 1
+  input:
+    aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai
+      size: 1274240
+    ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam
+      size: 151511
+    fb67cf87-cc05-4b1f-b76c-e33f5bbd9d05.dict: *id088
+    8309ab9c-2adf-42d1-ae7b-f1d2ebbff392.pac: *id089
+    7106e382-e3ed-49e8-9aea-f58fad1b1efd.fai: *id090
+    dd5fd67e-4c27-46dd-8fc2-b616560bc70a.sa: *id091
+    d12923a5-7342-479f-b369-f970340c4d1e.gz: *id092
+    6d55cdbe-e112-4955-a2dc-aaa3c19a3eba.amb: *id093
+    4be9f05a-e566-41f2-aa68-fbd410ed186e.fa: *id094
+    bc85a4ab-49f4-4482-8e1e-b92828b31a8b.ann: *id095
+    482cbaf9-873f-4ed8-8943-f266181ea2f9.bwt: *id096
+    aa099150-3bfa-4cb2-bed6-ef4255d2eaae.txt: *id097
+  output:
+    41b1ef10-84ea-4320-95f5-998a6c53808b.vcf:
+      type: normal
+      size: 757279
+    59c9ed00-1a1d-431c-bcc3-a303cff06d29.idx:
+      type: normal
+      size: 207548
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000034
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000013
+  source: haplotype_caller_00000013
+  runtime: 1
+  input:
+    aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai
+      size: 1274240
+    ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam
+      size: 151511
+    e73237dc-4ecd-482b-a99e-09cf00f1b6f8.dict: *id098
+    5a9498ad-4a4f-4564-a71c-f65015ea5ebd.pac: *id099
+    fe5e900a-a3c3-4fac-b267-71fd8704fbe0.fai: *id100
+    4e355459-0984-4c77-9817-d347bb9bcba1.sa: *id101
+    ce46e30a-4707-4ec1-bd65-383643cf12f5.gz: *id102
+    f4af09dc-1c57-4702-847d-4e23f92e1a5b.amb: *id103
+    7f3b1445-90d1-417a-83a5-b94234879e24.fa: *id104
+    b5185408-6647-424e-9dd8-54e44eae9033.ann: *id105
+    673adf0c-adfe-4040-85fd-1af74b624424.bwt: *id106
+    744e4df0-d592-4b06-865c-c4a872ee7208.txt: *id107
+  output:
+    2fea2412-4c88-4e93-aed5-1efdf0f546a2.vcf:
+      type: normal
+      size: 757279
+    edc11d98-70a9-403a-a739-63f1add520d5.idx:
+      type: normal
+      size: 290480
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000035
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000014
+  source: haplotype_caller_00000014
+  runtime: 1
+  input:
+    aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai
+      size: 1274240
+    ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea7ebe7b-2a36-44c4-86f3-0c9aa25f2993.bam
+      size: 151511
+    7712a8e3-bdb9-472e-96b6-21f1792aa6c9.dict: *id108
+    fcf09a29-4bde-477f-80e3-dceca91a5cb7.pac: *id109
+    93eb5707-acc0-4f5d-b675-385b9c5c89b9.fai: *id110
+    dad9ac57-fe8e-4e7d-9092-3bc39e92351a.sa: *id111
+    03c3cdbc-738b-4d39-a193-a97183b60d46.gz: *id112
+    477dab6f-b9ce-4d64-a4ea-871aaa322781.amb: *id113
+    9e6d5016-63ac-43ca-9831-46596b70a0b8.fa: *id114
+    1ef9d151-ac11-412a-a2a3-10dcd820f2d5.ann: *id115
+    ed67b8e7-5832-48dc-937e-8846701df8b9.bwt: *id116
+    53bbd7a9-5afe-4240-bf0d-bdc3661b1f81.txt: *id117
+  output:
+    3d543985-f646-4ed2-9d2e-5e646c1a59d1.vcf:
+      type: normal
+      size: 757279
+    ea1ba6ad-57cf-4972-afff-9e5fa5a005f6.idx:
+      type: normal
+      size: 304786
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000036
+    - merge_gcvf_00000037
+- name: alignment_to_reference_00000015
+  source: alignment_to_reference_00000015
+  runtime: 1
+  input:
+    a5a4848c-5151-4c60-a310-4c04eb1d7e3c.dict: *id118
+    14922c9f-d65c-42c0-844e-905cf0a87651.pac: *id119
+    add0e448-4358-4528-acd8-4a19a16184c6.fai: *id120
+    68c29ca6-1ea6-484a-9609-2ebd120a9f1e.fastq: *id121
+    7c188cc3-4284-4c4d-956f-61a2bd471511.fastq: *id122
+    1e3bd65c-e31d-40dd-a78b-1920bb57d9f3.sa: *id123
+    b0d689b8-4954-4d39-bc4a-8ee94c6c2430.gz: *id124
+    a5ac996f-5268-4d1d-8f01-13d466fb753a.amb: *id125
+    07af63ac-ded5-4f1c-bf2b-1a3d1e5d4dc2.fa: *id126
+    cc291a11-62e3-482f-bd19-c3c3f0be4bba.ann: *id127
+    75ad42f6-0ee5-4c0a-8b5d-2df03c221c11.bwt: *id128
+    fb59c5d4-24b1-464c-ae05-70c0261d7379.txt: *id129
+  output:
+    6924b2a2-5569-4808-aa38-00249bef7954.sam:
+      type: normal
+      size: 1125610
+  next:
+    type: pass
+    nodes:
+    - sort_sam_00000016
+- name: sort_sam_00000016
+  source: sort_sam_00000016
+  runtime: 1
+  input:
+    6924b2a2-5569-4808-aa38-00249bef7954.sam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 6924b2a2-5569-4808-aa38-00249bef7954.sam
+      size: 1125610
+    14c39218-5301-4705-bcc7-e3e76fb3f272.gz: *id130
+  output:
+    b44d78ca-be2b-4248-acd2-bf748c512814.bai:
+      type: normal
+      size: 1274240
+    de8dda09-6f1f-469c-9ef1-8c3fefbd0e2a.bam:
+      type: normal
+      size: 365760
+  next:
+    type: pass
+    nodes:
+    - dedup_00000017
+- name: dedup_00000017
+  source: dedup_00000017
+  runtime: 1
+  input:
+    b44d78ca-be2b-4248-acd2-bf748c512814.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: b44d78ca-be2b-4248-acd2-bf748c512814.bai
+      size: 1274240
+    de8dda09-6f1f-469c-9ef1-8c3fefbd0e2a.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: de8dda09-6f1f-469c-9ef1-8c3fefbd0e2a.bam
+      size: 365760
+    73674467-0d88-444b-9b8c-00b18e3e9e08.gz: *id131
+  output:
+    4ab2cb91-9978-4b3b-902e-c5860649e085.bai:
+      type: normal
+      size: 1274240
+    9658c267-012f-4965-9f27-4a8f4f4f67bb.bam:
+      type: normal
+      size: 374699
+  next:
+    type: pass
+    nodes:
+    - add_replace_00000018
+- name: add_replace_00000018
+  source: add_replace_00000018
+  runtime: 1
+  input:
+    4ab2cb91-9978-4b3b-902e-c5860649e085.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 4ab2cb91-9978-4b3b-902e-c5860649e085.bai
+      size: 1274240
+    9658c267-012f-4965-9f27-4a8f4f4f67bb.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 9658c267-012f-4965-9f27-4a8f4f4f67bb.bam
+      size: 374699
+    9aac05bf-1893-468c-8d93-56bbdc5ab751.gz: *id132
+  output:
+    98511a2f-a584-4825-9a34-8983a9922cea.bam:
+      type: normal
+      size: 37956
+    72cb6058-c86c-4f4d-ad07-c41b4e073808.bai:
+      type: normal
+      size: 1274240
+  next:
+    type: pass
+    nodes:
+    - realign_target_creator_00000019
+- name: realign_target_creator_00000019
+  source: realign_target_creator_00000019
+  runtime: 1
+  input:
+    98511a2f-a584-4825-9a34-8983a9922cea.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 98511a2f-a584-4825-9a34-8983a9922cea.bam
+      size: 37956
+    72cb6058-c86c-4f4d-ad07-c41b4e073808.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 72cb6058-c86c-4f4d-ad07-c41b4e073808.bai
+      size: 1274240
+    a1882459-25ec-4b72-9113-0ec08029749d.dict: *id133
+    6cf166d8-6170-402f-9af2-c9b3b46931e7.pac: *id134
+    c4f1f690-c33e-4792-94ce-28ac7bfbafad.fai: *id135
+    e3820977-1ce4-4123-b36a-c2433f6fe248.sa: *id136
+    ede69379-ed8e-4974-94f7-245b0e168620.gz: *id137
+    3d97c74b-9285-4c5f-8169-a707bd5deb31.amb: *id138
+    64c9f5e2-06f1-46e9-ae5c-0f8eedfc6e3f.fa: *id139
+    d19a2f74-c1a7-4daa-8421-21e8603af8af.ann: *id140
+    375c43d9-cf0d-4dd2-9891-fa29d0acc375.bwt: *id141
+    604534a9-916d-4b41-aba5-d93a27e222f4.txt: *id142
+  output:
+    1703a845-75c1-4135-8f7c-5c161d982a9c.list:
+      type: normal
+      size: 400
+  next:
+    type: pass
+    nodes:
+    - indel_realign_00000020
+- name: indel_realign_00000020
+  source: indel_realign_00000020
+  runtime: 1
+  input:
+    1703a845-75c1-4135-8f7c-5c161d982a9c.list:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 1703a845-75c1-4135-8f7c-5c161d982a9c.list
+      size: 400
+    9542d5eb-b672-4258-a638-4d721b237fa4.dict: *id143
+    1e7af736-9ad9-4530-8408-e0414c0a04b8.bai: *id144
+    a71e9837-6e57-4940-9b91-27bf1b66e8d1.pac: *id145
+    78efce4e-0441-4345-b839-1317dc60007c.fai: *id146
+    34a34736-01a6-4282-b693-9596b8a30f68.sa: *id147
+    78920f91-989d-417a-b198-3fc9c3e92531.gz: *id148
+    71bfa08b-fefd-4d69-8ced-3a98968a5f0d.amb: *id149
+    43314c98-d46c-4d72-ab04-410d4500cab0.fa: *id150
+    486c4bf1-c9bd-4db7-aaa1-039969d0e124.ann: *id151
+    37acf510-e14e-4946-abe1-f8ef7c7d7c85.bwt: *id152
+    b6bc0585-ce5b-4ca7-915b-719bdec2da20.bam: *id153
+    57004ee8-088d-4bca-a255-c499c343036a.txt: *id154
+  output:
+    7e604e4f-e611-4903-b060-6060820ff3f9.bai:
+      type: normal
+      size: 1274240
+    f55da13d-790e-4dca-b7ea-665ef75cf27e.bam:
+      type: normal
+      size: 521422
+  next:
+    type: pass
+    nodes:
+    - haplotype_caller_00000021
+    - haplotype_caller_00000022
+    - haplotype_caller_00000023
+    - haplotype_caller_00000024
+    - haplotype_caller_00000025
+    - haplotype_caller_00000026
+    - haplotype_caller_00000027
+    - haplotype_caller_00000028
+- name: haplotype_caller_00000021
+  source: haplotype_caller_00000021
+  runtime: 1
+  input:
+    7e604e4f-e611-4903-b060-6060820ff3f9.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7e604e4f-e611-4903-b060-6060820ff3f9.bai
+      size: 1274240
+    f55da13d-790e-4dca-b7ea-665ef75cf27e.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f55da13d-790e-4dca-b7ea-665ef75cf27e.bam
+      size: 521422
+    5adbebb0-8ad9-48f5-81a1-625723731cbc.dict: *id155
+    6195f48b-d889-4f53-a4f5-215dc2bd9553.pac: *id156
+    2698d8c0-d991-4e49-8c2c-5ff872bd16d4.fai: *id157
+    89e93225-896a-4e32-9242-d104ed2d8bf6.sa: *id158
+    79a36cdb-4542-40e3-846a-9ea0f00c4cd2.gz: *id159
+    5f31ccb1-65d5-4cb6-9e0c-9a8806326dc6.amb: *id160
+    5cd5f6bf-4d0f-48d3-b08e-5ee923b3d4d5.fa: *id161
+    2d2dbd88-b621-4444-8d63-23e4c49ae77c.ann: *id162
+    5b936d6d-2798-4078-87f6-e832d56f4dd2.bwt: *id163
+    3cd6cc52-af3c-4317-9ee7-ec8a8764682e.txt: *id164
+  output:
+    d6606efb-fcd3-4180-a5b7-f029ee04f0c5.vcf:
+      type: normal
+      size: 757279
+    371bbbb4-369f-4130-8d79-76fded5e65b3.idx:
+      type: normal
+      size: 227754
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000029
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000022
+  source: haplotype_caller_00000022
+  runtime: 1
+  input:
+    7e604e4f-e611-4903-b060-6060820ff3f9.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7e604e4f-e611-4903-b060-6060820ff3f9.bai
+      size: 1274240
+    f55da13d-790e-4dca-b7ea-665ef75cf27e.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f55da13d-790e-4dca-b7ea-665ef75cf27e.bam
+      size: 521422
+    d7cb7ec5-22c9-4efb-ac43-5764ff48549d.dict: *id165
+    c1cd388e-531a-4f7d-9f7c-78e6288617f8.pac: *id166
+    8de2714a-4f24-4790-a3ca-8a6746e0c508.fai: *id167
+    1d453c8f-2520-43cc-9534-03ea34518568.sa: *id168
+    97cf2582-09ce-4d39-9cf8-e917554d1b4a.gz: *id169
+    cf16c677-d392-4f84-b90b-493d178cb5b8.amb: *id170
+    e83079e7-c2d9-441b-ad34-4e37a5cf12ab.fa: *id171
+    78a2c423-6f97-4a66-bf89-7794f67f57e6.ann: *id172
+    90dd5f2c-e426-4ab4-90bd-de83c732e700.bwt: *id173
+    9c8abf59-17fe-4bcd-8581-71bd3b0285b5.txt: *id174
+  output:
+    af575eaf-8584-4418-8f99-533f9683efcc.vcf:
+      type: normal
+      size: 757279
+    11653882-b2f4-4e25-aab9-2a46f4a0a815.idx:
+      type: normal
+      size: 268101
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000030
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000023
+  source: haplotype_caller_00000023
+  runtime: 1
+  input:
+    7e604e4f-e611-4903-b060-6060820ff3f9.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7e604e4f-e611-4903-b060-6060820ff3f9.bai
+      size: 1274240
+    f55da13d-790e-4dca-b7ea-665ef75cf27e.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f55da13d-790e-4dca-b7ea-665ef75cf27e.bam
+      size: 521422
+    216d2acb-07a6-4ebc-b26a-3513c7e168f4.dict: *id175
+    1c74d9df-72bd-4321-b8db-1ae1bc2b6319.pac: *id176
+    96e47eac-4e1f-40c6-9d58-cc36a3ed9d4d.fai: *id177
+    03aa454a-9370-4549-a33d-698f98300514.sa: *id178
+    b509d29c-4aa7-4ef8-acda-e4e6deff5fe5.gz: *id179
+    43daca97-131a-446c-98aa-89f0e9a7c7af.amb: *id180
+    afa8b9c1-4a20-4d2a-9933-77824665e996.fa: *id181
+    9db2eaca-f41c-4221-bc46-4977a1c0646e.ann: *id182
+    ff75d6eb-9d7c-4c4b-bea7-e4a0c7552f31.bwt: *id183
+    6089ef29-6423-43df-befa-9969631e8348.txt: *id184
+  output:
+    93846baf-ce8b-46b9-9ef4-375910d28b5e.vcf:
+      type: normal
+      size: 757279
+    fb5f1d9d-86b8-4fe8-82fb-63cf1dcf105c.idx:
+      type: normal
+      size: 310458
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000031
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000024
+  source: haplotype_caller_00000024
+  runtime: 1
+  input:
+    7e604e4f-e611-4903-b060-6060820ff3f9.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7e604e4f-e611-4903-b060-6060820ff3f9.bai
+      size: 1274240
+    f55da13d-790e-4dca-b7ea-665ef75cf27e.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f55da13d-790e-4dca-b7ea-665ef75cf27e.bam
+      size: 521422
+    31745e13-6ca6-4f83-b645-bafc273b0f49.dict: *id185
+    6af78634-ba01-4b96-b737-f145e6fe015c.pac: *id186
+    e4f058a5-0a7b-4ebc-91ae-9bce5a92c2c6.fai: *id187
+    78eb27c5-ba45-4603-8b14-723562f4a9d8.sa: *id188
+    d546c333-c3d6-4e25-a6e4-ab5acd43030a.gz: *id189
+    08333128-07eb-404b-b205-8c2747d4a07d.amb: *id190
+    df511b98-e527-44a6-a289-f09edc261177.fa: *id191
+    1896fcb9-e787-4166-814f-e6d13a90ecb5.ann: *id192
+    6408795b-9005-4530-8d2e-57724f814920.bwt: *id193
+    8c75d213-dbd5-49a1-9eb5-719f635bac49.txt: *id194
+  output:
+    2f520af4-4497-4b09-b3f3-ec207cfe0f0b.vcf:
+      type: normal
+      size: 757279
+    796d0beb-e7e3-4e35-874d-fe62e62742e5.idx:
+      type: normal
+      size: 175087
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000032
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000025
+  source: haplotype_caller_00000025
+  runtime: 1
+  input:
+    7e604e4f-e611-4903-b060-6060820ff3f9.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7e604e4f-e611-4903-b060-6060820ff3f9.bai
+      size: 1274240
+    f55da13d-790e-4dca-b7ea-665ef75cf27e.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f55da13d-790e-4dca-b7ea-665ef75cf27e.bam
+      size: 521422
+    65b94187-3673-4224-962d-749cee0827d2.dict: *id195
+    1d92e756-68e3-47c7-9c28-728dc926719c.pac: *id196
+    81d31281-4e70-4f8e-a0a1-8131773ca805.fai: *id197
+    aa907460-2fad-4383-adfc-f9f0ac7ffe3d.sa: *id198
+    7701a793-7c13-4fd8-a37a-fc3632d6035a.gz: *id199
+    264cb6c0-4f37-4c01-868e-03fa4959d1b1.amb: *id200
+    bb7da3cd-5bd8-4d7e-b1d8-747ccbbe7d9a.fa: *id201
+    fc5f80e3-abeb-4fb2-b9c2-1b933ddbb7c7.ann: *id202
+    88acdb4e-b764-4955-ada3-a8ed5fe53bfc.bwt: *id203
+    3814aecb-e4db-48e5-80a0-2b6addce2de6.txt: *id204
+  output:
+    27b74f25-73d3-420c-a178-38c6cda71748.vcf:
+      type: normal
+      size: 757280
+    85a86e9f-3918-43d1-9438-76f845013fa0.idx:
+      type: normal
+      size: 195385
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000033
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000026
+  source: haplotype_caller_00000026
+  runtime: 1
+  input:
+    7e604e4f-e611-4903-b060-6060820ff3f9.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7e604e4f-e611-4903-b060-6060820ff3f9.bai
+      size: 1274240
+    f55da13d-790e-4dca-b7ea-665ef75cf27e.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f55da13d-790e-4dca-b7ea-665ef75cf27e.bam
+      size: 521422
+    da932a61-9fc5-4462-aec2-d29703c46856.dict: *id205
+    17b91f72-9029-4a51-a6b7-2925a36a075e.pac: *id206
+    4b49a9bb-1157-4190-bb32-8d0acab7d341.fai: *id207
+    0c51ec65-50e2-4454-9ab5-0b42b52c56a3.sa: *id208
+    1187b027-db11-4b31-b5c4-e53e7d9a4cfc.gz: *id209
+    3349de10-c519-4197-be75-73997897c80f.amb: *id210
+    847a38c6-a4c6-4566-a21c-417d62510e47.fa: *id211
+    97215ab2-2f92-45f5-b9e3-97f922f863f0.ann: *id212
+    c3db126b-40f2-4fbf-9ff1-cdced5bf68bb.bwt: *id213
+    e42b407d-f7ca-44c6-9c19-155ea02055d7.txt: *id214
+  output:
+    8d075142-3d73-43bf-ac76-123f0cbab4fc.vcf:
+      type: normal
+      size: 757279
+    963be231-6eed-48c6-a261-445b364d489b.idx:
+      type: normal
+      size: 111205
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000034
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000027
+  source: haplotype_caller_00000027
+  runtime: 1
+  input:
+    7e604e4f-e611-4903-b060-6060820ff3f9.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7e604e4f-e611-4903-b060-6060820ff3f9.bai
+      size: 1274240
+    f55da13d-790e-4dca-b7ea-665ef75cf27e.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f55da13d-790e-4dca-b7ea-665ef75cf27e.bam
+      size: 521422
+    289f9cf1-79bb-4968-9cde-958e0e43cea1.dict: *id215
+    6d9eb0dc-8e5e-4f30-a43f-262a9f625734.pac: *id216
+    65b10e14-9b3f-4023-bf37-dac6e7eedf71.fai: *id217
+    d46ba655-168d-40ba-8508-c43f63f47ac4.sa: *id218
+    a6349d0d-7835-41f2-adab-e14fdad09c54.gz: *id219
+    1128b6c4-98b6-4591-8d83-96985a48862e.amb: *id220
+    df7d287c-8bef-4d63-93f5-c2480f940754.fa: *id221
+    8db58a82-ee30-4cae-ac8d-257d83c96089.ann: *id222
+    5fa3309f-9b72-4cee-9a0c-c52d9e9e2667.bwt: *id223
+    5a9e4b79-e914-4335-9683-791cae627cbf.txt: *id224
+  output:
+    f468b54f-886b-4f1a-bed6-0ef381ecf3b0.vcf:
+      type: normal
+      size: 757279
+    1bd48e7e-3859-4054-bda9-2612bd059897.idx:
+      type: normal
+      size: 238863
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000035
+    - merge_gcvf_00000037
+- name: haplotype_caller_00000028
+  source: haplotype_caller_00000028
+  runtime: 1
+  input:
+    7e604e4f-e611-4903-b060-6060820ff3f9.bai:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7e604e4f-e611-4903-b060-6060820ff3f9.bai
+      size: 1274240
+    f55da13d-790e-4dca-b7ea-665ef75cf27e.bam:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f55da13d-790e-4dca-b7ea-665ef75cf27e.bam
+      size: 521422
+    225a6ee2-bded-43ea-9641-f876db2c983a.dict: *id225
+    1a0c8b37-a8dc-4bac-977d-783dfd8836e6.pac: *id226
+    d4907b85-f390-4701-a2b1-e6632835dae7.fai: *id227
+    8ab9f22f-8655-47ff-a481-2fa544084627.sa: *id228
+    4dd5dabd-fc3c-4f88-afc0-a485ec318fb4.gz: *id229
+    662b40e7-6fe0-49e2-a9f5-2209d032124b.amb: *id230
+    eb83e4e3-dd03-4374-a02f-f1bc9d337f5a.fa: *id231
+    28728830-9d43-4cf5-ab9f-68c4c7ba4ef6.ann: *id232
+    4939bec5-f7ff-49d0-9a50-589a43744c9d.bwt: *id233
+    df0dba06-ffac-4f16-96e2-ea04ae1c8c2a.txt: *id234
+  output:
+    7080c38a-92ad-4d77-a3cb-6d3b83ff44ba.vcf:
+      type: normal
+      size: 757279
+    8f70916e-afd5-4abb-9316-5bc315bd7168.idx:
+      type: normal
+      size: 182827
+  next:
+    type: pass
+    nodes:
+    - genotype_gvcfs_00000036
+    - merge_gcvf_00000037
+- name: genotype_gvcfs_00000029
+  source: genotype_gvcfs_00000029
+  runtime: 1
+  input:
+    f51e202f-69b1-4c40-88dc-8308a5270453.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f51e202f-69b1-4c40-88dc-8308a5270453.vcf
+      size: 757280
+    81d34b4f-028e-4518-845e-49aaa0a09ec6.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 81d34b4f-028e-4518-845e-49aaa0a09ec6.idx
+      size: 301596
+    d6606efb-fcd3-4180-a5b7-f029ee04f0c5.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: d6606efb-fcd3-4180-a5b7-f029ee04f0c5.vcf
+      size: 757279
+    371bbbb4-369f-4130-8d79-76fded5e65b3.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 371bbbb4-369f-4130-8d79-76fded5e65b3.idx
+      size: 227754
+    d4f30fb8-40f2-49a4-86f2-b67882eaa6ac.txt: *id235
+    30132bda-4e76-42fa-b3e0-b9c07e90be46.dict: *id236
+    4502bb4c-a849-4b5c-8613-b864abca8b5c.amb: *id237
+    1820b764-3a25-4453-baca-29c17fb2e945.ann: *id238
+    dc4422ed-6626-4546-b170-2a2ba40dbf93.fai: *id239
+    c9ac0d48-e161-4605-9c1f-5764a763a469.pac: *id240
+    720aa885-5cc4-4280-893e-be50cfb2cc3f.sa: *id241
+    ba943f0d-6dfd-453a-9732-1bb0af51a844.gz: *id242
+    7628310e-cca1-471b-ae92-dc130e515a29.fa: *id243
+    562a203b-fa4c-46f0-85e5-87df46b4bc81.bwt: *id244
+  output:
+    7873de1b-5318-4177-9128-1c23ea87b3ba.vcf:
+      type: normal
+      size: 831489
+    fc05ec4c-5498-438b-b2e8-ced0fecbe633.idx:
+      type: normal
+      size: 285839
+  next:
+    type: pass
+    nodes:
+    - combine_variants_00000038
+- name: genotype_gvcfs_00000030
+  source: genotype_gvcfs_00000030
+  runtime: 1
+  input:
+    11961b35-18ad-41fa-aebc-8503caa1ccc5.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 11961b35-18ad-41fa-aebc-8503caa1ccc5.vcf
+      size: 757280
+    f0ffed08-6f90-4168-948f-6a93d51e986d.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f0ffed08-6f90-4168-948f-6a93d51e986d.idx
+      size: 77421
+    af575eaf-8584-4418-8f99-533f9683efcc.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: af575eaf-8584-4418-8f99-533f9683efcc.vcf
+      size: 757279
+    11653882-b2f4-4e25-aab9-2a46f4a0a815.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 11653882-b2f4-4e25-aab9-2a46f4a0a815.idx
+      size: 268101
+    06f624b7-f06e-45af-ac94-9bc55ac468db.txt: *id245
+    1fe12302-6f3e-4603-b31a-3aa5535afb9f.dict: *id246
+    4253911a-4049-4164-adac-7dfeacc4d2c4.amb: *id247
+    a8f70fea-2332-43d6-b1a7-7e4eccd0c1d3.ann: *id248
+    794e3593-a2bb-48b5-a831-f7a24a69612a.fai: *id249
+    fea54261-cb91-4141-a22c-6be00c4a26a6.pac: *id250
+    b43479d8-2f85-4d46-88c2-3c53f2f83d8a.sa: *id251
+    85365bc4-86ed-4629-af26-1b0a0f504b55.gz: *id252
+    335162c5-7aff-4f3e-bcc9-f87ad43fc489.fa: *id253
+    5b6dc77b-eaf9-4092-9a97-5697b7db9773.bwt: *id254
+  output:
+    ab01f771-48c5-48d1-acbf-8dda80b6e396.vcf:
+      type: normal
+      size: 831489
+    f6ed085e-db6c-40a1-ab93-3125f0121042.idx:
+      type: normal
+      size: 285839
+  next:
+    type: pass
+    nodes:
+    - combine_variants_00000038
+- name: genotype_gvcfs_00000031
+  source: genotype_gvcfs_00000031
+  runtime: 1
+  input:
+    5a5924a8-b8bc-47a5-90e9-e499565701a7.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 5a5924a8-b8bc-47a5-90e9-e499565701a7.vcf
+      size: 757280
+    fabbfbee-a407-4a90-a9ab-5c7be0333205.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: fabbfbee-a407-4a90-a9ab-5c7be0333205.idx
+      size: 227573
+    93846baf-ce8b-46b9-9ef4-375910d28b5e.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 93846baf-ce8b-46b9-9ef4-375910d28b5e.vcf
+      size: 757279
+    fb5f1d9d-86b8-4fe8-82fb-63cf1dcf105c.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: fb5f1d9d-86b8-4fe8-82fb-63cf1dcf105c.idx
+      size: 310458
+    fb5cafb6-ab2c-44b2-b5f2-7707be7df8e9.txt: *id255
+    5e391f9b-8a59-4b2c-b037-b8d146c1f041.dict: *id256
+    eff105c8-2fb5-4e0b-a5d8-d338c22a5f1d.amb: *id257
+    5043cdc7-9e3a-4bd9-84bc-90514e8c6c56.ann: *id258
+    8cb9469c-1791-4761-9851-1717c94f4c65.fai: *id259
+    a91ca961-4137-4a0d-85b6-c7db4683850c.pac: *id260
+    2e26eb67-ee15-49b1-b88e-6322a7278cc6.sa: *id261
+    5da8837e-1e50-417b-9237-2bbdaf43c449.gz: *id262
+    74e491ef-82bb-4146-9fba-f7fd81bd60b9.fa: *id263
+    a7a77eaa-dabe-402c-83f1-341ed480f6e6.bwt: *id264
+  output:
+    307af5ae-a82d-423a-8a12-a27e295b97bc.vcf:
+      type: normal
+      size: 831489
+    d01a31c8-05ac-4b93-a56a-e391ce4234f6.idx:
+      type: normal
+      size: 285839
+  next:
+    type: pass
+    nodes:
+    - combine_variants_00000038
+- name: genotype_gvcfs_00000032
+  source: genotype_gvcfs_00000032
+  runtime: 1
+  input:
+    0fcb6c85-bded-4a5e-9a40-ad4116f0151e.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 0fcb6c85-bded-4a5e-9a40-ad4116f0151e.vcf
+      size: 757279
+    3bb3a1a4-82d4-4330-9b4c-4cd430f99315.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 3bb3a1a4-82d4-4330-9b4c-4cd430f99315.idx
+      size: 233043
+    2f520af4-4497-4b09-b3f3-ec207cfe0f0b.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 2f520af4-4497-4b09-b3f3-ec207cfe0f0b.vcf
+      size: 757279
+    796d0beb-e7e3-4e35-874d-fe62e62742e5.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 796d0beb-e7e3-4e35-874d-fe62e62742e5.idx
+      size: 175087
+    30f756b6-f176-4e18-8b86-b031e128b89f.txt: *id265
+    53f4f20f-14b7-4032-afbc-36ba9cc18149.dict: *id266
+    8c2e52a8-059a-4a62-818e-476a39617774.amb: *id267
+    c0faf628-bc78-4078-b817-478e5d7c6aa2.ann: *id268
+    1e99d893-f1f7-4af9-8c9c-654cdafae2a4.fai: *id269
+    495dce47-7764-4fe2-ba37-49187ce5b3e9.pac: *id270
+    f9498990-f8b2-4336-b6d2-dbc6ca89420c.sa: *id271
+    e6315e28-bedb-40af-a829-505d49dfc1b3.gz: *id272
+    66eb6857-e0e1-46d3-8cd6-410c065ff046.fa: *id273
+    59c86ad1-e0bd-4ce2-a865-05038113d16f.bwt: *id274
+  output:
+    1d8e02a5-9a48-433e-a0f7-fe86e44a9ff9.vcf:
+      type: normal
+      size: 831489
+    9082aa70-cb3e-4f48-a1d9-3d683ef87d50.idx:
+      type: normal
+      size: 285839
+  next:
+    type: pass
+    nodes:
+    - combine_variants_00000038
+- name: genotype_gvcfs_00000033
+  source: genotype_gvcfs_00000033
+  runtime: 1
+  input:
+    81dd04f1-a375-4327-a1e6-13653784750c.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 81dd04f1-a375-4327-a1e6-13653784750c.vcf
+      size: 757279
+    cd408d05-c45e-4cda-8ea0-af28a27784e1.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: cd408d05-c45e-4cda-8ea0-af28a27784e1.idx
+      size: 273438
+    27b74f25-73d3-420c-a178-38c6cda71748.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 27b74f25-73d3-420c-a178-38c6cda71748.vcf
+      size: 757280
+    85a86e9f-3918-43d1-9438-76f845013fa0.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 85a86e9f-3918-43d1-9438-76f845013fa0.idx
+      size: 195385
+    6341d523-27f7-49c5-9002-536a4417aced.txt: *id275
+    e9918bad-d0be-4031-8cf2-1d7a8dd6b8b4.dict: *id276
+    f0f7e32f-a499-4698-a223-b37e45db5f6a.amb: *id277
+    bc1fe624-8ea4-427c-934b-2ce8c4d1a823.ann: *id278
+    6d4b2633-1d70-4a0a-9e84-3bee36e05828.fai: *id279
+    6f5168c0-4fa0-4574-9b5e-fd743662c1e5.pac: *id280
+    49c81c05-cb8d-48fe-a0ff-0fad1a34a389.sa: *id281
+    4e519144-279f-4c62-8512-eaba14264b4b.gz: *id282
+    0d72ee24-5854-452f-bb03-3201cc118aa1.fa: *id283
+    99ff9a91-8976-4c56-9b63-5161c4dc68cf.bwt: *id284
+  output:
+    a61970d7-4132-4e11-baa6-f1168fca6986.vcf:
+      type: normal
+      size: 831489
+    14d046ca-e392-4c07-a91e-0327ad95febf.idx:
+      type: normal
+      size: 285839
+  next:
+    type: pass
+    nodes:
+    - combine_variants_00000038
+- name: genotype_gvcfs_00000034
+  source: genotype_gvcfs_00000034
+  runtime: 1
+  input:
+    41b1ef10-84ea-4320-95f5-998a6c53808b.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 41b1ef10-84ea-4320-95f5-998a6c53808b.vcf
+      size: 757279
+    59c9ed00-1a1d-431c-bcc3-a303cff06d29.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 59c9ed00-1a1d-431c-bcc3-a303cff06d29.idx
+      size: 207548
+    8d075142-3d73-43bf-ac76-123f0cbab4fc.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 8d075142-3d73-43bf-ac76-123f0cbab4fc.vcf
+      size: 757279
+    963be231-6eed-48c6-a261-445b364d489b.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 963be231-6eed-48c6-a261-445b364d489b.idx
+      size: 111205
+    4774da04-3a1d-439b-8aaf-d244c4752865.txt: *id285
+    d93e10f8-ee81-4ea0-a6d9-28eee0c38e83.dict: *id286
+    71c500f5-8653-4070-b33e-7cd0f3c23c6e.amb: *id287
+    c49fc788-29cb-463a-bc44-91783bb74915.ann: *id288
+    fc3fcc84-b82c-4a1d-8c60-973172b3a148.fai: *id289
+    89bd260b-9ebf-49af-bf01-1de45a591098.pac: *id290
+    689b96bb-9a7d-4810-9df7-600c9722b518.sa: *id291
+    7d028f69-7908-4cbd-80f9-6dc5b6d35dd7.gz: *id292
+    ba256aa7-18bd-4f48-8484-4a4f1075c5ff.fa: *id293
+    39423735-793d-4d9a-afb5-f8fa9f480750.bwt: *id294
+  output:
+    8c30878b-6356-4a06-9b7f-46ed6b3c7dc1.vcf:
+      type: normal
+      size: 831489
+    15c52a5a-9528-45be-bf4a-b136b41cafd4.idx:
+      type: normal
+      size: 285839
+  next:
+    type: pass
+    nodes:
+    - combine_variants_00000038
+- name: genotype_gvcfs_00000035
+  source: genotype_gvcfs_00000035
+  runtime: 1
+  input:
+    2fea2412-4c88-4e93-aed5-1efdf0f546a2.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 2fea2412-4c88-4e93-aed5-1efdf0f546a2.vcf
+      size: 757279
+    edc11d98-70a9-403a-a739-63f1add520d5.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: edc11d98-70a9-403a-a739-63f1add520d5.idx
+      size: 290480
+    f468b54f-886b-4f1a-bed6-0ef381ecf3b0.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f468b54f-886b-4f1a-bed6-0ef381ecf3b0.vcf
+      size: 757279
+    1bd48e7e-3859-4054-bda9-2612bd059897.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 1bd48e7e-3859-4054-bda9-2612bd059897.idx
+      size: 238863
+    31703e45-a052-4d28-a95b-b54f6cd5f477.txt: *id295
+    e16c37e6-03ae-4805-9903-7bbb6d508003.dict: *id296
+    7e8934f2-1a56-4df5-90f4-271eeb226404.amb: *id297
+    8ad30d3a-0869-42db-b256-d0213898f9da.ann: *id298
+    b68a631d-4642-4665-b3fb-46355bfe1723.fai: *id299
+    809a29a8-874d-4181-a0f0-e497b76e2f69.pac: *id300
+    137a772a-0b7b-49ca-ab9c-5065910bf284.sa: *id301
+    2386c00e-89fa-4406-953f-e42345e182d3.gz: *id302
+    45d6cf87-04ae-4eab-b909-fd3e68ec9569.fa: *id303
+    91f141d0-6d48-457d-9f1f-ce8a6ce1696f.bwt: *id304
+  output:
+    0a1cc9b5-e4bd-485b-869d-d2b54bc07be4.vcf:
+      type: normal
+      size: 831489
+    edb9a04d-c48b-429e-a5c2-c9474bc5b230.idx:
+      type: normal
+      size: 285839
+  next:
+    type: pass
+    nodes:
+    - combine_variants_00000038
+- name: genotype_gvcfs_00000036
+  source: genotype_gvcfs_00000036
+  runtime: 1
+  input:
+    3d543985-f646-4ed2-9d2e-5e646c1a59d1.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 3d543985-f646-4ed2-9d2e-5e646c1a59d1.vcf
+      size: 757279
+    ea1ba6ad-57cf-4972-afff-9e5fa5a005f6.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea1ba6ad-57cf-4972-afff-9e5fa5a005f6.idx
+      size: 304786
+    7080c38a-92ad-4d77-a3cb-6d3b83ff44ba.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7080c38a-92ad-4d77-a3cb-6d3b83ff44ba.vcf
+      size: 757279
+    8f70916e-afd5-4abb-9316-5bc315bd7168.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 8f70916e-afd5-4abb-9316-5bc315bd7168.idx
+      size: 182827
+    8497944d-bd17-4a26-9c4a-d352a9833563.txt: *id305
+    9a4fc850-7d9b-4c3f-bea7-1ee51a95104d.dict: *id306
+    60da29cf-03cc-479c-9e93-9745a7e6ac32.amb: *id307
+    f4f66a08-8611-4f38-9191-bdd4a3a035e7.ann: *id308
+    9a9a8c7a-b3bb-46f8-98cb-f3fc6121ac2d.fai: *id309
+    26437ca7-f05d-4e7f-901a-f53b21ced4b3.pac: *id310
+    aa0d6603-d363-4aee-b06b-e8995a2153e8.sa: *id311
+    f3383dbc-2302-4426-bdbf-443142ba597a.gz: *id312
+    20c3c497-0e71-46be-b8f1-c563dedf4275.fa: *id313
+    962c6409-441f-4db4-8b11-923a5e6ac1ba.bwt: *id314
+  output:
+    96308675-efaf-4ed7-a2bd-702dc44954bd.vcf:
+      type: normal
+      size: 831489
+    40363ffa-f7a4-4185-bc1c-1572c551b01b.idx:
+      type: normal
+      size: 285839
+  next:
+    type: pass
+    nodes:
+    - combine_variants_00000038
+- name: merge_gcvf_00000037
+  source: merge_gcvf_00000037
+  runtime: 1
+  input:
+    f51e202f-69b1-4c40-88dc-8308a5270453.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f51e202f-69b1-4c40-88dc-8308a5270453.vcf
+      size: 757280
+    81d34b4f-028e-4518-845e-49aaa0a09ec6.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 81d34b4f-028e-4518-845e-49aaa0a09ec6.idx
+      size: 301596
+    d6606efb-fcd3-4180-a5b7-f029ee04f0c5.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: d6606efb-fcd3-4180-a5b7-f029ee04f0c5.vcf
+      size: 757279
+    371bbbb4-369f-4130-8d79-76fded5e65b3.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 371bbbb4-369f-4130-8d79-76fded5e65b3.idx
+      size: 227754
+    11961b35-18ad-41fa-aebc-8503caa1ccc5.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 11961b35-18ad-41fa-aebc-8503caa1ccc5.vcf
+      size: 757280
+    f0ffed08-6f90-4168-948f-6a93d51e986d.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f0ffed08-6f90-4168-948f-6a93d51e986d.idx
+      size: 77421
+    af575eaf-8584-4418-8f99-533f9683efcc.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: af575eaf-8584-4418-8f99-533f9683efcc.vcf
+      size: 757279
+    11653882-b2f4-4e25-aab9-2a46f4a0a815.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 11653882-b2f4-4e25-aab9-2a46f4a0a815.idx
+      size: 268101
+    5a5924a8-b8bc-47a5-90e9-e499565701a7.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 5a5924a8-b8bc-47a5-90e9-e499565701a7.vcf
+      size: 757280
+    fabbfbee-a407-4a90-a9ab-5c7be0333205.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: fabbfbee-a407-4a90-a9ab-5c7be0333205.idx
+      size: 227573
+    93846baf-ce8b-46b9-9ef4-375910d28b5e.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 93846baf-ce8b-46b9-9ef4-375910d28b5e.vcf
+      size: 757279
+    fb5f1d9d-86b8-4fe8-82fb-63cf1dcf105c.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: fb5f1d9d-86b8-4fe8-82fb-63cf1dcf105c.idx
+      size: 310458
+    0fcb6c85-bded-4a5e-9a40-ad4116f0151e.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 0fcb6c85-bded-4a5e-9a40-ad4116f0151e.vcf
+      size: 757279
+    3bb3a1a4-82d4-4330-9b4c-4cd430f99315.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 3bb3a1a4-82d4-4330-9b4c-4cd430f99315.idx
+      size: 233043
+    2f520af4-4497-4b09-b3f3-ec207cfe0f0b.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 2f520af4-4497-4b09-b3f3-ec207cfe0f0b.vcf
+      size: 757279
+    796d0beb-e7e3-4e35-874d-fe62e62742e5.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 796d0beb-e7e3-4e35-874d-fe62e62742e5.idx
+      size: 175087
+    81dd04f1-a375-4327-a1e6-13653784750c.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 81dd04f1-a375-4327-a1e6-13653784750c.vcf
+      size: 757279
+    cd408d05-c45e-4cda-8ea0-af28a27784e1.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: cd408d05-c45e-4cda-8ea0-af28a27784e1.idx
+      size: 273438
+    27b74f25-73d3-420c-a178-38c6cda71748.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 27b74f25-73d3-420c-a178-38c6cda71748.vcf
+      size: 757280
+    85a86e9f-3918-43d1-9438-76f845013fa0.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 85a86e9f-3918-43d1-9438-76f845013fa0.idx
+      size: 195385
+    41b1ef10-84ea-4320-95f5-998a6c53808b.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 41b1ef10-84ea-4320-95f5-998a6c53808b.vcf
+      size: 757279
+    59c9ed00-1a1d-431c-bcc3-a303cff06d29.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 59c9ed00-1a1d-431c-bcc3-a303cff06d29.idx
+      size: 207548
+    8d075142-3d73-43bf-ac76-123f0cbab4fc.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 8d075142-3d73-43bf-ac76-123f0cbab4fc.vcf
+      size: 757279
+    963be231-6eed-48c6-a261-445b364d489b.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 963be231-6eed-48c6-a261-445b364d489b.idx
+      size: 111205
+    2fea2412-4c88-4e93-aed5-1efdf0f546a2.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 2fea2412-4c88-4e93-aed5-1efdf0f546a2.vcf
+      size: 757279
+    edc11d98-70a9-403a-a739-63f1add520d5.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: edc11d98-70a9-403a-a739-63f1add520d5.idx
+      size: 290480
+    f468b54f-886b-4f1a-bed6-0ef381ecf3b0.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f468b54f-886b-4f1a-bed6-0ef381ecf3b0.vcf
+      size: 757279
+    1bd48e7e-3859-4054-bda9-2612bd059897.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 1bd48e7e-3859-4054-bda9-2612bd059897.idx
+      size: 238863
+    3d543985-f646-4ed2-9d2e-5e646c1a59d1.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 3d543985-f646-4ed2-9d2e-5e646c1a59d1.vcf
+      size: 757279
+    ea1ba6ad-57cf-4972-afff-9e5fa5a005f6.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ea1ba6ad-57cf-4972-afff-9e5fa5a005f6.idx
+      size: 304786
+    7080c38a-92ad-4d77-a3cb-6d3b83ff44ba.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7080c38a-92ad-4d77-a3cb-6d3b83ff44ba.vcf
+      size: 757279
+    8f70916e-afd5-4abb-9316-5bc315bd7168.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 8f70916e-afd5-4abb-9316-5bc315bd7168.idx
+      size: 182827
+    539833f2-67ae-48cf-92c6-5c63246a3a51.gz: *id315
+    27895220-34ed-4256-b429-0f5946573db2.bwt: *id316
+    f9ce45b8-3e81-4e00-9b8b-2bee49578acf.txt: *id317
+    8878492c-f4d9-47d3-b9f7-d6b9146cb561.fai: *id318
+    3014250b-5b62-4db4-b036-9b1d40865c8e.pac: *id319
+    daef9e79-e2ed-4d4d-b24b-49557114fad4.fa: *id320
+    b670594a-48b0-4ee3-8bad-66bd899a8e64.dict: *id321
+    4a8690d4-88a0-4159-b57c-6cf1ba3f4308.ann: *id322
+    fdb97e76-fdd2-4efa-80c8-796711cd5a3b.list: *id323
+    32442e56-9a0b-4277-96b9-f02e18f5c65b.sa: *id324
+    c8dc33bc-d898-48c9-9455-ad1998c72baf.amb: *id325
+  output:
+    2d5e0311-3ae0-40d2-b6e7-02e5fd0eb0e5.idx:
+      type: normal
+      size: 291884
+    cbcf0c31-53e7-4aed-aff4-e767d8e7166b.vcf:
+      type: normal
+      size: 2567979
+  next:
+    type: pass
+    nodes: []
+- name: combine_variants_00000038
+  source: combine_variants_00000038
+  runtime: 1
+  input:
+    7873de1b-5318-4177-9128-1c23ea87b3ba.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 7873de1b-5318-4177-9128-1c23ea87b3ba.vcf
+      size: 831489
+    fc05ec4c-5498-438b-b2e8-ced0fecbe633.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: fc05ec4c-5498-438b-b2e8-ced0fecbe633.idx
+      size: 285839
+    ab01f771-48c5-48d1-acbf-8dda80b6e396.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ab01f771-48c5-48d1-acbf-8dda80b6e396.vcf
+      size: 831489
+    f6ed085e-db6c-40a1-ab93-3125f0121042.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: f6ed085e-db6c-40a1-ab93-3125f0121042.idx
+      size: 285839
+    307af5ae-a82d-423a-8a12-a27e295b97bc.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 307af5ae-a82d-423a-8a12-a27e295b97bc.vcf
+      size: 831489
+    d01a31c8-05ac-4b93-a56a-e391ce4234f6.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: d01a31c8-05ac-4b93-a56a-e391ce4234f6.idx
+      size: 285839
+    1d8e02a5-9a48-433e-a0f7-fe86e44a9ff9.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 1d8e02a5-9a48-433e-a0f7-fe86e44a9ff9.vcf
+      size: 831489
+    9082aa70-cb3e-4f48-a1d9-3d683ef87d50.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 9082aa70-cb3e-4f48-a1d9-3d683ef87d50.idx
+      size: 285839
+    a61970d7-4132-4e11-baa6-f1168fca6986.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: a61970d7-4132-4e11-baa6-f1168fca6986.vcf
+      size: 831489
+    14d046ca-e392-4c07-a91e-0327ad95febf.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 14d046ca-e392-4c07-a91e-0327ad95febf.idx
+      size: 285839
+    8c30878b-6356-4a06-9b7f-46ed6b3c7dc1.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 8c30878b-6356-4a06-9b7f-46ed6b3c7dc1.vcf
+      size: 831489
+    15c52a5a-9528-45be-bf4a-b136b41cafd4.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 15c52a5a-9528-45be-bf4a-b136b41cafd4.idx
+      size: 285839
+    0a1cc9b5-e4bd-485b-869d-d2b54bc07be4.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 0a1cc9b5-e4bd-485b-869d-d2b54bc07be4.vcf
+      size: 831489
+    edb9a04d-c48b-429e-a5c2-c9474bc5b230.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: edb9a04d-c48b-429e-a5c2-c9474bc5b230.idx
+      size: 285839
+    96308675-efaf-4ed7-a2bd-702dc44954bd.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 96308675-efaf-4ed7-a2bd-702dc44954bd.vcf
+      size: 831489
+    40363ffa-f7a4-4185-bc1c-1572c551b01b.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 40363ffa-f7a4-4185-bc1c-1572c551b01b.idx
+      size: 285839
+    0914051b-e019-43ff-8efb-df65e02b647a.txt: *id326
+    db08ac6d-4abc-45cb-ae21-d3d230e267c8.dict: *id327
+    bc761873-610f-41fb-825d-0ff324ceb4fe.amb: *id328
+    7fcef625-b333-4343-86a5-b5a4bc13a72e.ann: *id329
+    28fc9f2d-a00f-4d1c-90ea-8ea4963b45a4.fai: *id330
+    a3f6b60a-8417-4ca6-8e01-1dd51a221c0b.pac: *id331
+    f4cd9b76-686e-4de5-bea7-5a5629be717e.sa: *id332
+    d94ca2df-213b-43b2-80e0-ca8d309d7fe6.gz: *id333
+    9d338d78-096c-4c82-b071-4f7502180304.fa: *id334
+    e5dd3d01-4bc6-4849-830c-5f2c1e23926d.bwt: *id335
+  output:
+    ff73f1be-8d13-4d01-8101-8dcc5a863584.vcf:
+      type: normal
+      size: 1984549
+    faa8686e-87cf-482b-935d-d9a4f3c205f4.idx:
+      type: normal
+      size: 340910
+  next:
+    type: pass
+    nodes:
+    - select_variants_indel_00000039
+    - select_variants_snp_00000040
+- name: select_variants_indel_00000039
+  source: select_variants_indel_00000039
+  runtime: 1
+  input:
+    ff73f1be-8d13-4d01-8101-8dcc5a863584.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ff73f1be-8d13-4d01-8101-8dcc5a863584.vcf
+      size: 1984549
+    faa8686e-87cf-482b-935d-d9a4f3c205f4.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: faa8686e-87cf-482b-935d-d9a4f3c205f4.idx
+      size: 340910
+    91fe6b83-06fe-43d3-b68f-ac1414cb55b9.dict: *id336
+    13c5f4c5-c57a-49e2-9b40-145654957b36.pac: *id337
+    20ecba50-85cd-4312-a8ad-89254da06458.fai: *id338
+    55fd6ad5-b5da-4d5c-befa-d41ad6f6747f.sa: *id339
+    3f26c7ec-6c68-467c-a90c-c49a32fdeee9.gz: *id340
+    db3e3726-1855-47c9-ab00-1a75d4a60b83.amb: *id341
+    df118f4b-69e4-41ef-9dbd-3909012f34cb.fa: *id342
+    8e3530ee-6b0b-4e90-906d-9c6f244f9ad7.ann: *id343
+    1f8e1bce-64dd-4315-8a95-d45c45988774.bwt: *id344
+    780652dd-b7bd-47c5-bd8d-33aeae152d89.txt: *id345
+  output:
+    85f3d9e0-a89e-4142-9d39-a05a8a01ecbe.vcf:
+      type: normal
+      size: 720963
+  next:
+    type: pass
+    nodes:
+    - filtering_indel_00000041
+- name: select_variants_snp_00000040
+  source: select_variants_snp_00000040
+  runtime: 1
+  input:
+    ff73f1be-8d13-4d01-8101-8dcc5a863584.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: ff73f1be-8d13-4d01-8101-8dcc5a863584.vcf
+      size: 1984549
+    faa8686e-87cf-482b-935d-d9a4f3c205f4.idx:
+      type: pass
+      value:
+        function: INPUT
+        parameter: faa8686e-87cf-482b-935d-d9a4f3c205f4.idx
+      size: 340910
+    b81b1c51-fa87-4935-a844-731ab38d7337.dict: *id346
+    cf310131-b427-4797-a905-cac888e7283e.pac: *id347
+    4aa2ac6a-ae88-4496-aceb-d280cd605048.fai: *id348
+    4fd4b5e9-76f8-4fd4-a41b-eca1cbc946b0.sa: *id349
+    29f9e0ce-7cfd-4492-91e8-338836654cdd.gz: *id350
+    8cb4bb37-508b-423d-a977-256af9084ee4.amb: *id351
+    b66127c7-becb-46af-a80e-7e42eb049307.fa: *id352
+    194245d5-9137-4d10-885b-808cbf189067.ann: *id353
+    201d3f97-8744-4b90-8019-43f3a63a7542.bwt: *id354
+    06f71a7f-dec0-4652-9266-97b76fc5be10.txt: *id355
+  output:
+    fed3787e-8635-413c-ba40-f0c74c2e8c66.vcf:
+      type: normal
+      size: 2737241
+  next:
+    type: pass
+    nodes:
+    - filtering_snp_00000042
+- name: filtering_indel_00000041
+  source: filtering_indel_00000041
+  runtime: 1
+  input:
+    85f3d9e0-a89e-4142-9d39-a05a8a01ecbe.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: 85f3d9e0-a89e-4142-9d39-a05a8a01ecbe.vcf
+      size: 720963
+    d7aeb802-a315-4b44-8714-af9ca0ef0cdd.dict: *id356
+    2a5be518-4df1-4fc5-ad7f-5bd6c3e1e11a.pac: *id357
+    d4f64edf-c757-41aa-a888-2d40db530517.fai: *id358
+    0814ca48-073a-4a81-86b2-a426e8a574cd.sa: *id359
+    361939e5-f66b-4ddd-9640-9369d7ab8f01.gz: *id360
+    6869cb7c-e830-4c5f-be5f-1b78fe076ded.amb: *id361
+    53f038e2-b6df-4d23-8845-89b73d193ada.fa: *id362
+    34d39870-a525-40b8-acc1-ea3aa65a93c4.ann: *id363
+    68917b48-0353-4bff-95d0-e63815904138.bwt: *id364
+    7eece883-52e5-4ae6-ac9f-057c9e7dcb23.txt: *id365
+  output:
+    5863568e-a0ca-461f-99b1-54d334c8d1e0.vcf:
+      type: normal
+      size: 588702
+    0ff21cb7-f269-42a1-a36d-d122e264530a.idx:
+      type: normal
+      size: 285050
+  next:
+    type: pass
+    nodes: []
+- name: filtering_snp_00000042
+  source: filtering_snp_00000042
+  runtime: 1
+  input:
+    fed3787e-8635-413c-ba40-f0c74c2e8c66.vcf:
+      type: pass
+      value:
+        function: INPUT
+        parameter: fed3787e-8635-413c-ba40-f0c74c2e8c66.vcf
+      size: 2737241
+    f51042ef-b44d-4832-b5af-7dbae9e03870.dict: *id366
+    15580987-8815-46a8-b58d-fa5c7966b10a.pac: *id367
+    a1e6c59f-5338-4d85-9543-bb5877bf89c8.fai: *id368
+    1a53c00c-7aad-4b37-8640-7546765a626c.sa: *id369
+    2d276bd8-bb79-4d25-8aee-4957dad73164.gz: *id370
+    13cc079e-e7a8-47ca-86b0-07c22707f8ab.amb: *id371
+    cef62cad-b37b-43a4-a830-102e8da0bd9e.fa: *id372
+    79883b4f-9938-4721-8dcc-85a7daee2ff3.ann: *id373
+    2cb78bfc-e060-431c-9426-550c6384272f.bwt: *id374
+    db5b3f79-86f2-4bb5-ad37-8f469147992e.txt: *id375
+  output:
+    ebb7b898-6be1-4c82-8b83-2d6ce8c996b9.vcf:
+      type: normal
+      size: 893759
+    4c0a84f4-5775-4370-b5f9-3a3a7f1c54ad.idx:
+      type: normal
+      size: 286851
+  next:
+    type: pass
+    nodes: []

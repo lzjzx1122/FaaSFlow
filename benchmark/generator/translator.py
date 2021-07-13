@@ -4,17 +4,21 @@ import sys
 import os
 import random
 
-workflow_name = './cycles'
+workflow_name = 'soykb'
 utility = 'utility.py' # sys.argv[2]
 
 ## parse json build flat_workflow.yaml
 f = open(workflow_name + '/main_50.json')
 data = json.load(f)
 jobs = data['workflow']['jobs'] 
-
 yaml_data = {}
 functions = []
 global_inputs = {}
+
+## name to lowercase
+for job in jobs:
+    job['name'] = job['name'].lower()
+
 for job in jobs:
     function = {'name': job['name'], 'source': job['name'], 'runtime': 1}
     inputs = {}
@@ -29,6 +33,8 @@ for job in jobs:
     function['input'] = inputs
     function['output'] = outputs
     if 'children' in job:
+        for i in range(len(job['children'])):
+            job['children'][i] = job['children'][i].lower()
         function['next'] = {'type': 'pass', 'nodes': job['children']}
     functions.append(function)
 for function in functions:
@@ -44,17 +50,16 @@ yaml_data['functions'] = functions
 f = open(workflow_name + '/flat_workflow.yaml', 'w', encoding = 'utf-8')
 yaml.dump(yaml_data, f, sort_keys=False)
 
-## build functions and function_info.yaml
+## build images
+for function in functions:
+    print('------building image for function ' + function['name'] + '------')
+    os.system('docker build --no-cache -t ' + workflow_name + '_' + function['name'] + ' .')
 
-# names = []
-# for node in yaml_data['main']['nodes']:
-# 	names.append(node['name'])
-# os.system('rm -rf ../../src/function_manager/functions')
-# os.system('mkdir ../../src/function_manager/functions')
-# yaml_data2 = {"functions": []}
-# for name in names:
-#     os.system('mkdir ../../src/function_manager/functions/' + name)
-#     os.system('cp ../../src/function_manager/function_utility/main.py ../../src/function_manager/functions/' + name + "/main.py")
-#     yaml_data2["functions"].append({'name': name, 'qos_time': 1, 'qos_requirement': 0.99, 'max_containers' : 10})
-# f = open('../../src/function_manager/functions/function_info.yaml', 'w', encoding = 'utf-8')
-# yaml.dump(yaml_data2, f, sort_keys=False)
+## build function_info.yaml
+yaml_data2 = {'max_containers': 10}
+images = []
+for function in functions:
+    images.append({'image': workflow_name + '_' + function['name'], 'name': function['name'], 'qos_requirement': 0.95, 'qos_time': 100})
+yaml_data2['functions'] = images
+f2 = open(workflow_name + '/function_info.yaml', 'w', encoding = 'utf-8')
+yaml.dump(yaml_data2, f2, sort_keys=False)
