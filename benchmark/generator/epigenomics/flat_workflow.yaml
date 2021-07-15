@@ -477,6 +477,8 @@ functions:
 - name: fastqsplit_00000001
   source: fastqsplit_00000001
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     2a5b1c95-af78-4e40-acd3-e62aedff0eca.sfq: *id001
   output:
@@ -498,6 +500,8 @@ functions:
 - name: filtercontams_00000002
   source: filtercontams_00000002
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     1c231b47-2813-440d-b5f5-11a2cbbf408e.sfq:
       type: pass
@@ -516,6 +520,8 @@ functions:
 - name: sol2sanger_00000003
   source: sol2sanger_00000003
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7605ea64-4ad1-4aba-b51b-866fde5cf4dd.sfq:
       type: pass
@@ -536,6 +542,8 @@ functions:
 - name: fast2bfq_00000004
   source: fast2bfq_00000004
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     36d88f94-28c5-4b64-80d5-c16d1fc9b416.fq:
       type: pass
@@ -556,6 +564,8 @@ functions:
 - name: map_00000005
   source: map_00000005
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7a587e93-8b02-4fa0-b533-991f6e34468b.bfq:
       type: pass
@@ -577,6 +587,8 @@ functions:
 - name: filtercontams_00000006
   source: filtercontams_00000006
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     30aca913-391c-4e20-bd33-16c692de9279.sfq:
       type: pass
@@ -595,6 +607,8 @@ functions:
 - name: sol2sanger_00000007
   source: sol2sanger_00000007
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     8b9747df-35dd-4954-92d5-baa669c4b6b7.sfq:
       type: pass
@@ -615,6 +629,8 @@ functions:
 - name: fast2bfq_00000008
   source: fast2bfq_00000008
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     3cfbd63b-7232-4bf0-a826-68073e0143c3.fq:
       type: pass
@@ -635,6 +651,8 @@ functions:
 - name: map_00000009
   source: map_00000009
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     9ac189e4-b841-4c86-a518-c99c767c4340.bfq:
       type: pass
@@ -656,6 +674,8 @@ functions:
 - name: filtercontams_00000010
   source: filtercontams_00000010
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a31a6e77-325f-4297-943e-ba453e2733b2.sfq:
       type: pass
@@ -674,6 +694,8 @@ functions:
 - name: sol2sanger_00000011
   source: sol2sanger_00000011
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     f9db2979-2347-4672-a074-165024edc564.sfq:
       type: pass
@@ -694,6 +716,8 @@ functions:
 - name: fast2bfq_00000012
   source: fast2bfq_00000012
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     0aa47f64-3b28-47de-a579-d08fef3a05fe.fq:
       type: pass
@@ -714,6 +738,8 @@ functions:
 - name: map_00000013
   source: map_00000013
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     8a2bb6dd-7253-4f8d-8439-c824fc3452e2.bfq:
       type: pass
@@ -735,6 +761,8 @@ functions:
 - name: mapmerge_00000014
   source: mapmerge_00000014
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     21695b46-8817-48c3-9864-d0eded6c3d24.map:
       type: pass
@@ -767,6 +795,8 @@ functions:
 - name: fastqsplit_00000015
   source: fastqsplit_00000015
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     83d8215b-1bbf-44eb-9afd-0c82c33eb4ee.sfq: *id025
   output:
@@ -788,6 +818,8 @@ functions:
 - name: filtercontams_00000016
   source: filtercontams_00000016
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     99fb6388-000c-4265-99b8-e674e3a4581e.sfq:
       type: pass
@@ -806,6 +838,8 @@ functions:
 - name: sol2sanger_00000017
   source: sol2sanger_00000017
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     e23d4c35-9406-485b-89f1-71877e8b3209.sfq:
       type: pass
@@ -826,6 +860,8 @@ functions:
 - name: fast2bfq_00000018
   source: fast2bfq_00000018
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     c6eb9cd9-e044-47b7-9d4b-177dbbc0465c.fq:
       type: pass
@@ -846,6 +882,8 @@ functions:
 - name: map_00000019
   source: map_00000019
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     568a91a1-f943-4a9e-8207-9c0b40ad060b.bfq:
       type: pass
@@ -867,6 +905,8 @@ functions:
 - name: filtercontams_00000020
   source: filtercontams_00000020
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     78b397b8-7f0c-41a6-b8cd-c5c06735c9f8.sfq:
       type: pass
@@ -885,6 +925,8 @@ functions:
 - name: sol2sanger_00000021
   source: sol2sanger_00000021
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     9db94f10-0708-4b08-ab21-8bcb84da8dfe.sfq:
       type: pass
@@ -905,6 +947,8 @@ functions:
 - name: fast2bfq_00000022
   source: fast2bfq_00000022
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     b0abef65-7672-496a-ad73-85f3b096e584.fq:
       type: pass
@@ -925,6 +969,8 @@ functions:
 - name: map_00000023
   source: map_00000023
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     25fef98d-0937-425a-a850-6aa6f85015a7.bfq:
       type: pass
@@ -946,6 +992,8 @@ functions:
 - name: filtercontams_00000024
   source: filtercontams_00000024
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     6610d6b9-42d1-40d3-85ad-0d3c0980a4c0.sfq:
       type: pass
@@ -964,6 +1012,8 @@ functions:
 - name: sol2sanger_00000025
   source: sol2sanger_00000025
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     cae4a58d-84f4-449d-87c3-b0f712686141.sfq:
       type: pass
@@ -984,6 +1034,8 @@ functions:
 - name: fast2bfq_00000026
   source: fast2bfq_00000026
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     09be9d59-35e0-4d8a-bab7-0e00ee3b7d40.fq:
       type: pass
@@ -1004,6 +1056,8 @@ functions:
 - name: map_00000027
   source: map_00000027
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     b71fda00-186d-4b9a-837e-c80652d4b6a1.bfq:
       type: pass
@@ -1025,6 +1079,8 @@ functions:
 - name: mapmerge_00000028
   source: mapmerge_00000028
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     b0338426-8c7d-4dba-ab31-a2112cb5f4eb.map:
       type: pass
@@ -1057,6 +1113,8 @@ functions:
 - name: fastqsplit_00000029
   source: fastqsplit_00000029
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     f1068425-a373-4061-b687-6f8e80c2663b.sfq: *id049
   output:
@@ -1078,6 +1136,8 @@ functions:
 - name: filtercontams_00000030
   source: filtercontams_00000030
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a577c059-b2d6-41fa-950e-2e689f613861.sfq:
       type: pass
@@ -1096,6 +1156,8 @@ functions:
 - name: sol2sanger_00000031
   source: sol2sanger_00000031
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7a4158be-c80e-4b79-9ab6-8ae31377504f.sfq:
       type: pass
@@ -1116,6 +1178,8 @@ functions:
 - name: fast2bfq_00000032
   source: fast2bfq_00000032
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     ef741626-81b1-4668-9efc-c5f98169405a.fq:
       type: pass
@@ -1136,6 +1200,8 @@ functions:
 - name: map_00000033
   source: map_00000033
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     17105a0a-09f8-4bf5-85e7-2386e06114e2.bfq:
       type: pass
@@ -1157,6 +1223,8 @@ functions:
 - name: filtercontams_00000034
   source: filtercontams_00000034
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a8179fe4-61e1-4539-84be-4a21200afe0c.sfq:
       type: pass
@@ -1175,6 +1243,8 @@ functions:
 - name: sol2sanger_00000035
   source: sol2sanger_00000035
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     1a62a46f-80d4-4694-bba2-45a46a5834f3.sfq:
       type: pass
@@ -1195,6 +1265,8 @@ functions:
 - name: fast2bfq_00000036
   source: fast2bfq_00000036
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     80c3e4eb-50fd-4d39-bf82-2da1a9f6da83.fq:
       type: pass
@@ -1215,6 +1287,8 @@ functions:
 - name: map_00000037
   source: map_00000037
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a8ec3f50-4eb0-4510-8f9c-662d5fdbc90f.bfq:
       type: pass
@@ -1236,6 +1310,8 @@ functions:
 - name: filtercontams_00000038
   source: filtercontams_00000038
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aa0dbd4c-7b91-47db-9495-1090f323e80b.sfq:
       type: pass
@@ -1254,6 +1330,8 @@ functions:
 - name: sol2sanger_00000039
   source: sol2sanger_00000039
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     c3a1af60-7c99-40e0-8741-ff4cfc9a2e60.sfq:
       type: pass
@@ -1274,6 +1352,8 @@ functions:
 - name: fast2bfq_00000040
   source: fast2bfq_00000040
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     fe7cbceb-bee4-4c41-9fc7-958453d3393e.fq:
       type: pass
@@ -1294,6 +1374,8 @@ functions:
 - name: map_00000041
   source: map_00000041
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     9af628ab-2eb7-4c21-bfee-04dd5b00eb49.bfq:
       type: pass
@@ -1315,6 +1397,8 @@ functions:
 - name: mapmerge_00000042
   source: mapmerge_00000042
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     2936ef3f-0e77-48fa-8612-19cd2c9c8c6c.map:
       type: pass
@@ -1347,6 +1431,8 @@ functions:
 - name: mapmerge_00000043
   source: mapmerge_00000043
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     b9df14f5-6d22-4757-8606-abfa3005123d.map:
       type: pass
@@ -1379,6 +1465,8 @@ functions:
 - name: chr21_00000044
   source: chr21_00000044
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     abfeaf71-cc01-427a-a998-d6885eb8dc78.map:
       type: pass
@@ -1399,6 +1487,8 @@ functions:
 - name: pileup_00000045
   source: pileup_00000045
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     db6e3f1c-ec18-42ad-8818-e180e0844176.map:
       type: pass

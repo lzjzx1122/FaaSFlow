@@ -399,6 +399,8 @@ functions:
 - name: individuals_00000001
   source: individuals_00000001
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     e56817f6-9b16-49b9-8980-76d76f75c6a1.txt: *id001
     45ec98b7-6d8c-4ded-8b33-a1ca9ff32a8f.vcf: *id002
@@ -413,6 +415,8 @@ functions:
 - name: individuals_00000002
   source: individuals_00000002
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     252fdaff-5f6b-4f0f-b612-9ef047ad942b.txt: *id003
     2a82264b-838e-4213-9116-db8e2cf5a3ab.vcf: *id004
@@ -427,6 +431,8 @@ functions:
 - name: individuals_00000003
   source: individuals_00000003
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     1490931c-f5a2-400a-8b5b-87415ebde313.txt: *id005
     370cdafa-c750-4429-84e5-62dc1808afbe.vcf: *id006
@@ -441,6 +447,8 @@ functions:
 - name: individuals_00000004
   source: individuals_00000004
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     87343d56-5ef6-4e25-9021-0fcdf643feff.txt: *id007
     0b765540-c80c-49b0-bbda-466bb883493f.vcf: *id008
@@ -455,6 +463,8 @@ functions:
 - name: individuals_00000005
   source: individuals_00000005
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a6131007-6ea8-4438-a0ed-4c54a65521d2.txt: *id009
     d42a665d-61bd-4008-940d-989c27fd9b15.vcf: *id010
@@ -469,6 +479,8 @@ functions:
 - name: individuals_00000006
   source: individuals_00000006
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     c4eec031-f02f-45f5-872f-9f4ba90d85f7.txt: *id011
     e9b966f9-559c-45fe-b4c3-2d5f001e92bd.vcf: *id012
@@ -483,6 +495,8 @@ functions:
 - name: individuals_00000007
   source: individuals_00000007
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     c99636e7-8000-4393-93b4-dc1b5c0f6062.txt: *id013
     403a7317-f98a-4f8b-8df9-40e057614949.vcf: *id014
@@ -497,6 +511,8 @@ functions:
 - name: individuals_00000008
   source: individuals_00000008
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     bee8086e-18a1-40bb-b35e-20c9af1cb387.txt: *id015
     8b24e422-c36b-4689-98d1-cfb21f9e47a0.vcf: *id016
@@ -511,6 +527,8 @@ functions:
 - name: individuals_00000009
   source: individuals_00000009
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     30505417-4b07-4c49-8610-9f831aa93d21.txt: *id017
     1dc8774f-46ad-4456-b2cd-8d94ffd2808f.vcf: *id018
@@ -525,6 +543,8 @@ functions:
 - name: individuals_merge_00000010
   source: individuals_merge_00000010
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     d3fc7d12-5fbb-4f87-ae25-17315763e682.gz:
       type: pass
@@ -604,6 +624,8 @@ functions:
 - name: sifting_00000011
   source: sifting_00000011
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     85a90e48-78d2-4e08-8144-b048f1102b3c.vcf: *id019
   output:
@@ -630,6 +652,8 @@ functions:
 - name: mutation_overlap_00000012
   source: mutation_overlap_00000012
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -654,6 +678,8 @@ functions:
 - name: mutation_overlap_00000013
   source: mutation_overlap_00000013
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -678,6 +704,8 @@ functions:
 - name: mutation_overlap_00000014
   source: mutation_overlap_00000014
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -702,6 +730,8 @@ functions:
 - name: mutation_overlap_00000015
   source: mutation_overlap_00000015
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -726,6 +756,8 @@ functions:
 - name: mutation_overlap_00000016
   source: mutation_overlap_00000016
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -750,6 +782,8 @@ functions:
 - name: mutation_overlap_00000017
   source: mutation_overlap_00000017
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -774,6 +808,8 @@ functions:
 - name: mutation_overlap_00000018
   source: mutation_overlap_00000018
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -798,6 +834,8 @@ functions:
 - name: frequency_00000019
   source: frequency_00000019
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -822,6 +860,8 @@ functions:
 - name: frequency_00000020
   source: frequency_00000020
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -846,6 +886,8 @@ functions:
 - name: frequency_00000021
   source: frequency_00000021
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -870,6 +912,8 @@ functions:
 - name: frequency_00000022
   source: frequency_00000022
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -894,6 +938,8 @@ functions:
 - name: frequency_00000023
   source: frequency_00000023
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -918,6 +964,8 @@ functions:
 - name: frequency_00000024
   source: frequency_00000024
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -942,6 +990,8 @@ functions:
 - name: frequency_00000025
   source: frequency_00000025
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     280d5f76-4cc7-4b16-b5f5-519cc2c17fcc.gz:
       type: pass
@@ -966,6 +1016,8 @@ functions:
 - name: individuals_00000026
   source: individuals_00000026
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     d517d2c9-3a1b-467b-843e-821b466a26a5.txt: *id034
     4a604551-55cf-41f2-b048-5db8209871f5.vcf: *id035
@@ -980,6 +1032,8 @@ functions:
 - name: individuals_00000027
   source: individuals_00000027
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     cc91b684-1775-4d9e-aa34-a5f2a6b36197.txt: *id036
     b589bca5-3a5d-46ef-ace6-90160527b572.vcf: *id037
@@ -994,6 +1048,8 @@ functions:
 - name: individuals_00000028
   source: individuals_00000028
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     ad2682f8-4004-4709-b2c6-6cd37e568f6b.txt: *id038
     8b040502-0770-472f-82b6-70ec3dd48ce0.vcf: *id039
@@ -1008,6 +1064,8 @@ functions:
 - name: individuals_00000029
   source: individuals_00000029
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     db46b759-e6b1-46d2-8a75-75a26f2dc3cf.txt: *id040
     5462cc23-6648-4055-b403-dbbf12bce871.vcf: *id041
@@ -1022,6 +1080,8 @@ functions:
 - name: individuals_00000030
   source: individuals_00000030
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     90d17469-6ddb-4fb7-b64b-f6458dcc300a.txt: *id042
     d9900ad3-f8e1-4860-8a95-f4b2756ee015.vcf: *id043
@@ -1036,6 +1096,8 @@ functions:
 - name: individuals_00000031
   source: individuals_00000031
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     8e6aec68-009e-40c7-aff3-e79957cb7310.txt: *id044
     3a67cb91-19fa-49f7-b2c6-0b65ad0bb7f9.vcf: *id045
@@ -1050,6 +1112,8 @@ functions:
 - name: individuals_00000032
   source: individuals_00000032
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     10b45e27-15be-4a08-822e-410c84a9ea73.txt: *id046
     c7757372-4c4d-4c28-92f4-b47915dd3430.vcf: *id047
@@ -1064,6 +1128,8 @@ functions:
 - name: individuals_00000033
   source: individuals_00000033
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7d918d93-64b1-4714-afb3-29e0dc89ee92.txt: *id048
     4af4a215-ed0a-427c-97ec-61cdbc39cc3c.vcf: *id049
@@ -1078,6 +1144,8 @@ functions:
 - name: individuals_00000034
   source: individuals_00000034
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     f3770545-322e-473b-a5b0-17e96ccb7cd1.txt: *id050
     df8fe199-69bf-4d6f-a7f5-38d47fab97bb.vcf: *id051
@@ -1092,6 +1160,8 @@ functions:
 - name: individuals_merge_00000035
   source: individuals_merge_00000035
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     13bbd116-e45c-42fd-8d10-12d554891cf6.gz:
       type: pass
@@ -1171,6 +1241,8 @@ functions:
 - name: sifting_00000036
   source: sifting_00000036
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     bfb150ee-6a57-42e4-b9e1-f3146db6583c.vcf: *id052
   output:
@@ -1197,6 +1269,8 @@ functions:
 - name: mutation_overlap_00000037
   source: mutation_overlap_00000037
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1221,6 +1295,8 @@ functions:
 - name: mutation_overlap_00000038
   source: mutation_overlap_00000038
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1245,6 +1321,8 @@ functions:
 - name: mutation_overlap_00000039
   source: mutation_overlap_00000039
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1269,6 +1347,8 @@ functions:
 - name: mutation_overlap_00000040
   source: mutation_overlap_00000040
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1293,6 +1373,8 @@ functions:
 - name: mutation_overlap_00000041
   source: mutation_overlap_00000041
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1317,6 +1399,8 @@ functions:
 - name: mutation_overlap_00000042
   source: mutation_overlap_00000042
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1341,6 +1425,8 @@ functions:
 - name: mutation_overlap_00000043
   source: mutation_overlap_00000043
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1365,6 +1451,8 @@ functions:
 - name: frequency_00000044
   source: frequency_00000044
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1389,6 +1477,8 @@ functions:
 - name: frequency_00000045
   source: frequency_00000045
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1413,6 +1503,8 @@ functions:
 - name: frequency_00000046
   source: frequency_00000046
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1437,6 +1529,8 @@ functions:
 - name: frequency_00000047
   source: frequency_00000047
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1461,6 +1555,8 @@ functions:
 - name: frequency_00000048
   source: frequency_00000048
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1485,6 +1581,8 @@ functions:
 - name: frequency_00000049
   source: frequency_00000049
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass
@@ -1509,6 +1607,8 @@ functions:
 - name: frequency_00000050
   source: frequency_00000050
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     548c5d65-c8b5-4650-8ad8-314a0b20f42c.gz:
       type: pass

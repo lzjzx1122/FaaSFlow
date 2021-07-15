@@ -1083,6 +1083,8 @@ functions:
 - name: baseline_cycles_00000001
   source: baseline_cycles_00000001
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     d72a530d-f0d4-4af6-aabd-07a923a31559.soil: *id001
     746b688f-0c39-4b84-b8a0-7085423ef2fc.weather: *id002
@@ -1108,6 +1110,8 @@ functions:
 - name: cycles_00000002
   source: cycles_00000002
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     37a45a81-bebe-4ccf-8b26-f44c9d337513.dat:
       type: pass
@@ -1150,6 +1154,8 @@ functions:
 - name: fertilizer_increase_cycles_00000003
   source: fertilizer_increase_cycles_00000003
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     37a45a81-bebe-4ccf-8b26-f44c9d337513.dat:
       type: pass
@@ -1192,6 +1198,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000004
   source: cycles_fertilizer_increase_output_parser_00000004
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7550c87f-1572-4fb7-91b4-739c0c2c3ad7.csv:
       type: pass
@@ -1222,6 +1230,8 @@ functions:
 - name: baseline_cycles_00000005
   source: baseline_cycles_00000005
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7f1e592c-e5d1-4d8c-9cf8-0a7b780fc59b.soil: *id019
     77fda54b-3e9f-4437-8392-5f8bc0531858.weather: *id020
@@ -1247,6 +1257,8 @@ functions:
 - name: cycles_00000006
   source: cycles_00000006
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     2ff91b98-9baf-4601-b257-d10fba614556.dat:
       type: pass
@@ -1289,6 +1301,8 @@ functions:
 - name: fertilizer_increase_cycles_00000007
   source: fertilizer_increase_cycles_00000007
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     2ff91b98-9baf-4601-b257-d10fba614556.dat:
       type: pass
@@ -1331,6 +1345,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000008
   source: cycles_fertilizer_increase_output_parser_00000008
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     6e13786c-c8ad-427a-928d-bd008c1a40df.csv:
       type: pass
@@ -1361,6 +1377,8 @@ functions:
 - name: baseline_cycles_00000009
   source: baseline_cycles_00000009
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     cbb85b89-6fc9-4bf8-a09d-3d2f04bb1323.soil: *id037
     d9700445-d9e4-4b81-969d-8c4e5439b268.weather: *id038
@@ -1386,6 +1404,8 @@ functions:
 - name: cycles_00000010
   source: cycles_00000010
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     6f928465-850d-43d8-8ab7-b0d22affe20b.dat:
       type: pass
@@ -1428,6 +1448,8 @@ functions:
 - name: fertilizer_increase_cycles_00000011
   source: fertilizer_increase_cycles_00000011
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     6f928465-850d-43d8-8ab7-b0d22affe20b.dat:
       type: pass
@@ -1470,6 +1492,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000012
   source: cycles_fertilizer_increase_output_parser_00000012
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     ad1dbc8c-17d7-4228-87b4-5abe2611c73a.csv:
       type: pass
@@ -1500,6 +1524,8 @@ functions:
 - name: baseline_cycles_00000013
   source: baseline_cycles_00000013
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     0b676b6c-ea9a-4592-8f0c-0e05aaa1122d.soil: *id055
     1e71f9f1-7091-4f0a-b1ed-6478677413a3.weather: *id056
@@ -1525,6 +1551,8 @@ functions:
 - name: cycles_00000014
   source: cycles_00000014
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     462a7fae-4e1d-4374-a968-9338643e85db.dat:
       type: pass
@@ -1567,6 +1595,8 @@ functions:
 - name: fertilizer_increase_cycles_00000015
   source: fertilizer_increase_cycles_00000015
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     462a7fae-4e1d-4374-a968-9338643e85db.dat:
       type: pass
@@ -1609,6 +1639,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000016
   source: cycles_fertilizer_increase_output_parser_00000016
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     5614cb8c-87e7-48d7-873c-8c3e56c1d1ee.csv:
       type: pass
@@ -1639,6 +1671,8 @@ functions:
 - name: baseline_cycles_00000017
   source: baseline_cycles_00000017
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     ab0f79aa-fccb-47a1-9439-ff4412717bf9.soil: *id073
     60d04ca0-b592-42e7-8a04-61ca1fc1da28.weather: *id074
@@ -1664,6 +1698,8 @@ functions:
 - name: cycles_00000018
   source: cycles_00000018
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a31dfdbf-66bb-488b-8d46-9274845439ea.dat:
       type: pass
@@ -1706,6 +1742,8 @@ functions:
 - name: fertilizer_increase_cycles_00000019
   source: fertilizer_increase_cycles_00000019
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a31dfdbf-66bb-488b-8d46-9274845439ea.dat:
       type: pass
@@ -1748,6 +1786,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000020
   source: cycles_fertilizer_increase_output_parser_00000020
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     ebe99e6a-684c-469f-8e45-9b3c8bfbea19.csv:
       type: pass
@@ -1778,6 +1818,8 @@ functions:
 - name: cycles_output_summary_00000021
   source: cycles_output_summary_00000021
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     35863e1c-719c-4b09-a17a-a09177ede5f9.zip:
       type: pass
@@ -1880,6 +1922,8 @@ functions:
 - name: cycles_fertilizer_increase_output_summary_00000022
   source: cycles_fertilizer_increase_output_summary_00000022
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     c71c0aa8-dfb1-4263-b4ca-0e4c537aa262.csv:
       type: pass
@@ -1921,6 +1965,8 @@ functions:
 - name: baseline_cycles_00000023
   source: baseline_cycles_00000023
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     2c6e9010-8427-469f-b183-5b80df87fc8b.soil: *id091
     912b6001-092b-43ca-b5e8-a156545f2f0b.weather: *id092
@@ -1946,6 +1992,8 @@ functions:
 - name: cycles_00000024
   source: cycles_00000024
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     d4185abd-394c-4917-8664-a6d00e56495d.dat:
       type: pass
@@ -1988,6 +2036,8 @@ functions:
 - name: fertilizer_increase_cycles_00000025
   source: fertilizer_increase_cycles_00000025
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     d4185abd-394c-4917-8664-a6d00e56495d.dat:
       type: pass
@@ -2030,6 +2080,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000026
   source: cycles_fertilizer_increase_output_parser_00000026
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a386cf8d-cbc4-41aa-8373-b75b73acc9b0.csv:
       type: pass
@@ -2060,6 +2112,8 @@ functions:
 - name: baseline_cycles_00000027
   source: baseline_cycles_00000027
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     ebdbf294-36e3-4784-9336-cf9925ff3c4f.soil: *id109
     cbf66638-7886-4446-b4be-6c702dec791b.weather: *id110
@@ -2085,6 +2139,8 @@ functions:
 - name: cycles_00000028
   source: cycles_00000028
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     b5dc0769-1068-491f-8372-44a083eaf662.dat:
       type: pass
@@ -2127,6 +2183,8 @@ functions:
 - name: fertilizer_increase_cycles_00000029
   source: fertilizer_increase_cycles_00000029
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     b5dc0769-1068-491f-8372-44a083eaf662.dat:
       type: pass
@@ -2169,6 +2227,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000030
   source: cycles_fertilizer_increase_output_parser_00000030
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     13afed29-a0ea-4771-b10a-a542740a24a6.csv:
       type: pass
@@ -2199,6 +2259,8 @@ functions:
 - name: baseline_cycles_00000031
   source: baseline_cycles_00000031
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     2580383e-7a7e-4631-a39c-299bf79d09c3.soil: *id127
     9b5183e6-f5f0-472a-9039-d1791615e8a1.weather: *id128
@@ -2224,6 +2286,8 @@ functions:
 - name: cycles_00000032
   source: cycles_00000032
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     9ec91874-d787-4f37-a7f6-7015f508af7a.dat:
       type: pass
@@ -2266,6 +2330,8 @@ functions:
 - name: fertilizer_increase_cycles_00000033
   source: fertilizer_increase_cycles_00000033
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     9ec91874-d787-4f37-a7f6-7015f508af7a.dat:
       type: pass
@@ -2308,6 +2374,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000034
   source: cycles_fertilizer_increase_output_parser_00000034
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     260ad41e-7e3c-427f-be52-9cdee689f216.csv:
       type: pass
@@ -2338,6 +2406,8 @@ functions:
 - name: baseline_cycles_00000035
   source: baseline_cycles_00000035
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aeb40a39-1b7b-4de3-9789-0915eaf687ed.soil: *id145
     5b58798c-6ca6-479c-8cb1-9ba2bab5b270.weather: *id146
@@ -2363,6 +2433,8 @@ functions:
 - name: cycles_00000036
   source: cycles_00000036
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     63d07b5d-1741-4317-b788-2e161567ea04.dat:
       type: pass
@@ -2405,6 +2477,8 @@ functions:
 - name: fertilizer_increase_cycles_00000037
   source: fertilizer_increase_cycles_00000037
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     63d07b5d-1741-4317-b788-2e161567ea04.dat:
       type: pass
@@ -2447,6 +2521,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000038
   source: cycles_fertilizer_increase_output_parser_00000038
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     473ffadf-25dc-4ba7-9e31-e01234c0de63.csv:
       type: pass
@@ -2477,6 +2553,8 @@ functions:
 - name: baseline_cycles_00000039
   source: baseline_cycles_00000039
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     78306b13-2c69-484d-83ac-a1f210c04150.soil: *id163
     023b1a6a-7c6f-4f7d-9bd3-ad01bef0d39d.weather: *id164
@@ -2502,6 +2580,8 @@ functions:
 - name: cycles_00000040
   source: cycles_00000040
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     cf8b88af-6264-4b92-bc39-896550387049.dat:
       type: pass
@@ -2544,6 +2624,8 @@ functions:
 - name: fertilizer_increase_cycles_00000041
   source: fertilizer_increase_cycles_00000041
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     cf8b88af-6264-4b92-bc39-896550387049.dat:
       type: pass
@@ -2586,6 +2668,8 @@ functions:
 - name: cycles_fertilizer_increase_output_parser_00000042
   source: cycles_fertilizer_increase_output_parser_00000042
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     75f11cd6-232a-4419-9917-119a76368bbc.csv:
       type: pass
@@ -2616,6 +2700,8 @@ functions:
 - name: cycles_output_summary_00000043
   source: cycles_output_summary_00000043
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     c0d0f5b2-3926-4d2e-b854-fadc3450d92c.zip:
       type: pass
@@ -2718,6 +2804,8 @@ functions:
 - name: cycles_fertilizer_increase_output_summary_00000044
   source: cycles_fertilizer_increase_output_summary_00000044
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a2971176-acaf-4497-a6c8-a8c4d621bcc8.csv:
       type: pass
@@ -2759,6 +2847,8 @@ functions:
 - name: cycles_plots_00000045
   source: cycles_plots_00000045
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     02456efa-d264-4167-bd46-027257bc2d48.csv:
       type: pass
@@ -2776,6 +2866,8 @@ functions:
 - name: cycles_plots_00000046
   source: cycles_plots_00000046
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     378a582f-fdad-4d14-b1c3-b3dd97ebd5a7.csv:
       type: pass

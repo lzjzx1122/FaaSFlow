@@ -9,6 +9,19 @@ class function:
         self.input_files = input_files
         self.output_files = output_files
         self.conditions = conditions
+        self.scale = 0
+        self.mem_usage = 0
+        self.split_ratio = 1
+    
+    def set_scale(self, scale):
+        self.scale = scale
+
+    def set_mem_usage(self, mem_usage):
+        self.mem_usage = mem_usage
+    
+    # foreach: multiple container in one workflow
+    def set_split_ratio(self, split_ratio):
+        self.split_ratio = split_ratio
 
 
 class workflow:

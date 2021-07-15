@@ -1,8 +1,6 @@
 import yaml
 import component
-
-network_bandwidth = 10000000 / 8
-
+import config
 
 def parse(filename):
     data = yaml.load(open(filename), Loader=yaml.FullLoader)
@@ -37,7 +35,7 @@ def parse(filename):
             for key in function['output']:
                 output_files[key] = {'size': function['output'][key]['size'], 'type': function['output'][key]['type']}
                 send_byte += function['output'][key]['size']
-        send_time = send_byte / network_bandwidth
+        send_time = send_byte / config.network_bandwidth
         conditions = list()
         if 'next' in function:
             foreach_flag = False
@@ -58,6 +56,12 @@ def parse(filename):
                     parent_cnt[n] = parent_cnt[n] + 1
         current_function = component.function(name, [], next, nextDis, source, runtime,
                                               input_files, output_files, conditions)
+        if 'scale' in function:
+            current_function.set_scale(function['scale'])
+        if 'mem_usage' in function:
+            current_function.set_mem_usage(function['mem_usage'])
+        if 'split_ratio' in function:
+            current_function.set_split_ratio(function['split_ratio'])
         total = total + 1
         nodes[name] = current_function
     for name in nodes:

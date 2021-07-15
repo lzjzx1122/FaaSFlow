@@ -9,6 +9,8 @@ functions:
 - name: rand
   source: rand
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     count:
       type: normal
@@ -22,7 +24,7 @@ functions:
       size: 8
     rand_result:
       type: normal
-      size: 800000000
+      size: 8
   next:
     type: foreach
     nodes:
@@ -30,6 +32,9 @@ functions:
 - name: square
   source: square
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
+  split_ratio: 3
   input:
     x:
       type: key
@@ -42,11 +47,11 @@ functions:
       value:
         function: rand
         parameter: rand_result
-      size: 800000000
+      size: 8
   output:
     square_result:
       type: normal
-      size: 800000000
+      size: 8
   next:
     type: pass
     nodes:
@@ -54,23 +59,25 @@ functions:
 - name: add
   source: add
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     x:
       type: key
       value:
         function: rand
         parameter: split_keys
-      size: 800000000
+      size: 8
     content:
       type: normal
       value:
         function: square
         parameter: square_result
-      size: 800000000
+      size: 8
   output:
     add_result:
       type: normal
-      size: 800000000
+      size: 8
 global_output:
   result:
     type: pass

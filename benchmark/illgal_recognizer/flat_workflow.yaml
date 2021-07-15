@@ -15,6 +15,8 @@ functions:
 - name: upload
   source: upload
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     image_name:
       type: pass
@@ -43,6 +45,8 @@ functions:
 - name: adult
   source: adult
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     image_name:
       type: pass
@@ -73,6 +77,8 @@ functions:
 - name: violence
   source: violence
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     image_name:
       type: pass
@@ -103,6 +109,8 @@ functions:
 - name: virtual1
   source: VIRTUAL
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   next:
     type: switch
     conditions:
@@ -114,6 +122,8 @@ functions:
 - name: mosaic
   source: mosaic
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     image_name:
       type: pass
@@ -130,12 +140,14 @@ functions:
   output:
     mosaic_name:
       type: normal
-      size: 800000000
+      size: 8
     content:
       type: normal
-      size: 800000000
+      size: 8
 - name: extract
   source: extract
+  scale: 3
+  mem_usage: 0.25
   runtime: 1
   input:
     image_name:
@@ -153,7 +165,7 @@ functions:
   output:
     extracted_text:
       type: normal
-      size: 800000000
+      size: 8
   next:
     type: pass
     nodes:
@@ -161,17 +173,19 @@ functions:
 - name: translate
   source: translate
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     extracted_text:
       type: pass
       value:
         function: extract
         parameter: extracted_text
-      size: 800000000
+      size: 8
   output:
     translated_text:
       type: normal
-      size: 800000000
+      size: 8
   next:
     type: pass
     nodes:
@@ -179,13 +193,15 @@ functions:
 - name: word_censor
   source: word_censor
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     translated_text:
       type: pass
       value:
         function: translate
         parameter: translated_text
-      size: 800000000
+      size: 8
   output:
     filter_count:
       type: normal
@@ -203,6 +219,8 @@ functions:
 - name: virtual2
   source: VIRTUAL
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   next:
     type: switch
     conditions:
@@ -214,4 +232,6 @@ functions:
 - name: END
   source: END
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
 global_output:

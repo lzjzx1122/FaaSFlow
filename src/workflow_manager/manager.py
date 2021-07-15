@@ -7,6 +7,8 @@ import gevent
 import gevent.lock
 from typing import Any, Dict, List
 import requests
+from gevent import monkey
+monkey.patch_all()
 
 sys.path.append('../function_manager')
 from function_manager import FunctionManager

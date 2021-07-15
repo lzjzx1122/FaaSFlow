@@ -15,10 +15,10 @@ class Repository:
                     self.couch.delete(db)
                 self.couch.create(db)
 
-    def save_function_info(self, function_info_list, db_name):
+    def save_function_info(self, function_info, db_name):
         db = self.couch[db_name]
-        for info in function_info_list:
-            db[info['function_name']] = info
+        for name in function_info:
+            db[name] = function_info[name]
 
     def save_foreach_functions(self, foreach_functions, db_name):
         db = self.couch[db_name]

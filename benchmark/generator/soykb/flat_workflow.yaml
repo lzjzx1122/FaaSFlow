@@ -2253,6 +2253,8 @@ functions:
 - name: alignment_to_reference_00000001
   source: alignment_to_reference_00000001
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     5e26b4aa-76ed-4a91-b437-e2a9e8ed3f98.dict: *id001
     0d68ca3b-6008-498a-b736-ce54f80e6ef8.pac: *id002
@@ -2277,6 +2279,8 @@ functions:
 - name: sort_sam_00000002
   source: sort_sam_00000002
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     78d3a8a7-2c07-4785-9626-f60869e2eb3d.sam:
       type: pass
@@ -2299,6 +2303,8 @@ functions:
 - name: dedup_00000003
   source: dedup_00000003
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a50b315f-decc-470e-a6a6-0fb2c3de5f1a.bai:
       type: pass
@@ -2327,6 +2333,8 @@ functions:
 - name: add_replace_00000004
   source: add_replace_00000004
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7405aacf-042f-4d4b-97b6-3143a164258c.bai:
       type: pass
@@ -2355,6 +2363,8 @@ functions:
 - name: realign_target_creator_00000005
   source: realign_target_creator_00000005
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     2127af54-a5f9-481f-a185-babfc17cbb6d.bam:
       type: pass
@@ -2389,6 +2399,8 @@ functions:
 - name: indel_realign_00000006
   source: indel_realign_00000006
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     69fa7a96-ed7c-4eff-9311-168157460589.list:
       type: pass
@@ -2429,6 +2441,8 @@ functions:
 - name: haplotype_caller_00000007
   source: haplotype_caller_00000007
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
       type: pass
@@ -2467,6 +2481,8 @@ functions:
 - name: haplotype_caller_00000008
   source: haplotype_caller_00000008
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
       type: pass
@@ -2505,6 +2521,8 @@ functions:
 - name: haplotype_caller_00000009
   source: haplotype_caller_00000009
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
       type: pass
@@ -2543,6 +2561,8 @@ functions:
 - name: haplotype_caller_00000010
   source: haplotype_caller_00000010
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
       type: pass
@@ -2581,6 +2601,8 @@ functions:
 - name: haplotype_caller_00000011
   source: haplotype_caller_00000011
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
       type: pass
@@ -2619,6 +2641,8 @@ functions:
 - name: haplotype_caller_00000012
   source: haplotype_caller_00000012
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
       type: pass
@@ -2657,6 +2681,8 @@ functions:
 - name: haplotype_caller_00000013
   source: haplotype_caller_00000013
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
       type: pass
@@ -2695,6 +2721,8 @@ functions:
 - name: haplotype_caller_00000014
   source: haplotype_caller_00000014
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     aa1c2b75-a5c4-4c05-a0ce-26eb593370a3.bai:
       type: pass
@@ -2733,6 +2761,8 @@ functions:
 - name: alignment_to_reference_00000015
   source: alignment_to_reference_00000015
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     a5a4848c-5151-4c60-a310-4c04eb1d7e3c.dict: *id118
     14922c9f-d65c-42c0-844e-905cf0a87651.pac: *id119
@@ -2757,6 +2787,8 @@ functions:
 - name: sort_sam_00000016
   source: sort_sam_00000016
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     6924b2a2-5569-4808-aa38-00249bef7954.sam:
       type: pass
@@ -2779,6 +2811,8 @@ functions:
 - name: dedup_00000017
   source: dedup_00000017
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     b44d78ca-be2b-4248-acd2-bf748c512814.bai:
       type: pass
@@ -2807,6 +2841,8 @@ functions:
 - name: add_replace_00000018
   source: add_replace_00000018
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     4ab2cb91-9978-4b3b-902e-c5860649e085.bai:
       type: pass
@@ -2835,6 +2871,8 @@ functions:
 - name: realign_target_creator_00000019
   source: realign_target_creator_00000019
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     98511a2f-a584-4825-9a34-8983a9922cea.bam:
       type: pass
@@ -2869,6 +2907,8 @@ functions:
 - name: indel_realign_00000020
   source: indel_realign_00000020
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     1703a845-75c1-4135-8f7c-5c161d982a9c.list:
       type: pass
@@ -2909,6 +2949,8 @@ functions:
 - name: haplotype_caller_00000021
   source: haplotype_caller_00000021
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7e604e4f-e611-4903-b060-6060820ff3f9.bai:
       type: pass
@@ -2947,6 +2989,8 @@ functions:
 - name: haplotype_caller_00000022
   source: haplotype_caller_00000022
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7e604e4f-e611-4903-b060-6060820ff3f9.bai:
       type: pass
@@ -2985,6 +3029,8 @@ functions:
 - name: haplotype_caller_00000023
   source: haplotype_caller_00000023
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7e604e4f-e611-4903-b060-6060820ff3f9.bai:
       type: pass
@@ -3023,6 +3069,8 @@ functions:
 - name: haplotype_caller_00000024
   source: haplotype_caller_00000024
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7e604e4f-e611-4903-b060-6060820ff3f9.bai:
       type: pass
@@ -3061,6 +3109,8 @@ functions:
 - name: haplotype_caller_00000025
   source: haplotype_caller_00000025
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7e604e4f-e611-4903-b060-6060820ff3f9.bai:
       type: pass
@@ -3099,6 +3149,8 @@ functions:
 - name: haplotype_caller_00000026
   source: haplotype_caller_00000026
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7e604e4f-e611-4903-b060-6060820ff3f9.bai:
       type: pass
@@ -3137,6 +3189,8 @@ functions:
 - name: haplotype_caller_00000027
   source: haplotype_caller_00000027
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7e604e4f-e611-4903-b060-6060820ff3f9.bai:
       type: pass
@@ -3175,6 +3229,8 @@ functions:
 - name: haplotype_caller_00000028
   source: haplotype_caller_00000028
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7e604e4f-e611-4903-b060-6060820ff3f9.bai:
       type: pass
@@ -3213,6 +3269,8 @@ functions:
 - name: genotype_gvcfs_00000029
   source: genotype_gvcfs_00000029
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     f51e202f-69b1-4c40-88dc-8308a5270453.vcf:
       type: pass
@@ -3262,6 +3320,8 @@ functions:
 - name: genotype_gvcfs_00000030
   source: genotype_gvcfs_00000030
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     11961b35-18ad-41fa-aebc-8503caa1ccc5.vcf:
       type: pass
@@ -3311,6 +3371,8 @@ functions:
 - name: genotype_gvcfs_00000031
   source: genotype_gvcfs_00000031
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     5a5924a8-b8bc-47a5-90e9-e499565701a7.vcf:
       type: pass
@@ -3360,6 +3422,8 @@ functions:
 - name: genotype_gvcfs_00000032
   source: genotype_gvcfs_00000032
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     0fcb6c85-bded-4a5e-9a40-ad4116f0151e.vcf:
       type: pass
@@ -3409,6 +3473,8 @@ functions:
 - name: genotype_gvcfs_00000033
   source: genotype_gvcfs_00000033
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     81dd04f1-a375-4327-a1e6-13653784750c.vcf:
       type: pass
@@ -3458,6 +3524,8 @@ functions:
 - name: genotype_gvcfs_00000034
   source: genotype_gvcfs_00000034
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     41b1ef10-84ea-4320-95f5-998a6c53808b.vcf:
       type: pass
@@ -3507,6 +3575,8 @@ functions:
 - name: genotype_gvcfs_00000035
   source: genotype_gvcfs_00000035
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     2fea2412-4c88-4e93-aed5-1efdf0f546a2.vcf:
       type: pass
@@ -3556,6 +3626,8 @@ functions:
 - name: genotype_gvcfs_00000036
   source: genotype_gvcfs_00000036
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     3d543985-f646-4ed2-9d2e-5e646c1a59d1.vcf:
       type: pass
@@ -3605,6 +3677,8 @@ functions:
 - name: merge_gcvf_00000037
   source: merge_gcvf_00000037
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     f51e202f-69b1-4c40-88dc-8308a5270453.vcf:
       type: pass
@@ -3822,6 +3896,8 @@ functions:
 - name: combine_variants_00000038
   source: combine_variants_00000038
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     7873de1b-5318-4177-9128-1c23ea87b3ba.vcf:
       type: pass
@@ -3944,6 +4020,8 @@ functions:
 - name: select_variants_indel_00000039
   source: select_variants_indel_00000039
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     ff73f1be-8d13-4d01-8101-8dcc5a863584.vcf:
       type: pass
@@ -3978,6 +4056,8 @@ functions:
 - name: select_variants_snp_00000040
   source: select_variants_snp_00000040
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     ff73f1be-8d13-4d01-8101-8dcc5a863584.vcf:
       type: pass
@@ -4012,6 +4092,8 @@ functions:
 - name: filtering_indel_00000041
   source: filtering_indel_00000041
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     85f3d9e0-a89e-4142-9d39-a05a8a01ecbe.vcf:
       type: pass
@@ -4042,6 +4124,8 @@ functions:
 - name: filtering_snp_00000042
   source: filtering_snp_00000042
   runtime: 1
+  scale: 3
+  mem_usage: 0.25
   input:
     fed3787e-8635-413c-ba40-f0c74c2e8c66.vcf:
       type: pass

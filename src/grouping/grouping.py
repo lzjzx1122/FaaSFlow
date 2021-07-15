@@ -1,12 +1,13 @@
+from typing import List
 import parse_yaml
 import queue
 import json
+import component
 import repository
+import config
 
-inter_communication_time = 0.1
-node_cnt = 10
-node_ip = ['', '', '', '', '', '', '', '', '', '']
-
+mem_usage = 0
+max_mem_usage = 0
 
 def init_graph(workflow, group_set):
     in_degree_vec = dict()
@@ -33,7 +34,7 @@ def find_set(node, group_set):
     return None
 
 
-def topo_search(workflow, in_degree_vec, group_set, no_net_latency):
+def topo_search(workflow: component.workflow, in_degree_vec, group_set):
     dist_vec = dict()  # { name: [dist, max_length] }
     prev_vec = dict()  # { name: [prev_name, length] }
     q = queue.Queue()
@@ -49,10 +50,8 @@ def topo_search(workflow, in_degree_vec, group_set, no_net_latency):
             next_node = workflow.nodes[node.next[index]]
             w = node.nextDis[index]
             next_node_name = next_node.name
-            if no_net_latency is True:
-                w = 0
-            elif next_node_name in find_set(prev_name, group_set):
-                w = inter_communication_time
+            if next_node_name in find_set(prev_name, group_set):
+                w = w / config.net_mem_bandwidth_ratio
             if next_node.name not in dist_vec:
                 dist_vec[next_node_name] = [pre_dist[0] + w + next_node.runtime, max(pre_dist[1], w)]
                 prev_vec[next_node_name] = [prev_name, w]
@@ -68,30 +67,41 @@ def topo_search(workflow, in_degree_vec, group_set, no_net_latency):
                 q.put(next_node)
     return dist_vec, prev_vec
 
+def get_total_scale(node_set, workflow: component.workflow):
+    scale = 0
+    for name in node_set:
+        if not name.startswith('virtual'):
+            scale += workflow.nodes[name].scale
+    return scale
 
-def mergeable(node1, node2, group_set, group_size):
+def mergeable(node1, node2, group_set, workflow: component.workflow, write_to_mem_nodes):
+    global mem_usage, max_mem_usage
     node_set1 = find_set(node1, group_set)
-    if node2 in node_set1:
+    if node2 in node_set1: # same set
         return False
     node_set2 = find_set(node2, group_set)
-    if len(node_set1) + len(node_set2) > group_size:
+    node_set1_scale = get_total_scale(node_set1, workflow)
+    node_set2_scale = get_total_scale(node_set2, workflow)
+    if node_set1_scale + node_set2_scale > config.node_mem / config.container_mem: # too many container in same node
+        print('Hit container threshold')
         return False
+    if node1 not in write_to_mem_nodes:
+        current_mem_usage = workflow.nodes[node1].nextDis[0] * config.network_bandwidth
+        if mem_usage + current_mem_usage > max_mem_usage: # too much memory consumption
+            print('Hit memory consumption threshold')
+            return False
+        mem_usage += current_mem_usage
+        write_to_mem_nodes.append(node1)
     group_set.remove(node_set1)
     group_set.remove(node_set2)
     group_set.append(node_set1 | node_set2)
     return True
 
-
-penalty_rate = 1.5
-
-
-def merge_node(crit_vec, group_set, group_size):
-    merge_flag = False
+def merge_path(crit_vec, group_set, workflow: component.workflow, write_to_mem_nodes):
     for edge in crit_vec:
-        merge_flag = merge_flag | mergeable(edge[0], edge[1][0], group_set, group_size)
-        if merge_flag:
-            break
-    return merge_flag
+        if mergeable(edge[1][0], edge[0], group_set, workflow, write_to_mem_nodes):
+            return True
+    return False
 
 
 def get_longest_dis(workflow, dist_vec):
@@ -104,76 +114,36 @@ def get_longest_dis(workflow, dist_vec):
     return dist, node_name
 
 
-def grouping(workflow):
-    topo_search_cnt = 0
+def grouping(workflow: component.workflow):
+
+    # initialization: get in-degree of each node
     group_set = list()
+    write_to_mem_nodes = []
     in_degree_vec = init_graph(workflow, group_set)
-    group_size = 1
-    total_node_cnt = len(workflow.nodes)
-    no_latency_dist_vec, _ = topo_search(workflow, in_degree_vec.copy(), group_set, True)
-    # no_latency_crit_length = no_latency_dist_vec[workflow.end.name][0]
-    no_latency_crit_length, _ = get_longest_dis(workflow, no_latency_dist_vec)
-    init_flag = True
-    init_crit_length = 0
 
     while True:
-        dist_vec, prev_vec = topo_search(workflow, in_degree_vec.copy(), group_set, False)
-        topo_search_cnt = topo_search_cnt + 1
-        # crit_length = dist_vec[workflow.end.name][0]
+
+        # break if every node is in same group
+        if len(group_set) == 1:
+            break
+
+        # topo dp: find each node's longest dis and it's predecessor
+        dist_vec, prev_vec = topo_search(workflow, in_degree_vec.copy(), group_set)
         crit_length, tmp_node_name = get_longest_dis(workflow, dist_vec)
         print('crit_length: ', crit_length)
-        print('barrier: ', no_latency_crit_length * penalty_rate)
-        if init_flag:
-            init_crit_length = crit_length
-            init_flag = False
-        if crit_length < no_latency_crit_length * penalty_rate:
-            break
-        elif group_size == total_node_cnt:
-            break
+
+        # find the longest path, edge descent sorted
         crit_vec = dict()
         while tmp_node_name not in workflow.start_functions:
             crit_vec[tmp_node_name] = prev_vec[tmp_node_name]
             tmp_node_name = prev_vec[tmp_node_name][0]
         crit_vec = sorted(crit_vec.items(), key=lambda c: c[1][1], reverse=True)
-        if not merge_node(crit_vec, group_set, group_size):
-            group_size = group_size + 1
-            merge_node(crit_vec, group_set, group_size)
-    print('no_latency_crit_length: ', no_latency_crit_length)
+
+        # if can't merge every edge of this path, just break
+        if not merge_path(crit_vec, group_set, workflow, write_to_mem_nodes):
+            break
     print(group_set)
     return group_set
-
-
-# def get_type(workflow, name, node, group_detail, mode):
-#     if mode == 'input':
-#         for prev_node_name in node.prev:
-#             prev_node = workflow.nodes[prev_node_name]
-#             if name in prev_node.output_files:
-#                 node_set = find_set(prev_node.name, group_detail)
-#                 type = 'MEM' if node.name in node_set else 'DB'
-#                 return type
-#         return 'DB'
-#     else:
-#         not_in_same_set = False
-#         in_same_set = False
-#         for next_node_name in node.next:
-#             next_node = workflow.nodes[next_node_name]
-#             in_next = False
-#             for arg in next_node.input_files:
-#                 if name == next_node.input_files[arg]['parameter']:
-#                     in_next = True
-#                     break
-#             if in_next:
-#                 node_set = find_set(next_node.name, group_detail)
-#                 if node.name not in node_set:
-#                     not_in_same_set = True
-#                 else:
-#                     in_same_set = True
-#         if not_in_same_set and in_same_set:
-#             return 'DB+MEM'
-#         elif in_same_set:
-#             return 'MEM'
-#         else:
-#             return 'DB'
 
 # define the output destination at function level, instead of one per key/file
 def get_type(workflow, node, group_detail):
@@ -193,17 +163,33 @@ def get_type(workflow, node, group_detail):
     else:
         return 'DB'
 
+def get_max_mem_usage(workflow: component.workflow):
+    global max_mem_usage
+    for name in workflow.nodes:
+        if not name.startswith('virtual'):
+            max_mem_usage += (1 - config.reserved_mem_percentage - workflow.nodes[name].mem_usage) * config.container_mem * workflow.nodes[name].split_ratio
+    return max_mem_usage
 
-def save_function_info(workflow, ip_list):
+def get_function_info(workflow: component.workflow, ip_list):
+
+    global max_mem_usage
+
+    # grouping algorithm
+    max_mem_usage = get_max_mem_usage(workflow)
+    print('max_mem_usage', max_mem_usage)
     group_detail = grouping(workflow)
+
+    # allocating ip 
     ip_index = 0
     function_ip = {}
     for group in group_detail:
         for function in group:
             function_ip[function] = ip_list[ip_index]
         ip_index = (ip_index + 1) % len(ip_list)
-    function_info_list = list()
-    function_info_list_raw = list()
+
+    # building function info: both optmized and raw version
+    function_info_dict = {}
+    function_info_raw_dict = {}
     for node_name in workflow.nodes:
         node = workflow.nodes[node_name]
         to = get_type(workflow, node, group_detail)
@@ -214,7 +200,6 @@ def save_function_info(workflow, ip_list):
         function_input = dict()
         function_input_raw = dict()
         for arg in node.input_files:
-            # type = get_type(workflow, node.input_files[arg]['parameter'], node, group_detail, 'input')
             function_input[arg] = {'size': node.input_files[arg]['size'],
                                    'function': node.input_files[arg]['function'],
                                    'parameter': node.input_files[arg]['parameter'],
@@ -226,7 +211,6 @@ def save_function_info(workflow, ip_list):
         function_output = dict()
         function_output_raw = dict()
         for arg in node.output_files:
-            # type = get_type(workflow, arg, node, group_detail, 'output')
             function_output[arg] = {'size': node.output_files[arg]['size'], 'type': node.output_files[arg]['type']}
             function_output_raw[arg] = {'size': node.output_files[arg]['size'], 'type': node.output_files[arg]['type']}
         function_info['input'] = function_input
@@ -235,16 +219,23 @@ def save_function_info(workflow, ip_list):
         function_info_raw['input'] = function_input_raw
         function_info_raw['output'] = function_output_raw
         function_info_raw['next'] = node.next
-        function_info_list.append(function_info)
-        function_info_list_raw.append(function_info_raw)
-    return function_info_list, function_info_list_raw
+        function_info_dict[node_name] = function_info
+        function_info_raw_dict[node_name] = function_info_raw
+    
+    # if successor contains 'virtual', then the destination of storage should be propagated
+    for name in workflow.nodes:
+        for next_name in workflow.nodes[name].next:
+            if next_name.startswith('virtual'):
+                if function_info_dict[next_name]['to'] != function_info_dict[name]['to']:
+                    function_info_dict[name]['to'] = 'DB+MEM'
+    return function_info_dict, function_info_raw_dict
 
 
-ip_list = ['127.0.0.1:8000']
-info_list, info_list_raw = save_function_info(parse_yaml.workflow, ip_list)
+ip_list = ['127.0.0.1:8000', '127.0.0.1:8001']
+info_dict, info_raw_dict = get_function_info(parse_yaml.workflow, ip_list)
 repo = repository.Repository(clear=True)
-repo.save_function_info(info_list, 'function_info')
-repo.save_function_info(info_list_raw, 'function_info_raw')
+repo.save_function_info(info_dict, 'function_info')
+repo.save_function_info(info_raw_dict, 'function_info_raw')
 repo.save_basic_input(parse_yaml.workflow.global_input, 'workflow_metadata')
 repo.save_start_functions(parse_yaml.workflow.start_functions, 'workflow_metadata')
 repo.save_foreach_functions(parse_yaml.workflow.foreach_functions, 'workflow_metadata')

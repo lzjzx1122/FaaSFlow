@@ -6,7 +6,7 @@ import sys
 from manager import WorkflowManager
 from flask import Flask, request
 app = Flask(__name__)
-manager = WorkflowManager(sys.argv[1] + ':' + sys.argv[2], 'test', 'raw') # TODO: support multi workflow
+manager = WorkflowManager(sys.argv[1] + ':' + sys.argv[2], 'test', 'optimized') # TODO: support multi workflow
 
 # a new request from outside
 # the previous function was done
