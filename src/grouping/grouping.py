@@ -5,6 +5,7 @@ import json
 import component
 import repository
 import config
+import time
 
 mem_usage = 0
 max_mem_usage = 0
@@ -83,12 +84,12 @@ def mergeable(node1, node2, group_set, workflow: component.workflow, write_to_me
     node_set1_scale = get_total_scale(node_set1, workflow)
     node_set2_scale = get_total_scale(node_set2, workflow)
     if node_set1_scale + node_set2_scale > config.node_mem / config.container_mem: # too many container in same node
-        print('Hit container threshold')
+        # print('Hit container threshold')
         return False
     if node1 not in write_to_mem_nodes:
         current_mem_usage = workflow.nodes[node1].nextDis[0] * config.network_bandwidth
         if mem_usage + current_mem_usage > max_mem_usage: # too much memory consumption
-            print('Hit memory consumption threshold')
+            # print('Hit memory consumption threshold')
             return False
         mem_usage += current_mem_usage
         write_to_mem_nodes.append(node1)
@@ -130,7 +131,7 @@ def grouping(workflow: component.workflow):
         # topo dp: find each node's longest dis and it's predecessor
         dist_vec, prev_vec = topo_search(workflow, in_degree_vec.copy(), group_set)
         crit_length, tmp_node_name = get_longest_dis(workflow, dist_vec)
-        print('crit_length: ', crit_length)
+        # print('crit_length: ', crit_length)
 
         # find the longest path, edge descent sorted
         crit_vec = dict()
@@ -142,7 +143,7 @@ def grouping(workflow: component.workflow):
         # if can't merge every edge of this path, just break
         if not merge_path(crit_vec, group_set, workflow, write_to_mem_nodes):
             break
-    print(group_set)
+    # print(group_set)
     return group_set
 
 # define the output destination at function level, instead of one per key/file
@@ -176,7 +177,7 @@ def get_function_info(workflow: component.workflow, ip_list):
 
     # grouping algorithm
     max_mem_usage = get_max_mem_usage(workflow)
-    print('max_mem_usage', max_mem_usage)
+    # print('max_mem_usage', max_mem_usage)
     group_detail = grouping(workflow)
 
     # allocating ip 

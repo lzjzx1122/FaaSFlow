@@ -1,7 +1,7 @@
 from workflowhub import WorkflowGenerator
 from workflowhub.generator.workflow.genome_recipe import GenomeRecipe
 
-num_tasks_list = [50]
+num_tasks_list = [100, 250, 400, 500, 750, 1000]
 for task in num_tasks_list:
     print(task)
     recipe = GenomeRecipe().from_num_tasks(num_tasks=task, runtime_factor=0.05, input_file_size_factor=0.003, output_file_size_factor=10)

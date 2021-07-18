@@ -8,7 +8,7 @@ workflow_name = 'soykb'
 utility = 'utility.py' # sys.argv[2]
 
 ## parse json build flat_workflow.yaml
-f = open(workflow_name + '/main_50.json')
+f = open(workflow_name + '/gen_examples/main_1000.json')
 data = json.load(f)
 jobs = data['workflow']['jobs'] 
 yaml_data = {}
@@ -47,7 +47,7 @@ for function in functions:
 yaml_data['global_input'] = global_inputs
 yaml_data['functions'] = functions
 
-f = open(workflow_name + '/flat_workflow.yaml', 'w', encoding = 'utf-8')
+f = open(workflow_name + '/xxx.yaml', 'w', encoding = 'utf-8')
 yaml.dump(yaml_data, f, sort_keys=False)
 
 # ## build images
