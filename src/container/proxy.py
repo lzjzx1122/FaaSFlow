@@ -14,7 +14,7 @@ default_file = 'main.py'
 work_dir = '/proxy'
 
 
-class functionRunner:
+class Runner:
     def __init__(self):
         self.code = None
         self.function = None
@@ -35,7 +35,6 @@ class functionRunner:
         self.ctx = {}
         exec(code, self.ctx)
         print('init finished...')
-        return True
 
     def run(self, request_id, runtime, input, output, to, keys):
         # run the function
@@ -54,7 +53,7 @@ class functionRunner:
 proxy = Flask(__name__)
 proxy.status = 'new'
 proxy.debug = False
-runner = functionRunner()
+runner = Runner()
 
 
 @proxy.route('/status', methods=['GET'])
