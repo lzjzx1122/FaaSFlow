@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 import parse_yaml
 import queue
 import json
@@ -6,25 +6,35 @@ import component
 import repository
 import config
 import time
+import yaml
+import uuid
 
 mem_usage = 0
 max_mem_usage = 0
+group_ip = {}
+group_scale = {}
 
-def init_graph(workflow, group_set):
+def init_graph(workflow, group_set, node_info):
+    global group_ip, group_scale
+    ip_list = list(node_info.keys())
     in_degree_vec = dict()
     q = queue.Queue()
     for name in workflow.start_functions:
         q.put(workflow.nodes[name])
-        group_set.append({name})
+        group_set.append((name, ))
     while q.empty() is False:
         node = q.get()
         for next_node_name in node.next:
             if next_node_name not in in_degree_vec:
                 in_degree_vec[next_node_name] = 1
                 q.put(workflow.nodes[next_node_name])
-                group_set.append({next_node_name})
+                group_set.append((next_node_name, ))
             else:
                 in_degree_vec[next_node_name] += 1
+    for s in group_set:
+        group_ip[s] = ip_list[hash(s) % len(ip_list)]
+        group_scale[s] = workflow.nodes[s[0]].scale
+        node_info[group_ip[s]] -= workflow.nodes[s[0]].scale
     return in_degree_vec
 
 
@@ -68,39 +78,60 @@ def topo_search(workflow: component.workflow, in_degree_vec, group_set):
                 q.put(next_node)
     return dist_vec, prev_vec
 
-def get_total_scale(node_set, workflow: component.workflow):
-    scale = 0
-    for name in node_set:
-        if not name.startswith('virtual'):
-            scale += workflow.nodes[name].scale
-    return scale
-
-def mergeable(node1, node2, group_set, workflow: component.workflow, write_to_mem_nodes):
-    global mem_usage, max_mem_usage
+def mergeable(node1, node2, group_set, workflow: component.workflow, write_to_mem_nodes, node_info):
+    global mem_usage, max_mem_usage, group_ip, group_scale
     node_set1 = find_set(node1, group_set)
+
+    # same set?
     if node2 in node_set1: # same set
         return False
     node_set2 = find_set(node2, group_set)
-    node_set1_scale = get_total_scale(node_set1, workflow)
-    node_set2_scale = get_total_scale(node_set2, workflow)
-    if node_set1_scale + node_set2_scale > config.node_mem / config.container_mem: # too many container in same node
-        # print('Hit container threshold')
+
+    # meet scale requirement?
+    new_node_info = node_info.copy()
+    node_set1_scale = group_scale[node_set1]
+    node_set2_scale = group_scale[node_set2]
+    new_node_info[group_ip[node_set1]] += node_set1_scale
+    new_node_info[group_ip[node_set2]] += node_set2_scale
+    best_fit_addr, best_fit_scale = None, 10000000
+    for addr in new_node_info:
+        if new_node_info[addr] >= node_set1_scale + node_set2_scale and new_node_info[addr] < best_fit_scale:
+            best_fit_addr = addr
+            best_fit_scale = new_node_info[addr]
+    if best_fit_addr is None:
+        print('Hit scale threshold', node_set1_scale, node_set2_scale)
         return False
+
+    # check memory limit    
     if node1 not in write_to_mem_nodes:
         current_mem_usage = workflow.nodes[node1].nextDis[0] * config.network_bandwidth
         if mem_usage + current_mem_usage > max_mem_usage: # too much memory consumption
-            # print('Hit memory consumption threshold')
+            print('Hit memory consumption threshold')
             return False
         mem_usage += current_mem_usage
         write_to_mem_nodes.append(node1)
+
+    # merge sets & update scale
+    new_group_set = (*node_set1, *node_set2)
+
+    group_set.append(new_group_set)
+    group_ip[new_group_set] = best_fit_addr
+    node_info[best_fit_addr] -= node_set1_scale + node_set2_scale
+    group_scale[new_group_set] = node_set1_scale + node_set2_scale
+
+    node_info[group_ip[node_set1]] += node_set1_scale
+    node_info[group_ip[node_set2]] += node_set2_scale
     group_set.remove(node_set1)
-    group_set.remove(node_set2)
-    group_set.append(node_set1 | node_set2)
+    group_set.remove(node_set2) 
+    group_ip.pop(node_set1)
+    group_ip.pop(node_set2)
+    group_scale.pop(node_set1)
+    group_scale.pop(node_set2)
     return True
 
-def merge_path(crit_vec, group_set, workflow: component.workflow, write_to_mem_nodes):
+def merge_path(crit_vec, group_set, workflow: component.workflow, write_to_mem_nodes, node_info):
     for edge in crit_vec:
-        if mergeable(edge[1][0], edge[0], group_set, workflow, write_to_mem_nodes):
+        if mergeable(edge[1][0], edge[0], group_set, workflow, write_to_mem_nodes, node_info):
             return True
     return False
 
@@ -115,12 +146,12 @@ def get_longest_dis(workflow, dist_vec):
     return dist, node_name
 
 
-def grouping(workflow: component.workflow):
+def grouping(workflow: component.workflow, node_info):
 
     # initialization: get in-degree of each node
     group_set = list()
     write_to_mem_nodes = []
-    in_degree_vec = init_graph(workflow, group_set)
+    in_degree_vec = init_graph(workflow, group_set, node_info)
 
     while True:
 
@@ -141,9 +172,8 @@ def grouping(workflow: component.workflow):
         crit_vec = sorted(crit_vec.items(), key=lambda c: c[1][1], reverse=True)
 
         # if can't merge every edge of this path, just break
-        if not merge_path(crit_vec, group_set, workflow, write_to_mem_nodes):
+        if not merge_path(crit_vec, group_set, workflow, write_to_mem_nodes, node_info):
             break
-    # print(group_set)
     return group_set
 
 # define the output destination at function level, instead of one per key/file
@@ -171,30 +201,24 @@ def get_max_mem_usage(workflow: component.workflow):
             max_mem_usage += (1 - config.reserved_mem_percentage - workflow.nodes[name].mem_usage) * config.container_mem * workflow.nodes[name].split_ratio
     return max_mem_usage
 
-def get_function_info(workflow: component.workflow, ip_list):
+def get_function_info(workflow: component.workflow, node_info: Dict):
 
-    global max_mem_usage
+    global max_mem_usage, group_ip
 
     # grouping algorithm
     max_mem_usage = get_max_mem_usage(workflow)
     # print('max_mem_usage', max_mem_usage)
-    group_detail = grouping(workflow)
-
-    # allocating ip 
-    ip_index = 0
-    function_ip = {}
-    for group in group_detail:
-        for function in group:
-            function_ip[function] = ip_list[ip_index]
-        ip_index = (ip_index + 1) % len(ip_list)
+    group_detail = grouping(workflow, node_info)
 
     # building function info: both optmized and raw version
+    ip_list = list(node_info.keys())
     function_info_dict = {}
     function_info_raw_dict = {}
     for node_name in workflow.nodes:
         node = workflow.nodes[node_name]
         to = get_type(workflow, node, group_detail)
-        function_info = {'function_name': node.name, 'runtime': node.runtime, 'to': to, 'ip': function_ip[node.name],
+        ip = group_ip[find_set(node_name, group_detail)]
+        function_info = {'function_name': node.name, 'runtime': node.runtime, 'to': to, 'ip': ip,
                          'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
         function_info_raw = {'function_name': node.name, 'runtime': node.runtime, 'to': 'DB', 'ip': ip_list[hash(node.name) % len(ip_list)],
                              'parent_cnt': workflow.parent_cnt[node.name], 'conditions': node.conditions}
@@ -232,8 +256,11 @@ def get_function_info(workflow: component.workflow, ip_list):
     return function_info_dict, function_info_raw_dict
 
 
-ip_list = ['127.0.0.1:8000', '127.0.0.1:8001']
-info_dict, info_raw_dict = get_function_info(parse_yaml.workflow, ip_list)
+node_info_list = yaml.load(open('node_info.yaml'), Loader=yaml.FullLoader)
+node_info_dict = {}
+for node_info in node_info_list['nodes']:
+    node_info_dict[node_info['address']] = node_info['scale_limit']
+info_dict, info_raw_dict = get_function_info(parse_yaml.workflow, node_info_dict)
 repo = repository.Repository(clear=True)
 repo.save_function_info(info_dict, 'function_info')
 repo.save_function_info(info_raw_dict, 'function_info_raw')
