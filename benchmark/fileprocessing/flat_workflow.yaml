@@ -1,0 +1,94 @@
+global_input:
+  filename:
+    type: pass
+    value:
+      function: INPUT
+      parameter: filename
+    size: 8
+functions:
+- name: start
+  source: start
+  runtime: 1
+  scale: 3
+  mem_usage: 0.25
+  input:
+    filename:
+      type: pass
+      value:
+        function: INPUT
+        parameter: filename
+      size: 8
+  output:
+    file:
+      type: pass
+      size: 800
+  next:
+    type: parallel
+    nodes:
+    - conversion
+    - sentiment
+- name: conversion
+  source: conversion
+  runtime: 1
+  scale: 3
+  mem_usage: 0.25
+  input:
+    file:
+      type: pass
+      value:
+        function: start
+        parameter: file
+      size: 800
+  output:
+    html:
+      type: pass
+      size: 800
+  next:
+    type: pass
+    nodes:
+    - upload
+- name: sentiment
+  source: sentiment
+  runtime: 1
+  scale: 3
+  mem_usage: 0.25
+  input:
+    file:
+      type: pass
+      value:
+        function: start
+        parameter: file
+      size: 800
+  output:
+    score:
+      type: pass
+      size: 8
+  next:
+    type: pass
+    nodes:
+    - upload
+- name: upload
+  source: upload
+  runtime: 1
+  scale: 3
+  mem_usage: 0.25
+  input:
+    html:
+      type: pass
+      value:
+        function: conversion
+        parameter: html
+      size: 800
+    score:
+      type: pass
+      value:
+        function: sentiment
+        parameter: score
+      size: 8
+  output:
+  next:
+    type: pass
+    nodes:
+    - END
+
+global_output:

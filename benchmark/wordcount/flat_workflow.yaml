@@ -1,10 +1,4 @@
 global_input:
-  files:
-    type: pass
-    value:
-      function: INPUT
-      parameter: files
-    size: 8
 
 functions:
 - name: start
@@ -13,16 +7,13 @@ functions:
   scale: 3
   mem_usage: 0.25
   input:
-    files:
-      type: pass
-      value:
-        function: INPUT
-        parameter: files
-      size: 8
   output:
     filename:
       type: keys
       size: 8
+    file:
+      type: pass
+      size: 800
   next:
     type: foreach
     nodes:
@@ -39,10 +30,16 @@ functions:
         function: start
         parameter: finename
       size: 8
+    file:
+      type: pass
+      value:
+        function: start
+        parameter: file
+      size: 800
   output:
     wordcount:
       type: pass
-      size: 8
+      size: 80
   next:
     type: pass
     nodes:
@@ -64,11 +61,11 @@ functions:
       value:
         function: count
         parameter: wordcount
-      size: 8
+      size: 80
   output:
     result:
       type: pass
-      size: 8
+      size: 80
 
 global_output:
   result:
