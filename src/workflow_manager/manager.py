@@ -45,7 +45,7 @@ class WorkflowState:
             self.executed[f] = False
             self.parent_executed[f] = 0
 
-function_manager = FunctionManager("../../benchmark/generator/soykb") # demonstrate workflow definition(computation graph, code...)
+function_manager = FunctionManager("../../benchmark/wordcount") # demonstrate workflow definition(computation graph, code...)
 
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:
@@ -56,15 +56,15 @@ class WorkflowManager:
         self.states: Dict[str, WorkflowState] = {}
         self.function_info: Dict[str, dict] = {}
 
-        self.foreach_func = repo.get_foreach_functions()
-        self.merge_func = repo.get_merge_functions()
-        self.func = repo.get_current_node_functions(self.host_addr, self.meta_db)
-        
         self.mode = mode
         if mode == 'optimized':
             self.meta_db = 'function_info'
         else:
             self.meta_db = 'function_info_raw'
+
+        self.foreach_func = repo.get_foreach_functions()
+        self.merge_func = repo.get_merge_functions()
+        self.func = repo.get_current_node_functions(self.host_addr, self.meta_db)
 
     # return the workflow state of the request
     def get_state(self, request_id: str) -> WorkflowState:

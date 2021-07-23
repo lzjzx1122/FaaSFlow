@@ -1,7 +1,7 @@
 import json
 import os
 import threading
-
+import time
 import couchdb
 import redis
 
@@ -15,6 +15,7 @@ class Store:
         couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
         db_server = couchdb.Server(couchdb_url)
         self.db = db_server['results']
+        self.latency_db = db_server['workflow_latency']
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.fetch_dict = {}
         self.put_dict = {}
@@ -52,6 +53,7 @@ class Store:
 
     # input_keys: specify the keys you want
     def fetch(self, input_keys):
+        fetch_start = time.time()
         self.fetch_dict = {}
         threads = []
         for k in input_keys:
@@ -75,6 +77,8 @@ class Store:
             thread_.start()
         for thread_ in threads:
             thread_.join()
+        fetch_end = time.time()
+        self.latency_db.save({'request_id': self.request_id, 'function_name': self.function_name, 'phase': 'edge', 'time': fetch_end - fetch_start})
         return self.fetch_dict
 
     def put_to_mem(self, k, content_type):
@@ -114,6 +118,7 @@ class Store:
     # output_result: {'k1': ...(dict-like), 'k2': ...(byte stream)}
     # output_content_type: default application/json, just specify one when you need to
     def put(self, output_result, output_content_type):
+        put_start = time.time()
         for k in output_result:
             if k not in output_content_type:
                 output_content_type[k] = 'application/json'  # default: dict-like, should be stored in json style
@@ -134,6 +139,8 @@ class Store:
             for k in output_result:
                 if k not in self.output or self.output[k]['type'] != 'keys':
                     self.put_to_mem(k, output_content_type[k])
+        put_end = time.time()
+        self.latency_db.save({'request_id': self.request_id, 'function_name': self.function_name, 'phase': 'edge', 'time': put_end - put_start})
                     # thread_ = threading.Thread(target=self.put_to_mem, args=(k, output_content_type[k]))
                     # threads.append(thread_)
         # for thread_ in threads:

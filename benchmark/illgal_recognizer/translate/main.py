@@ -2,6 +2,7 @@ from googletrans import Translator
 import couchdb
 import os,json
 from Store import Store
+import time
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)
@@ -24,7 +25,9 @@ def main(function_name, request_id, runtime, input, output, to, keys):
 
     store = Store(function_name, request_id, input, output, to, keys)
     extracted_text = store.fetch(['extracted_text'])['extracted_text']
-    translated_text = translator.translate(extracted_text, dest='en').text
+    # translated_text = translator.translate(extracted_text, dest='en').text # can't connect to google...
+    translated_text = extracted_text
+    time.sleep(1)
     store.put({'translated_text': translated_text}, {})
 
     # evt = json.loads(event)

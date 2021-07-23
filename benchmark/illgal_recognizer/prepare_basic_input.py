@@ -15,4 +15,4 @@ def main(request_id, image_name, user_name):
     with open(image_name, 'rb') as f:
         db.put_attachment(db[request_id], f.read(), filename=image_name, content_type='application/octet')
 
-main('456', "test.jpg", "ziliuziliu")
+# main('5678', "01.jpg", "ziliuziliu")

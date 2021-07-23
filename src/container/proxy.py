@@ -12,7 +12,9 @@ from gevent.pywsgi import WSGIServer
 
 default_file = 'main.py'
 work_dir = '/proxy'
-
+couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
+db_server = couchdb.Server(couchdb_url)
+latency_db = db_server['workflow_latency']
 
 class Runner:
     def __init__(self):
@@ -46,7 +48,10 @@ class Runner:
         self.ctx['to'] = to
         self.ctx['keys'] = keys
         print('running... context: ', self.ctx)
+        start = time.time()
         out = eval('main(function_name, request_id, runtime, input, output, to, keys)', self.ctx)
+        end = time.time()
+        latency_db.save({'request_id': request_id, 'function_name': self.function, 'phase': 'edge+node', 'time': end - start})
         return out
 
 

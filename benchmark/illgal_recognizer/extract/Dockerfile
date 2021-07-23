@@ -1,8 +1,8 @@
 FROM workflow_base
 
-RUN pip3 install --no-cache-dir pillow opencv-python
-
 RUN apt-get update
-RUN apt-get install tesseract-ocr
+RUN apt-get install -y tesseract-ocr libgl1-mesa-glx
+
+RUN pip3 install --no-cache-dir pillow opencv-python pytesseract
 
 COPY main.py /proxy/main.py

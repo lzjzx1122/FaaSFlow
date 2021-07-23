@@ -11,9 +11,10 @@ def parse(filename):
     foreach_functions = set()
     merge_funtions = set()
     total = 0
-    for key in data['global_input']:
-        parameter = data['global_input'][key]['value']['parameter']
-        global_input[parameter] = data['global_input'][key]['size']
+    if 'global_input' in data:
+        for key in data['global_input']:
+            parameter = data['global_input'][key]['value']['parameter']
+            global_input[parameter] = data['global_input'][key]['size']
     functions = data['functions']
     parent_cnt[functions[0]['name']] = 0
     for function in functions:
@@ -73,5 +74,5 @@ def parse(filename):
     return component.workflow(start_functions, nodes, global_input, total, parent_cnt, foreach_functions, merge_funtions)
 
 
-yaml_file = '../../benchmark/generator/soykb/xxx.yaml'
+yaml_file = '../../benchmark/wordcount/flat_workflow.yaml'
 workflow = parse(yaml_file)

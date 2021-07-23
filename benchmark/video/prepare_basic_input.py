@@ -18,4 +18,4 @@ def main(request_id, video_name, user_name, segment_time, target_type, split):
     with open(video_name, 'rb') as f:
         db.put_attachment(db[request_id], f.read(), filename=video_name, content_type='application/octet')
 
-main('123', "test.mp4", "ziliuziliu", 10, "avi", True)
+# main('123', "sample.mp4", "ziliuziliu", 10, "avi", True)

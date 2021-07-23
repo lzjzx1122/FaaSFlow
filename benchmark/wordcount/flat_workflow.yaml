@@ -1,26 +1,23 @@
-global_input:
-
 functions:
 - name: start
   source: start
-  runtime: 1
+  runtime: 0.02
   scale: 3
   mem_usage: 0.25
-  input:
   output:
     filename:
       type: keys
       size: 8
     file:
       type: pass
-      size: 800
+      size: 3383449
   next:
     type: foreach
     nodes:
     - count
 - name: count
   source: count
-  runtime: 1
+  runtime: 0.12
   scale: 3
   mem_usage: 0.25
   input:
@@ -28,25 +25,25 @@ functions:
       type: key
       value:
         function: start
-        parameter: finename
+        parameter: filename
       size: 8
     file:
       type: pass
       value:
         function: start
         parameter: file
-      size: 800
+      size: 3383449
   output:
     wordcount:
       type: pass
-      size: 80
+      size: 736992
   next:
     type: pass
     nodes:
     - merge
 - name: merge
   source: merge
-  runtime: 1
+  runtime: 0.05
   scale: 3
   mem_usage: 0.25
   input:
@@ -65,7 +62,7 @@ functions:
   output:
     result:
       type: pass
-      size: 80
+      size: 325053
 
 global_output:
   result:

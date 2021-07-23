@@ -10,7 +10,7 @@ monkey.patch_all()
 from repository import Repository
 
 # send request
-req_id = '123'
+req_id = 'aa'
 repo = Repository()
 start_functions = repo.get_start_functions()
 print(start_functions)
@@ -29,7 +29,7 @@ def trigger_function(function_name):
 
 jobs = []
 start = time.time()
-for n in start_functions: # assume that there's only one start node
+for n in start_functions:
     jobs.append(gevent.spawn(trigger_function, n))
 gevent.joinall(jobs)
 end = time.time()

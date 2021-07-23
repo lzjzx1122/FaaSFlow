@@ -3,7 +3,7 @@ from Store import Store
 def main(function_name, request_id, runtime, input, output, to, keys):
     store = Store(function_name, request_id, input, output, to, keys)
     fn = store.fetch(['filename'])['filename']
-    content = store.fetch([fn])
+    content = store.fetch([fn])[fn]
 
     # count
     res = {}

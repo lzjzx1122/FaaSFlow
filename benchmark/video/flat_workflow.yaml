@@ -32,7 +32,7 @@ global_input:
 functions:
 - name: upload
   source: upload
-  runtime: 1
+  runtime: 3.80
   scale: 3
   mem_usage: 0.25
   input:
@@ -69,7 +69,7 @@ functions:
       size: 8
     gif:
       type: normal
-      size: 8
+      size: 4439111
   next:
     type: pass
     nodes:
@@ -87,7 +87,7 @@ functions:
       - simple_process
 - name: simple_process
   source: simple_process
-  runtime: 1
+  runtime: 3
   scale: 3
   mem_usage: 0.25
   input:
@@ -112,10 +112,10 @@ functions:
   output:
     content:
       type: normal
-      size: 8
+      size: 22663904
 - name: split
   source: split
-  runtime: 1
+  runtime: 0.63
   scale: 3
   mem_usage: 0.25
   input:
@@ -143,14 +143,14 @@ functions:
       size: 8
     content:
       type: pass
-      size: 8
+      size: 51724615
   next:
     type: foreach
     nodes:
       - transcode
 - name: transcode
   source: transcode
-  runtime: 1
+  runtime: 1.74
   scale: 3
   mem_usage: 0.25
   split_ratio: 3
@@ -176,14 +176,14 @@ functions:
   output:
     content:
       type: pass
-      size: 8
+      size: 22694084
   next:
     type: pass
     nodes:
       - merge
 - name: merge
   source: merge
-  runtime: 1
+  runtime: 0.28
   scale: 3
   mem_usage: 0.25
   input:
@@ -220,5 +220,5 @@ functions:
   output:
     content:
       type: pass
-      size: 8
+      size: 22663904
 global_output:

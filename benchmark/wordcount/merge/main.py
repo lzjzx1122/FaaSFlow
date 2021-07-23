@@ -7,7 +7,7 @@ def main(function_name, request_id, runtime, input, output, to, keys):
 
     # merge
     res = {}
-    for wc in counts:
+    for wc in counts.values():
         for w in wc:
             if w not in res:
                 res[w] = wc[w]

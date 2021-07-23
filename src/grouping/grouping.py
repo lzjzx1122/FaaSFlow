@@ -162,7 +162,7 @@ def grouping(workflow: component.workflow, node_info):
         # topo dp: find each node's longest dis and it's predecessor
         dist_vec, prev_vec = topo_search(workflow, in_degree_vec.copy(), group_set)
         crit_length, tmp_node_name = get_longest_dis(workflow, dist_vec)
-        # print('crit_length: ', crit_length)
+        print('crit_length: ', crit_length)
 
         # find the longest path, edge descent sorted
         crit_vec = dict()
@@ -209,6 +209,7 @@ def get_function_info(workflow: component.workflow, node_info: Dict):
     max_mem_usage = get_max_mem_usage(workflow)
     # print('max_mem_usage', max_mem_usage)
     group_detail = grouping(workflow, node_info)
+    print(group_detail)
 
     # building function info: both optmized and raw version
     ip_list = list(node_info.keys())

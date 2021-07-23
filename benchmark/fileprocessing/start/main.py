@@ -4,4 +4,4 @@ def main(function_name, request_id, runtime, input, output, to, keys):
     fn = store.fetch(['filename'])['filename']
     with open('/text/'+fn, 'r') as f:
         content = f.read()
-    store.put({'file': content}, {'file': 'text/plain'})
+    store.put({'file': content}, {})
