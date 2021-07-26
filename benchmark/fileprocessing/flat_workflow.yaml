@@ -8,7 +8,7 @@ global_input:
 functions:
 - name: start
   source: start
-  runtime: 1
+  runtime: 0.09
   scale: 3
   mem_usage: 0.25
   input:
@@ -21,7 +21,7 @@ functions:
   output:
     file:
       type: pass
-      size: 800
+      size: 29600094
   next:
     type: parallel
     nodes:
@@ -29,7 +29,7 @@ functions:
     - sentiment
 - name: conversion
   source: conversion
-  runtime: 1
+  runtime: 19.00
   scale: 3
   mem_usage: 0.25
   input:
@@ -38,18 +38,18 @@ functions:
       value:
         function: start
         parameter: file
-      size: 800
+      size: 29600094
   output:
     html:
       type: pass
-      size: 800
+      size: 29600099
   next:
     type: pass
     nodes:
     - upload
 - name: sentiment
   source: sentiment
-  runtime: 1
+  runtime: 19.05
   scale: 3
   mem_usage: 0.25
   input:
@@ -58,7 +58,7 @@ functions:
       value:
         function: start
         parameter: file
-      size: 800
+      size: 29600094
   output:
     score:
       type: pass
@@ -78,17 +78,12 @@ functions:
       value:
         function: conversion
         parameter: html
-      size: 800
+      size: 29600099
     score:
       type: pass
       value:
         function: sentiment
         parameter: score
       size: 8
-  output:
-  next:
-    type: pass
-    nodes:
-    - END
 
 global_output:

@@ -10,11 +10,12 @@ class Repository:
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
 
+    # get all function_name for every node seems to solve the problem of KeyError Exception in manager.py, line 103
     def get_current_node_functions(self, ip: str, mode: str) -> List[str]:
         db = self.couch[mode]
         functions = []
-        for item in db.find({'selector': {'ip': ip}}):
-            functions.append(item['function_name'])
+        for item in db:
+            functions.append(db[item]['function_name'])
         return functions
 
     def get_foreach_functions(self) -> List[str]:

@@ -5,13 +5,9 @@ from gevent import monkey
 monkey.patch_all()
 
 couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
-request_id = '123'
 db_server = couchdb.Server(couchdb_url)
 db = db_server['workflow_metadata']
 results_db = db_server['results']
-if request_id in results_db:
-    results_db.delete(results_db[request_id])
-results_db[request_id] = {}
 
 def put_attachment_wrapper(request_id, byte_cnt, filename):
     try:
@@ -22,11 +18,11 @@ def put_attachment_wrapper(request_id, byte_cnt, filename):
         return 1
 
 def put_attachment_loop(request_id, byte_cnt, filename):
-    print(filename)
     while put_attachment_wrapper(request_id, byte_cnt, filename) == 1:
         pass
 
-def prepare_basic_input():
+def prepare_basic_input(request_id):
+    results_db[request_id] = {}
     jobs = []
     for item in db:
         doc = db[item]
@@ -35,7 +31,8 @@ def prepare_basic_input():
                 if k == '_id' or k == '_rev':
                     continue
                 filename = k + '.json'
-                jobs.append(gevent.spawn(put_attachment_loop, request_id, int(doc[k]), filename))
+                put_attachment_loop(request_id, int(doc[k]), filename)
+                print(filename, ' successfully stored for request', request_id)
     gevent.joinall(jobs)
 
-prepare_basic_input()
+# prepare_basic_input('14fc421c-a571-42d1-8604-fa81abb0fa55')

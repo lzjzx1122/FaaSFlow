@@ -45,7 +45,7 @@ class WorkflowState:
             self.executed[f] = False
             self.parent_executed[f] = 0
 
-function_manager = FunctionManager("../../benchmark/wordcount") # demonstrate workflow definition(computation graph, code...)
+function_manager = FunctionManager("../../benchmark/generator/soykb") # demonstrate workflow definition(computation graph, code...)
 
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:
@@ -104,10 +104,12 @@ class WorkflowManager:
         runnable = self.check_runnable(state, function_name)
         # remember to release state.lock
         if runnable:
+            print('----function ', function_name, ' runnable----')
             state.executed[function_name] = True
             state.lock.release()
             self.run_function(state, function_name)
         else:
+            print('----function ', function_name, ' not runnable----')
             state.lock.release()
 
     # trigger a function that runs on remote machine

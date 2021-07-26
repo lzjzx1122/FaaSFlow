@@ -74,5 +74,5 @@ def parse(filename):
     return component.workflow(start_functions, nodes, global_input, total, parent_cnt, foreach_functions, merge_funtions)
 
 
-yaml_file = '../../benchmark/wordcount/flat_workflow.yaml'
+yaml_file = '../../benchmark/generator/soykb/flat_workflow.yaml'
 workflow = parse(yaml_file)

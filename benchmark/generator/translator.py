@@ -8,7 +8,7 @@ workflow_name = 'soykb'
 utility = 'utility.py' # sys.argv[2]
 
 ## parse json build flat_workflow.yaml
-f = open(workflow_name + '/gen_examples/main_1000.json')
+f = open(workflow_name + '/main_50.json')
 data = json.load(f)
 jobs = data['workflow']['jobs'] 
 yaml_data = {}
@@ -47,19 +47,19 @@ for function in functions:
 yaml_data['global_input'] = global_inputs
 yaml_data['functions'] = functions
 
-f = open(workflow_name + '/xxx.yaml', 'w', encoding = 'utf-8')
+f = open(workflow_name + '/flat_workflow.yaml', 'w', encoding = 'utf-8')
 yaml.dump(yaml_data, f, sort_keys=False)
 
-# ## build images
-# for function in functions:
-#     print('------building image for function ' + function['name'] + '------')
-#     os.system('docker build --no-cache -t ' + workflow_name + '_' + function['name'] + ' .')
+## build images
+for function in functions:
+    print('------building image for function ' + function['name'] + '------')
+    os.system('docker build --no-cache -t ' + workflow_name + '_' + function['name'] + ' .')
 
-# ## build function_info.yaml
-# yaml_data2 = {'max_containers': 10}
-# images = []
-# for function in functions:
-#     images.append({'image': workflow_name + '_' + function['name'], 'name': function['name'], 'qos_requirement': 0.95, 'qos_time': 100})
-# yaml_data2['functions'] = images
-# f2 = open(workflow_name + '/function_info.yaml', 'w', encoding = 'utf-8')
-# yaml.dump(yaml_data2, f2, sort_keys=False)
+## build function_info.yaml
+yaml_data2 = {'max_containers': 10}
+images = []
+for function in functions:
+    images.append({'image': workflow_name + '_' + function['name'], 'name': function['name'], 'qos_requirement': 0.95, 'qos_time': 100})
+yaml_data2['functions'] = images
+f2 = open(workflow_name + '/function_info.yaml', 'w', encoding = 'utf-8')
+yaml.dump(yaml_data2, f2, sort_keys=False)
