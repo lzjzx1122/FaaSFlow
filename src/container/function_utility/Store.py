@@ -12,7 +12,7 @@ class Store:
     def __init__(self, function_name, request_id, input, output, to, keys):
         # to: where to store for outputs
         # keys: foreach key (split_key) specified by workflow_manager
-        couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
+        couchdb_url = 'http://openwhisk:openwhisk@172.20.185.137:5984/'
         db_server = couchdb.Server(couchdb_url)
         self.db = db_server['results']
         self.latency_db = db_server['workflow_latency']

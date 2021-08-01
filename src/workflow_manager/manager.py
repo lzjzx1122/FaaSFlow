@@ -47,7 +47,7 @@ class WorkflowState:
             self.executed[f] = False
             self.parent_executed[f] = 0
 
-function_manager = FunctionManager("../../benchmark/generator/cycles") # demonstrate workflow definition(computation graph, code...)
+function_manager = FunctionManager("../../benchmark/generator/genome") # demonstrate workflow definition(computation graph, code...)
 
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:

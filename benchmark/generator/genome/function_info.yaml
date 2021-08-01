@@ -1,4 +1,4 @@
-max_containers: 10
+max_containers: 1
 functions:
 - image: genome_individuals_00000001
   name: individuals_00000001
