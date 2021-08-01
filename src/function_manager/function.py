@@ -3,6 +3,7 @@ import time
 import math
 import gevent
 from gevent import event
+from gevent.lock import BoundedSemaphore
 from container import Container
 from function_info import FunctionInfo
 
@@ -29,10 +30,11 @@ class Function:
         # container pool
         self.num_exec = 0
         self.exec_pool = []
+        self.b = BoundedSemaphore()
     
     # put the request into request queue
     def send_request(self, request_id, runtime, input, output, to, keys):
-        print('send_request', request_id, runtime)
+        # print('send_request', request_id, runtime)
         start = time.time()
         # self.request_log['start'].append(start)
 
@@ -89,13 +91,18 @@ class Function:
     def create_container(self):
         # do not create new exec container
         # when the number of execs hits the limit
+        self.b.acquire() # critical: missing lock may cause infinite container creation under high concurrency scenario
+        # print(self, self.info.function_name, self.num_exec)
         if self.num_exec > self.info.max_containers:
             return None
+        self.num_exec += 1
+        self.b.release()
         try:
             container = Container.create(self.client, self.info.img_name, self.port_controller.get(), 'exec')
+            # print(container)
         except Exception as e:
+            print(e)
             return None
-        self.num_exec += 1
         self.init_container(container)
         return container
 
@@ -126,7 +133,10 @@ class Function:
         # find the old containers
         old_container = []
         self.exec_pool = clean_pool(self.exec_pool, exec_lifetime, old_container)
+
+        self.b.acquire()
         self.num_exec -= len(old_container)
+        self.b.release()
 
         # time consuming work is put here
         for c in old_container:

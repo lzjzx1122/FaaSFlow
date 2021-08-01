@@ -28,6 +28,10 @@ class Repository:
         db = self.couch[db_name]
         db.save({'merge_functions': list(merge_functions)})
 
+    def save_all_addrs(self, addrs, db_name):
+        db = self.couch[db_name]
+        db.save({'addrs': list(addrs)})
+
     def get_foreach_functions(self):
         db = self.couch['workflow_metadata']
         for item in db:

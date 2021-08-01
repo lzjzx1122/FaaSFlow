@@ -4,4 +4,4 @@ functions:
 - {image: video_split, name: split, qos_requirement: 0.95, qos_time: 100}
 - {image: video_transcode, name: transcode, qos_requirement: 0.95, qos_time: 100}
 - {image: video_merge, name: merge, qos_requirement: 0.95, qos_time: 100}
-max_containers: 10
+max_containers: 30

@@ -49,7 +49,10 @@ class Store:
         else:
             filename = param + '.json'
             f = self.db.get_attachment(self.request_id, filename=filename, default='no attachment')
-            self.fetch_dict[k] = json.load(f)
+            if f == 'no attachment':
+                self.fetch_dict[k] = f
+            else:
+                self.fetch_dict[k] = json.load(f)
 
     # input_keys: specify the keys you want
     def fetch(self, input_keys):

@@ -10,6 +10,20 @@ class Repository:
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
 
+    def allocate_db(self, request_id):
+        db = self.couch['results']
+        db[request_id] = {}
+
+    def mem_clearall(self):
+        self.redis.flushall()
+
+    def get_all_addrs(self) -> List[str]:
+        db = self.couch['workflow_metadata']
+        for item in db:
+            doc = db[item]
+            if 'addrs' in doc:
+                return doc['addrs']
+
     def get_current_node_functions(self, ip, mode) -> List[str]:
         db = self.couch[mode]
         functions = []
@@ -105,3 +119,37 @@ class Repository:
             key_str = key.decode()
             if key_str.startswith(request_id):
                 self.redis.delete(key)
+
+    def reset_all_mem(self, clear_function_data = False):
+        if clear_function_data:
+            self.couch.delete('results')
+            self.couch.create('results')
+        self.couch.delete('workflow_latency')
+        self.couch.create('workflow_latency')
+        self.redis.flushall()
+
+    def analyze_each_function(self, request_id):
+        db = self.couch['workflow_latency']
+        edge_time = {}
+        node_time = {}
+        transcode_cnt = 0
+        for doc in db:
+            if db[doc]['request_id'] != request_id:
+                continue
+            function_name = db[doc]['function_name']
+            phase = db[doc]['phase']
+            latency = db[doc]['time']
+            if phase == 'edge+node':
+                node_time.setdefault(function_name, 0)
+                node_time[function_name] += latency
+            else:
+                edge_time.setdefault(function_name, 0)
+                edge_time[function_name] += latency
+                # if function_name == 'transcode':
+                #     transcode_cnt = transcode_cnt+1
+        for name in node_time:
+            node_time[name] -= edge_time[name]
+            # if name == 'transcode':
+            #     node_time[name] /= transcode_cnt
+            #     edge_time[name] /= transcode_cnt
+        return edge_time, node_time

@@ -49,11 +49,13 @@ from Store import Store
 def main(function_name, request_id, runtime, input, output, to, keys):
 
     store = Store(function_name, request_id, input, output, to, keys)
-    inputs = store.fetch(['image_name', 'user_name'])
+    # inputs = store.fetch(['image_name', 'user_name'])
+    image_name = '01.jpg'
     output_result = {'output_prefix': 'mosaic', 'illegal_flag': False}
     store.put(output_result, {})
-
-
+    store.put({'image_name': image_name, 'user_name': 'ziliuziliu'}, {})
+    with open(image_name, 'rb') as f: img = f.read()
+    store.put({image_name: img}, {image_name: 'application/octet'})
     # print('OK')
     # request_data = json.load(request.files['data'])
     # request_file = request.files['document']

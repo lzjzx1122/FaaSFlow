@@ -45,7 +45,7 @@ def parse(config_path):
             
             info = FunctionInfo(function_name,
                               img_name,
-                              max_containers,
+                              int(max_containers),
                               float(c['qos_time']),
                               float(c['qos_requirement']))
             print('img_name', info.img_name)

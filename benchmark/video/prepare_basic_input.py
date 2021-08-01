@@ -3,6 +3,7 @@ import couchdb
 import json
 
 def main(request_id, video_name, user_name, segment_time, target_type, split):
+    print('----prepare input for ', request_id, '----')
     couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
     db_server = couchdb.Server(couchdb_url)
     db = db_server['results']

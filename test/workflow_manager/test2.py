@@ -8,9 +8,11 @@ import redis
 
 couchdb_url = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 db_server = couchdb.Server(couchdb_url)
-if 'workflow_latency' not in db_server:
-    db_server.create('workflow_latency')
-# results_db = db_server['results']
+db_server.resource.put_json(['results', '_revs_limit'], 500)
+print(db_server.resource.get_json(['results', '_revs_limit']))
+# if 'workflow_latency' not in db_server:
+#     db_server.create('workflow_latency')
+# results_db = db_server['results']E
 # results_db['test'] = {}
 # start = time.time()
 # results_db.put_attachment(results_db['test'], content, 'test.txt')

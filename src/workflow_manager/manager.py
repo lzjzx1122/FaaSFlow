@@ -1,4 +1,6 @@
 import sys
+
+from requests.api import request
 import repository
 import gevent
 import gevent.lock
@@ -45,7 +47,7 @@ class WorkflowState:
             self.executed[f] = False
             self.parent_executed[f] = 0
 
-function_manager = FunctionManager("../../benchmark/generator/soykb") # demonstrate workflow definition(computation graph, code...)
+function_manager = FunctionManager("../../benchmark/generator/cycles") # demonstrate workflow definition(computation graph, code...)
 
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:
@@ -56,6 +58,7 @@ class WorkflowManager:
         self.states: Dict[str, WorkflowState] = {}
         self.function_info: Dict[str, dict] = {}
 
+        print('mode: ', mode)
         self.mode = mode
         if mode == 'optimized':
             self.meta_db = 'function_info'
@@ -74,12 +77,31 @@ class WorkflowManager:
         state = self.states[request_id]
         self.lock.release()
         return state
+    
+    def del_state_remote(self, request_id: str, remote_addr: str):
+        url = 'http://{}/clear'.format(remote_addr)
+        requests.post(url, json={'request_id': request_id})
+
+    # delete state
+    def del_state(self, request_id: str, master: bool):
+        # print('----delete workflow state ', request_id, '----')
+        self.lock.acquire()
+        if request_id in self.states:
+            self.states.pop(request_id)
+        self.lock.release()
+        if master:
+            jobs = []
+            addrs = repo.get_all_addrs()
+            for addr in addrs:
+                if addr != self.host_addr:
+                    jobs.append(gevent.spawn(self.del_state_remote, request_id, addr))
+            gevent.joinall(jobs)
 
     # get function's info from database
     # the result is cached
     def get_function_info(self, function_name: str) -> Any:
         if function_name not in self.function_info:
-            print('function_name: ', function_name)
+            # print('function_name: ', function_name)
             self.function_info[function_name] = repo.get_function_info(function_name, self.meta_db)
         return self.function_info[function_name]
 
@@ -97,24 +119,24 @@ class WorkflowManager:
 
     # trigger a function that runs on local
     def trigger_function_local(self, state: WorkflowState, function_name: str, no_parent_execution = False) -> None:
-        print('----trying to trigger local function ' + function_name + '----')
+        # print('----trying to trigger local function ' + function_name + '----')
         state.lock.acquire()
         if not no_parent_execution:
             state.parent_executed[function_name] += 1
         runnable = self.check_runnable(state, function_name)
         # remember to release state.lock
         if runnable:
-            print('----function ', function_name, ' runnable----')
+            # print('----function ', function_name, ' runnable----')
             state.executed[function_name] = True
             state.lock.release()
             self.run_function(state, function_name)
         else:
-            print('----function ', function_name, ' not runnable----')
+            # print('----function ', function_name, ' not runnable----')
             state.lock.release()
 
     # trigger a function that runs on remote machine
     def trigger_function_remote(self, state: WorkflowState, function_name: str, remote_addr: str, no_parent_execution = False) -> None:
-        print('----trying to trigger remote function ' + function_name + '----')
+        # print('----trying to trigger remote function ' + function_name + '----')
         remote_url = 'http://{}/request'.format(remote_addr)
         data = {
             'request_id': state.request_id,
@@ -188,3 +210,9 @@ class WorkflowManager:
         function_manager.run(info['function_name'], state.request_id,
                              info['runtime'], info['input'], info['output'],
                              info['to'], {})
+
+    def clear_mem(self, request_id):
+        repo.clear_mem(request_id)
+    
+    def clear_db(self, request_id):
+        repo.clear_db(request_id)

@@ -39,6 +39,13 @@ class Repository:
             if 'start_functions' in doc:
                 return doc['start_functions']
 
+    def get_all_addrs(self) -> List[str]:
+        db = self.couch['workflow_metadata']
+        for item in db:
+            doc = db[item]
+            if 'addrs' in doc:
+                return doc['addrs']
+
     def get_function_info(self, function_name: str, mode: str) -> Any:
         db = self.couch[mode]
         for item in db.find({'selector': {'function_name': function_name}}):
@@ -99,3 +106,7 @@ class Repository:
             key_str = key.decode()
             if key_str.startswith(request_id):
                 self.redis.delete(key)
+
+    def clear_db(self, request_id):
+        db = self.couch['results']
+        db.delete(db[request_id])

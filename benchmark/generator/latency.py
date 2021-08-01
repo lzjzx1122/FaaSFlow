@@ -1,39 +1,13 @@
+import gevent
+from gevent import monkey; monkey.patch_all()
 import couchdb
 import uuid
 import requests
 from repository import Repository
-import gevent
 import time
 import prepare_basic_input
-couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
-db_server = couchdb.Server(couchdb_url)
-db = db_server['workflow_latency']
-repo = Repository()
 
-def analyze_each_function(request_id):
-    edge_time = {}
-    node_time = {}
-    transcode_cnt = 0
-    for doc in db:
-        if db[doc]['request_id'] != request_id:
-            continue
-        function_name = db[doc]['function_name']
-        phase = db[doc]['phase']
-        latency = db[doc]['time']
-        if phase == 'edge+node':
-            node_time.setdefault(function_name, 0)
-            node_time[function_name] += latency
-        else:
-            edge_time.setdefault(function_name, 0)
-            edge_time[function_name] += latency
-            # if function_name == 'transcode':
-            #     transcode_cnt = transcode_cnt+1
-    for name in node_time:
-        node_time[name] -= edge_time[name]
-        # if name == 'transcode':
-        #     node_time[name] /= transcode_cnt
-        #     edge_time[name] /= transcode_cnt
-    return edge_time, node_time
+repo = Repository()
 
 def trigger_function(request_id, function_name):
     print('----triggering function ' + function_name + '----')
@@ -53,13 +27,10 @@ def run_workflow(request_id):
     for n in start_functions:
         jobs.append(gevent.spawn(trigger_function, request_id, n))
     gevent.joinall(jobs)
+    print('----ending----')
 
 def analyze_overall_workflow():
-    db_server.delete('results')
-    db_server.delete('workflow_latency')
-    db_server.create('results')
-    db_server.create('workflow_latency')
-    repo.mem_clearall()
+    repo.reset_all_mem(clear_function_data=True)
     ids = [str(uuid.uuid4()) for i in range(12)]
     jobs = []
     for i in range(12):
@@ -75,7 +46,7 @@ def analyze_overall_workflow():
         overall_start = time.time()
         run_workflow(id)
         overall_end = time.time()
-        edge_time, node_time = analyze_each_function(id)
+        edge_time, node_time = repo.analyze_each_function(id)
         e = sum(edge_time.values())
         n = sum(node_time.values())
         print('----request ', id, ' finished, overall time: ', overall_end - overall_start, ' edge time: ', e, ' node time: ', n, '----')

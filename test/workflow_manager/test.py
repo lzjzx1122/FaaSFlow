@@ -1,17 +1,18 @@
+from gevent import monkey
+monkey.patch_all()
 import time
-
 import couchdb
 import redis
 import requests
 import gevent
-from gevent import monkey
-monkey.patch_all()
+import uuid
 
 from repository import Repository
 
 # send request
-req_id = '003fdf9a-3f8c-402a-819a-557f52b4ec55'
+req_id = str(uuid.uuid4())
 repo = Repository()
+repo.allocate_db(req_id)
 start_functions = repo.get_start_functions()
 print(start_functions)
 
@@ -32,6 +33,9 @@ start = time.time()
 for n in start_functions:
     jobs.append(gevent.spawn(trigger_function, n))
 gevent.joinall(jobs)
+master_addr = repo.get_all_addrs()[0]
+clear_url = 'http://{}/clear'.format(master_addr)
+# requests.post(clear_url, json={'request_id': req_id, 'master': True})
 end = time.time()
 latency = end - start
 print(latency)

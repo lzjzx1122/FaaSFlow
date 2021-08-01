@@ -74,5 +74,6 @@ def parse(filename):
     return component.workflow(start_functions, nodes, global_input, total, parent_cnt, foreach_functions, merge_funtions)
 
 
-yaml_file = '../../benchmark/generator/soykb/flat_workflow.yaml'
+yaml_file = '../../benchmark/generator/cycles/flat_workflow.yaml'
+print(yaml_file)
 workflow = parse(yaml_file)

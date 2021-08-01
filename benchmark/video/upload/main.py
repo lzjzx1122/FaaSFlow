@@ -46,13 +46,15 @@ def get_fileNameExt(filename):
 #     os.system(command)
 #     return preview_filename, output_filepath
 
-def preview_generate(video_name, video):
-    with open(os.path.join('work', video_name), 'wb') as f: f.write(video)
+def preview_generate(video_name):
+    # with open(os.path.join('work', video_name), 'wb') as f: f.write(video)
     shortname, _ = get_fileNameExt(video_name)
     preview_name = 'preview_' + shortname + '.gif'    
-    command = 'ffmpeg -t 3 -ss 00:00:02 -i {0} {1}'.format(os.path.join('work', video_name), os.path.join('work', preview_name)) 
+    # command = 'ffmpeg -t 3 -ss 00:00:02 -i {0} {1}'.format(os.path.join('work', video_name), os.path.join('work', preview_name)) 
+    command = 'ffmpeg -t 3 -ss 00:00:02 -i {0} {1}'.format(video_name, preview_name) 
     os.system(command)
-    with open(os.path.join('work', preview_name), 'rb') as f: preview_video = f.read()
+    # with open(os.path.join('work', preview_name), 'rb') as f: preview_video = f.read()
+    with open(preview_name, 'rb') as f: preview_video = f.read()
     return preview_name, preview_video
 
 #get method for downloading
@@ -87,31 +89,33 @@ def main(function_name, request_id, runtime, input, output, to, keys):
     # }
     
     store = Store(function_name, request_id, input, output, to, keys)
-    request_store = store.fetch(['video_name', 'user_name', 'target_type', 'segment_time'])
+    # request_store = store.fetch(['video_name', 'user_name', 'target_type', 'segment_time'])
 
-    if request_store:
+    # if request_store:
         # user_object = db[request_store['user_name']]
         # input_path = os.path.join('..',request_store['user_name'],'object_id_'+request_store['request_id'])
         # input_filepath = os.path.join(input_path,request_store['video_name'])
         # if os.path.exists(input_path) == False: 
         #     os.makedirs(input_path)
         # request_file.save(input_filepath)
-        video_name = request_store['video_name']
-        video = store.fetch([video_name])[video_name]
+        # video_name = request_store['video_name']
+        # video = store.fetch([video_name])[video_name]
         # preview_filename, output_filepath = preview_generate(request_store['video_name'],input_path,input_filepath)
-        preview_name, preview_video = preview_generate(video_name, video)
+    video_name = 'sample.mp4'
+    with open(video_name, 'rb') as f: video = f.read()
+    preview_name, preview_video = preview_generate(video_name)
         # new_doc_id = document_create_and_init(user_object, request_store['request_id'], request_store['video_name'], request_store['video_key'], request_store['target_type'], request_store['segment_time'], preview_filename)
 
         # active_storage('PUT', user_object,new_doc_id,request_store['video_name'],input_filepath,'application/octet')
         # active_storage('PUT', user_object,new_doc_id,preview_filename,output_filepath,'image/gif')
-
-        output_result = {'output_prefix': 'new', 'preview_name': preview_name, preview_name: preview_video}
-        output_content_type = {preview_name: 'application/octet'}
-        store.put(output_result, output_content_type)
-
-        return '{"code": "ok"}'
-    else:
-        return '{"message": "Please first upload a file!"}'
+    output_result = {'output_prefix': 'new', 'preview_name': preview_name, preview_name: preview_video}
+    output_content_type = {preview_name: 'application/octet'}
+    store.put(output_result, output_content_type)
+    store.put({video_name: video}, {video_name: 'application/octet'})
+    store.put({'video_name': video_name, 'user_name': 'ziliuziliu', 'segment_time': 10, 'target_type': 'avi', 'split': True}, {})
+    return '{"code": "ok"}'
+    # else:
+    #     return '{"message": "Please first upload a file!"}'
 
 
 # server.run(port=10000, debug=True,host='0.0.0.0')

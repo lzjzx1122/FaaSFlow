@@ -4,6 +4,7 @@ import os
 from function_info import parse
 from port_controller import PortController
 from function import Function
+import random
 
 repack_clean_interval = 5.000 # repack and clean every 5 seconds
 dispatch_interval = 0.005 # 200 qps at most
@@ -13,7 +14,8 @@ class FunctionManager:
     def __init__(self, config_path):
         self.function_info = parse(config_path)
 
-        self.port_controller = PortController(10080, 30000)
+        min_port = random.randint(2, 11) * 5000
+        self.port_controller = PortController(min_port, min_port + 4999)
         self.client = docker.from_env()
 
         self.functions = {

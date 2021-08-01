@@ -11,14 +11,14 @@ if 'overhead' in db_server:
     db_server.delete('overhead')
 db = db_server.create('overhead')
 
-managers = [psutil.Process(int(sys.argv[1])), psutil.Process(int(sys.argv[2]))]
+managers = [psutil.Process(int(sys.argv[1]))]
 mems = []
 cpus = []
 
 def run():
     gevent.spawn_later(1, run)
-    mem = (managers[0].memory_percent() + managers[0].memory_percent()) / 2
-    cpu = (managers[0].cpu_percent() + managers[1].cpu_percent()) / 2
+    mem = managers[0].memory_percent()
+    cpu = managers[0].cpu_percent()
     print('time: ', time.time(), 'mem: ', mem, 'cpu: ', cpu)
     mems.append(mem)
     cpus.append(cpu)

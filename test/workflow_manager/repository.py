@@ -9,6 +9,17 @@ class Repository:
     def __init__(self):
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
+    
+    def allocate_db(self, request_id):
+        db = self.couch['results']
+        db[request_id] = {}
+
+    def get_all_addrs(self) -> List[str]:
+        db = self.couch['workflow_metadata']
+        for item in db:
+            doc = db[item]
+            if 'addrs' in doc:
+                return doc['addrs']
 
     def get_current_node_functions(self, ip, mode) -> List[str]:
         db = self.couch[mode]
