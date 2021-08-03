@@ -47,7 +47,7 @@ class WorkflowState:
             self.executed[f] = False
             self.parent_executed[f] = 0
 
-function_manager = FunctionManager("../../benchmark/generator/cycles") # demonstrate workflow definition(computation graph, code...)
+function_manager = FunctionManager("../../benchmark/generator/genome") # demonstrate workflow definition(computation graph, code...)
 
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:
@@ -69,6 +69,10 @@ class WorkflowManager:
         self.merge_func = repo.get_merge_functions()
         self.func = repo.get_current_node_functions(self.host_addr, self.meta_db)
 
+    # def show_state(self):
+    #     gevent.spawn_later(1, self.show_state)
+    #     print('states: ', self.states)
+
     # return the workflow state of the request
     def get_state(self, request_id: str) -> WorkflowState:
         self.lock.acquire()
@@ -87,7 +91,7 @@ class WorkflowManager:
         # print('----delete workflow state ', request_id, '----')
         self.lock.acquire()
         if request_id in self.states:
-            self.states.pop(request_id)
+            del self.states[request_id]
         self.lock.release()
         if master:
             jobs = []
@@ -144,7 +148,8 @@ class WorkflowManager:
             'function_name': function_name,
             'no_parent_execution': no_parent_execution,
         }
-        requests.post(remote_url, json=data)
+        response = requests.post(remote_url, json=data)
+        response.close()
 
     # check if a function's parents are all finished
     def check_runnable(self, state: WorkflowState, function_name: str) -> bool:

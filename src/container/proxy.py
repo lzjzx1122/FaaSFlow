@@ -12,7 +12,7 @@ from gevent.pywsgi import WSGIServer
 
 default_file = 'main.py'
 work_dir = '/proxy'
-couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
+couchdb_url = 'http://openwhisk:openwhisk@172.20.185.137:5984/'
 db_server = couchdb.Server(couchdb_url)
 latency_db = db_server['workflow_latency']
 
