@@ -5,30 +5,32 @@ import json
 couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
 
 class Repository:
-    def __init__(self, clear):
+    def __init__(self):
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
-        if clear:
-            db_list = ['function_info', 'function_info_raw', 'workflow_metadata']
-            for db in db_list:
-                if db in self.couch:
-                    self.couch.delete(db)
-                self.couch.create(db)
 
     def save_function_info(self, function_info, db_name):
+        if db_name not in self.couch:
+            self.couch.create(db_name)
         db = self.couch[db_name]
         for name in function_info:
             db[name] = function_info[name]
 
     def save_foreach_functions(self, foreach_functions, db_name):
+        if db_name not in self.couch:
+            self.couch.create(db_name)
         db = self.couch[db_name]
         db.save({'foreach_functions': list(foreach_functions)})
     
     def save_merge_functions(self, merge_functions, db_name):
+        if db_name not in self.couch:
+            self.couch.create(db_name)
         db = self.couch[db_name]
         db.save({'merge_functions': list(merge_functions)})
 
     def save_all_addrs(self, addrs, db_name):
+        if db_name not in self.couch:
+            self.couch.create(db_name)
         db = self.couch[db_name]
         db.save({'addrs': list(addrs)})
 
@@ -47,6 +49,8 @@ class Repository:
                 return doc['merge_functions']
 
     def save_start_functions(self, start_functions, db_name):
+        if db_name not in self.couch:
+            self.couch.create(db_name)
         db = self.couch[db_name]
         db.save({'start_functions': start_functions})
 
@@ -63,6 +67,8 @@ class Repository:
             return item
 
     def save_basic_input(self, basic_input, db_name):
+        if db_name not in self.couch:
+            self.couch.create(db_name)
         db = self.couch[db_name]
         db.save(basic_input)
 

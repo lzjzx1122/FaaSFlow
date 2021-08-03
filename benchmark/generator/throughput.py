@@ -5,19 +5,21 @@ import repository
 import gevent
 import uuid
 import time
-import prepare_basic_input
+# import prepare_basic_input
+import sys
 
 repo = repository.Repository()
 
-speed = 8 # request / minute
+speed = 6 # request / minute
 latency_results = []
+workflow_name = sys.argv[1]
 
 def trigger_function(request_id, function_name):
-    info = repo.get_function_info(function_name, 'function_info')
+    info = repo.get_function_info(function_name, workflow_name + '_function_info')
     url = 'http://{}/request'.format(info['ip'])
     data = {
         'request_id': request_id,
-        'workflow_name': 'test',
+        'workflow_name': workflow_name,
         'function_name': function_name,
         'no_parent_execution': True
     }
@@ -32,14 +34,14 @@ def run_workflow():
     # prepare_basic_input.prepare_basic_input(request_id)
     print('----dispatching request ', request_id, '----')
     start = time.time()
-    start_functions = repo.get_start_functions()
+    start_functions = repo.get_start_functions(workflow_name + '_workflow_metadata')
     jobs = []
     for n in start_functions:
         jobs.append(gevent.spawn(trigger_function, request_id, n))
     gevent.joinall(jobs)
-    master_addr = repo.get_all_addrs()[0]
+    master_addr = repo.get_all_addrs(workflow_name + '_workflow_metadata')[0]
     clear_url = 'http://{}/clear'.format(master_addr)
-    requests.post(clear_url, json={'request_id': request_id, 'master': True})
+    requests.post(clear_url, json={'request_id': request_id, 'master': True, 'workflow_name': workflow_name})
     end = time.time()
     print('----ending ', request_id, '----')
     latency_results.append(end - start)

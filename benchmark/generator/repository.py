@@ -17,47 +17,33 @@ class Repository:
     def mem_clearall(self):
         self.redis.flushall()
 
-    def get_all_addrs(self) -> List[str]:
-        db = self.couch['workflow_metadata']
-        for item in db:
-            doc = db[item]
-            if 'addrs' in doc:
-                return doc['addrs']
-
-    def get_current_node_functions(self, ip, mode) -> List[str]:
-        db = self.couch[mode]
-        functions = []
-        for item in db.find({'selector': {'ip': ip}}):
-            functions.append(item['function_name'])
-        return functions
-    
-    def get_all_functions(self, mode) -> List[str]:
-        db = self.couch[mode]
-        functions = []
-        for item in db:
-            functions.append(db[item]['function_name'])
-        return functions
-
-    def get_foreach_functions(self) -> List[str]:
-        db = self.couch['workflow_metadata']
+    def get_foreach_functions(self, db_name) -> List[str]:
+        db = self.couch[db_name]
         for item in db:
             doc = db[item]
             if 'foreach_functions' in doc:
                 return doc['foreach_functions']
 
-    def get_merge_functions(self) -> List[str]:
-        db = self.couch['workflow_metadata']
+    def get_merge_functions(self, db_name) -> List[str]:
+        db = self.couch[db_name]
         for item in db:
             doc = db[item]
             if 'merge_functions' in doc:
                 return doc['merge_functions']
 
-    def get_start_functions(self) -> List[str]:
-        db = self.couch['workflow_metadata']
+    def get_start_functions(self, db_name) -> List[str]:
+        db = self.couch[db_name]
         for item in db:
             doc = db[item]
             if 'start_functions' in doc:
                 return doc['start_functions']
+
+    def get_all_addrs(self, db_name) -> List[str]:
+        db = self.couch[db_name]
+        for item in db:
+            doc = db[item]
+            if 'addrs' in doc:
+                return doc['addrs']
 
     def get_function_info(self, function_name: str, mode: str) -> Any:
         db = self.couch[mode]

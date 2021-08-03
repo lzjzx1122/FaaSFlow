@@ -1,4 +1,4 @@
-max_containers: 10
+max_containers: 1
 functions:
 - image: epigenomics_fastqsplit_00000001
   name: fastqsplit_00000001

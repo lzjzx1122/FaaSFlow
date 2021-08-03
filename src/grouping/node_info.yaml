@@ -1,4 +1,5 @@
 nodes:
-- address: 172.20.185.138:8000
-  scale_limit: 150
+- address: 172.20.185.137:8000
+  scale_limit: 200
+
 

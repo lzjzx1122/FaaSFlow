@@ -47,11 +47,13 @@ class WorkflowState:
             self.executed[f] = False
             self.parent_executed[f] = 0
 
-function_manager = FunctionManager("../../benchmark/generator/genome") # demonstrate workflow definition(computation graph, code...)
+class WorkflowDispatcher:
+    def __init__(self, function_infos: Dict[str, str]) -> None:
+        self.function_managers = {name: FunctionManager(addr) for name, addr in function_infos}
 
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:
-    def __init__(self, host_addr: str, workflow_name: str, mode: str):
+    def __init__(self, host_addr: str, workflow_name: str, mode: str, function_info_addr: str):
         self.lock = gevent.lock.BoundedSemaphore() # guard self.states
         self.host_addr = host_addr
         self.workflow_name = workflow_name
@@ -61,13 +63,16 @@ class WorkflowManager:
         print('mode: ', mode)
         self.mode = mode
         if mode == 'optimized':
-            self.meta_db = 'function_info'
+            self.info_db = workflow_name + '_function_info'
         else:
-            self.meta_db = 'function_info_raw'
+            self.info_db = workflow_name + '_function_info_raw'
+        self.meta_db = workflow_name + '_workflow_metadata'
 
-        self.foreach_func = repo.get_foreach_functions()
-        self.merge_func = repo.get_merge_functions()
-        self.func = repo.get_current_node_functions(self.host_addr, self.meta_db)
+        self.foreach_func = repo.get_foreach_functions(self.meta_db)
+        self.merge_func = repo.get_merge_functions(self.meta_db)
+        self.func = repo.get_current_node_functions(self.host_addr, self.info_db)
+        
+        self.function_manager = FunctionManager(function_info_addr)
 
     # def show_state(self):
     #     gevent.spawn_later(1, self.show_state)
@@ -95,7 +100,7 @@ class WorkflowManager:
         self.lock.release()
         if master:
             jobs = []
-            addrs = repo.get_all_addrs()
+            addrs = repo.get_all_addrs(self.meta_db)
             for addr in addrs:
                 if addr != self.host_addr:
                     jobs.append(gevent.spawn(self.del_state_remote, request_id, addr))
@@ -106,7 +111,7 @@ class WorkflowManager:
     def get_function_info(self, function_name: str) -> Any:
         if function_name not in self.function_info:
             # print('function_name: ', function_name)
-            self.function_info[function_name] = repo.get_function_info(function_name, self.meta_db)
+            self.function_info[function_name] = repo.get_function_info(function_name, self.info_db)
         return self.function_info[function_name]
 
     # trigger the function when one of its parent is finished
@@ -200,19 +205,19 @@ class WorkflowManager:
             keys = {}  # {'split_keys': '1', 'split_keys_2': '2'}
             for k in foreach_keys:
                 keys[k] = all_keys[k][i]
-            jobs.append(gevent.spawn(function_manager.run, info['function_name'], state.request_id,
+            jobs.append(gevent.spawn(self.function_manager.run, info['function_name'], state.request_id,
                                      info['runtime'], info['input'], info['output'],
                                      info['to'], keys))
         gevent.joinall(jobs)
 
     def run_merge(self, state: WorkflowState, info: Any) -> None:
         all_keys = repo.get_keys(state.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
-        function_manager.run(info['function_name'], state.request_id,
+        self.function_manager.run(info['function_name'], state.request_id,
                              info['runtime'], info['input'], info['output'],
                              info['to'], all_keys)
 
     def run_normal(self, state: WorkflowState, info: Any) -> None:
-        function_manager.run(info['function_name'], state.request_id,
+        self.function_manager.run(info['function_name'], state.request_id,
                              info['runtime'], info['input'], info['output'],
                              info['to'], {})
 

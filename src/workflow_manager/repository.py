@@ -18,29 +18,29 @@ class Repository:
             functions.append(db[item]['function_name'])
         return functions
 
-    def get_foreach_functions(self) -> List[str]:
-        db = self.couch['workflow_metadata']
+    def get_foreach_functions(self, db_name) -> List[str]:
+        db = self.couch[db_name]
         for item in db:
             doc = db[item]
             if 'foreach_functions' in doc:
                 return doc['foreach_functions']
 
-    def get_merge_functions(self) -> List[str]:
-        db = self.couch['workflow_metadata']
+    def get_merge_functions(self, db_name) -> List[str]:
+        db = self.couch[db_name]
         for item in db:
             doc = db[item]
             if 'merge_functions' in doc:
                 return doc['merge_functions']
 
-    def get_start_functions(self) -> List[str]:
-        db = self.couch['workflow_metadata']
+    def get_start_functions(self, db_name) -> List[str]:
+        db = self.couch[db_name]
         for item in db:
             doc = db[item]
             if 'start_functions' in doc:
                 return doc['start_functions']
 
-    def get_all_addrs(self) -> List[str]:
-        db = self.couch['workflow_metadata']
+    def get_all_addrs(self, db_name) -> List[str]:
+        db = self.couch[db_name]
         for item in db:
             doc = db[item]
             if 'addrs' in doc:
