@@ -9,7 +9,7 @@ import prepare_basic_input
 
 repo = repository.Repository()
 
-speed = 1 # request / minute
+speed = 8 # request / minute
 latency_results = []
 
 def trigger_function(request_id, function_name):
@@ -43,6 +43,7 @@ def run_workflow():
     end = time.time()
     print('----ending ', request_id, '----')
     latency_results.append(end - start)
+    repo.save_latency(end - start)
 
 def analyze():
     gevent.spawn_later(5, analyze)
@@ -54,14 +55,13 @@ def analyze():
         results = latency_results[-100:]
         results.sort()
         print('!!!! 95%: ', results[-5], ' 99%: ', results[-1], ' !!!!')
-        repo.save_tl(results[-5], results[-1])
 
 def run():
     global speed
     print('----running workflow ', speed, ' request / s----')
     repo.mem_clearall()
     repo.reset_all_mem(clear_function_data=True)
-    repo.clear_tl_db()
+    repo.clear_latency_db()
     gevent.spawn_later(1, run_workflow)
     gevent.spawn_later(5, analyze)
     gevent.wait()

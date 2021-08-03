@@ -3,7 +3,7 @@ import couchdb
 import redis
 import json
 
-couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
+couchdb_url = 'http://openwhisk:openwhisk@172.20.185.137:5984/'
 
 class Repository:
     def __init__(self):
@@ -154,11 +154,18 @@ class Repository:
             #     edge_time[name] /= transcode_cnt
         return edge_time, node_time
 
-    def clear_tl_db(self):
-        if 'tail_latency' in self.couch:
-            self.couch.delete('tail_latency')
-        self.couch.create('tail_latency')
+    def clear_latency_db(self):
+        if 'latency' in self.couch:
+            self.couch.delete('latency')
+        self.couch.create('latency')
     
-    def save_tl(self, nf, nn):
-        db = self.couch['tail_latency']
-        db.save({'95%': nf, '99%': nn})
+    def save_latency(self, l):
+        db = self.couch['latency']
+        db.save({'latency': l})
+    
+    def down_latency(self):
+        db = self.couch['latency']
+        l = []
+        for _ in db:
+            l.append(db[_]['latency'])
+        return l

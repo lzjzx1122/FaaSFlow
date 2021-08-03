@@ -204,7 +204,6 @@ def get_max_mem_usage(workflow: component.workflow):
 def get_function_info(workflow: component.workflow, node_info: Dict):
 
     global max_mem_usage, group_ip
-
     # grouping algorithm
     max_mem_usage = get_max_mem_usage(workflow)
     # print('max_mem_usage', max_mem_usage)
