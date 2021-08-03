@@ -43,7 +43,7 @@ class FunctionManager:
             gevent.spawn(function.dispatch_request)
     
     def run(self, function_name, request_id, runtime, input, output, to, keys):
-        print('run', function_name, request_id, runtime, input, output, to, keys)
+        # print('run', function_name, request_id, runtime, input, output, to, keys)
         if function_name not in self.functions:
             raise Exception("No such function!")
         return self.functions[function_name].send_request(request_id, runtime, input, output, to, keys)
