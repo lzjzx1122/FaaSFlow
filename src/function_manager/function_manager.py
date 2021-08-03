@@ -27,7 +27,7 @@ class FunctionManager:
        
     def init(self):
         print("Clearing previous containers.")
-        os.system('docker rm -f $(docker ps -aq --filter ancestor=workflow_base)')
+        os.system('docker rm -f $(docker ps -aq --filter label=workflow)')
 
         gevent.spawn_later(repack_clean_interval, self._clean_loop)
         gevent.spawn_later(dispatch_interval, self._dispatch_loop)
