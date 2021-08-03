@@ -3,7 +3,7 @@ import couchdb
 import redis
 import json
 
-couchdb_url = 'http://openwhisk:openwhisk@172.20.185.137:5984/'
+couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
 
 class Repository:
     def __init__(self):
