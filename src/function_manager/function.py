@@ -6,8 +6,6 @@ from gevent.lock import BoundedSemaphore
 from container import Container
 from function_info import FunctionInfo
 
-update_rate = 0.65 # the update rate of lambda and mu
-
 # data structure for request info
 class RequestInfo:
     def __init__(self, request_id, data):
@@ -27,14 +25,12 @@ class Function:
         self.rq = []
 
         # container pool
-        self.num_exec = 0
-        self.exec_pool = []
+        self.num_exec = 0 # the number of containers in execution, not in container pool
+        self.container_pool = []
         self.b = BoundedSemaphore()
     
     # put the request into request queue
     def send_request(self, request_id, runtime, input, output, to, keys):
-        logging.info('send request to: %s of: %s, rq len: %d', self.info.function_name, request_id, len(self.rq))
-
         data = {'request_id': request_id, 'runtime': runtime, 'input': input, 'output': output, 'to': to, 'keys': keys}
         req = RequestInfo(request_id, data)
         self.rq.append(req)
@@ -63,6 +59,7 @@ class Function:
         req = self.rq.pop(0)
         self.num_processing -= 1
         # 2. send request to the container
+        logging.info('send request to: %s of: %s, rq len: %d', self.info.function_name, req.request_id, len(self.rq))
         res = container.send_request(req.data)
         req.result.set(res)
         
@@ -74,8 +71,12 @@ class Function:
     def self_container(self):
         res = None
 
-        if len(self.exec_pool) != 0:
-            res = self.exec_pool.pop(-1)
+        self.b.acquire()
+        if len(self.container_pool) != 0:
+            logging.info('get container from pool of function: %s, pool size: %d', self.info.function_name, len(self.container_pool))
+            res = self.container_pool.pop(-1)
+            self.num_exec += 1
+        self.b.release()
         
         return res
 
@@ -84,16 +85,15 @@ class Function:
         # do not create new exec container
         # when the number of execs hits the limit
         self.b.acquire() # critical: missing lock may cause infinite container creation under high concurrency scenario
-        if self.num_exec > self.info.max_containers:
-            logging.info('hit container limit: %s', self.info.function_name)
+        if self.num_exec + len(self.container_pool) > self.info.max_containers:
+            logging.info('hit container limit, function: %s', self.info.function_name)
             return None
         self.num_exec += 1
         self.b.release()
 
-        logging.info('create container of: %s, pool size: %d', self.info.function_name, len(self.exec_pool))
+        logging.info('create container of function: %s', self.info.function_name)
         try:
             container = Container.create(self.client, self.info.img_name, self.port_controller.get(), 'exec')
-            # print(container)
         except Exception as e:
             print(e)
             return None
@@ -102,12 +102,15 @@ class Function:
 
     # put the container into one of the three pool, according to its attribute
     def put_container(self, container):
-        self.exec_pool.append(container)
+        self.b.acquire()
+        self.container_pool.append(container)
+        self.num_exec -= 1
+        self.b.release()
 
     # after the destruction of container
     # its port should be give back to port manager
     def remove_container(self, container):
-        logging.info('remove container: %s, pool size: %d', self.info.function_name, len(self.exec_pool))
+        logging.info('remove container: %s, pool size: %d', self.info.function_name, len(self.container_pool))
         container.destroy()
         self.port_controller.put(container.port)
 
@@ -119,10 +122,8 @@ class Function:
     def repack_and_clean(self):
         # find the old containers
         old_container = []
-        self.exec_pool = clean_pool(self.exec_pool, exec_lifetime, old_container)
-
         self.b.acquire()
-        self.num_exec -= len(old_container)
+        self.container_pool = clean_pool(self.container_pool, exec_lifetime, old_container)
         self.b.release()
 
         # time consuming work is put here
