@@ -1,6 +1,6 @@
 import sys
+import logging
 
-from requests.api import request
 import repository
 import gevent
 import gevent.lock
@@ -47,10 +47,6 @@ class WorkflowState:
             self.executed[f] = False
             self.parent_executed[f] = 0
 
-class WorkflowDispatcher:
-    def __init__(self, function_infos: Dict[str, str]) -> None:
-        self.function_managers = {name: FunctionManager(addr) for name, addr in function_infos}
-
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:
     def __init__(self, host_addr: str, workflow_name: str, mode: str, function_info_addr: str):
@@ -60,7 +56,6 @@ class WorkflowManager:
         self.states: Dict[str, WorkflowState] = {}
         self.function_info: Dict[str, dict] = {}
 
-        print('mode: ', mode)
         self.mode = mode
         if mode == 'optimized':
             self.info_db = workflow_name + '_function_info'
@@ -73,10 +68,6 @@ class WorkflowManager:
         self.func = repo.get_current_node_functions(self.host_addr, self.info_db)
         
         self.function_manager = FunctionManager(function_info_addr)
-
-    # def show_state(self):
-    #     gevent.spawn_later(1, self.show_state)
-    #     print('states: ', self.states)
 
     # return the workflow state of the request
     def get_state(self, request_id: str) -> WorkflowState:
@@ -93,7 +84,7 @@ class WorkflowManager:
 
     # delete state
     def del_state(self, request_id: str, master: bool):
-        # print('----delete workflow state ', request_id, '----')
+        logging.info('delete state of: %s', request_id)
         self.lock.acquire()
         if request_id in self.states:
             del self.states[request_id]
@@ -110,7 +101,6 @@ class WorkflowManager:
     # the result is cached
     def get_function_info(self, function_name: str) -> Any:
         if function_name not in self.function_info:
-            # print('function_name: ', function_name)
             self.function_info[function_name] = repo.get_function_info(function_name, self.info_db)
         return self.function_info[function_name]
 
@@ -128,24 +118,22 @@ class WorkflowManager:
 
     # trigger a function that runs on local
     def trigger_function_local(self, state: WorkflowState, function_name: str, no_parent_execution = False) -> None:
-        # print('----trying to trigger local function ' + function_name + '----')
+        logging.info('trigger local function: %s of: %s', function_name, state.request_id)
         state.lock.acquire()
         if not no_parent_execution:
             state.parent_executed[function_name] += 1
         runnable = self.check_runnable(state, function_name)
         # remember to release state.lock
         if runnable:
-            # print('----function ', function_name, ' runnable----')
             state.executed[function_name] = True
             state.lock.release()
             self.run_function(state, function_name)
         else:
-            # print('----function ', function_name, ' not runnable----')
             state.lock.release()
 
     # trigger a function that runs on remote machine
     def trigger_function_remote(self, state: WorkflowState, function_name: str, remote_addr: str, no_parent_execution = False) -> None:
-        # print('----trying to trigger remote function ' + function_name + '----')
+        logging.info('trigger remote function: %s on: %s of: %s', function_name, remote_addr, state.request_id)
         remote_url = 'http://{}/request'.format(remote_addr)
         data = {
             'request_id': state.request_id,
@@ -163,6 +151,7 @@ class WorkflowManager:
 
     # run a function on local
     def run_function(self, state: WorkflowState, function_name: str) -> None:
+        logging.info('run function: %s of: %s', function_name, state.request_id)
         # end functions
         if function_name == 'END':
             return

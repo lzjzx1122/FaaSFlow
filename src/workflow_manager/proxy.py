@@ -12,7 +12,7 @@ class Dispatcher:
     def __init__(self, mode: str, info_addrs: Dict[str, str]) -> None:
         self.managers = {name: WorkflowManager(sys.argv[1] + ':' + sys.argv[2], name, mode, addr) for name, addr in info_addrs.items()}
     
-    def get_state(self, workflow_name, request_id):
+    def get_state(self, workflow_name: str, request_id: str) -> WorkflowManager:
         return self.managers[workflow_name].get_state(request_id)
 
     def trigger_function(self, workflow_name, state, function_name, no_parent_execution):
@@ -58,6 +58,8 @@ def clear():
     return json.dumps({'status': 'ok'})
 
 from gevent.pywsgi import WSGIServer
+import logging
 if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%H:%M:%S')
     server = WSGIServer((sys.argv[1], int(sys.argv[2])), app)
     server.serve_forever()

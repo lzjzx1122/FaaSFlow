@@ -1,7 +1,6 @@
-import docker
+import logging
 import time
 import math
-import gevent
 from gevent import event
 from gevent.lock import BoundedSemaphore
 from container import Container
@@ -34,19 +33,12 @@ class Function:
     
     # put the request into request queue
     def send_request(self, request_id, runtime, input, output, to, keys):
-        # print('send_request', request_id, runtime)
-        start = time.time()
-        # self.request_log['start'].append(start)
+        logging.info('send request to: %s of: %s, rq len: %d', self.info.function_name, request_id, len(self.rq))
 
         data = {'request_id': request_id, 'runtime': runtime, 'input': input, 'output': output, 'to': to, 'keys': keys}
         req = RequestInfo(request_id, data)
         self.rq.append(req)
         res = req.result.get()
-
-        end = time.time()
-        # self.request_log['duration'].append(res['duration'])
-        # self.request_log['alltime'].append(end - start)
-
         return res
 
     # receive a request from upper layer
@@ -92,11 +84,13 @@ class Function:
         # do not create new exec container
         # when the number of execs hits the limit
         self.b.acquire() # critical: missing lock may cause infinite container creation under high concurrency scenario
-        # print(self, self.info.function_name, self.num_exec)
         if self.num_exec > self.info.max_containers:
+            logging.info('hit container limit: %s', self.info.function_name)
             return None
         self.num_exec += 1
         self.b.release()
+
+        logging.info('create container of: %s, pool size: %d', self.info.function_name, len(self.exec_pool))
         try:
             container = Container.create(self.client, self.info.img_name, self.port_controller.get(), 'exec')
             # print(container)
@@ -108,21 +102,14 @@ class Function:
 
     # put the container into one of the three pool, according to its attribute
     def put_container(self, container):
-        if container.attr == 'exec':
-            self.exec_pool.append(container)
+        self.exec_pool.append(container)
 
     # after the destruction of container
     # its port should be give back to port manager
     def remove_container(self, container):
+        logging.info('remove container: %s, pool size: %d', self.info.function_name, len(self.exec_pool))
         container.destroy()
         self.port_controller.put(container.port)
-    
-    # return the status of all container pools
-    def get_status(self):
-        return {
-            "exec": [self.num_exec, len(self.exec_pool)],
-            "quene_len": len(self.rq)
-        }
 
     # do the function specific initialization work
     def init_container(self, container):
@@ -147,8 +134,6 @@ def favg(a):
 
 # life time of three different kinds of containers
 exec_lifetime = 60
-lender_lifetime = 120
-renter_lifetime = 40
 
 # the pool list is in order:
 # - at the tail is the hottest containers (most recently used)
