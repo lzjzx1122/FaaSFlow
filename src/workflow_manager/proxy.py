@@ -27,7 +27,7 @@ class Dispatcher:
     def del_state(self, workflow_name, request_id, master):
         self.managers[workflow_name].del_state(request_id, master)
 
-dispatcher = Dispatcher(mode='raw', info_addrs={'genome': '../../benchmark/generator/genome', 'epigenomics': '../../benchmark/generator/epigenomics'})
+dispatcher = Dispatcher(mode='raw', info_addrs={'epigenomics': '../../benchmark/generator/epigenomics'})
 
 # a new request from outside
 # the previous function was done
@@ -60,6 +60,6 @@ def clear():
 from gevent.pywsgi import WSGIServer
 import logging
 if __name__ == '__main__':
-    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%H:%M:%S')
+    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%H:%M:%S', level='INFO')
     server = WSGIServer((sys.argv[1], int(sys.argv[2])), app)
     server.serve_forever()
