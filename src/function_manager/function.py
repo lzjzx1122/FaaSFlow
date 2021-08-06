@@ -48,7 +48,8 @@ class Function:
         container = self.self_container()
         
         # create a new container
-        if container is None:
+        while container is None:
+        # if container is None:
             container = self.create_container()
            
         # the number of exec container hits limit
@@ -96,6 +97,7 @@ class Function:
             container = Container.create(self.client, self.info.img_name, self.port_controller.get(), 'exec')
         except Exception as e:
             print(e)
+            self.num_exec -= 1
             return None
         self.init_container(container)
         return container

@@ -101,7 +101,7 @@ def main(function_name, request_id, runtime, input, output, to, keys):
         # video_name = request_store['video_name']
         # video = store.fetch([video_name])[video_name]
         # preview_filename, output_filepath = preview_generate(request_store['video_name'],input_path,input_filepath)
-    video_name = 'sample.mp4'
+    video_name = 'test.mp4'
     with open(video_name, 'rb') as f: video = f.read()
     preview_name, preview_video = preview_generate(video_name)
         # new_doc_id = document_create_and_init(user_object, request_store['request_id'], request_store['video_name'], request_store['video_key'], request_store['target_type'], request_store['segment_time'], preview_filename)
@@ -112,7 +112,7 @@ def main(function_name, request_id, runtime, input, output, to, keys):
     output_content_type = {preview_name: 'application/octet'}
     store.put(output_result, output_content_type)
     store.put({video_name: video}, {video_name: 'application/octet'})
-    store.put({'video_name': video_name, 'user_name': 'ziliuziliu', 'segment_time': 10, 'target_type': 'avi', 'split': True}, {})
+    store.put({'video_name': video_name, 'user_name': 'ziliuziliu', 'segment_time': 25, 'target_type': 'avi', 'split': True}, {})
     return '{"code": "ok"}'
     # else:
     #     return '{"message": "Please first upload a file!"}'

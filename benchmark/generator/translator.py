@@ -4,7 +4,7 @@ import sys
 import os
 import random
 
-workflow_name = 'epigenomics'
+workflow_name = 'soykb'
 utility = 'utility.py' # sys.argv[2]
 
 ## parse json build flat_workflow.yaml
