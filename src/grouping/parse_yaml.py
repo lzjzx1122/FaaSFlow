@@ -74,7 +74,7 @@ def parse(filename):
     return component.workflow(start_functions, nodes, global_input, total, parent_cnt, foreach_functions, merge_funtions)
 
 
-yaml_file = '../../benchmark/generator/epigenomics/flat_workflow.yaml'
-workflow_name = 'epigenomics'
+yaml_file = '../../benchmark/generator/soykb/flat_workflow.yaml'
+workflow_name = 'illgal_recognizer'
 print(yaml_file)
 workflow = parse(yaml_file)

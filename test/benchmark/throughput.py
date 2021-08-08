@@ -1,3 +1,4 @@
+from typing_extensions import final
 from gevent import monkey; monkey.patch_all(thread=False)
 import requests
 from tqdm import tqdm
@@ -10,7 +11,7 @@ import sys
 
 repo = repository.Repository()
 
-speed = 6 # request / minute
+speed = 400 # request / minute
 latency_results = []
 workflow_name = sys.argv[1]
 
@@ -23,11 +24,17 @@ def trigger_function(request_id, function_name):
         'function_name': function_name,
         'no_parent_execution': True
     }
-    requests.post(url, json=data)
+    try:
+        requests.post(url, json=data)
+    except Exception:
+        print('Exception Happend, Clearing...')
+        master_addr = repo.get_all_addrs(workflow_name + '_workflow_metadata')[0]
+        clear_url = 'http://{}/clear'.format(master_addr)
+        requests.post(clear_url, json={'request_id': request_id, 'master': True, 'workflow_name': workflow_name})
 
 def run_workflow():
     global speed
-    gevent.spawn_later(60/speed, run_workflow)
+    gevent.spawn_later(60 / speed, run_workflow)
     request_id = str(uuid.uuid4())
     repo.allocate_db(request_id)
     # print('----preparing input ', request_id, '----')
@@ -35,6 +42,7 @@ def run_workflow():
     print('----dispatching request ', request_id, '----')
     start = time.time()
     start_functions = repo.get_start_functions(workflow_name + '_workflow_metadata')
+
     jobs = []
     for n in start_functions:
         jobs.append(gevent.spawn(trigger_function, request_id, n))
@@ -54,9 +62,10 @@ def analyze():
     if len(latency_results) >= 20:
         print(latency_results[-10:])
     if len(latency_results) >= 110:
-        results = latency_results[-100:]
+        results = latency_results[-105:]
         results.sort()
-        print('!!!! 95%: ', results[-5], ' 99%: ', results[-1], ' !!!!')
+        print('max: ', results[-15:])
+        # print('!!!! 95%: ', results[-5], ' 99%: ', results[-1], ' !!!!')
 
 def run():
     global speed

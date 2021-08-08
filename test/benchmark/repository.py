@@ -155,3 +155,24 @@ class Repository:
         for _ in db:
             l.append(db[_]['latency'])
         return l
+    
+    def get_video_latency(self):
+        db = self.couch['ffmpeg_latency']
+        other_ffmpeg = 0
+        other_io = 0
+        transcode_ffmpeg = 0
+        transcode_io = 0
+        for doc in db:
+            function_name = db[doc]['function']
+            mode = db[doc]['mode']
+            if function_name == 'transcode':
+                if mode == 'io':
+                    transcode_io += float(db[doc]['latency'])
+                else:
+                    transcode_ffmpeg += float(db[doc]['latency'])
+            else:
+                if mode == 'io':
+                    other_io += float(db[doc]['latency'])
+                else:
+                    other_ffmpeg += float(db[doc]['latency'])
+        return other_io / 12 + transcode_io / 48, other_ffmpeg / 12 + transcode_ffmpeg / 48

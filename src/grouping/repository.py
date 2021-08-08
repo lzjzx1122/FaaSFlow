@@ -5,9 +5,13 @@ import json
 couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
 
 class Repository:
-    def __init__(self):
+    def __init__(self, workflow_name):
         self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
         self.couch = couchdb.Server(couchdb_url)
+        db_list = [workflow_name + '_function_info', workflow_name + '_function_info_raw', workflow_name + '_workflow_metadata']
+        for db_name in db_list:
+            if db_name in self.couch:
+                self.couch.delete(db_name)
 
     def save_function_info(self, function_info, db_name):
         if db_name not in self.couch:

@@ -255,13 +255,17 @@ def get_function_info(workflow: component.workflow, node_info: Dict):
                     function_info_dict[name]['to'] = 'DB+MEM'
     return function_info_dict, function_info_raw_dict
 
-
 node_info_list = yaml.load(open('node_info.yaml'), Loader=yaml.FullLoader)
 node_info_dict = {}
 for node_info in node_info_list['nodes']:
     node_info_dict[node_info['address']] = node_info['scale_limit']
+
+start = time.time()
 info_dict, info_raw_dict = get_function_info(parse_yaml.workflow, node_info_dict)
-repo = repository.Repository()
+end = time.time()
+
+print('overall: ', end - start)
+repo = repository.Repository(parse_yaml.workflow_name)
 repo.save_function_info(info_dict, parse_yaml.workflow_name + '_function_info')
 repo.save_function_info(info_raw_dict, parse_yaml.workflow_name + '_function_info_raw')
 repo.save_basic_input(parse_yaml.workflow.global_input, parse_yaml.workflow_name + '_workflow_metadata')
