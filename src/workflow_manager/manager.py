@@ -47,9 +47,35 @@ class WorkflowState:
             self.executed[f] = False
             self.parent_executed[f] = 0
 
+def get_size(obj, seen=None):
+   # From https://goshippo.com/blog/measure-real-size-any-python-object/
+   # Recursively finds size of objects
+   size = sys.getsizeof(obj)
+   if seen is None:
+       seen = set()
+   obj_id = id(obj)
+   if obj_id in seen:
+       return 0
+
+# Important mark as seen *before* entering recursion to gracefully handle
+   # self-referential objects
+   seen.add(obj_id)
+   if isinstance(obj, dict):
+     size += sum([get_size(v, seen) for v in obj.values()])
+     size += sum([get_size(k, seen) for k in obj.keys()])
+   elif hasattr(obj, '__dict__'):
+     size += get_size(obj.__dict__, seen)
+   elif hasattr(obj, '__iter__') and not isinstance(obj, (str, bytes, bytearray)):
+     size += sum([get_size(i, seen) for i in obj])
+   return size
+
+min_port = 20000
+
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:
     def __init__(self, host_addr: str, workflow_name: str, mode: str, function_info_addr: str):
+        global min_port
+
         self.lock = gevent.lock.BoundedSemaphore() # guard self.states
         self.host_addr = host_addr
         self.workflow_name = workflow_name
@@ -67,7 +93,8 @@ class WorkflowManager:
         self.merge_func = repo.get_merge_functions(self.meta_db)
         self.func = repo.get_current_node_functions(self.host_addr, self.info_db)
         
-        self.function_manager = FunctionManager(function_info_addr)
+        self.function_manager = FunctionManager(function_info_addr, min_port)
+        min_port += 5000
 
     # return the workflow state of the request
     def get_state(self, request_id: str) -> WorkflowState:
@@ -75,12 +102,13 @@ class WorkflowManager:
         if request_id not in self.states:
             self.states[request_id] = WorkflowState(request_id, self.func)
         state = self.states[request_id]
+        print('----current size: ', get_size(self.states[request_id]))
         self.lock.release()
         return state
     
     def del_state_remote(self, request_id: str, remote_addr: str):
         url = 'http://{}/clear'.format(remote_addr)
-        requests.post(url, json={'request_id': request_id})
+        requests.post(url, json={'request_id': request_id, 'workflow_name': self.workflow_name})
 
     # delete state
     def del_state(self, request_id: str, master: bool):

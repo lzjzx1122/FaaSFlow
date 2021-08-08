@@ -1,5 +1,6 @@
 import json
 from typing import Dict
+from threading import Thread
 from gevent import monkey
 monkey.patch_all()
 
@@ -27,7 +28,10 @@ class Dispatcher:
     def del_state(self, workflow_name, request_id, master):
         self.managers[workflow_name].del_state(request_id, master)
 
-dispatcher = Dispatcher(mode='raw', info_addrs={'epigenomics': '../../benchmark/generator/epigenomics'})
+dispatcher = Dispatcher(mode='optimized', info_addrs={'genome': '../../benchmark/generator/genome', 'epigenomics': '../../benchmark/generator/epigenomics',
+                                                'soykb': '../../benchmark/generator/soykb', 'cycles': '../../benchmark/generator/cycles',
+                                                'fileprocessing': '../../benchmark/fileprocessing', 'wordcount': '../../benchmark/wordcount',
+                                                'illgal_recognizer': '../../benchmark/illgal_recognizer', 'video': '../../benchmark/video'})
 
 # a new request from outside
 # the previous function was done
@@ -41,6 +45,7 @@ def req():
     # get the corresponding workflow state and trigger the function
     state = dispatcher.get_state(workflow_name, request_id)
     dispatcher.trigger_function(workflow_name, state, function_name, no_parent_execution)
+    # Thread(target=dispatcher.trigger_function, args=(workflow_name, state, function_name, no_parent_execution)).start()
     return json.dumps({'status': 'ok'})
 
 @app.route('/clear', methods = ['POST'])
@@ -51,9 +56,8 @@ def clear():
     master = False
     if 'master' in data:
         master = True
-        dispatcher.clear_mem(workflow_name, request_id) # must clear memory after each run 
-                                      # TODO: clear results in localized redis in each node
         dispatcher.clear_db(workflow_name, request_id) # optional: clear results in center db
+    dispatcher.clear_mem(workflow_name, request_id) # must clear memory after each run 
     dispatcher.del_state(workflow_name, request_id, master) # and remove state for every node
     return json.dumps({'status': 'ok'})
 

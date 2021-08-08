@@ -11,10 +11,9 @@ dispatch_interval = 0.005 # 200 qps at most
 
 # the class for scheduling functions' inter-operations
 class FunctionManager:
-    def __init__(self, config_path):
+    def __init__(self, config_path, min_port):
         self.function_info = parse(config_path)
 
-        min_port = random.randint(2, 11) * 5000
         self.port_controller = PortController(min_port, min_port + 4999)
         self.client = docker.from_env()
 
