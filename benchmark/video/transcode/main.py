@@ -58,10 +58,10 @@ def get_fileNameExt(filename):
     return fileDir, tempfilename, shortname, extension
 
 # @print_excute_time
-def main(function_name, request_id, runtime, input, output, to, keys):
+def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
     # evt = json.loads(event)
 
-    store = Store(function_name, request_id, input, output, to, keys)
+    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
     evt = store.fetch(['user_name', 'split_keys', 'target_type'])
 
     user_name = evt['user_name']

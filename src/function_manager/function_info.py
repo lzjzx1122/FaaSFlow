@@ -3,7 +3,8 @@ import os
 
 # data structure for function info
 class FunctionInfo:
-    def __init__(self, function_name, img_name, max_containers, qos_time, qos_requirement):
+    def __init__(self, workflow_name, function_name, img_name, max_containers, qos_time, qos_requirement):
+        self.workflow_name = workflow_name
         self.function_name = function_name
         self.img_name = img_name
         self.max_containers = max_containers
@@ -29,6 +30,7 @@ def parse(config_path):
     config_file = os.path.join(config_path, "function_info.yaml")
     with open(config_file, 'r') as f:
         config = yaml.safe_load(f)
+        workflow_name = config['workflow']
         max_containers = config['max_containers']
         for c in config['functions']:
             function_name = c['name']
@@ -43,7 +45,7 @@ def parse(config_path):
             # packages = c['packages'] if 'packages' in c else [] 
             #generate_image(config_path, function_name, packages)
             
-            info = FunctionInfo(function_name,
+            info = FunctionInfo(workflow_name, function_name,
                               img_name,
                               int(max_containers),
                               float(c['qos_time']),

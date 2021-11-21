@@ -21,9 +21,9 @@ SIZE = (224, 224)
 #         with open(save_path,'wb') as f: f.write(r.read())
 
 
-def main(function_name, request_id, runtime, input, output, to, keys):
+def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
 
-    store = Store(function_name, request_id, input, output, to, keys)
+    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
     inputs = store.fetch(['user_name', 'image_name'])
     user_name = inputs['user_name']
     image_name = inputs['image_name']

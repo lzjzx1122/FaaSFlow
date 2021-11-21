@@ -1,3 +1,4 @@
+import sys
 from typing import Dict, List
 import parse_yaml
 import queue
@@ -201,17 +202,51 @@ def get_max_mem_usage(workflow: component.workflow):
             max_mem_usage += (1 - config.reserved_mem_percentage - workflow.nodes[name].mem_usage) * config.container_mem * workflow.nodes[name].split_ratio
     return max_mem_usage
 
-def get_function_info(workflow: component.workflow, node_info: Dict):
+
+def save_grouping_config(workflow: component.workflow, node_info, info_dict, info_raw_dict):
+    repo = repository.Repository(workflow.workflow_name)
+    repo.save_function_info(info_dict, workflow.workflow_name + '_function_info')
+    repo.save_function_info(info_raw_dict, workflow.workflow_name + '_function_info_raw')
+    repo.save_basic_input(workflow.global_input, workflow.workflow_name + '_workflow_metadata')
+    repo.save_start_functions(workflow.start_functions, workflow.workflow_name + '_workflow_metadata')
+    repo.save_foreach_functions(workflow.foreach_functions, workflow.workflow_name + '_workflow_metadata')
+    repo.save_merge_functions(workflow.merge_functions, workflow.workflow_name + '_workflow_metadata')
+    repo.save_all_addrs(list(node_info.keys()), workflow.workflow_name + '_workflow_metadata')
+
+# def query(workflow: component.workflow, group_detail: List):
+#     total = 0
+#     merged = 0
+#     for name, node in workflow.nodes.items():
+#         for next_node_name in node.next:
+#             total = total + 1
+#             merged_edge = False
+#             for s in group_detail:
+#                 if name in s and next_node_name in s:
+#                     merged_edge = True
+#             if merged_edge:
+#                 merged = merged + 1
+#     return merged, total
+
+def get_grouping_config(workflow: component.workflow):
 
     global max_mem_usage, group_ip
+
+    # get node info
+    node_info_list = yaml.load(open('node_info.yaml'), Loader=yaml.FullLoader)
+    node_info_dict = {}
+    for node_info in node_info_list['nodes']:
+        node_info_dict[node_info['address']] = node_info['scale_limit']
+
     # grouping algorithm
     max_mem_usage = get_max_mem_usage(workflow)
     # print('max_mem_usage', max_mem_usage)
-    group_detail = grouping(workflow, node_info)
+    group_detail = grouping(workflow, node_info_dict)
     print(group_detail)
+    
+    # print(query(workflow, group_detail))
 
     # building function info: both optmized and raw version
-    ip_list = list(node_info.keys())
+    ip_list = list(node_info_dict.keys())
     function_info_dict = {}
     function_info_raw_dict = {}
     for node_name in workflow.nodes:
@@ -253,23 +288,11 @@ def get_function_info(workflow: component.workflow, node_info: Dict):
             if next_name.startswith('virtual'):
                 if function_info_dict[next_name]['to'] != function_info_dict[name]['to']:
                     function_info_dict[name]['to'] = 'DB+MEM'
-    return function_info_dict, function_info_raw_dict
 
-node_info_list = yaml.load(open('node_info.yaml'), Loader=yaml.FullLoader)
-node_info_dict = {}
-for node_info in node_info_list['nodes']:
-    node_info_dict[node_info['address']] = node_info['scale_limit']
+    return node_info_dict, function_info_dict, function_info_raw_dict
 
-start = time.time()
-info_dict, info_raw_dict = get_function_info(parse_yaml.workflow, node_info_dict)
-end = time.time()
-
-print('overall: ', end - start)
-repo = repository.Repository(parse_yaml.workflow_name)
-repo.save_function_info(info_dict, parse_yaml.workflow_name + '_function_info')
-repo.save_function_info(info_raw_dict, parse_yaml.workflow_name + '_function_info_raw')
-repo.save_basic_input(parse_yaml.workflow.global_input, parse_yaml.workflow_name + '_workflow_metadata')
-repo.save_start_functions(parse_yaml.workflow.start_functions, parse_yaml.workflow_name + '_workflow_metadata')
-repo.save_foreach_functions(parse_yaml.workflow.foreach_functions, parse_yaml.workflow_name + '_workflow_metadata')
-repo.save_merge_functions(parse_yaml.workflow.merge_functions, parse_yaml.workflow_name + '_workflow_metadata')
-repo.save_all_addrs(list(node_info_dict.keys()), parse_yaml.workflow_name + '_workflow_metadata')
+if __name__ == '__main__':
+    workflow_name = sys.argv[1]
+    workflow = parse_yaml.parse(workflow_name)
+    node_info, function_info, function_info_raw = get_grouping_config(workflow)
+    save_grouping_config(workflow, node_info, function_info, function_info_raw)

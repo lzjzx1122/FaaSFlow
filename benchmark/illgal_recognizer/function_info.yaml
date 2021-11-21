@@ -1,3 +1,4 @@
+workflow: 'illgal_recognizer'
 functions:
 - {image: recognizer_upload, name: upload, qos_requirement: 0.95, qos_time: 100}
 - {image: recognizer_adult, name: adult, qos_requirement: 0.95, qos_time: 100}

@@ -1,3 +1,4 @@
+workflow: cycles
 max_containers: 10
 functions:
 - image: cycles_baseline_cycles_00000001

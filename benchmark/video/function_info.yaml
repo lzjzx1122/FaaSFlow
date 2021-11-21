@@ -1,3 +1,4 @@
+workflow: video
 functions:
 - {image: video_upload, name: upload, qos_requirement: 0.95, qos_time: 100}
 - {image: video_simple_process, name: simple_process, qos_requirement: 0.95, qos_time: 100}

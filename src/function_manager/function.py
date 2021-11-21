@@ -118,7 +118,7 @@ class Function:
 
     # do the function specific initialization work
     def init_container(self, container):
-        container.init(self.info.function_name)
+        container.init(self.info.workflow_name, self.info.function_name)
 
     # do the repack and cleaning work regularly
     def repack_and_clean(self):

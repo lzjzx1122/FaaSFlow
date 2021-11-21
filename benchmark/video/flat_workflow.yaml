@@ -35,7 +35,13 @@ functions:
   runtime: 3.80
   scale: 3
   mem_usage: 0.25
-  input:
+  output:
+    split:
+      type: pass
+      value:
+        function: INPUT
+        parameter: split
+      size: 8
     video_name:
       type: pass
       value:
@@ -60,7 +66,6 @@ functions:
         function: INPUT
         parameter: target_type
       size: 8
-  output:
     output_prefix:
       type: normal
       size: 8

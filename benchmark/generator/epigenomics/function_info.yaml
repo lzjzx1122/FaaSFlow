@@ -1,3 +1,4 @@
+workflow: epigenomics
 max_containers: 1
 functions:
 - image: epigenomics_fastqsplit_00000001

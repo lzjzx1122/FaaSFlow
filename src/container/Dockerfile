@@ -28,6 +28,9 @@ EXPOSE 5000
 #     pip install --no-cache-dir gevent flask && \
 #     apk del .build-deps
 
+RUN sed -i 's/deb.debian.org/mirror.sjtu.edu.cn/g' /etc/apt/sources.list
+RUN apt-get clean
+RUN apt-get update
 RUN pip3 install --no-cache-dir gevent flask couchdb redis
 
 # RUN pip3 install --no-cache-dir gevent flask couchdb redis tensorflow keras pillow opencv-python googletrans==4.0.0-rc1

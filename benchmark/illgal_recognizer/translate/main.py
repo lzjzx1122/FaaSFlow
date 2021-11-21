@@ -21,9 +21,9 @@ translator = Translator()
 #     (shortname, extension) = os.path.splitext(filename)
 #     return shortname, extension
 
-def main(function_name, request_id, runtime, input, output, to, keys):
+def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
 
-    store = Store(function_name, request_id, input, output, to, keys)
+    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
     extracted_text = store.fetch(['extracted_text'])['extracted_text']
     # translated_text = translator.translate(extracted_text, dest='en').text # can't connect to google...
     translated_text = extracted_text

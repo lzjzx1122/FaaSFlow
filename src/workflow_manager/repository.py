@@ -3,7 +3,7 @@ import couchdb
 import redis
 import json
 
-couchdb_url = 'http://openwhisk:openwhisk@172.20.185.137:5984/'
+couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
 
 class Repository:
     def __init__(self):
@@ -52,6 +52,9 @@ class Repository:
             return item
 
     def create_request_doc(self, request_id: str) -> None:
+        if request_id in self.couch['results']:
+            doc = self.couch['results'][request_id]
+            self.couch['results'].delete(doc)
         self.couch['results'][request_id] = {}
 
     def get_keys(self, request_id: str) -> Any:
@@ -61,12 +64,6 @@ class Repository:
             if k != '_id' and k != '_rev' and k != '_attachments':
                 keys[k] = doc[k]
         return keys
-
-    def get_len(self, request_id: str, function: str, parameter: str) -> int:
-        db = self.couch['results']
-        len = db[request_id + '_' + function + '_' + parameter]['len']
-        return int(len)
-
 
     # fetch result from couchdb/redis
     def fetch_from_mem(self, redis_key, content_type):
@@ -110,3 +107,7 @@ class Repository:
     def clear_db(self, request_id):
         db = self.couch['results']
         db.delete(db[request_id])
+
+    def log_status(self, workflow_name, request_id, status):
+        log_db = self.couch['log']
+        log_db.save({'request_id': request_id, 'workflow': workflow_name, 'status': status})

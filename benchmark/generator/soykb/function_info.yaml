@@ -1,3 +1,4 @@
+workflow: soykb
 max_containers: 10
 functions:
 - image: soykb_alignment_to_reference_00000001

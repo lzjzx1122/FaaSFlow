@@ -2,8 +2,17 @@ import yaml
 import component
 import config
 
-def parse(filename):
-    data = yaml.load(open(filename), Loader=yaml.FullLoader)
+yaml_file_addr = {'fileprocessing': '../../benchmark/fileprocessing/flat_workflow.yaml',
+                  'illgal_recognizer': '../../benchmark/illgal_recognizer/flat_workflow.yaml',
+                  'video': '../../benchmark/video/flat_workflow.yaml',
+                  'wordcount': '../../benchmark/wordcount/flat_workflow.yaml',
+                  'cycles': '../../benchmark/generator/cycles/flat_workflow.yaml',
+                  'epigenomics': '../../benchmark/generator/epigenomics/flat_workflow.yaml',
+                  'genome': '../../benchmark/generator/genome/flat_workflow.yaml',
+                  'soykb': '../../benchmark/generator/soykb/flat_workflow.yaml'}
+
+def parse(workflow_name):
+    data = yaml.load(open(yaml_file_addr[workflow_name]), Loader=yaml.FullLoader)
     global_input = dict()
     start_functions = []
     nodes = dict()
@@ -71,10 +80,4 @@ def parse(filename):
             start_functions.append(name)
         for next_node in nodes[name].next:
             nodes[next_node].prev.append(name)
-    return component.workflow(start_functions, nodes, global_input, total, parent_cnt, foreach_functions, merge_funtions)
-
-
-yaml_file = '../../benchmark/generator/soykb/flat_workflow.yaml'
-workflow_name = 'illgal_recognizer'
-print(yaml_file)
-workflow = parse(yaml_file)
+    return component.workflow(workflow_name, start_functions, nodes, global_input, total, parent_cnt, foreach_functions, merge_funtions)

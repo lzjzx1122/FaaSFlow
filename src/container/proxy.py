@@ -12,19 +12,22 @@ from gevent.pywsgi import WSGIServer
 
 default_file = 'main.py'
 work_dir = '/proxy'
-couchdb_url = 'http://openwhisk:openwhisk@172.20.185.137:5984/'
+couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
 db_server = couchdb.Server(couchdb_url)
 latency_db = db_server['workflow_latency']
 
 class Runner:
     def __init__(self):
         self.code = None
+        self.workflow = None
         self.function = None
         self.ctx = None
 
-    def init(self, function):
+    def init(self, workflow, function):
         print('init...')
+
         # update function status
+        self.workflow = workflow
         self.function = function
 
         os.chdir(work_dir)
@@ -40,6 +43,7 @@ class Runner:
 
     def run(self, request_id, runtime, input, output, to, keys):
         # run the function
+        self.ctx['workflow_name'] = self.workflow
         self.ctx['function_name'] = self.function
         self.ctx['request_id'] = request_id
         self.ctx['runtime'] = runtime
@@ -49,7 +53,7 @@ class Runner:
         self.ctx['keys'] = keys
         print('running... context: ', self.ctx)
         start = time.time()
-        out = eval('main(function_name, request_id, runtime, input, output, to, keys)', self.ctx)
+        out = eval('main(workflow_name, function_name, request_id, runtime, input, output, to, keys)', self.ctx)
         end = time.time()
         latency_db.save({'request_id': request_id, 'function_name': self.function, 'phase': 'edge+node', 'time': end - start})
         return out
@@ -76,7 +80,7 @@ def init():
     proxy.status = 'init'
 
     inp = request.get_json(force=True, silent=True)
-    runner.init(inp['function'])
+    runner.init(inp['workflow'], inp['function'])
 
     proxy.status = 'ok'
     return ('OK', 200)

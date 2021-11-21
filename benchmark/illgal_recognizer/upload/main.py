@@ -46,9 +46,9 @@ from Store import Store
 
 # post method for uploading
 # @server.route('/upload', methods=['post'])
-def main(function_name, request_id, runtime, input, output, to, keys):
+def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
 
-    store = Store(function_name, request_id, input, output, to, keys)
+    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
     # inputs = store.fetch(['image_name', 'user_name'])
     image_name = '01.jpg'
     output_result = {'output_prefix': 'mosaic', 'illegal_flag': False}

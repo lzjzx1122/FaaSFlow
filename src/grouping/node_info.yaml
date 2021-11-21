@@ -1,15 +1,15 @@
 nodes:
-- address: 172.20.185.138:8000
-  scale_limit: 40
-- address: 172.20.185.139:8000
-  scale_limit: 40
-- address: 172.20.185.140:8000
-  scale_limit: 40
-- address: 172.20.185.141:8000
-  scale_limit: 40
-- address: 172.20.185.143:8000
-  scale_limit: 40
-- address: 172.20.185.144:8000
-  scale_limit: 40
-- address: 172.20.185.145:8000
-  scale_limit: 40
+- address: 127.0.0.1:8000
+  scale_limit: 500
+# - address: 172.20.185.139:8000
+#   scale_limit: 100
+# - address: 172.20.185.140:8000
+#   scale_limit: 100
+# - address: 172.20.185.141:8000
+#   scale_limit: 100
+# - address: 172.20.185.143:8000
+#   scale_limit: 100
+# - address: 172.20.185.144:8000
+#   scale_limit: 100
+# - address: 172.20.185.145:8000
+#   scale_limit: 100

@@ -47,8 +47,8 @@ for function in functions:
 yaml_data['global_input'] = global_inputs
 yaml_data['functions'] = functions
 
-f = open(workflow_name + '/flat_workflow.yaml', 'w', encoding = 'utf-8')
-yaml.dump(yaml_data, f, sort_keys=False)
+# f = open(workflow_name + '/flat_workflow.yaml', 'w', encoding = 'utf-8')
+# yaml.dump(yaml_data, f, sort_keys=False)
 
 ## build images
 for function in functions:
@@ -56,10 +56,10 @@ for function in functions:
     os.system('docker build --no-cache -t ' + workflow_name + '_' + function['name'] + ' .')
 
 ## build function_info.yaml
-yaml_data2 = {'max_containers': 1}
-images = []
-for function in functions:
-    images.append({'image': workflow_name + '_' + function['name'], 'name': function['name'], 'qos_requirement': 0.95, 'qos_time': 100})
-yaml_data2['functions'] = images
-f2 = open(workflow_name + '/function_info.yaml', 'w', encoding = 'utf-8')
-yaml.dump(yaml_data2, f2, sort_keys=False)
+# yaml_data2 = {'workflow': workflow_name, 'max_containers': 1}
+# images = []
+# for function in functions:
+#     images.append({'image': workflow_name + '_' + function['name'], 'name': function['name'], 'qos_requirement': 0.95, 'qos_time': 100})
+# yaml_data2['functions'] = images
+# f2 = open(workflow_name + '/function_info.yaml', 'w', encoding = 'utf-8')
+# yaml.dump(yaml_data2, f2, sort_keys=False)

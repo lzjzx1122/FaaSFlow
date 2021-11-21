@@ -15,7 +15,7 @@ from Store import Store
 #         r = user_object.get_attachment(document_id,filename = filename)
 #         with open(save_path,'wb') as f: f.write(r.read())
 
-def main(function_name, request_id, runtime, input, output, to, keys):
+def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
     # evt = json.loads(event)
     # user_name = evt['user_name']
     # document_id = evt['document_id']
@@ -25,7 +25,7 @@ def main(function_name, request_id, runtime, input, output, to, keys):
     # illegal_flag = user_object[document_id]['illegal_flag']
 
 
-    store = Store(function_name, request_id, input, output, to, keys)
+    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
     inputs = store.fetch(['user_name', 'image_name', 'output_prefix'])
     image_name = inputs['image_name']
     mosaic_prefix = inputs['output_prefix']

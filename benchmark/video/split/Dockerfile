@@ -1,8 +1,7 @@
 FROM workflow_base
 
-RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list
-RUN cat /etc/apt/sources.list
-RUN rm -Rf /var/lib/apt/lists/*
+RUN sed -i 's/deb.debian.org/mirror.sjtu.edu.cn/g' /etc/apt/sources.list
+RUN apt-get clean
 
 RUN apt-get update
 RUN apt-get -y --force-yes install yasm ffmpeg

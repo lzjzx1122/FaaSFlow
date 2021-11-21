@@ -74,7 +74,7 @@ def preview_generate(video_name):
 
 # post method for uploading
 # @server.route('/upload', methods=['post'])
-def main(function_name, request_id, runtime, input, output, to, keys):
+def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
     # print('OK')
     # request_data = json.load(request.files['data'])
     # request_file = request.files['document']
@@ -88,7 +88,7 @@ def main(function_name, request_id, runtime, input, output, to, keys):
     #     "item": request_file
     # }
     
-    store = Store(function_name, request_id, input, output, to, keys)
+    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
     # request_store = store.fetch(['video_name', 'user_name', 'target_type', 'segment_time'])
 
     # if request_store:
