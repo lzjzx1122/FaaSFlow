@@ -21,7 +21,7 @@ class Runner:
         self.code = None
         self.workflow = None
         self.function = None
-        self.ctx = None
+        self.ctx = {}
 
     def init(self, workflow, function):
         print('init...')
@@ -32,13 +32,11 @@ class Runner:
 
         os.chdir(work_dir)
 
-        # compile the python file first
+        # compile first
         filename = os.path.join(work_dir, default_file)
         with open(filename, 'r') as f:
-            code = compile(f.read(), filename, mode='exec')
+            self.code = compile(f.read(), filename, mode='exec')
 
-        self.ctx = {}
-        exec(code, self.ctx)
         print('init finished...')
 
     def run(self, request_id, runtime, input, output, to, keys):
@@ -51,9 +49,11 @@ class Runner:
         self.ctx['output'] = output
         self.ctx['to'] = to
         self.ctx['keys'] = keys
+
         print('running... context: ', self.ctx)
+        exec(self.code, self.ctx)
         start = time.time()
-        out = eval('main(workflow_name, function_name, request_id, runtime, input, output, to, keys)', self.ctx)
+        out = eval('main()', self.ctx)
         end = time.time()
         latency_db.save({'request_id': request_id, 'function_name': self.function, 'phase': 'edge+node', 'time': end - start})
         return out

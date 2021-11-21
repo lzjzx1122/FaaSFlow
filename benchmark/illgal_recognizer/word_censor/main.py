@@ -87,7 +87,9 @@ class DFAFilter():
 gfw = DFAFilter()
 gfw.parse("spooky_keywords")
 
-def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
+store = Store(workflow_name, function_name, request_id, input, output, to, keys)
+
+def main():
     # evt = json.loads(event)
     # user_name = evt['user_name']
     # document_id = evt['document_id']
@@ -103,8 +105,6 @@ def main(workflow_name, function_name, request_id, runtime, input, output, to, k
 
     # with open(input_filepath,"r") as f:    
     #     text_content = f.read()
-
-    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
     text_content = store.fetch(['translated_text'])['translated_text']
 
     word_filter, filter_count = gfw.filter(text_content, "*")

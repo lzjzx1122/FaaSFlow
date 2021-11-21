@@ -28,7 +28,7 @@ class Dispatcher:
     def del_state(self, workflow_name, request_id, master):
         self.managers[workflow_name].del_state(request_id, master)
 
-dispatcher = Dispatcher(data_mode='optimized', control_mode='WorkerSP', info_addrs={'genome': '../../benchmark/generator/genome', 'epigenomics': '../../benchmark/generator/epigenomics',
+dispatcher = Dispatcher(data_mode='raw', control_mode='WorkerSP', info_addrs={'genome': '../../benchmark/generator/genome', 'epigenomics': '../../benchmark/generator/epigenomics',
                                                 'soykb': '../../benchmark/generator/soykb', 'cycles': '../../benchmark/generator/cycles',
                                                 'fileprocessing': '../../benchmark/fileprocessing', 'wordcount': '../../benchmark/wordcount',
                                                 'illgal_recognizer': '../../benchmark/illgal_recognizer', 'video': '../../benchmark/video'})

@@ -5,6 +5,7 @@ from Store import Store
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)
+store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 # def active_storage(avtive_type, user_object,document_id,filename,file_path=None,content_type=None, save_path=None):
 #     if avtive_type == 'PUT':
@@ -15,7 +16,7 @@ from Store import Store
 #         r = user_object.get_attachment(document_id,filename = filename)
 #         with open(save_path,'wb') as f: f.write(r.read())
 
-def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
+def main():
     # evt = json.loads(event)
     # user_name = evt['user_name']
     # document_id = evt['document_id']
@@ -23,9 +24,6 @@ def main(workflow_name, function_name, request_id, runtime, input, output, to, k
 
     # user_object = db[user_name]
     # illegal_flag = user_object[document_id]['illegal_flag']
-
-
-    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
     inputs = store.fetch(['user_name', 'image_name', 'output_prefix'])
     image_name = inputs['image_name']
     mosaic_prefix = inputs['output_prefix']

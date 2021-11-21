@@ -10,6 +10,7 @@ from Store import Store
 
 MAX_SPLIT_NUM = 100
 LOGGER = logging.getLogger()
+store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 # def active_storage(avtive_type, user_object,document_id,filename,file_path=None,content_type=None, save_path=None):
 #     if avtive_type == 'PUT':
@@ -63,10 +64,8 @@ def getVideoDuration(input_video):
     return duration
 
 # @print_excute_time
-def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
+def main():
     # evt = json.loads(event)
-
-    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
     evt = store.fetch(['user_name', 'video_name', 'segment_time'])
 
     user_name = evt['user_name']

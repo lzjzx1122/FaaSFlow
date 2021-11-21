@@ -8,6 +8,7 @@ from Store import Store
 # db = couchdb.Server(couchdb_address)
 
 LOGGER = logging.getLogger()
+store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 class FFmpegError(Exception):
     def __init__(self, message, status):
@@ -54,9 +55,7 @@ def get_fileNameExt(filename):
     return shortname, extension
 
 # @print_excute_time
-def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
-
-    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
+def main():
     evt = store.fetch(['user_name', 'video_name', 'target_type'])
 
     # evt = json.loads(event)

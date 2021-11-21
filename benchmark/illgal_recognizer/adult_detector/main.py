@@ -7,6 +7,7 @@ import os
 model_file_path = './resnet50_final_adult.h5'
 model = load_model(model_file_path) 
 SIZE = (224, 224)
+store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)
@@ -21,9 +22,7 @@ SIZE = (224, 224)
 #         with open(save_path,'wb') as f: f.write(r.read())
 
 
-def main(workflow_name, function_name, request_id, runtime, input, output, to, keys):
-
-    store = Store(workflow_name, function_name, request_id, input, output, to, keys)
+def main():
     inputs = store.fetch(['user_name', 'image_name'])
     user_name = inputs['user_name']
     image_name = inputs['image_name']
