@@ -2,14 +2,7 @@ import yaml
 import component
 import config
 
-yaml_file_addr = {'fileprocessing': '../../benchmark/fileprocessing/flat_workflow.yaml',
-                  'illgal_recognizer': '../../benchmark/illgal_recognizer/flat_workflow.yaml',
-                  'video': '../../benchmark/video/flat_workflow.yaml',
-                  'wordcount': '../../benchmark/wordcount/flat_workflow.yaml',
-                  'cycles': '../../benchmark/generator/cycles/flat_workflow.yaml',
-                  'epigenomics': '../../benchmark/generator/epigenomics/flat_workflow.yaml',
-                  'genome': '../../benchmark/generator/genome/flat_workflow.yaml',
-                  'soykb': '../../benchmark/generator/soykb/flat_workflow.yaml'}
+yaml_file_addr = config.WORKFLOW_YAML_ADDR
 
 def parse(workflow_name):
     data = yaml.load(open(yaml_file_addr[workflow_name]), Loader=yaml.FullLoader)
@@ -45,7 +38,7 @@ def parse(workflow_name):
             for key in function['output']:
                 output_files[key] = {'size': function['output'][key]['size'], 'type': function['output'][key]['type']}
                 send_byte += function['output'][key]['size']
-        send_time = send_byte / config.network_bandwidth
+        send_time = send_byte / config.NETWORK_BANDWIDTH
         conditions = list()
         if 'next' in function:
             foreach_flag = False

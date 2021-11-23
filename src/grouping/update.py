@@ -45,7 +45,7 @@ def update_edge(workflow: component.workflow, start_function: str, end_function:
     for i in range(len(start_node.next)):
         next_node_name = start_node.next[i]
         if next_node_name == end_function:
-            start_node.nextDis[i] += size / config.network_bandwidth
+            start_node.nextDis[i] += size / config.NETWORK_BANDWIDTH
 
 def update_workflow(workflow: component.workflow, key_log: Dict):
     for key in key_log:

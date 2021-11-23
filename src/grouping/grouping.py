@@ -63,7 +63,7 @@ def topo_search(workflow: component.workflow, in_degree_vec, group_set):
             w = node.nextDis[index]
             next_node_name = next_node.name
             if next_node_name in find_set(prev_name, group_set):
-                w = w / config.net_mem_bandwidth_ratio
+                w = w / config.NET_MEM_BANDWIDTH_RATIO
             if next_node.name not in dist_vec:
                 dist_vec[next_node_name] = [pre_dist[0] + w + next_node.runtime, max(pre_dist[1], w)]
                 prev_vec[next_node_name] = [prev_name, w]
@@ -105,7 +105,7 @@ def mergeable(node1, node2, group_set, workflow: component.workflow, write_to_me
 
     # check memory limit    
     if node1 not in write_to_mem_nodes:
-        current_mem_usage = workflow.nodes[node1].nextDis[0] * config.network_bandwidth
+        current_mem_usage = workflow.nodes[node1].nextDis[0] * config.NETWORK_BANDWIDTH
         if mem_usage + current_mem_usage > max_mem_usage: # too much memory consumption
             print('Hit memory consumption threshold')
             return False
@@ -199,7 +199,7 @@ def get_max_mem_usage(workflow: component.workflow):
     global max_mem_usage
     for name in workflow.nodes:
         if not name.startswith('virtual'):
-            max_mem_usage += (1 - config.reserved_mem_percentage - workflow.nodes[name].mem_usage) * config.container_mem * workflow.nodes[name].split_ratio
+            max_mem_usage += (1 - config.RESERVED_MEM_PERCENTAGE - workflow.nodes[name].mem_usage) * config.CONTAINER_MEM * workflow.nodes[name].split_ratio
     return max_mem_usage
 
 

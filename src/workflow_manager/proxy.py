@@ -2,6 +2,7 @@ import json
 from typing import Dict
 from threading import Thread
 from gevent import monkey
+import config
 monkey.patch_all()
 
 import sys
@@ -10,8 +11,8 @@ from flask import Flask, request
 app = Flask(__name__)
 
 class Dispatcher:
-    def __init__(self, data_mode: str, control_mode: str, info_addrs: Dict[str, str]) -> None:
-        self.managers = {name: WorkflowManager(sys.argv[1] + ':' + sys.argv[2], name, data_mode, control_mode, addr) for name, addr in info_addrs.items()}
+    def __init__(self, data_mode: str, info_addrs: Dict[str, str]) -> None:
+        self.managers = {name: WorkflowManager(sys.argv[1] + ':' + sys.argv[2], name, data_mode, addr) for name, addr in info_addrs.items()}
     
     def get_state(self, workflow_name: str, request_id: str) -> WorkflowManager:
         return self.managers[workflow_name].get_state(request_id)
@@ -28,10 +29,7 @@ class Dispatcher:
     def del_state(self, workflow_name, request_id, master):
         self.managers[workflow_name].del_state(request_id, master)
 
-dispatcher = Dispatcher(data_mode='raw', control_mode='WorkerSP', info_addrs={'genome': '../../benchmark/generator/genome', 'epigenomics': '../../benchmark/generator/epigenomics',
-                                                'soykb': '../../benchmark/generator/soykb', 'cycles': '../../benchmark/generator/cycles',
-                                                'fileprocessing': '../../benchmark/fileprocessing', 'wordcount': '../../benchmark/wordcount',
-                                                'illgal_recognizer': '../../benchmark/illgal_recognizer', 'video': '../../benchmark/video'})
+dispatcher = Dispatcher(data_mode=config.DATA_MODE, info_addrs=config.FUNCTION_INFO_ADDRS)
 
 # a new request from outside
 # the previous function was done

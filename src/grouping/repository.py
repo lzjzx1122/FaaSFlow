@@ -2,12 +2,13 @@ from os import remove
 import couchdb
 import redis
 from typing import Dict, List
+import config
 
-couchdb_url = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
+couchdb_url = config.COUCHDB_URL
 
 class Repository:
     def __init__(self, workflow_name, remove_old_db=True):
-        self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
+        self.redis = redis.StrictRedis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=config.REDIS_DB)
         self.couch = couchdb.Server(couchdb_url)
         if remove_old_db:
             db_list = [workflow_name + '_function_info', workflow_name + '_function_info_raw', workflow_name + '_workflow_metadata']

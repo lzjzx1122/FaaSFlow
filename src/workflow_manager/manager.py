@@ -51,7 +51,7 @@ min_port = 20000
 
 # mode: 'optimized' vs 'normal'
 class WorkflowManager:
-    def __init__(self, host_addr: str, workflow_name: str, data_mode: str, control_mode: str, function_info_addr: str):
+    def __init__(self, host_addr: str, workflow_name: str, data_mode: str, function_info_addr: str):
         global min_port
 
         self.lock = gevent.lock.BoundedSemaphore() # guard self.states
@@ -60,8 +60,6 @@ class WorkflowManager:
         self.states: Dict[str, WorkflowState] = {}
         self.function_info: Dict[str, dict] = {}
 
-        self.control_mode = control_mode
-        self.gateway_addr = 'http://localhost:7000'
         self.data_mode = data_mode
         if data_mode == 'optimized':
             self.info_db = workflow_name + '_function_info'
@@ -111,17 +109,11 @@ class WorkflowManager:
             self.function_info[function_name] = repo.get_function_info(function_name, self.info_db)
         return self.function_info[function_name]
 
-    # MasterSP simulation
-    def dispatch_work(self):
-        requests.get(url=self.gateway_addr+'/dispatch')
-
     # trigger the function when one of its parent is finished
     # function may run or not, depending on if all its parents were finished
     # function could be local or remote
     def trigger_function(self, state: WorkflowState, function_name: str, no_parent_execution = False) -> None:
         func_info = self.get_function_info(function_name)
-        if self.control_mode == 'MasterSP':
-            self.dispatch_work()
         if func_info['ip'] == self.host_addr:
             # function runs on local
             self.trigger_function_local(state, function_name, no_parent_execution)

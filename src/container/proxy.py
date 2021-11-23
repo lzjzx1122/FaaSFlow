@@ -10,10 +10,11 @@ import threading
 from flask import Flask, request
 from gevent.pywsgi import WSGIServer
 from Store import Store
+import config
 
 default_file = 'main.py'
 work_dir = '/proxy'
-couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
+couchdb_url = config.COUCHDB_URL
 db_server = couchdb.Server(couchdb_url)
 latency_db = db_server['workflow_latency']
 

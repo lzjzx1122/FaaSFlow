@@ -6,18 +6,15 @@ FROM python:3.7-slim
 COPY pip.conf /etc/pip.conf
 
 # fulfill the structure requirement of proxy
-RUN mkdir /proxy && \
-    mkdir /results
+RUN mkdir /proxy
 
-# copy the proxy server
+# copy libs
 COPY proxy.py /proxy/proxy.py
+COPY main.py /proxy/main.py
+COPY Store.py /proxy/Store.py
+COPY config.py /proxy/config.py
 
-COPY function_utility/main.py /proxy/main.py
-
-COPY function_utility/Store.py /proxy/Store.py
-
-# the work dir of proxy is under exec/
-WORKDIR /exec
+WORKDIR /proxy
 
 # proxy server runs under port 5000
 EXPOSE 5000
@@ -32,10 +29,5 @@ RUN sed -i 's/deb.debian.org/mirror.sjtu.edu.cn/g' /etc/apt/sources.list
 RUN apt-get clean
 RUN apt-get update
 RUN pip3 install --no-cache-dir gevent flask couchdb redis
-
-# RUN pip3 install --no-cache-dir gevent flask couchdb redis tensorflow keras pillow opencv-python googletrans==4.0.0-rc1
-# # ffmpeg
-# RUN apt-get update
-# RUN apt-get -y --force-yes install yasm ffmpeg tesseract-ocr
 
 CMD [ "python3", "/proxy/proxy.py" ]

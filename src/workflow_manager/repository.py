@@ -2,12 +2,13 @@ from typing import Any, List
 import couchdb
 import redis
 import json
+import config
 
-couchdb_url = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
+couchdb_url = config.COUCHDB_URL
 
 class Repository:
     def __init__(self):
-        self.redis = redis.StrictRedis(host='172.17.0.1', port=6380, db=0)
+        self.redis = redis.StrictRedis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=config.REDIS_DB)
         self.couch = couchdb.Server(couchdb_url)
 
     # get all function_name for every node seems to solve the problem of KeyError Exception in manager.py, line 103
