@@ -2,7 +2,6 @@
 from collections import defaultdict
 import os,json,re
 import couchdb
-from Store import Store
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)
@@ -86,8 +85,6 @@ class DFAFilter():
 
 gfw = DFAFilter()
 gfw.parse("spooky_keywords")
-
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 def main():
     # evt = json.loads(event)

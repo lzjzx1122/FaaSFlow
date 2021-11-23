@@ -3,10 +3,6 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 import time
 # nltk.download('vader_lexicon')
 
-from Store import Store
-
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
-
 def main():
     content = store.fetch(['file'])['file']
     # sia = SentimentIntensityAnalyzer()

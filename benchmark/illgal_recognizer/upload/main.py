@@ -1,5 +1,4 @@
 import json
-from Store import Store
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)
@@ -46,8 +45,6 @@ from Store import Store
 
 # post method for uploading
 # @server.route('/upload', methods=['post'])
-
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 def main():
     # inputs = store.fetch(['image_name', 'user_name'])

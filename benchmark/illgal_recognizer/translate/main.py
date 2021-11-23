@@ -1,13 +1,11 @@
 from googletrans import Translator
 import couchdb
 import os,json
-from Store import Store
 import time
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)
 translator = Translator()
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 # def active_storage(avtive_type, user_object,document_id,filename,file_path=None,content_type=None, save_path=None):
 #     if avtive_type == 'PUT':
 #         content = open(file_path, 'rb')

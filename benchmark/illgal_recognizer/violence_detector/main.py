@@ -2,7 +2,6 @@ import numpy as np
 import os,json
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-from Store import Store
 
 model_file_path = './resnet50_final_violence.h5'
 model = load_model(model_file_path) 
@@ -19,8 +18,6 @@ SIZE = (224, 224)
 #     elif avtive_type == 'GET':
 #         r = user_object.get_attachment(document_id,filename = filename)
 #         with open(save_path,'wb') as f: f.write(r.read())
-
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 def main():
     inputs = store.fetch(['user_name', 'image_name'])

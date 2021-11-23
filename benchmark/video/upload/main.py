@@ -1,7 +1,4 @@
 import os
-from Store import Store
-
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)

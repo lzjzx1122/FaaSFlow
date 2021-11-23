@@ -6,11 +6,9 @@ from PIL import Image
 import sys
 from sys import argv
 import couchdb
-from Store import Store
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 def get_string(img_path):
     # Read image with opencv

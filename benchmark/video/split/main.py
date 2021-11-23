@@ -3,14 +3,12 @@ import subprocess
 import logging
 import os
 import math
-from Store import Store
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)
 
 MAX_SPLIT_NUM = 100
 LOGGER = logging.getLogger()
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 # def active_storage(avtive_type, user_object,document_id,filename,file_path=None,content_type=None, save_path=None):
 #     if avtive_type == 'PUT':

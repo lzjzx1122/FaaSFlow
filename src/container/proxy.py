@@ -9,6 +9,7 @@ import json
 import threading
 from flask import Flask, request
 from gevent.pywsgi import WSGIServer
+from Store import Store
 
 default_file = 'main.py'
 work_dir = '/proxy'
@@ -40,21 +41,18 @@ class Runner:
         print('init finished...')
 
     def run(self, request_id, runtime, input, output, to, keys):
-        # run the function
-        self.ctx['workflow_name'] = self.workflow
-        self.ctx['function_name'] = self.function
-        self.ctx['request_id'] = request_id
-        self.ctx['runtime'] = runtime
-        self.ctx['input'] = input
-        self.ctx['output'] = output
-        self.ctx['to'] = to
-        self.ctx['keys'] = keys
+        # FaaSStore
+        store = Store(self.workflow, self.function, request_id, input, output, to, keys)
+        self.ctx = {'workflow': self.workflow, 'function': self.function, 'store': store}
 
-        print('running... context: ', self.ctx)
+        # pre-exec
         exec(self.code, self.ctx)
+
+        # run function
         start = time.time()
         out = eval('main()', self.ctx)
         end = time.time()
+
         latency_db.save({'request_id': request_id, 'function_name': self.function, 'phase': 'edge+node', 'time': end - start})
         return out
 

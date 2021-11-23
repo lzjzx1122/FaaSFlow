@@ -1,5 +1,4 @@
 import numpy as np
-from Store import Store
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import os
@@ -7,7 +6,6 @@ import os
 model_file_path = './resnet50_final_adult.h5'
 model = load_model(model_file_path) 
 SIZE = (224, 224)
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)

@@ -2,13 +2,11 @@
 import subprocess
 import logging
 import os
-from Store import Store
 
 # couchdb_address = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
 # db = couchdb.Server(couchdb_address)
 
 LOGGER = logging.getLogger()
-store = Store(workflow_name, function_name, request_id, input, output, to, keys)
 
 class FFmpegError(Exception):
     def __init__(self, message, status):
