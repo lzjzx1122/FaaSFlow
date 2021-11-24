@@ -10,7 +10,7 @@ result_dir = "/results"
 
 
 class Store:
-    def __init__(self, workflow_name, function_name, request_id, input, output, to, keys):
+    def __init__(self, workflow_name, function_name, request_id, input, output, to, keys, runtime):
         # to: where to store for outputs
         # keys: foreach key (split_key) specified by workflow_manager
         couchdb_url = config.COUCHDB_URL
@@ -28,6 +28,7 @@ class Store:
         self.output = output
         self.to = to
         self.keys = keys
+        self.runtime = runtime
         if os.path.exists('work'):
             os.system('rm -rf work')
         os.mkdir('work')

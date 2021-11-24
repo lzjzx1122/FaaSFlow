@@ -3,18 +3,23 @@ from typing import Dict
 from threading import Thread
 from gevent import monkey
 import config
+from workersp import WorkerSPManager
+from mastersp import MasterSPManager
 monkey.patch_all()
 
 import sys
-from manager import WorkflowManager
 from flask import Flask, request
 app = Flask(__name__)
 
 class Dispatcher:
-    def __init__(self, data_mode: str, info_addrs: Dict[str, str]) -> None:
-        self.managers = {name: WorkflowManager(sys.argv[1] + ':' + sys.argv[2], name, data_mode, addr) for name, addr in info_addrs.items()}
+    def __init__(self, data_mode: str, control_mode: str, info_addrs: Dict[str, str]) -> None:
+        self.managers = {}
+        if control_mode == 'WorkerSP':
+            self.managers = {name: WorkerSPManager(sys.argv[1] + ':' + sys.argv[2], name, data_mode, addr) for name, addr in info_addrs.items()}
+        elif control_mode == 'MasterSP':
+            self.managers = {name: MasterSPManager(sys.argv[1] + ':' + sys.argv[2], name, data_mode, addr) for name, addr in info_addrs.items()}
     
-    def get_state(self, workflow_name: str, request_id: str) -> WorkflowManager:
+    def get_state(self, workflow_name: str, request_id: str) -> WorkerSPManager:
         return self.managers[workflow_name].get_state(request_id)
 
     def trigger_function(self, workflow_name, state, function_name, no_parent_execution):
@@ -29,7 +34,7 @@ class Dispatcher:
     def del_state(self, workflow_name, request_id, master):
         self.managers[workflow_name].del_state(request_id, master)
 
-dispatcher = Dispatcher(data_mode=config.DATA_MODE, info_addrs=config.FUNCTION_INFO_ADDRS)
+dispatcher = Dispatcher(data_mode=config.DATA_MODE, control_mode=config.CONTROL_MODE, info_addrs=config.FUNCTION_INFO_ADDRS)
 
 # a new request from outside
 # the previous function was done
@@ -43,7 +48,6 @@ def req():
     # get the corresponding workflow state and trigger the function
     state = dispatcher.get_state(workflow_name, request_id)
     dispatcher.trigger_function(workflow_name, state, function_name, no_parent_execution)
-    # Thread(target=dispatcher.trigger_function, args=(workflow_name, state, function_name, no_parent_execution)).start()
     return json.dumps({'status': 'ok'})
 
 @app.route('/clear', methods = ['POST'])

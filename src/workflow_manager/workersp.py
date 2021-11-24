@@ -50,7 +50,7 @@ class WorkflowState:
 min_port = 20000
 
 # mode: 'optimized' vs 'normal'
-class WorkflowManager:
+class WorkerSPManager:
     def __init__(self, host_addr: str, workflow_name: str, data_mode: str, function_info_addr: str):
         global min_port
 

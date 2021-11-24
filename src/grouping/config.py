@@ -13,5 +13,5 @@ WORKFLOW_YAML_ADDR = {'fileprocessing': '../../benchmark/fileprocessing/flat_wor
                   'soykb': '../../benchmark/generator/soykb/flat_workflow.yaml'}
 COUCHDB_URL = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
 REDIS_HOST = '127.0.0.1'
-REDIS_PORT = 6380
+REDIS_PORT = 6379
 REDIS_DB = 0

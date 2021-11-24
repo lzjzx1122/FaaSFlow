@@ -43,7 +43,7 @@ class Runner:
 
     def run(self, request_id, runtime, input, output, to, keys):
         # FaaSStore
-        store = Store(self.workflow, self.function, request_id, input, output, to, keys)
+        store = Store(self.workflow, self.function, request_id, input, output, to, keys, runtime)
         self.ctx = {'workflow': self.workflow, 'function': self.function, 'store': store}
 
         # pre-exec

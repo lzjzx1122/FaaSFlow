@@ -7,13 +7,19 @@ from flask import Flask, request
 from repository import Repository
 import requests
 import time
+import config
 
 app = Flask(__name__)
 repo = Repository()
 
 def trigger_function(workflow_name, request_id, function_name):
     info = repo.get_function_info(function_name, workflow_name + '_function_info')
-    url = 'http://{}/request'.format(info['ip'])
+    ip = ''
+    if config.CONTROL_MODE == 'WorkerSP':
+        ip = info['ip']
+    elif config.CONTROL_MODE == 'MasterSP':
+        ip = config.MASTER_HOST
+    url = 'http://{}/request'.format(ip)
     data = {
         'request_id': request_id,
         'workflow_name': workflow_name,
@@ -33,7 +39,11 @@ def run_workflow(workflow_name, request_id):
     gevent.joinall(jobs)
 
     # clear memory and other stuff
-    master_addr = repo.get_all_addrs(workflow_name + '_workflow_metadata')[0]
+    master_addr  = ''
+    if config.CONTROL_MODE == 'WorkerSP':
+        master_addr = repo.get_all_addrs(workflow_name + '_workflow_metadata')[0]
+    elif config.CONTROL_MODE == 'MasterSP':
+        master_addr = config.MASTER_HOST
     clear_url = 'http://{}/clear'.format(master_addr)
     requests.post(clear_url, json={'request_id': request_id, 'master': True, 'workflow_name': workflow_name})
 
@@ -46,12 +56,6 @@ def run():
     repo.log_status(workflow, request_id, 'EXECUTE')
     run_workflow(workflow, request_id)
     repo.log_status(workflow, request_id, 'FINISH')
-    return json.dumps({'status': 'ok'})
-
-@app.route('/dispatch', methods = ['GET'])
-def dispatch():
-    logging.info('dispatching work, stand by...')
-    time.sleep(2)
     return json.dumps({'status': 'ok'})
 
 from gevent.pywsgi import WSGIServer
