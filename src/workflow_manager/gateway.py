@@ -39,13 +39,14 @@ def run_workflow(workflow_name, request_id):
     gevent.joinall(jobs)
 
     # clear memory and other stuff
-    master_addr  = ''
-    if config.CONTROL_MODE == 'WorkerSP':
-        master_addr = repo.get_all_addrs(workflow_name + '_workflow_metadata')[0]
-    elif config.CONTROL_MODE == 'MasterSP':
-        master_addr = config.MASTER_HOST
-    clear_url = 'http://{}/clear'.format(master_addr)
-    requests.post(clear_url, json={'request_id': request_id, 'master': True, 'workflow_name': workflow_name})
+    if config.CLEAR_DB_AND_MEM:
+        master_addr  = ''
+        if config.CONTROL_MODE == 'WorkerSP':
+            master_addr = repo.get_all_addrs(workflow_name + '_workflow_metadata')[0]
+        elif config.CONTROL_MODE == 'MasterSP':
+            master_addr = config.MASTER_HOST
+        clear_url = 'http://{}/clear'.format(master_addr)
+        requests.post(clear_url, json={'request_id': request_id, 'master': True, 'workflow_name': workflow_name})
 
 @app.route('/run', methods = ['POST'])
 def run():

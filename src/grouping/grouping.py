@@ -151,6 +151,7 @@ def grouping(workflow: component.workflow, node_info):
 
     # initialization: get in-degree of each node
     group_set = list()
+    critical_path_functions = set()
     write_to_mem_nodes = []
     in_degree_vec = init_graph(workflow, group_set, node_info)
 
@@ -166,16 +167,20 @@ def grouping(workflow: component.workflow, node_info):
         print('crit_length: ', crit_length)
 
         # find the longest path, edge descent sorted
+        critical_path_functions.clear()
         crit_vec = dict()
         while tmp_node_name not in workflow.start_functions:
             crit_vec[tmp_node_name] = prev_vec[tmp_node_name]
             tmp_node_name = prev_vec[tmp_node_name][0]
         crit_vec = sorted(crit_vec.items(), key=lambda c: c[1][1], reverse=True)
+        for k, v in crit_vec:
+            critical_path_functions.add(k)
+            critical_path_functions.add(v[0])
 
         # if can't merge every edge of this path, just break
         if not merge_path(crit_vec, group_set, workflow, write_to_mem_nodes, node_info):
             break
-    return group_set
+    return group_set, critical_path_functions
 
 # define the output destination at function level, instead of one per key/file
 def get_type(workflow, node, group_detail):
@@ -203,7 +208,7 @@ def get_max_mem_usage(workflow: component.workflow):
     return max_mem_usage
 
 
-def save_grouping_config(workflow: component.workflow, node_info, info_dict, info_raw_dict):
+def save_grouping_config(workflow: component.workflow, node_info, info_dict, info_raw_dict, critical_path_functions):
     repo = repository.Repository(workflow.workflow_name)
     repo.save_function_info(info_dict, workflow.workflow_name + '_function_info')
     repo.save_function_info(info_raw_dict, workflow.workflow_name + '_function_info_raw')
@@ -212,6 +217,7 @@ def save_grouping_config(workflow: component.workflow, node_info, info_dict, inf
     repo.save_foreach_functions(workflow.foreach_functions, workflow.workflow_name + '_workflow_metadata')
     repo.save_merge_functions(workflow.merge_functions, workflow.workflow_name + '_workflow_metadata')
     repo.save_all_addrs(list(node_info.keys()), workflow.workflow_name + '_workflow_metadata')
+    repo.save_critical_path_functions(critical_path_functions, workflow.workflow_name + '_workflow_metadata')
 
 # def query(workflow: component.workflow, group_detail: List):
 #     total = 0
@@ -232,15 +238,15 @@ def get_grouping_config(workflow: component.workflow):
     global max_mem_usage, group_ip
 
     # get node info
-    node_info_list = yaml.load(open('node_info.yaml'), Loader=yaml.FullLoader)
+    node_info_list = yaml.load(open('../src/grouping/node_info.yaml'), Loader=yaml.FullLoader)
     node_info_dict = {}
     for node_info in node_info_list['nodes']:
-        node_info_dict[node_info['address']] = node_info['scale_limit']
+        node_info_dict[node_info['worker_address']] = node_info['scale_limit']
 
     # grouping algorithm
     max_mem_usage = get_max_mem_usage(workflow)
     # print('max_mem_usage', max_mem_usage)
-    group_detail = grouping(workflow, node_info_dict)
+    group_detail, critical_path_functions = grouping(workflow, node_info_dict)
     print(group_detail)
     
     # print(query(workflow, group_detail))
@@ -289,10 +295,10 @@ def get_grouping_config(workflow: component.workflow):
                 if function_info_dict[next_name]['to'] != function_info_dict[name]['to']:
                     function_info_dict[name]['to'] = 'DB+MEM'
 
-    return node_info_dict, function_info_dict, function_info_raw_dict
+    return node_info_dict, function_info_dict, function_info_raw_dict, critical_path_functions
 
 if __name__ == '__main__':
     workflow_name = sys.argv[1]
     workflow = parse_yaml.parse(workflow_name)
-    node_info, function_info, function_info_raw = get_grouping_config(workflow)
-    save_grouping_config(workflow, node_info, function_info, function_info_raw)
+    node_info, function_info, function_info_raw, critical_path_functions = get_grouping_config(workflow)
+    save_grouping_config(workflow, node_info, function_info, function_info_raw, critical_path_functions)

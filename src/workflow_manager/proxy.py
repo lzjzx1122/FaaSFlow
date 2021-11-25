@@ -1,11 +1,12 @@
+from gevent import monkey
+monkey.patch_all()
+
 import json
 from typing import Dict
 from threading import Thread
-from gevent import monkey
 import config
 from workersp import WorkerSPManager
 from mastersp import MasterSPManager
-monkey.patch_all()
 
 import sys
 from flask import Flask, request
