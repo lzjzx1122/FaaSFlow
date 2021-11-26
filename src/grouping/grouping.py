@@ -298,7 +298,10 @@ def get_grouping_config(workflow: component.workflow):
     return node_info_dict, function_info_dict, function_info_raw_dict, critical_path_functions
 
 if __name__ == '__main__':
-    workflow_name = sys.argv[1]
-    workflow = parse_yaml.parse(workflow_name)
-    node_info, function_info, function_info_raw, critical_path_functions = get_grouping_config(workflow)
-    save_grouping_config(workflow, node_info, function_info, function_info_raw, critical_path_functions)
+    if len(sys.argv) <= 1:
+        print('usage: python3 grouping.py <workflow_name>, ...')
+    workflow_pool = sys.argv[1:]
+    for workflow_name in workflow_pool:
+        workflow = parse_yaml.parse(workflow_name)
+        node_info, function_info, function_info_raw, critical_path_functions = get_grouping_config(workflow)
+        save_grouping_config(workflow, node_info, function_info, function_info_raw, critical_path_functions)

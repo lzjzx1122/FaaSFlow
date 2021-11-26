@@ -6,7 +6,7 @@ import random
 
 def translator(workflow_name: str):
     ## parse json build flat_workflow.yaml
-    addr_prefix = '../benchmark/generator'
+    addr_prefix = '~/FaaSFlow/benchmark/generator'
     f = open(addr_prefix + '/' + workflow_name + '/main_50.json')
     data = json.load(f)
     jobs = data['workflow']['jobs'] 

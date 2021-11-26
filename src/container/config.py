@@ -1,4 +1,4 @@
-COUCHDB_URL = 'http://openwhisk:openwhisk@172.17.0.1:5984/'
+COUCHDB_URL = 'http://openwhisk:openwhisk@172.20.185.158:5984/'
 REDIS_HOST = '172.17.0.1'
 REDIS_PORT = 6379
 REDIS_DB = 0
