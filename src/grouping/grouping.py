@@ -238,7 +238,7 @@ def get_grouping_config(workflow: component.workflow):
     global max_mem_usage, group_ip
 
     # get node info
-    node_info_list = yaml.load(open('../src/grouping/node_info.yaml'), Loader=yaml.FullLoader)
+    node_info_list = yaml.load(open('node_info.yaml'), Loader=yaml.FullLoader)
     node_info_dict = {}
     for node_info in node_info_list['nodes']:
         node_info_dict[node_info['worker_address']] = node_info['scale_limit']

@@ -17,4 +17,5 @@ docker run -itd -p 5984:5984 -e COUCHDB_USER=openwhisk -e COUCHDB_PASSWORD=openw
 pip3 install -r requirements.txt
 python3 couchdb_starter.py
 # run grouping for all benchmarks
-python3 ~/FaaSFlow/src/grouping/grouping.py video illgal_recognizer fileprocessing wordcount cycles epigenomics genome soykb
+cd ../src/grouping
+python3 grouping.py video illgal_recognizer fileprocessing wordcount cycles epigenomics genome soykb
