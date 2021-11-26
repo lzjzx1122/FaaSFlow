@@ -112,3 +112,7 @@ class Repository:
     def log_status(self, workflow_name, request_id, status):
         log_db = self.couch['log']
         log_db.save({'request_id': request_id, 'workflow': workflow_name, 'status': status})
+    
+    def save_latency(self, log):
+        latency_db = self.couch['workflow_latency']
+        latency_db.save(log)

@@ -9,4 +9,4 @@ COUCHDB_URL = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
 REDIS_DB = 0
-CLEAR_DB_AND_MEM = False
+CLEAR_DB_AND_MEM = True

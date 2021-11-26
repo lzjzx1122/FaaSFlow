@@ -4,6 +4,6 @@ RUN sed -i 's/deb.debian.org/mirrors.cloud.aliyuncs.com/g' /etc/apt/sources.list
 RUN apt-get clean
 
 RUN apt-get update
-RUN apt-get -y --force-yes install yasm ffmpeg
+RUN apt-get -y --force-yes --fix-missing install yasm ffmpeg
 
 COPY main.py /proxy/main.py

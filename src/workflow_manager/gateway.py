@@ -33,10 +33,12 @@ def run_workflow(workflow_name, request_id):
 
     # allocate works
     start_functions = repo.get_start_functions(workflow_name + '_workflow_metadata')
+    start = time.time()
     jobs = []
     for n in start_functions:
         jobs.append(gevent.spawn(trigger_function, workflow_name, request_id, n))
     gevent.joinall(jobs)
+    end = time.time()
 
     # clear memory and other stuff
     if config.CLEAR_DB_AND_MEM:
@@ -47,6 +49,8 @@ def run_workflow(workflow_name, request_id):
             master_addr = config.MASTER_HOST
         clear_url = 'http://{}/clear'.format(master_addr)
         requests.post(clear_url, json={'request_id': request_id, 'master': True, 'workflow_name': workflow_name})
+    
+    return end - start
 
 @app.route('/run', methods = ['POST'])
 def run():
@@ -55,9 +59,9 @@ def run():
     request_id = data['request_id']
     logging.info('processing request ' + request_id + '...')
     repo.log_status(workflow, request_id, 'EXECUTE')
-    run_workflow(workflow, request_id)
+    latency = run_workflow(workflow, request_id)
     repo.log_status(workflow, request_id, 'FINISH')
-    return json.dumps({'status': 'ok'})
+    return json.dumps({'status': 'ok', 'latency': latency})
 
 from gevent.pywsgi import WSGIServer
 import logging

@@ -1,5 +1,6 @@
 import sys
 import logging
+import time
 
 import repository
 import gevent
@@ -33,7 +34,6 @@ def cond_exec(req_id: str, cond: str) -> Any:
         except NameError as e:
             name = str(e).split("'")[1]
             values[name] = FakeFunc(req_id, name)
-
     return res
 
 class WorkflowState:
@@ -185,10 +185,11 @@ class WorkerSPManager:
         for i, next_func in enumerate(info['next']):
                 cond = info['conditions'][i]
                 if cond_exec(state.request_id, cond):
-                    self.run_function(state, next_func)
+                    self.trigger_function(state, next_func)
                     break
 
     def run_foreach(self, state: WorkflowState, info: Any) -> None:
+        start = time.time()
         all_keys = repo.get_keys(state.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
         foreach_keys = []  # ['split_keys', 'split_keys_2']
         for arg in info['input']:
@@ -203,17 +204,25 @@ class WorkerSPManager:
                                      info['runtime'], info['input'], info['output'],
                                      info['to'], keys))
         gevent.joinall(jobs)
+        end = time.time()
+        repo.save_latency({'request_id': state.request_id, 'function_name': info['function_name'], 'phase': 'all', 'time': end - start})
 
     def run_merge(self, state: WorkflowState, info: Any) -> None:
+        start = time.time()
         all_keys = repo.get_keys(state.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
         self.function_manager.run(info['function_name'], state.request_id,
                              info['runtime'], info['input'], info['output'],
                              info['to'], all_keys)
+        end = time.time()
+        repo.save_latency({'request_id': state.request_id, 'function_name': info['function_name'], 'phase': 'all', 'time': end - start})
 
     def run_normal(self, state: WorkflowState, info: Any) -> None:
+        start = time.time()
         self.function_manager.run(info['function_name'], state.request_id,
                              info['runtime'], info['input'], info['output'],
                              info['to'], {})
+        end = time.time()
+        repo.save_latency({'request_id': state.request_id, 'function_name': info['function_name'], 'phase': 'all', 'time': end - start})
 
     def clear_mem(self, request_id):
         repo.clear_mem(request_id)

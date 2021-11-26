@@ -88,8 +88,7 @@ class Store:
         for thread_ in threads:
             thread_.join()
         fetch_end = time.time()
-        
-        # self.latency_db.save({'request_id': self.request_id, 'function_name': self.function_name, 'phase': 'edge', 'time': fetch_end - fetch_start})
+        self.latency_db.save({'request_id': self.request_id, 'function_name': self.function_name, 'phase': 'edge', 'time': fetch_end - fetch_start})
         return self.fetch_dict
 
     def put_to_mem(self, k, content_type):
@@ -144,5 +143,4 @@ class Store:
                 if k not in self.output or self.output[k]['type'] != 'keys':
                     self.put_to_mem(k, output_content_type[k])
         put_end = time.time()
-
-        # self.latency_db.save({'request_id': self.request_id, 'function_name': self.function_name, 'phase': 'edge', 'time': put_end - put_start})
+        self.latency_db.save({'request_id': self.request_id, 'function_name': self.function_name, 'phase': 'edge', 'time': put_end - put_start})

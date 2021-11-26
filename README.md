@@ -24,7 +24,7 @@ On each worker node:
 
 ## Start-up
 
-1. Enter src/workflow_manager/proxy.py, start a proxy for each worker node: 
+1. Enter src/workflow_manager, start a proxy for each worker node: 
 - python3 proxy.py \<worker_ip\> \<worker_port\> 
 
 2. For MasterSP, start another proxy at any node as master node. Set MASTER_HOST src/workflow_manager/config.py as corresponding address.
@@ -35,3 +35,10 @@ On each worker node:
 
 ## Run Experiment
 
+Some experiment scripts are provided in test/asplos, and experiment data can be found under test/asplos/data. Start one gateway.py and several proxy.py before conducting your experiment. Reset configurations(CONTROL_MODE: MasterSP or WorkerSP, DATA_MODE: raw or optimized) to see differences.
+
+1. Schedule Overhead: run scheduling_overhead.py
+
+2. End-to-End Latency: run e2e_latency.py
+
+3. Data Overhead: run data_overhead.py

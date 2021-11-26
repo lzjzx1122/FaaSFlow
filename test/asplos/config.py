@@ -1,0 +1,5 @@
+GATEWAY_ADDR = '127.0.0.1:7000'
+COUCHDB_URL = 'http://openwhisk:openwhisk@127.0.0.1:5984/'
+REDIS_HOST = '172.17.0.1'
+REDIS_PORT = 6379
+REDIS_DB = 0

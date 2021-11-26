@@ -1,6 +1,6 @@
 import sys
 import logging
-
+import time
 import repository
 import gevent
 import gevent.lock
@@ -123,12 +123,12 @@ class MasterSPManager:
 
     # trigger a function that runs on local
     def trigger_function_local(self, state: WorkflowState, function_name: str, no_parent_execution = False) -> None:
-        logging.info('trigger local function: %s of: %s', function_name, state.request_id)
+        logging.info('trigger local function: %s of: %s time: %s', function_name, state.request_id, time.time())
         self.run_function(state, function_name)
 
     # trigger a function that runs on remote machine
     def trigger_function_remote(self, state: WorkflowState, function_name: str, remote_addr: str, no_parent_execution = False) -> None:
-        logging.info('trigger remote function: %s on: %s of: %s', function_name, remote_addr, state.request_id)
+        logging.info('trigger remote function: %s on: %s of: %s time: %s', function_name, remote_addr, state.request_id, time.time())
         state.lock.acquire()
         if not no_parent_execution:
             state.parent_executed[function_name] += 1
@@ -136,23 +136,26 @@ class MasterSPManager:
         if runnable:
             state.executed[function_name] = True
             state.lock.release()
-            remote_url = 'http://{}/request'.format(remote_addr)
-            data = {
-                'request_id': state.request_id,
-                'workflow_name': self.workflow_name,
-                'function_name': function_name,
-                'no_parent_execution': no_parent_execution,
-            }
-            response = requests.post(remote_url, json=data)
-            response.close()
+            info = self.get_function_info(function_name)
+            if function_name.startswith('virtual'): # virtual must run on master
+                self.run_switch(state, info)
+                return # do not need to check next
+            else:
+                remote_url = 'http://{}/request'.format(remote_addr)
+                data = {
+                    'request_id': state.request_id,
+                    'workflow_name': self.workflow_name,
+                    'function_name': function_name,
+                    'no_parent_execution': no_parent_execution,
+                }
+                requests.post(remote_url, json=data)
+                jobs = [
+                    gevent.spawn(self.trigger_function, state, func)
+                    for func in info['next']
+                ]
+                gevent.joinall(jobs)
         else:
             state.lock.release()
-        info = self.get_function_info(function_name)
-        jobs = [
-            gevent.spawn(self.trigger_function, state, func)
-            for func in info['next']
-        ]
-        gevent.joinall(jobs)
 
     # check if a function's parents are all finished
     def check_runnable(self, state: WorkflowState, function_name: str) -> bool:
@@ -180,13 +183,17 @@ class MasterSPManager:
             self.run_normal(state, info)
 
     def run_switch(self, state: WorkflowState, info: Any) -> None:
+        start = time.time()
         for i, next_func in enumerate(info['next']):
                 cond = info['conditions'][i]
                 if cond_exec(state.request_id, cond):
-                    self.run_function(state, next_func)
+                    end = time.time()
+                    repo.save_latency({'request_id': state.request_id, 'function_name': info['function_name'], 'phase': 'all', 'time': end - start})
+                    self.trigger_function(state, next_func)
                     break
 
     def run_foreach(self, state: WorkflowState, info: Any) -> None:
+        start = time.time()
         all_keys = repo.get_keys(state.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
         foreach_keys = []  # ['split_keys', 'split_keys_2']
         for arg in info['input']:
@@ -201,17 +208,25 @@ class MasterSPManager:
                                      info['runtime'], info['input'], info['output'],
                                      info['to'], keys))
         gevent.joinall(jobs)
+        end = time.time()
+        repo.save_latency({'request_id': state.request_id, 'function_name': info['function_name'], 'phase': 'all', 'time': end - start})
 
     def run_merge(self, state: WorkflowState, info: Any) -> None:
+        start = time.time()
         all_keys = repo.get_keys(state.request_id)  # {'split_keys': ['1', '2', '3'], 'split_keys_2': ...}
         self.function_manager.run(info['function_name'], state.request_id,
                              info['runtime'], info['input'], info['output'],
                              info['to'], all_keys)
+        end = time.time()
+        repo.save_latency({'request_id': state.request_id, 'function_name': info['function_name'], 'phase': 'all', 'time': end - start})
 
     def run_normal(self, state: WorkflowState, info: Any) -> None:
+        start = time.time()
         self.function_manager.run(info['function_name'], state.request_id,
                              info['runtime'], info['input'], info['output'],
                              info['to'], {})
+        end = time.time()
+        repo.save_latency({'request_id': state.request_id, 'function_name': info['function_name'], 'phase': 'all', 'time': end - start})
 
     def clear_mem(self, request_id):
         repo.clear_mem(request_id)
