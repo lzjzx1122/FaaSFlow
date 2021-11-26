@@ -1,6 +1,7 @@
 FROM workflow_base
 
 RUN sed -i 's/deb.debian.org/mirrors.cloud.aliyuncs.com/g' /etc/apt/sources.list
+RUN sed -i 's/security.debian.org/mirrors.cloud.aliyuncs.com/g' /etc/apt/sources.list
 RUN apt-get clean
 
 RUN apt-get update

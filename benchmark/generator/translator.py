@@ -6,8 +6,7 @@ import random
 
 def translator(workflow_name: str):
     ## parse json build flat_workflow.yaml
-    addr_prefix = '~/FaaSFlow/benchmark/generator'
-    f = open(addr_prefix + '/' + workflow_name + '/main_50.json')
+    f = open('../benchmark/generator/' + workflow_name + '/main_50.json')
     data = json.load(f)
     jobs = data['workflow']['jobs'] 
     yaml_data = {}
@@ -52,7 +51,7 @@ def translator(workflow_name: str):
     ## build images
     for function in functions:
         print('------building image for function ' + function['name'] + '------')
-        os.system('docker build --no-cache -t ' + workflow_name + '_' + function['name'] + ' ' + addr_prefix)
+        os.system('docker build --no-cache -t ' + workflow_name + '_' + function['name'] + ' ../benchmark/generator')
 
     ## build function_info.yaml
     # yaml_data2 = {'workflow': workflow_name, 'max_containers': 1}
