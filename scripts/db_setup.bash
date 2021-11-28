@@ -16,6 +16,9 @@ docker pull couchdb
 docker run -itd -p 5984:5984 -e COUCHDB_USER=openwhisk -e COUCHDB_PASSWORD=openwhisk --name couchdb couchdb
 pip3 install -r requirements.txt
 python3 couchdb_starter.py
+# install redis
+docker pull redis
+docker run -itd -p 6379:6379 --name redis redis
 # run grouping for all benchmarks
 cd ../src/grouping
 python3 grouping.py video illgal_recognizer fileprocessing wordcount cycles epigenomics genome soykb

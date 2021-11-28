@@ -4,3 +4,4 @@ couchdb
 docker
 flask
 psutil
+pandas
