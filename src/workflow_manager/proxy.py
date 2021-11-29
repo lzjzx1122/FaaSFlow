@@ -68,7 +68,7 @@ def clear():
 
 @app.route('/info', methods = ['GET'])
 def info():
-    return len(docker_client.containers.list())
+    return str(len(docker_client.containers.list()))
 
 from gevent.pywsgi import WSGIServer
 import logging
