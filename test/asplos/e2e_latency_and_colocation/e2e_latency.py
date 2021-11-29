@@ -35,8 +35,11 @@ def analyze_workflow(workflow_name, mode):
         print('----firing workflow----', id)
         e2e_latency = run_workflow(workflow_name, id)
         if total > 2:
-            e2e_total += e2e_latency
-            print('e2e_latency: ', e2e_latency)
+            if e2e_latency > 100:
+                total = total - 1
+            else:
+                e2e_total += e2e_latency
+                print('e2e_latency: ', e2e_latency)
     e2e_latency = e2e_total / (total - 2)
     print(f'{workflow_name} e2e_latency: ', e2e_latency)
     e2e_dict[workflow_name] = e2e_latency
@@ -48,11 +51,11 @@ def analyze(mode, datamode):
     # workflow_pool = ['illgal_recognizer']
     if mode == 'single':
         for workflow in workflow_pool:
-            analyze_workflow(workflow)
+            analyze_workflow(workflow, mode)
     elif mode == 'corun':
         jobs = []
         for i, workflow_name in enumerate(workflow_pool):
-            jobs.append(gevent.spawn_later(i * 3, analyze_workflow, workflow_name))
+            jobs.append(gevent.spawn_later(i * 3, analyze_workflow, workflow_name, mode))
         gevent.joinall(jobs)
     e2e_latencies = []
     for workflow in workflow_pool:

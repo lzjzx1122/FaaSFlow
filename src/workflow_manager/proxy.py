@@ -1,6 +1,7 @@
 from gevent import monkey
 monkey.patch_all()
 import os
+import gevent
 import json
 from typing import Dict
 from threading import Thread
@@ -13,6 +14,7 @@ import sys
 from flask import Flask, request
 app = Flask(__name__)
 docker_client = docker.from_env()
+container_names = []
 
 class Dispatcher:
     def __init__(self, data_mode: str, control_mode: str, info_addrs: Dict[str, str]) -> None:
@@ -68,7 +70,14 @@ def clear():
 
 @app.route('/info', methods = ['GET'])
 def info():
-    return os.popen('docker ps -q | wc -l').readline()[:-1]
+    return container_names
+
+GET_NODE_INFO_INTERVAL = 0.1
+
+def get_container_names():
+    gevent.spawn_later(get_container_names)
+    global container_names
+    container_names = [container.attrs['Name'] for container in docker_client.containers.list()]
 
 from gevent.pywsgi import WSGIServer
 import logging
@@ -76,3 +85,4 @@ if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%H:%M:%S', level='INFO')
     server = WSGIServer((sys.argv[1], int(sys.argv[2])), app)
     server.serve_forever()
+    gevent.spawn_later(GET_NODE_INFO_INTERVAL)
