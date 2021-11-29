@@ -7,10 +7,12 @@ from threading import Thread
 import config
 from workersp import WorkerSPManager
 from mastersp import MasterSPManager
+import docker
 
 import sys
 from flask import Flask, request
 app = Flask(__name__)
+docker_client = docker.from_env()
 
 class Dispatcher:
     def __init__(self, data_mode: str, control_mode: str, info_addrs: Dict[str, str]) -> None:
@@ -66,7 +68,7 @@ def clear():
 
 @app.route('/info', methods = ['GET'])
 def info():
-    return os.popen('docker ps -q | wc -l').readline()[:-1]
+    return len(docker_client.containers.list())
 
 from gevent.pywsgi import WSGIServer
 import logging

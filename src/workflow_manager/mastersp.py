@@ -113,7 +113,7 @@ class MasterSPManager:
     def get_node_status(self, addr: str, status: Dict):
         url = f'http://{addr}/info'
         result = requests.get(url)
-        status[addr] = result
+        status[addr] = result.json()
 
     # simulate dynamic node selecting
     def node_select(self):
