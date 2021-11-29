@@ -136,7 +136,7 @@ def favg(a):
     return math.fsum(a) / len(a)
 
 # life time of three different kinds of containers
-exec_lifetime = 60
+exec_lifetime = 600
 
 # the pool list is in order:
 # - at the tail is the hottest containers (most recently used)

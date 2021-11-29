@@ -13,6 +13,7 @@ import gevent
 
 repo = Repository()
 TEST_PER_WORKFLOW = 3 * 60
+TEST_CORUN = 8 * 60
 e2e_dict = {}
 
 def run_workflow(workflow_name, request_id):
@@ -21,13 +22,14 @@ def run_workflow(workflow_name, request_id):
     rep = requests.post(url, json=data)
     return rep.json()['latency']
 
-def analyze_workflow(workflow_name):
+def analyze_workflow(workflow_name, mode):
     global e2e_dict
     print(f'----analyzing {workflow_name}----')
     total = 0
     start = time.time()
     e2e_total = 0
-    while total < 3 or (time.time() - start <= TEST_PER_WORKFLOW and total <= 102):
+    LIMIT = TEST_PER_WORKFLOW if mode == 'SINGLE' else TEST_CORUN
+    while total < 3 or (time.time() - start <= LIMIT and total <= 102):
         total += 1
         id = str(uuid.uuid4())
         print('----firing workflow----', id)
