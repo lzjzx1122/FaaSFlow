@@ -13,18 +13,20 @@ import gevent
 
 repo = Repository()
 TEST_PER_WORKFLOW = 3 * 60
-TEST_CORUN = 8 * 60
+TEST_CORUN = 3 * 60
 e2e_dict = {}
 
 def run_workflow(workflow_name, request_id):
     url = 'http://' + config.GATEWAY_ADDR + '/run'
     data = {'workflow':workflow_name, 'request_id': request_id}
-    rep = requests.post(url, json=data)
-    return rep.json()['latency']
+    try:
+        rep = requests.post(url, json=data, timeout=50)
+        return rep.json()['latency']
+    except Exception:
+        return 1000
 
 def analyze_workflow(workflow_name, mode):
     global e2e_dict
-    print(f'----analyzing {workflow_name}----')
     total = 0
     start = time.time()
     e2e_total = 0
@@ -32,7 +34,7 @@ def analyze_workflow(workflow_name, mode):
     while total < 3 or (time.time() - start <= LIMIT and total <= 102):
         total += 1
         id = str(uuid.uuid4())
-        print('----firing workflow----', id)
+        print(f'----firing workflow {workflow_name}----', id)
         e2e_latency = run_workflow(workflow_name, id)
         if total > 2:
             if e2e_latency > 100:
@@ -55,7 +57,7 @@ def analyze(mode, datamode):
     elif mode == 'corun':
         jobs = []
         for i, workflow_name in enumerate(workflow_pool):
-            jobs.append(gevent.spawn_later(i * 3, analyze_workflow, workflow_name, mode))
+            jobs.append(gevent.spawn_later(i * 5, analyze_workflow, workflow_name, mode))
         gevent.joinall(jobs)
     e2e_latencies = []
     for workflow in workflow_pool:
@@ -66,6 +68,7 @@ def analyze(mode, datamode):
 if __name__ == '__main__':
     opts, args = getopt.getopt(sys.argv[1:],'',['mode=', 'datamode='])
     repo.clear_couchdb_results()
+    repo.clear_couchdb_workflow_latency()
     for name, value in opts:
         if name == '--mode':
             mode = value

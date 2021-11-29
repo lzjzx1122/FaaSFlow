@@ -9,6 +9,7 @@ import config
 from workersp import WorkerSPManager
 from mastersp import MasterSPManager
 import docker
+import subprocess
 
 import sys
 from flask import Flask, request
@@ -70,7 +71,7 @@ def clear():
 
 @app.route('/info', methods = ['GET'])
 def info():
-    return container_names
+    return json.dumps(container_names)
 
 GET_NODE_INFO_INTERVAL = 0.1
 

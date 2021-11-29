@@ -123,12 +123,7 @@ class MasterSPManager:
         for addr in addrs:
             jobs.append(gevent.spawn(self.get_node_status, addr, status))
         gevent.joinall(jobs)
-        mn_container = 100000
         selected_addr = ''
-        for k, v in status.items():
-            if int(v) < mn_container:
-                selected_addr = k
-                mn_container = int(v)
         return selected_addr
 
     # trigger the function when one of its parent is finished

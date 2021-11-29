@@ -47,9 +47,9 @@ def analyze_workflow(workflow_name):
     return data_overhead
 
 def analyze(mode):
-    workflow_pool = ['cycles', 'epigenomics', 'genome', 'soykb', 'video', 'illgal_recognizer', 'fileprocessing', 'wordcount']
+    # workflow_pool = ['cycles', 'epigenomics', 'genome', 'soykb', 'video', 'illgal_recognizer', 'fileprocessing', 'wordcount']
     # workflow_pool = ['cycles', 'epigenomics', 'genome', 'soykb']
-    # workflow_pool = ['illgal_recognizer']
+    workflow_pool = ['soykb']
     data_overhead = []
     for workflow in workflow_pool:
         data_overhead.append(analyze_workflow(workflow))
