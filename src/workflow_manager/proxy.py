@@ -1,6 +1,6 @@
 from gevent import monkey
 monkey.patch_all()
-
+import os
 import json
 from typing import Dict
 from threading import Thread
@@ -63,6 +63,10 @@ def clear():
     dispatcher.clear_mem(workflow_name, request_id) # must clear memory after each run 
     dispatcher.del_state(workflow_name, request_id, master) # and remove state for every node
     return json.dumps({'status': 'ok'})
+
+@app.route('/info', methods = ['GET'])
+def info():
+    return os.popen('docker ps -q | wc -l').readline()[:-1]
 
 from gevent.pywsgi import WSGIServer
 import logging

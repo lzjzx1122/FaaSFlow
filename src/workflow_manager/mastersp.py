@@ -109,6 +109,28 @@ class MasterSPManager:
             self.function_info[function_name] = repo.get_function_info(function_name, self.info_db)
         return self.function_info[function_name]
 
+    # get node status
+    def get_node_status(self, addr: str, status: Dict):
+        url = f'http://{addr}/info'
+        result = requests.get(url)
+        status[addr] = result
+
+    # simulate dynamic node selecting
+    def node_select(self):
+        addrs = repo.get_all_addrs(self.meta_db)
+        jobs = []
+        status = {}
+        for addr in addrs:
+            jobs.append(gevent.spawn(self.get_node_status, addr, status))
+        gevent.joinall(jobs)
+        mn_container = 100000
+        selected_addr = ''
+        for k, v in status.items():
+            if int(v) < mn_container:
+                selected_addr = k
+                mn_container = int(v)
+        return selected_addr
+
     # trigger the function when one of its parent is finished
     # function may run or not, depending on if all its parents were finished
     # function could be local or remote
@@ -136,6 +158,7 @@ class MasterSPManager:
         if runnable:
             state.executed[function_name] = True
             state.lock.release()
+            self.node_select() # simulate node selecting 
             info = self.get_function_info(function_name)
             if function_name.startswith('virtual'): # virtual must run on master
                 self.run_switch(state, info)
