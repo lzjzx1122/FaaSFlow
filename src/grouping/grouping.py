@@ -88,6 +88,10 @@ def mergeable(node1, node2, group_set, workflow: component.workflow, write_to_me
         return False
     node_set2 = find_set(node2, group_set)
 
+    # group size no larger than GROUP_LIMIT
+    if len(node_set1) + len(node_set2) > config.GROUP_LIMIT:
+        return False
+
     # meet scale requirement?
     new_node_info = node_info.copy()
     node_set1_scale = group_scale[node_set1]
@@ -241,7 +245,7 @@ def get_grouping_config(workflow: component.workflow):
     node_info_list = yaml.load(open('node_info.yaml'), Loader=yaml.FullLoader)
     node_info_dict = {}
     for node_info in node_info_list['nodes']:
-        node_info_dict[node_info['worker_address']] = node_info['scale_limit']
+        node_info_dict[node_info['worker_address']] = node_info['scale_limit'] * 0.8
 
     # grouping algorithm
     max_mem_usage = get_max_mem_usage(workflow)

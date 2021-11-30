@@ -22,8 +22,14 @@ def run_workflow(workflow_name, request_id):
 def get_data_overhead(request_id):
     data_overhead = 0
     docs = repo.get_latencies(request_id, 'edge')
+    func_time = {}
     for doc in docs:
+        function_name = doc['function_name']
+        if function_name not in func_time:
+            func_time[function_name] = 0
+        func_time[function_name] += doc['time']
         data_overhead += doc['time']
+    pd.DataFrame({'function': func_time.keys(), 'time': func_time.values()}).to_csv('data2.csv')
     return data_overhead
 
 def analyze_workflow(workflow_name):
@@ -42,6 +48,7 @@ def analyze_workflow(workflow_name):
             data_overhead = get_data_overhead(id)
             data_total += data_overhead
             print('data_overhead: ', data_overhead)
+            break
     data_overhead = data_total / (total - 2)
     print(f'{workflow_name} data_overhead: ', data_overhead)
     return data_overhead

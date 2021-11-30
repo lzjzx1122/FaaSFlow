@@ -1,9 +1,11 @@
 ,workflow,e2e_latency
-0,cycles,81.32354354858398
-1,epigenomics,61.58953253428141
-2,genome,28.085663080215454
-3,soykb,109.17194247245789
-4,video,30.195011814435322
-5,illgal_recognizer,26.592366695404053
-6,fileprocessing,27.749175667762756
-7,wordcount,9.051009567160355
+0,cycles,timeout
+1,epigenomics,12.672529038928804
+2,genome,7.847516033384535
+3,soykb,17.079438082377116
+4,video,11.686576449352762
+5,illgal_recognizer,6.8919923305511475
+6,fileprocessing,11.556633015473684
+7,wordcount,2.21279399394989
+
+Notice: We set TIMEOUT barrier to 100s. Any workflow that runs more than 100s will be identified as timeout.

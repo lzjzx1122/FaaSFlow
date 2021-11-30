@@ -13,16 +13,18 @@ import gevent
 
 repo = Repository()
 TEST_PER_WORKFLOW = 3 * 60
-TEST_CORUN = 3 * 60
+TEST_CORUN = 5 * 60
+TIMEOUT = 100
 e2e_dict = {}
 
 def run_workflow(workflow_name, request_id):
     url = 'http://' + config.GATEWAY_ADDR + '/run'
     data = {'workflow':workflow_name, 'request_id': request_id}
     try:
-        rep = requests.post(url, json=data, timeout=50)
+        rep = requests.post(url, json=data, timeout=TIMEOUT)
         return rep.json()['latency']
     except Exception:
+        print(f'{workflow_name} timeout')
         return 1000
 
 def analyze_workflow(workflow_name, mode):
@@ -30,8 +32,9 @@ def analyze_workflow(workflow_name, mode):
     total = 0
     start = time.time()
     e2e_total = 0
+    timeout = 0
     LIMIT = TEST_PER_WORKFLOW if mode == 'SINGLE' else TEST_CORUN
-    while total < 3 or (time.time() - start <= LIMIT and total <= 102):
+    while timeout < 5 and (total < 3 or time.time() - start <= LIMIT):
         total += 1
         id = str(uuid.uuid4())
         print(f'----firing workflow {workflow_name}----', id)
@@ -39,18 +42,23 @@ def analyze_workflow(workflow_name, mode):
         if total > 2:
             if e2e_latency > 100:
                 total = total - 1
+                timeout = timeout + 1
             else:
                 e2e_total += e2e_latency
                 print('e2e_latency: ', e2e_latency)
-    e2e_latency = e2e_total / (total - 2)
-    print(f'{workflow_name} e2e_latency: ', e2e_latency)
-    e2e_dict[workflow_name] = e2e_latency
+    if timeout >= 5:
+        print(f'{workflow_name} e2e_latency: timeout')
+        e2e_dict[workflow_name] = 'timeout'
+    else:
+        e2e_latency = e2e_total / (total - 2)
+        print(f'{workflow_name} e2e_latency: ', e2e_latency)
+        e2e_dict[workflow_name] = e2e_latency
 
 def analyze(mode, datamode):
     global e2e_dict
     workflow_pool = ['cycles', 'epigenomics', 'genome', 'soykb', 'video', 'illgal_recognizer', 'fileprocessing', 'wordcount']
     # workflow_pool = ['cycles', 'epigenomics', 'genome', 'soykb']
-    # workflow_pool = ['illgal_recognizer']
+    # workflow_pool = ['soykb']
     if mode == 'single':
         for workflow in workflow_pool:
             analyze_workflow(workflow, mode)
@@ -59,6 +67,7 @@ def analyze(mode, datamode):
         for i, workflow_name in enumerate(workflow_pool):
             jobs.append(gevent.spawn_later(i * 5, analyze_workflow, workflow_name, mode))
         gevent.joinall(jobs)
+    print(e2e_dict)
     e2e_latencies = []
     for workflow in workflow_pool:
         e2e_latencies.append(e2e_dict[workflow])

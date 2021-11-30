@@ -3,6 +3,7 @@ NET_MEM_BANDWIDTH_RATIO = 15 # mem_time = net_time / 15
 CONTAINER_MEM = 256 * 1024 * 1024 # 256MB
 NODE_MEM = 256 * 1024 * 1024 * 1024 # 256G
 RESERVED_MEM_PERCENTAGE = 0.2
+GROUP_LIMIT = 10
 WORKFLOW_YAML_ADDR = {'fileprocessing': '../../benchmark/fileprocessing/flat_workflow.yaml',
                   'illgal_recognizer': '../../benchmark/illgal_recognizer/flat_workflow.yaml',
                   'video': '../../benchmark/video/flat_workflow.yaml',
