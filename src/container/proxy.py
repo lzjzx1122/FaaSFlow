@@ -1,21 +1,17 @@
-import zipfile
-import shutil
 import os
 import time
-import re
-import base64
 import couchdb
-import json
-import threading
 from flask import Flask, request
 from gevent.pywsgi import WSGIServer
 from Store import Store
 import config
+import redis
 
 default_file = 'main.py'
 work_dir = '/proxy'
 couchdb_url = config.COUCHDB_URL
 db_server = couchdb.Server(couchdb_url)
+redis_server = redis.StrictRedis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=config.REDIS_DB)
 latency_db = db_server['workflow_latency']
 
 class Runner:

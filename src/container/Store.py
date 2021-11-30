@@ -2,23 +2,15 @@ import json
 import os
 import threading
 import time
-import couchdb
-import redis
-import config
-
-result_dir = "/results"
-
 
 class Store:
-    def __init__(self, workflow_name, function_name, request_id, input, output, to, keys, runtime):
+    def __init__(self, workflow_name, function_name, request_id, input, output, to, keys, runtime, db_server, redis_server):
         # to: where to store for outputs
         # keys: foreach key (split_key) specified by workflow_manager
-        couchdb_url = config.COUCHDB_URL
-        db_server = couchdb.Server(couchdb_url)
         self.db = db_server['results']
         self.latency_db = db_server['workflow_latency']
         self.log_db = db_server['log']
-        self.redis = redis.StrictRedis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=config.REDIS_DB)
+        self.redis = redis_server
         self.fetch_dict = {}
         self.put_dict = {}
         self.workflow_name = workflow_name
