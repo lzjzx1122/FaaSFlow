@@ -73,6 +73,12 @@ def clear():
 def info():
     return json.dumps(container_names)
 
+@app.route('/clear_container', methods = ['GET'])
+def info():
+    print('clearing containers')
+    os.system('docker rm -f $(docker ps -aq --filter label=workflow)')
+    return json.dumps({'status': 'ok'})
+
 GET_NODE_INFO_INTERVAL = 0.1
 
 def get_container_names():

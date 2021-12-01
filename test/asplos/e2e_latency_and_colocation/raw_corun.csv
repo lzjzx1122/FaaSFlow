@@ -8,4 +8,4 @@
 6,fileprocessing,11.556633015473684
 7,wordcount,2.21279399394989
 
-Notice: We set TIMEOUT barrier to 100s. Any workflow that runs more than 100s will be identified as timeout.
+Notice: We set TIMEOUT barrier to 60s. Any workflow that runs more than 60s will be identified as timeout.

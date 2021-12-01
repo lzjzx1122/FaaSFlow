@@ -63,6 +63,18 @@ def run():
     repo.log_status(workflow, request_id, 'FINISH')
     return json.dumps({'status': 'ok', 'latency': latency})
 
+@app.route('/clear_conainer', methods = ['GET'])
+def clear_container():
+    data = request.get_json(force=True, silent=True)
+    workflow = data['workflow']
+    addrs = repo.get_all_addrs(workflow + '_workflow_metadata')
+    jobs = []
+    for addr in addrs:
+        clear_url = f'http://{addr}/clear_container'
+        jobs.append(gevent.spawn(requests.get, clear_url))
+    gevent.joinall(jobs)
+    return json.dumps({'status': 'ok'})
+
 from gevent.pywsgi import WSGIServer
 import logging
 if __name__ == '__main__':

@@ -6,7 +6,7 @@ import random
 
 def translator(workflow_name: str):
     ## parse json build flat_workflow.yaml
-    f = open(workflow_name + '/main_50.json')
+    f = open('../benchmark/generator/' + workflow_name + '/main_50.json')
     data = json.load(f)
     jobs = data['workflow']['jobs'] 
     yaml_data = {}
@@ -45,25 +45,25 @@ def translator(workflow_name: str):
     yaml_data['global_input'] = global_inputs
     yaml_data['functions'] = functions
 
-    f = open(workflow_name + '/flat_workflow.yaml', 'w', encoding = 'utf-8')
-    yaml.dump(yaml_data, f, sort_keys=False)
+    # f = open(workflow_name + '/flat_workflow.yaml', 'w', encoding = 'utf-8')
+    # yaml.dump(yaml_data, f, sort_keys=False)
 
     ## build images
     for function in functions:
         print('------building image for function ' + function['name'] + '------')
-        os.system('docker build --no-cache -t ' + workflow_name + '_' + function['name'] + ' .')
+        os.system('docker build --no-cache -t ' + workflow_name + '_' + function['name'] + ' ../benchmark/generator')
 
     ## build function_info.yaml
-    yaml_data2 = {'workflow': workflow_name, 'max_containers': 1}
-    images = []
-    for function in functions:
-        images.append({'image': workflow_name + '_' + function['name'], 'name': function['name'], 'qos_requirement': 0.95, 'qos_time': 100})
-    yaml_data2['functions'] = images
-    f2 = open(workflow_name + '/function_info.yaml', 'w', encoding = 'utf-8')
-    yaml.dump(yaml_data2, f2, sort_keys=False)
+    # yaml_data2 = {'workflow': workflow_name, 'max_containers': 1}
+    # images = []
+    # for function in functions:
+    #     images.append({'image': workflow_name + '_' + function['name'], 'name': function['name'], 'qos_requirement': 0.95, 'qos_time': 100})
+    # yaml_data2['functions'] = images
+    # f2 = open(workflow_name + '/function_info.yaml', 'w', encoding = 'utf-8')
+    # yaml.dump(yaml_data2, f2, sort_keys=False)
 
 if __name__ == '__main__':
-    # translator('cycles')
-    # translator('epigenomics')
-    # translator('genome')
+    translator('cycles')
+    translator('epigenomics')
+    translator('genome')
     translator('soykb')

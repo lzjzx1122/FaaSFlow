@@ -14,7 +14,7 @@ import gevent
 repo = Repository()
 TEST_PER_WORKFLOW = 3 * 60
 TEST_CORUN = 5 * 60
-TIMEOUT = 100
+TIMEOUT = 60
 e2e_dict = {}
 
 def run_workflow(workflow_name, request_id):
