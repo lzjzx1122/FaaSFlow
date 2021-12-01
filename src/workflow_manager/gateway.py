@@ -63,7 +63,7 @@ def run():
     repo.log_status(workflow, request_id, 'FINISH')
     return json.dumps({'status': 'ok', 'latency': latency})
 
-@app.route('/clear_conainer', methods = ['GET'])
+@app.route('/clear_container', methods = ['POST'])
 def clear_container():
     data = request.get_json(force=True, silent=True)
     workflow = data['workflow']

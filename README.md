@@ -43,30 +43,26 @@ We provide some test scripts under `test/asplos`.
 
 1. Start a proxy and record its pid.
 
-2. Run: `python3 component_overhead.py --pid=<pid>`
-
-3. Result is in: `component_overhead.txt`
+2. Run: `python3 run.py --pid=<pid>`
 
 ### Data Overhead: total time spend on data transmission
 
 1. On each node, reset DATA_MODE in `src/workflow_manager/config.py` to `raw`(cache unabled) or `optimized`(cache enabled), and start a proxy. Start a gateway also.
 
-2. Run: `python3 component_overhead.py --datamode=<DATA_MODE>`
-
-3. Result is in: `optimized.csv` and `raw.csv`
+2. Run: `python3 run.py --datamode=<DATA_MODE>`
 
 ### End-to-End Latency: run one-by-one and run all-at-once
 
 1. Start a proxy on each node. Start a gateway also.
 
-2. Run: `python3 e2e_latency.py --datamode=<DATA_MODE> --mode=<MODE>` DATA_MODE = `raw` or `optimized`, MODE = `single` or `corun`
+2. Run: `python3 run.py --datamode=<DATA_MODE> --mode=<MODE>` DATA_MODE = `raw` or `optimized`, MODE = `single` or `corun`
 
 ### Scheduler Scalability: the overhead of graph scheduler when scale-up total nodes of one workflow
 
-1. Run: `python3 scheduler_scalability.py`
+1. Run: `python3 run.py`
 
 ### Schedule Overhead: time spend on scheduling tasks
 
 1. On each node, reset CONTROL_MODE in `src/workflow_manager/config.py` to `MasterSP` or `WorkerSP`, and start a proxy. Start a gateway also.
 
-2. Run: `python3 schedule_overhead.py --controlmode=<CONTROL_MODE>`
+2. Run: `python3 run.py --controlmode=<CONTROL_MODE>`

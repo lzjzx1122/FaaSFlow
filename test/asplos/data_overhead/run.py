@@ -11,7 +11,7 @@ import pandas as pd
 import time
 
 repo = Repository()
-TEST_PER_WORKFLOW = 3 * 60
+TEST_PER_WORKFLOW = 2 * 60
 
 def run_workflow(workflow_name, request_id):
     url = 'http://' + config.GATEWAY_ADDR + '/run'
@@ -48,14 +48,14 @@ def analyze_workflow(workflow_name):
     return data_overhead
 
 def analyze(mode):
-    workflow_pool = ['cycles', 'epigenomics', 'genome', 'soykb', 'video', 'illgal_recognizer', 'fileprocessing', 'wordcount']
+    # workflow_pool = ['cycles', 'epigenomics', 'genome', 'soykb', 'video', 'illgal_recognizer', 'fileprocessing', 'wordcount']
     # workflow_pool = ['cycles', 'epigenomics', 'genome', 'soykb']
-    # workflow_pool = ['soykb']
+    workflow_pool = ['genome']
     data_overhead = []
     for workflow in workflow_pool:
         data_overhead.append(analyze_workflow(workflow))
     df = pd.DataFrame({'workflow': workflow_pool, 'data_overhead': data_overhead})
-    df.to_csv(mode + '.csv')
+    df.to_csv(mode + '2.csv')
 
 if __name__ == '__main__':
     opts, args = getopt.getopt(sys.argv[1:],'',['datamode='])

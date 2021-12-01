@@ -74,7 +74,7 @@ def info():
     return json.dumps(container_names)
 
 @app.route('/clear_container', methods = ['GET'])
-def info():
+def clear_container():
     print('clearing containers')
     os.system('docker rm -f $(docker ps -aq --filter label=workflow)')
     return json.dumps({'status': 'ok'})

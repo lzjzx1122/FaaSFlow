@@ -7,7 +7,7 @@ import config
 couchdb_url = config.COUCHDB_URL
 
 class Repository:
-    def __init__(self, workflow_name, remove_old_db=True):
+    def __init__(self, workflow_name, remove_old_db=False):
         self.redis = redis.StrictRedis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=config.REDIS_DB)
         self.couch = couchdb.Server(couchdb_url)
         if remove_old_db:

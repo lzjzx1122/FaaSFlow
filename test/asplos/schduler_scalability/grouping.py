@@ -100,14 +100,14 @@ def mergeable(node1, node2, group_set, workflow: component.workflow, write_to_me
             best_fit_addr = addr
             best_fit_scale = new_node_info[addr]
     if best_fit_addr is None:
-        print('Hit scale threshold', node_set1_scale, node_set2_scale)
+        # print('Hit scale threshold', node_set1_scale, node_set2_scale)
         return False
 
     # check memory limit    
     if node1 not in write_to_mem_nodes:
         current_mem_usage = workflow.nodes[node1].nextDis[0] * config.NETWORK_BANDWIDTH
         if mem_usage + current_mem_usage > max_mem_usage: # too much memory consumption
-            print('Hit memory consumption threshold')
+            # print('Hit memory consumption threshold')
             return False
         mem_usage += current_mem_usage
         write_to_mem_nodes.append(node1)
@@ -164,7 +164,7 @@ def grouping(workflow: component.workflow, node_info):
         # topo dp: find each node's longest dis and it's predecessor
         dist_vec, prev_vec = topo_search(workflow, in_degree_vec.copy(), group_set)
         crit_length, tmp_node_name = get_longest_dis(workflow, dist_vec)
-        print('crit_length: ', crit_length)
+        # print('crit_length: ', crit_length)
 
         # find the longest path, edge descent sorted
         critical_path_functions.clear()
@@ -235,7 +235,7 @@ def get_grouping_config(workflow: component.workflow):
     max_mem_usage = get_max_mem_usage(workflow)
     # print('max_mem_usage', max_mem_usage)
     group_detail, critical_path_functions = grouping(workflow, node_info_dict)
-    print(group_detail)
+    # print(group_detail)
     
     # print(query(workflow, group_detail))
 

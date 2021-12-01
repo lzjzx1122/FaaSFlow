@@ -12,8 +12,8 @@ import time
 import gevent
 
 repo = Repository()
-TEST_PER_WORKFLOW = 3 * 60
-TEST_CORUN = 5 * 60
+TEST_PER_WORKFLOW = 2 * 60
+TEST_CORUN = 2 * 60
 TIMEOUT = 60
 e2e_dict = {}
 
@@ -33,7 +33,7 @@ def analyze_workflow(workflow_name, mode):
     start = time.time()
     e2e_total = 0
     timeout = 0
-    LIMIT = TEST_PER_WORKFLOW if mode == 'SINGLE' else TEST_CORUN
+    LIMIT = TEST_PER_WORKFLOW if mode == 'single' else TEST_CORUN
     while timeout < 5 and (total < 3 or time.time() - start <= LIMIT):
         total += 1
         id = str(uuid.uuid4())

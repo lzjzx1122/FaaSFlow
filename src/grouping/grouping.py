@@ -237,15 +237,9 @@ def save_grouping_config(workflow: component.workflow, node_info, info_dict, inf
 #                 merged = merged + 1
 #     return merged, total
 
-def get_grouping_config(workflow: component.workflow):
+def get_grouping_config(workflow: component.workflow, node_info_dict):
 
     global max_mem_usage, group_ip
-
-    # get node info
-    node_info_list = yaml.load(open('node_info.yaml'), Loader=yaml.FullLoader)
-    node_info_dict = {}
-    for node_info in node_info_list['nodes']:
-        node_info_dict[node_info['worker_address']] = node_info['scale_limit'] * 0.8
 
     # grouping algorithm
     max_mem_usage = get_max_mem_usage(workflow)
@@ -304,8 +298,15 @@ def get_grouping_config(workflow: component.workflow):
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         print('usage: python3 grouping.py <workflow_name>, ...')
+
+    # get node info
+    node_info_list = yaml.load(open('node_info.yaml'), Loader=yaml.FullLoader)
+    node_info_dict = {}
+    for node_info in node_info_list['nodes']:
+        node_info_dict[node_info['worker_address']] = node_info['scale_limit'] * 0.8
+        
     workflow_pool = sys.argv[1:]
     for workflow_name in workflow_pool:
         workflow = parse_yaml.parse(workflow_name)
-        node_info, function_info, function_info_raw, critical_path_functions = get_grouping_config(workflow)
+        node_info, function_info, function_info_raw, critical_path_functions = get_grouping_config(workflow, node_info_dict)
         save_grouping_config(workflow, node_info, function_info, function_info_raw, critical_path_functions)
