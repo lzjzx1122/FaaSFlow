@@ -54,21 +54,21 @@ We provide some test scripts under `test/asplos`.
 
 ### Scheduler Scalability: the overhead of graph scheduler when scale-up total nodes of one workflow
 
-Dirextly run: 
+Directly run on the storage node: 
 ```
     python3 run.py
 ```
 
 ### Component Overhead: overhead of one workflow engine
 
-Start a proxy at any worker node (skip if you have already done in the above start-up) and get its pid. Then run:
+Start a proxy at any worker node (skip if you have already done in the above start-up) and get its pid. Then run it on any worker node:
 ```
     python3 run.py --pid=<pid>
 ```
     
 ### Data Overhead: total time spend on data transmission
 
-Make the WorkerSP deployment, run: 
+Make the WorkerSP deployment, run it on the storage node: 
 ```
     python3 run.py --datamode=optimized
 ```
@@ -77,13 +77,13 @@ Then make the MasterSP deployment, run it again with `--datamode=raw`.
 
 ### End-to-End Latency: run one-by-one and run all-at-once
 
-Firstly, Make the WorkerSP deployment, run: 
+Firstly, Make the WorkerSP deployment, run it on the storage node: 
 ```
     python3 run.py --datamode=optimized --mode=single
 ```
 Then terminate and restart all `proxy.py` and `gateway.py` (reasons in [here](#note)), run it again with `--datamode=optimized --mode=corun`.
 
-Secondly, make the MasterSP deployment, run:
+Secondly, make the MasterSP deployment, run it on the storage node:
 ```
     python3 run.py --datamode=raw --mode=single
 ```
@@ -91,7 +91,7 @@ Then terminate and restart all `proxy.py` and `gateway.py` , run it again with `
 
 ### Schedule Overhead: time spend on scheduling tasks
 
-Make the WorkerSP deployment, run: 
+Make the WorkerSP deployment, run it on the storage node: 
 ```
     python3 run.py --controlmode=WorkerSP
 ```
@@ -108,7 +108,7 @@ Then make the MasterSP deployment, run it again with `--controlmode=MasterSP`.
     ./wondershaper -a docker0 -c
     ./wondershaper -a docker0 -u 409600 -d 409600
 ```
-3. Then run the script:
+3. Then run the script on the storage node:
 ```
     python3 run.py --datamode=optimized
 ```
@@ -124,7 +124,7 @@ Then make the MasterSP deployment, run it again with `--controlmode=MasterSP`.
     ./wondershaper -a docker0 -c
     ./wondershaper -a docker0 -u 204800 -d 204800
 ```
-and then run the following commands. 
+and then run the following commands on the storage node. 
 **Remember to restart all `proxy.py` and the `gateway.py` whenever you start the `run.py` script, to avoid any potential bugs.**
 
 ```
@@ -138,7 +138,7 @@ python3 run.py --bandwidth=25 --datamode=optimized --workflow=genome
     ./wondershaper -a docker0 -c
     ./wondershaper -a docker0 -u 409600 -d 409600
 ```
-and then run the following commands. 
+and then run the following commands on the storage node.
 ```
     python3 run.py --bandwidth=50 --datamode=optimized --workflow=genome    
 ```
