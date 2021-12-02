@@ -4,23 +4,25 @@
 
 FaaSFlow is a serverless workflow engine that enables efficient workflow execution in 2 ways: a worker-side workflow schedule pattern to reduce scheduling overhead, and a adaptive storage library to use local memory to transfer data between functions on the same node.
 
+## Hardware Depedencies and Private IP Address
+
+1. In our experiment setup, we use aliyun ecs instance installed with Ubuntu 18.04 (ecs.g7.2xlarge, cores: 8, DRAM: 32GB) for each worker node, and a ecs.g6e.4xlarge(cores: 16, DRAM: 64GB) instance for database node installed with Ubuntu 18.04 and CouchDB.
+
+2. Please save the private IP address of the storage node as the **<master_ip>**, and save the private IP addredd of other 7 worker nodes as the **<worker_ip>**. 
+
 ## Installation and Software Dependencies
 
-1. In our experiment setup, we use aliyun ecs instance installed with Ubuntu 18.04 (ecs.g7.2xlarge, cores: 8, DRAM: 32GB) for each worker node, and a ecs.g6e.4xlarge(cores: 16, DRAM: 64GB) instance for database node installed with Ubuntu 18.04 and CouchDB. Clone our code `https://github.com/lzjzx1122/FaaSFlow.git` into each nodes (8 nodes total).
+Clone our code `https://github.com/lzjzx1122/FaaSFlow.git` and:
 
-2. Please save the private IP address of the storage node as the **<master_ip>**, and save the private IP addredd of other 7 worker nodes as the **<worker_ip>**.
+1. Reset `worker_address` configuration with your <worker_ip>:8000 on `src/grouping/node_info.yaml`. It will specify your worker address. The `scale_limit: 120` respresents the maximum container numbers that can be deployed in each 32GB memory instance, and it do not need any change by default.
 
-On database node:
+2. Reset `COUCHDB_URL` as `http://openwhisk:openwhisk@<master_ip>:5984/`  in `src/container/config.py`, `src/workflow_manager/config.py`, `test/asplos/config.py`. It will specify the corresponding database storage you build previously.
 
-3. Reset `worker_address` configuration with your <worker_ip>:8000 on `src/grouping/node_info.yaml`. It will specify your worker address. The `scale_limit: 120` respresents the maximum container numbers that can be deployed in each 32GB memory instance, and it do not need any change by default.
+3. Then, clone the modified code into each node (8 nodes total).
 
-4. Run: `scripts/db_setup.bash`. This install docker, couchdb, some python packages, and build grouping results from 8 benchmarks.
+4. On the storage node: Run `scripts/db_setup.bash`. This install docker, couchdb, some python packages, and build grouping results from 8 benchmarks.
 
-On each worker node:
-
-5. Reset `COUCHDB_URL` as `http://openwhisk:openwhisk@<master_ip>:5984/`  in `src/container/config.py`, `src/workflow_manager/config.py`, `test/asplos/config.py`. It will specify the corresponding database storage you build previously.
-
-6. Run `scripts/worker_setup.bash`. This install docker, redis, some python packages, and build docker images from 8 benchmarks.
+5. On each worker node: Run `scripts/worker_setup.bash`. This install docker, redis, some python packages, and build docker images from 8 benchmarks.
 
 ## WorkerSP Start-up
 
