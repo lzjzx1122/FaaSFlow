@@ -45,7 +45,7 @@ def analyze_workflow():
         return 'timeout'
     latencies.sort()
     if len(latencies) < 100:
-        return latencies[-2]
+        return latencies[-1]
     else:
         tail = int(len(latencies) / 100)
         return latencies[-tail]

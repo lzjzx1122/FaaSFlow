@@ -9,5 +9,5 @@ WORKFLOW_YAML_ADDR = {'fileprocessing': '../../../benchmark/fileprocessing/flat_
                   'genome': '../../../benchmark/generator/genome/flat_workflow.yaml',
                   'soykb': '../../../benchmark/generator/soykb/flat_workflow.yaml'}
 NETWORK_BANDWIDTH = 25 * 1024 * 1024 / 4 # 25MB/s / 4
-RPMs = {'gen-25': [6, 8, 10, 20], 'gen-50': [6, 8, 10, 20], 'gen-75': [6, 8, 10, 20, 30], 'gen-100': [6, 8, 10, 20, 30, 40],
-'vid-25': [4, 6, 8, 10], 'vid-50': [4, 6, 8, 10, 15], 'vid-75': [4, 6, 8, 10, 15, 20], 'vid-100': [4, 6, 8, 10, 15, 20]}
+RPMs = {'genome-25': [2, 4, 6, 8], 'genome-50': [2, 4, 6, 8, 10], 'genome-75': [2, 4, 6, 8, 10], 'genome-100': [2, 4, 6, 8, 10],
+'video-25': [4, 8, 16, 24], 'video-50': [8, 16, 24, 32, 40], 'video-75': [8, 16, 24, 32, 40], 'video-100': [8, 16, 24, 32, 40]}

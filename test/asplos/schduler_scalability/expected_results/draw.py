@@ -28,14 +28,16 @@ bar_width = 0.25
 tick_label = ["10","25","50","100","200"]
 plt.plot(x,y1,color='#74a9cf',linewidth=6,label='Overhead',marker='o', ms=12)
 plt.xticks([10,25,50,100,200],tick_label)
-ax1.set_ylim(20, 35)
+plt.yticks(fontsize=28)
+ax1.set_xticklabels(tick_label, fontsize=28)
+ax1.set_ylim(22.5, 37.5)
 ax1.set_ylabel("Memory usage (MB)", fontsize=34)
 ax1.set_xlabel('Function Nodes in Benchmark Genome', fontsize=34)
-ax1.axhline(y=22.5, xmin=0.0, xmax=1, color='tab:grey', linestyle='--')
 ax1.axhline(y=25, xmin=0.0, xmax=1, color='tab:grey', linestyle='--')
 ax1.axhline(y=27.5, xmin=0.0, xmax=1, color='tab:grey', linestyle='--')
 ax1.axhline(y=30, xmin=0.0, xmax=1, color='tab:grey', linestyle='--')
 ax1.axhline(y=32.5, xmin=0.0, xmax=1, color='tab:grey', linestyle='--')
+ax1.axhline(y=35, xmin=0.0, xmax=1, color='tab:grey', linestyle='--')
 
 
 # 设置子图之间的间距，默认值为1.08

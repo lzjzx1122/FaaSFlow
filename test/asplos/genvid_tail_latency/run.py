@@ -17,7 +17,7 @@ ticket = 0
 running = 0
 timeout = 0
 BANDWIDTH = 50
-TEST_PER_WORKFLOW = 3 * 60
+TEST_PER_WORKFLOW = 2 * 60
 RPM = 0
 workflow = ''
 
@@ -44,8 +44,9 @@ def analyze_workflow():
     global latencies, timeout
     if timeout >= 3:
         return 'timeout'
+    latencies.sort()
     if len(latencies) < 100:
-        return latencies[-2]
+        return latencies[-1]
     else:
         tail = int(len(latencies) / 100)
         return latencies[-tail]
@@ -57,7 +58,7 @@ def analyze(datamode, workflow):
     tail_latencies = []
     for rpm in config.RPMs[f'{workflow}-{BANDWIDTH}']:
         RPM = rpm
-        print(f'----analyzing {workflow} at bandwidth {BANDWIDTH}MB/s, prewarming----')
+        print(f'----analyzing {workflow} at bandwidth {BANDWIDTH}MB/s, {rpm}RPM, prewarming----')
 
         # prewarm to achieve stable throughput
         ticket = 2
@@ -70,14 +71,9 @@ def analyze(datamode, workflow):
                 break
             if ticket == 0 and running == 0: # finished running
                 break
-            print(f'ticket: {ticket}, running: {running}, timeout: {timeout}')
             gevent.sleep(5)
         if timeout == 2:
             tail_latencies.append('timeout')
-            clear_url = 'http://' + config.GATEWAY_ADDR + '/clear_container'
-            data = {'workflow': workflow}
-            requests.post(clear_url, json=data)
-            gevent.sleep(5)
             break
 
         # tail latency analysis
@@ -92,26 +88,17 @@ def analyze(datamode, workflow):
                 break
             if ticket == 0 and running == 0: # finished running
                 break
-            print(f'ticket: {ticket}, running: {running}, timeout: {timeout}')
             gevent.sleep(5)
         if timeout != 0:
             tail_latencies.append('timeout')
-            clear_url = 'http://' + config.GATEWAY_ADDR + '/clear_container'
-            data = {'workflow': workflow}
-            requests.post(clear_url, json=data)
-            gevent.sleep(5)
             break
         tail_latency = analyze_workflow()
         print(f'{workflow} tail latency: {tail_latency}')
         tail_latencies.append(tail_latency)
-        clear_url = 'http://' + config.GATEWAY_ADDR + '/clear_container'
-        data = {'workflow': workflow}
-        requests.post(clear_url, json=data)
-        gevent.sleep(5)
-    for _ in range(len(config.RPMs[f'{workflow}-{BANDWIDTH}']) - len(tail-latencies)):
+    for _ in range(len(config.RPMs[f'{workflow}-{BANDWIDTH}']) - len(tail_latencies)):
         tail_latencies.append('timeout')
     df = pd.DataFrame({'rpm': config.RPMs[f'{workflow}-{BANDWIDTH}'], 'tail_latency': tail_latencies})
-    df.to_csv(f'{datamode}_{workflow}_{BANDWIDTH}MB/s.csv')
+    df.to_csv(f'{datamode}_{workflow}_{BANDWIDTH}MB.csv')
 
 if __name__ == '__main__':
     repo.clear_couchdb_results()
