@@ -20,7 +20,11 @@ Clone our code `https://github.com/lzjzx1122/FaaSFlow.git` and:
 
 3. Then, clone the modified code into each node (8 nodes total).
 
-4. On the storage node: Run `scripts/db_setup.bash`. It installs docker, CouchDB, some python packages, and build grouping results from 8 benchmarks.
+4. On the storage node: Run `scripts/db_setup.bash`. It installs docker, CouchDB, some python packages, and build grouping results from 8 benchmarks. Then enable the max 4096 connections by adding the options to the configuration file in `/opt/couchdb/etc/local.ini`:
+```
+    [httpd]
+    server_options = [{backlog, 128}, {acceptor_pool_size, 16}, {max, 4096}]
+```
 
 5. On each worker node: Run `scripts/worker_setup.bash`. This install docker, Redis, some python packages, and build docker images from 8 benchmarks.
 
