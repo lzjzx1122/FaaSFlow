@@ -1,5 +1,8 @@
 import yaml
 import component
+import sys
+
+sys.path.append('../../config')
 import config
 
 yaml_file_addr = config.WORKFLOW_YAML_ADDR

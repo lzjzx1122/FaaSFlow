@@ -9,6 +9,7 @@ if __name__ == '__main__':
     mem = []
     cpu = []
     for node_cnt in node_cnts:
+        print('running workflow with {} nodes'.format(node_cnt))
         ret = subprocess.Popen(['python3', 'grouping.py', str(node_cnt)])
         manager = psutil.Process(ret.pid)
         mem_percent = 0

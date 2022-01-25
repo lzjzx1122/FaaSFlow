@@ -1,9 +1,13 @@
 from typing import List
 import couchdb
 import parse_yaml
+import sys
+
+sys.path.append('../../../config')
+import config
 
 workflow = []
-db = couchdb.Server('http://openwhisk:openwhisk@localhost:5984')
+db = couchdb.Server(config.COUCHDB_URL)
 timedict = {}
 mxdis = 0
 ans = []

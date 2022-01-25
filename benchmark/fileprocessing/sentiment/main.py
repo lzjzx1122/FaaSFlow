@@ -1,11 +1,10 @@
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
-import time
-# nltk.download('vader_lexicon')
+nltk.download('vader_lexicon')
 
 def main():
     content = store.fetch(['file'])['file']
     sia = SentimentIntensityAnalyzer()
-    score = sia.polarity_scores(content) # can't handle large dataset
-    # time.sleep(7)
+    score = sia.polarity_scores(content)
+    # time.sleep(7) # if can't handle large dataset, please uncomment this to simulate sentiment processing
     store.put({'score': 0}, {})

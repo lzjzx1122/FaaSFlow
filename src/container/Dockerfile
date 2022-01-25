@@ -12,7 +12,7 @@ RUN mkdir /proxy
 COPY proxy.py /proxy/proxy.py
 COPY main.py /proxy/main.py
 COPY Store.py /proxy/Store.py
-COPY config.py /proxy/config.py
+COPY container_config.py /proxy/container_config.py
 
 WORKDIR /proxy
 
@@ -25,7 +25,6 @@ EXPOSE 5000
 #     pip install --no-cache-dir gevent flask && \
 #     apk del .build-deps
 
-RUN sed -i 's/deb.debian.org/mirrors.cloud.aliyuncs.com/g' /etc/apt/sources.list
 RUN apt-get clean
 RUN apt-get update
 RUN pip3 install --no-cache-dir gevent flask couchdb redis

@@ -4,14 +4,12 @@ import os
 import gevent
 import json
 from typing import Dict
-from threading import Thread
+import sys
+sys.path.append('../../config')
 import config
 from workersp import WorkerSPManager
 from mastersp import MasterSPManager
 import docker
-import subprocess
-
-import sys
 from flask import Flask, request
 app = Flask(__name__)
 docker_client = docker.from_env()

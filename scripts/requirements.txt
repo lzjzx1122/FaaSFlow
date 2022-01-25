@@ -5,3 +5,4 @@ docker
 flask
 psutil
 pandas
+PyYAML

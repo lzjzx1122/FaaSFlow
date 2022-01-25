@@ -2,6 +2,9 @@ from typing import Any, List
 import couchdb
 import redis
 import json
+import sys
+
+sys.path.append('../../config')
 import config
 
 couchdb_url = config.COUCHDB_URL

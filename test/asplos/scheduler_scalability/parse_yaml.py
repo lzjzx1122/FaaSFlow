@@ -1,8 +1,11 @@
 import yaml
 import component
+import sys
+sys.path.append('../../../config')
 import config
 
-yaml_file_addr = config.WORKFLOW_YAML_ADDR
+
+yaml_file_addr = {10: 'wdl/10.yaml', 25: 'wdl/25.yaml', 50: 'wdl/50.yaml', 100: 'wdl/100.yaml', 200: 'wdl/200.yaml'}
 
 def parse(workflow_name, node_cnt):
     data = yaml.load(open(yaml_file_addr[node_cnt]), Loader=yaml.FullLoader)

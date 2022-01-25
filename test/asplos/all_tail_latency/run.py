@@ -5,6 +5,7 @@ import requests
 import getopt
 import sys
 sys.path.append('..')
+sys.path.append('../../../config')
 from repository import Repository
 import config
 import pandas as pd

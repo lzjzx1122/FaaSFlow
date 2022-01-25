@@ -1,13 +1,10 @@
 import sys
-from typing import Dict, List
+sys.path.append('../../../config')
 import parse_yaml
 import queue
-import json
 import component
 import config
-import time
 import yaml
-import uuid
 import repository
 
 mem_usage = 0

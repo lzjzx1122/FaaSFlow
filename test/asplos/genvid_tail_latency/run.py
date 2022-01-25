@@ -5,10 +5,10 @@ import requests
 import getopt
 import sys
 sys.path.append('..')
+sys.path.append('../../../config')
 from repository import Repository
 import config
 import pandas as pd
-import config
 import gevent
 
 repo = Repository()
@@ -53,8 +53,6 @@ def analyze_workflow():
 
 def analyze(datamode, workflow):
     global BANDWIDTH, ticket, running, timeout, latencies, RPM
-    workflow_pool = ['cycles', 'epigenomics', 'genome', 'soykb', 'video', 'illgal_recognizer', 'fileprocessing', 'wordcount']
-    # workflow_pool = ['illgal_recognizer']
     tail_latencies = []
     for rpm in config.RPMs[f'{workflow}-{BANDWIDTH}']:
         RPM = rpm

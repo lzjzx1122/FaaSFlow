@@ -7,6 +7,8 @@ from flask import Flask, request
 from repository import Repository
 import requests
 import time
+
+sys.path.append('../../config')
 import config
 
 app = Flask(__name__)

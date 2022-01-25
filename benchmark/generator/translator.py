@@ -1,8 +1,5 @@
 import json
-import yaml
-import sys
 import os
-import random
 
 def translator(workflow_name: str):
     ## parse json build flat_workflow.yaml

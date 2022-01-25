@@ -1,7 +1,9 @@
-from os import remove
 import couchdb
 import redis
 from typing import Dict, List
+import sys
+
+sys.path.append('../../../config')
 import config
 
 couchdb_url = config.COUCHDB_URL

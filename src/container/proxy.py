@@ -4,14 +4,14 @@ import couchdb
 from flask import Flask, request
 from gevent.pywsgi import WSGIServer
 from Store import Store
-import config
+import container_config
 import redis
 
 default_file = 'main.py'
 work_dir = '/proxy'
-couchdb_url = config.COUCHDB_URL
+couchdb_url = container_config.COUCHDB_URL
 db_server = couchdb.Server(couchdb_url)
-redis_server = redis.StrictRedis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=config.REDIS_DB)
+redis_server = redis.StrictRedis(host=container_config.REDIS_HOST, port=container_config.REDIS_PORT, db=container_config.REDIS_DB)
 latency_db = db_server['workflow_latency']
 
 class Runner:

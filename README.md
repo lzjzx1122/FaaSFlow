@@ -10,13 +10,17 @@ FaaSFlow is a serverless workflow engine that enables efficient workflow executi
 
 2. Please save the private IP address of the storage node as the **<master_ip>**, and save the private IP address of the other 7 worker nodes as the **<worker_ip>**. 
 
+## About Config Setting
+
+There are 2 places for config setting. `src/container/container_config.py` specifies CouchDB and Redis's address, you need to fill in correct ip so that application code can directly connect to database inside container environment. All other configurations are in `config/config.py`.
+
 ## Installation and Software Dependencies
 
 Clone our code `https://github.com/lzjzx1122/FaaSFlow.git` and:
 
 1. Reset `worker_address` configuration with your <worker_ip>:8000 on `src/grouping/node_info.yaml`. It will specify your workers' addresses. The `scale_limit: 120` represents the maximum container numbers that can be deployed in each 32GB memory instance, and it does not need any change by default.
 
-2. Reset `COUCHDB_URL` as `http://openwhisk:openwhisk@<master_ip>:5984/`  in `src/container/config.py`, `src/workflow_manager/config.py`, `test/asplos/config.py`. It will specify the corresponding database storage you built previously.
+2. Reset `COUCHDB_URL` as `http://openwhisk:openwhisk@<master_ip>:5984/`  in `config/config.py`, `src/container/container_config.py`. It will specify the corresponding database storage you built previously.
 
 3. Then, clone the modified code into each node (8 nodes total).
 
@@ -30,11 +34,13 @@ Clone our code `https://github.com/lzjzx1122/FaaSFlow.git` and:
 
 ## WorkerSP Start-up
 
-The following operations help to run scripts under WorkerSP. Firstly, enter `src/workflow_manager`, change the configuration by `DATA_MODE = optimized` and `CONTROL_MODE = WorkerSP` in both 7 worker nodes and storage node. Then, start the engine proxy with the local  <worker_ip> on each worker node by the following <span id="jump">command</span>: 
+The following operations help to run scripts under WorkerSP.
+
+Firstly, change the configuration by `DATA_MODE = optimized` and `CONTROL_MODE = WorkerSP` in both 7 worker nodes and storage node. Define the `GATEWAY_ADDR` as `<master_ip>:7000`. Then, enter `src/workflow_manager` and start the engine proxy with the local  <worker_ip> on each worker node by the following <span id="jump">command</span>: 
 ```
     python3 proxy.py <worker_ip> 8000             (proxy start)
 ```
-Enter `test/asplos/config.py` and define the `GATEWAY_ADDR` as `<master_ip>:7000`. Then start the gateway on the storage node by the following command: 
+Then start the gateway on the storage node by the following command: 
 ```
     python3 gateway.py <master_ip> 7000           (gateway start)
 ``` 
@@ -44,9 +50,9 @@ If you would like to run scripts under WorkerSP, you have finished all the opera
 
 ## MasterSP Start-up
 
-The following operations help to run scripts under MasterSP. Firstly, enter `src/workflow_manager`, change the configuration by `DATA_MODE = raw` and `CONTROL_MODE = MasterSP` in both 7 worker nodes and storage node. Then, restart the engine proxy on each worker node by the [proxy start](#jump) command, and restart the gateway on the storage node by the [gateway start](#jump) command.
+The following operations help to run scripts under MasterSP. Firstly, change the configuration by `DATA_MODE = raw` and `CONTROL_MODE = MasterSP` in both 7 worker nodes and storage node. Then, restart the engine proxy on each worker node by the [proxy start](#jump) command, and restart the gateway on the storage node by the [gateway start](#jump) command.
 
-Enter `src/workflow_manager/config.py`, and define the `MASTER_HOST` as `<master_ip>:8000`. Then,
+Define the `MASTER_HOST` as `<master_ip>:8000`. Then,
 start another proxy on the storage node as the virtual master node by the following command: 
 ```
     python3 proxy.py <master_ip> 8000
