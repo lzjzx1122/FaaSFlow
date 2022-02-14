@@ -1,9 +1,9 @@
 COUCHDB_URL = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
-REDIS_HOST = '127.0.0.1'
-REDIS_PORT = 6379
+REDIS_HOST = '127.0.0.1' # it serves to connect with the local redis, so it should be 127.0.0.1
+REDIS_PORT = 6379 # it follows the same configuration as created redis by docker (e.g., -p 6379:6379)
 REDIS_DB = 0
-GATEWAY_ADDR = '10.2.64.8:7000'
-MASTER_HOST = '10.2.64.8:8000'
+GATEWAY_ADDR = '10.2.64.8:7000' # need to update as your private_ip
+MASTER_HOST = '10.2.64.8:8000' # need to update as your private_ip
 WORKFLOW_YAML_ADDR = {'fileprocessing': '/home/openwhisk/Workflow/benchmark/fileprocessing/flat_workflow.yaml',
                   'illgal_recognizer': '/home/openwhisk/Workflow/benchmark/illgal_recognizer/flat_workflow.yaml',
                   'video': '/home/openwhisk/Workflow/benchmark/video/flat_workflow.yaml',
