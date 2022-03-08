@@ -4,6 +4,8 @@
 
 FaaSFlow is a serverless workflow engine that enables efficient workflow execution in 2 ways: a worker-side workflow schedule pattern to reduce scheduling overhead, and an adaptive storage library to use local memory to transfer data between functions on the same node.
 
+*Our work has been accepted by ASPLOS' 22. The paper is [FaaSFlow: Enable Efficient Workflow Execution for Function-as-a-Service](https://dl.acm.org/doi/10.1145/3503222.3507717)*
+
 ## Hardware Depedencies and Private IP Address
 
 1. In our experiment setup, we use aliyun ecs instance installed with Ubuntu 18.04 (ecs.g7.2xlarge, cores: 8, DRAM: 32GB) for each worker node, and a ecs.g6e.4xlarge(cores: 16, DRAM: 64GB) instance for database node installed with Ubuntu 18.04 and CouchDB.
@@ -157,3 +159,24 @@ and then run the following commands on the storage node.
 3. Other configurations follow the same logic (`-u 614400 -d 614400` and `--bandwidth=75` corresponds to 75MB/s, `-u 819200 -d 819200` and `--bandwidth=100` corresponds to 100MB/s)
 
 4. Make the MasterSP deployment and review steps 1 and 2, however, with `--datamode=raw`. Then, the evaluation of benchmark follows the same logic with `--workflow=video`.
+
+## Cite
+Welcome to cite FaaSFlow by:
+```
+@inproceedings{10.1145/3503222.3507717,
+    author = {Li, Zijun and Liu, Yushi and Guo, Linsong and Chen, Quan and Cheng, Jiagan and Zheng, Wenli and Guo, Minyi},
+    title = {FaaSFlow: Enable Efficient Workflow Execution for Function-as-a-Service},
+    year = {2022},
+    isbn = {9781450392051},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3503222.3507717},
+    doi = {10.1145/3503222.3507717},
+    booktitle = {Proceedings of the 27th ACM International Conference on Architectural Support for Programming Languages and Operating Systems},
+    pages = {782–796},
+    numpages = {15},
+    keywords = {serverless workflows, master-worker, graph partition, FaaS},
+    location = {Lausanne, Switzerland},
+    series = {ASPLOS 2022}
+}
+```
