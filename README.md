@@ -6,6 +6,9 @@ FaaSFlow is a serverless workflow engine that enables efficient workflow executi
 
 *Our work has been accepted by ASPLOS' 22. The paper is [FaaSFlow: Enable Efficient Workflow Execution for Function-as-a-Service](https://dl.acm.org/doi/10.1145/3503222.3507717)*
 
+[![Security Status](https://s.murphysec.com/badge/lzjzx1122/FaaSFlow.svg)](https://www.murphysec.com/p/lzjzx1122/FaaSFlow)
+
+
 ## Hardware Depedencies and Private IP Address
 
 1. In our experiment setup, we use aliyun ecs instance installed with Ubuntu 18.04 (ecs.g7.2xlarge, cores: 8, DRAM: 32GB) for each worker node, and a ecs.g6e.4xlarge(cores: 16, DRAM: 64GB) instance for database node installed with Ubuntu 18.04 and CouchDB.
