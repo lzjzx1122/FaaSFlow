@@ -1,7 +1,0 @@
-workflow: fileprocessing
-functions:
-- {image: fileprocessing_conversion, name: conversion, qos_requirement: 0.95, qos_time: 100}
-- {image: fileprocessing_sentiment, name: sentiment, qos_requirement: 0.95, qos_time: 100}
-- {image: fileprocessing_start, name: start, qos_requirement: 0.95, qos_time: 100}
-- {image: fileprocessing_upload, name: upload, qos_requirement: 0.95, qos_time: 100}
-max_containers: 10

@@ -1,0 +1,44 @@
+workflow_name: wordcount
+global_inputs:
+  $USER.start:
+    type: NORMAL
+    dest:
+      wordcount__start: { block_0: { start } }
+templates:
+  wordcount__start:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          start: { type: NORMAL }
+        output_datas:
+          file:
+            type: FOREACH
+            dest:
+              wordcount__count: { block_0: { file } }
+          VIRTUAL.CNT:
+            type: NORMAL
+            dest:
+              wordcount__merge: { block_0: { VIRTUAL.CNT } }
+  wordcount__count:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          file: { type: NORMAL }
+        output_datas:
+          res:
+            type: MERGE
+            dest:
+              wordcount__merge: { block_0: { counts } }
+  wordcount__merge:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          VIRTUAL.CNT: { type: NORMAL }
+          counts: { type: LIST }
+        output_datas:
+          res:
+            type: NORMAL
+            dest: { $USER }

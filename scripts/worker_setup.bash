@@ -16,10 +16,4 @@ pip3 install -r requirements.txt
 # install redis
 docker pull redis
 docker run -itd -p 6379:6379 --name redis redis
-# build docker images
-docker build --no-cache -t workflow_base ../src/container
-python3 ../benchmark/generator/translator.py
-../benchmark/wordcount/create_image.sh
-../benchmark/fileprocessing/create_image.sh
-../benchmark/illgal_recognizer/create_image.sh
-../benchmark/video/create_image.sh
+bash image_setup.bash

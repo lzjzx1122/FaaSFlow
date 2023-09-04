@@ -6,3 +6,6 @@ flask
 psutil
 pandas
 PyYAML
+pykafka
+kafka-python
+confluent-kafka

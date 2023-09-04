@@ -1,0 +1,105 @@
+workflow_name: recognizer
+global_inputs:
+  $USER.start:
+    type: NORMAL
+    dest:
+      recognizer__upload: { block_0: { start } }
+templates:
+  recognizer__upload:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          start: { type: NORMAL }
+        output_datas:
+          img:
+            type: NORMAL
+            dest:
+              recognizer__adult: { block_0: { img } }
+              recognizer__violence: { block_0: { img } }
+              recognizer__mosaic: { block_0: { img } }
+              recognizer__extract: { block_0: { img } }
+  recognizer__adult:
+    blocks:
+      block_0:
+        type: SWITCH
+        input_datas:
+          img: { type: NORMAL }
+        output_datas:
+          illegal:
+            type: NORMAL
+        conditions:
+          illegal==True:
+            virtual.start:
+              recognizer__mosaic: { block_0: { start } }
+          default:
+            virtual.start:
+              recognizer__extract: { block_0: { start_0 } }
+
+  recognizer__violence:
+    blocks:
+      block_0:
+        type: SWITCH
+        input_datas:
+          img: { type: NORMAL }
+        output_datas:
+          illegal:
+            type: NORMAL
+        conditions:
+          illegal==True:
+            virtual.start:
+              recognizer__mosaic: { block_0: { start } }
+          default:
+            virtual.start:
+              recognizer__extract: { block_0: { start_1 } }
+  recognizer__mosaic:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          img: { type: NORMAL }
+          start: { type: NORMAL }
+        output_datas:
+          content:
+            type: NORMAL
+            dest: { $USER }
+  recognizer__extract:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          img: { type: NORMAL }
+          start_0: { type: NORMAL }
+          start_1: { type: NORMAL }
+        output_datas:
+          text:
+            type: NORMAL
+            dest:
+              recognizer__translate: { block_0: { text } }
+  recognizer__translate:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          text: { type: NORMAL }
+        output_datas:
+          translated_text:
+            type: NORMAL
+            dest:
+              recognizer__censor: { block_0: { text } }
+  recognizer__censor:
+    blocks:
+      block_0:
+        type: SWITCH
+        input_datas:
+          text: { type: NORMAL }
+        output_datas:
+          illegal:
+            type: NORMAL
+        conditions:
+          illegal==True:
+            virtual.start:
+              recognizer__mosaic: { block_0: { start } }
+          default:
+            virtual.start:
+              $USER

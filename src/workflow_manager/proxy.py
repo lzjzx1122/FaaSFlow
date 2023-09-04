@@ -1,93 +1,140 @@
+
 from gevent import monkey
+
 monkey.patch_all()
-import os
+import gc
 import gevent
+import socket
+import time
 import json
-from typing import Dict
 import sys
-sys.path.append('../../config')
-import config
+
+sys.path.append('../../')
+from gevent.pywsgi import WSGIServer
+from typing import Dict
 from workersp import WorkerSPManager
-from mastersp import MasterSPManager
-import docker
+from config import config
 from flask import Flask, request
+from src.function_manager.file_controller import file_controller
+from src.function_manager.prefetcher import prefetcher
+
 app = Flask(__name__)
-docker_client = docker.from_env()
-container_names = []
+
 
 class Dispatcher:
-    def __init__(self, data_mode: str, control_mode: str, info_addrs: Dict[str, str]) -> None:
-        self.managers = {}
-        if control_mode == 'WorkerSP':
-            self.managers = {name: WorkerSPManager(sys.argv[1] + ':' + sys.argv[2], name, data_mode, addr) for name, addr in info_addrs.items()}
-        elif control_mode == 'MasterSP':
-            self.managers = {name: MasterSPManager(sys.argv[1] + ':' + sys.argv[2], name, data_mode, addr) for name, addr in info_addrs.items()}
-    
-    def get_state(self, workflow_name: str, request_id: str) -> WorkerSPManager:
-        return self.managers[workflow_name].get_state(request_id)
+    def __init__(self, workflows_info_path: dict, functions_info_path: str):
+        self.manager = WorkerSPManager(sys.argv[1], config.GATEWAY_URL,
+                                       workflows_info_path, functions_info_path)
 
-    def trigger_function(self, workflow_name, state, function_name, no_parent_execution):
-        self.managers[workflow_name].trigger_function(state, function_name, no_parent_execution)
-    
-    def clear_mem(self, workflow_name, request_id):
-        self.managers[workflow_name].clear_mem(request_id)
-    
-    def clear_db(self, workflow_name, request_id):
-        self.managers[workflow_name].clear_db(request_id)
-    
-    def del_state(self, workflow_name, request_id, master):
-        self.managers[workflow_name].del_state(request_id, master)
+    def get_state(self, request_id):
+        return self.manager.get_state(request_id)
 
-dispatcher = Dispatcher(data_mode=config.DATA_MODE, control_mode=config.CONTROL_MODE, info_addrs=config.FUNCTION_INFO_ADDRS)
+    # def trigger_function(self, state, function_name):
+    #     self.manager.trigger_function(state, function_name)
 
-# a new request from outside
-# the previous function was done
-@app.route('/request', methods = ['POST'])
+    def receive_incoming_data(self, request_id, workflow_name, template_name, block_name, datas: dict,
+                              from_local: bool, from_virtual=None):
+        self.manager.receive_incoming_data(request_id, workflow_name, template_name, block_name, datas, from_local,
+                                           from_virtual)
+
+    def receive_incoming_request(self, request_id, workflow_name, templates_info):
+        self.manager.init_incoming_request(request_id, workflow_name, templates_info)
+
+
+print(config.WORKFLOWS_INFO_PATH)
+print(config.FUNCTIONS_INFO_PATH)
+dispatcher = Dispatcher(config.WORKFLOWS_INFO_PATH, config.FUNCTIONS_INFO_PATH)
+
+gc_interval = 20
+
+
+def regular_clear_gc():
+    gevent.spawn_later(gc_interval, regular_clear_gc)
+    gc.collect()
+
+
+def socket_server():
+    s = socket.socket()
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    s.bind(('0.0.0.0', 5999))
+    s.listen(100)
+    while True:
+        c, addr = s.accept()
+        client_data = c.recv(64 * 1024)
+        c.close()
+        # time.sleep(0.005)
+        data = json.loads(client_data)
+        dispatcher.receive_incoming_data(data['request_id'], data['workflow_name'], data['template_name'],
+                                         data['block_name'], data['datas'], from_local=True)
+
+
+
+@app.route('/commit_inter_data', methods=['POST'])
+def handle_inter_data_commit():
+    data = request.get_json(force=True, silent=True)
+    # print('---')
+    # print('get inter_data from {} {} {} {}'.format(data['block_name'], data['template_name'], data['workflow_name'],
+    #                                                data['request_id']))
+    # print(data['datas'].keys(), 'time cost during transmit: ', time.time() - data['post_time'])
+    # for k, v in data['datas'].items():
+    #     if 'debug' in k:
+    #         print(k, v)
+    # print()
+    dispatcher.receive_incoming_data(data['request_id'], data['workflow_name'], data['template_name'],
+                                     data['block_name'], data['datas'], from_local=True)
+    return 'OK', 200
+
+
+@app.route('/transfer_data', methods=['POST'])
+def transfer_data():
+    data = request.get_json(force=True, silent=True)
+    from_virtual = None
+    if 'from_virtual' in data:
+        from_virtual = data['from_virtual']
+    dispatcher.receive_incoming_data(data['request_id'], data['workflow_name'], data['template_name'],
+                                     data['block_name'], data['datas'], from_local=False, from_virtual=from_virtual)
+    return json.dumps({'status': 'ok'})
+
+
+@app.route('/request_info', methods=['POST'])
 def req():
     data = request.get_json(force=True, silent=True)
+    # print(data)
     request_id = data['request_id']
     workflow_name = data['workflow_name']
-    function_name = data['function_name']
-    no_parent_execution = data['no_parent_execution']
-    # get the corresponding workflow state and trigger the function
-    state = dispatcher.get_state(workflow_name, request_id)
-    dispatcher.trigger_function(workflow_name, state, function_name, no_parent_execution)
+    templates_info = data['templates_info']
+    dispatcher.receive_incoming_request(request_id, workflow_name, templates_info)
     return json.dumps({'status': 'ok'})
 
-@app.route('/clear', methods = ['POST'])
-def clear():
+
+@app.route('/test_send_data', methods=['POST'])
+def test_send_data():
     data = request.get_json(force=True, silent=True)
-    workflow_name = data['workflow_name']
-    request_id = data['request_id']
-    master = False
-    if 'master' in data:
-        master = True
-        dispatcher.clear_db(workflow_name, request_id) # optional: clear results in center db
-    dispatcher.clear_mem(workflow_name, request_id) # must clear memory after each run 
-    dispatcher.del_state(workflow_name, request_id, master) # and remove state for every node
+    print(type(data))
     return json.dumps({'status': 'ok'})
 
-@app.route('/info', methods = ['GET'])
-def info():
-    return json.dumps(container_names)
 
-@app.route('/clear_container', methods = ['GET'])
-def clear_container():
-    print('clearing containers')
-    os.system('docker rm -f $(docker ps -aq --filter label=workflow)')
+@app.route('/clear', methods=['POST'])
+def clear():
+    file_controller.init(config.FILE_CONTROLLER_PATH)
+    prefetcher.init(config.PREFETCH_POOL_PATH)
+    global dispatcher
+    dispatcher = Dispatcher(config.WORKFLOWS_INFO_PATH, config.FUNCTIONS_INFO_PATH)
+    time.sleep(10)
     return json.dumps({'status': 'ok'})
 
-GET_NODE_INFO_INTERVAL = 0.1
 
-def get_container_names():
-    gevent.spawn_later(get_container_names)
-    global container_names
-    container_names = [container.attrs['Name'] for container in docker_client.containers.list()]
+@app.route('/finish', methods=['POST'])
+def finish():
+    dispatcher.manager.flow_monitor.upload_all_logs()
+    return 'OK', 200
 
-from gevent.pywsgi import WSGIServer
-import logging
+
 if __name__ == '__main__':
-    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%H:%M:%S', level='INFO')
-    server = WSGIServer((sys.argv[1], int(sys.argv[2])), app)
+    gc.disable()
+    gevent.spawn_later(gc_interval, regular_clear_gc)
+    file_controller.init(config.FILE_CONTROLLER_PATH)
+    prefetcher.init(config.PREFETCH_POOL_PATH)
+    gevent.spawn(socket_server)
+    server = WSGIServer(('0.0.0.0', int(sys.argv[2])), app, log=None)
     server.serve_forever()
-    gevent.spawn_later(GET_NODE_INFO_INTERVAL)

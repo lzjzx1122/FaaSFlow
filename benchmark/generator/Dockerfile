@@ -1,2 +1,0 @@
-FROM workflow_base
-

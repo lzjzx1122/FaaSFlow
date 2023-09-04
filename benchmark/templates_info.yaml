@@ -1,0 +1,110 @@
+templates:
+
+
+  - image_name: video__upload
+    template_name: video__upload
+    blocks: { block_0 }
+    cpus: 0.2
+    gc: True
+
+  - image_name: video__split
+    template_name: video__split
+    blocks: { block_0 }
+    cpus: 0.2
+    gc: True
+
+  - image_name: video__transcode
+    template_name: video__transcode
+    blocks: { block_0 }
+    cpus: 0.5
+    gc: True
+
+  - image_name: video__merge
+    template_name: video__merge
+    blocks: { block_0 }
+    cpus: 0.2
+    gc: True
+
+  - image_name: video__simple_process
+    template_name: video__simple_process
+    blocks: { block_0 }
+    cpus: 0.5
+    gc: True
+
+#  - image_name: video__group0
+#    template_name: video__group0
+#    blocks: { simple_process, split, upload }
+#    cpus: 0.5
+#    gc: True
+
+  - image_name: wordcount__start
+    template_name: wordcount__start
+    blocks: { block_0 }
+    cpus: 0.2
+
+  - image_name: wordcount__count
+    template_name: wordcount__count
+    blocks: { block_0 }
+    cpus: 0.2
+
+  - image_name: wordcount__merge
+    template_name: wordcount__merge
+    blocks: { block_0 }
+    cpus: 0.2
+
+  - image_name: recognizer__upload
+    template_name: recognizer__upload
+    blocks: { block_0 }
+    cpus: 0.2
+    gc: True
+
+  - image_name: recognizer__adult
+    template_name: recognizer__adult
+    blocks: { block_0 }
+    cpus: 1
+    gc: True
+
+  - image_name: recognizer__violence
+    template_name: recognizer__violence
+    blocks: { block_0 }
+    cpus: 1
+    gc: True
+
+  - image_name: recognizer__mosaic
+    template_name: recognizer__mosaic
+    blocks: { block_0 }
+    cpus: 0.2
+    gc: True
+
+  - image_name: recognizer__extract
+    template_name: recognizer__extract
+    blocks: { block_0 }
+    cpus: 0.5
+    gc: True
+
+  - image_name: recognizer__translate
+    template_name: recognizer__translate
+    blocks: { block_0 }
+    cpus: 0.2
+    gc: True
+
+  - image_name: recognizer__censor
+    template_name: recognizer__censor
+    blocks: { block_0 }
+    cpus: 0.2
+    gc: True
+
+  - image_name: svd__start
+    template_name: svd__start
+    blocks: { block_0 }
+    cpus: 0.2
+
+  - image_name: svd__compute
+    template_name: svd__compute
+    blocks: { block_0 }
+    cpus: 0.1
+
+  - image_name: svd__merge
+    template_name: svd__merge
+    blocks: { block_0 }
+    cpus: 0.2

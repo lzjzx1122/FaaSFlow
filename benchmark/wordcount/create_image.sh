@@ -1,3 +1,5 @@
-docker build --no-cache -t wc_start ~/FaaSFlow/benchmark/wordcount/start
-docker build --no-cache -t wc_count ~/FaaSFlow/benchmark/wordcount/count
-docker build --no-cache -t wc_merge ~/FaaSFlow/benchmark/wordcount/merge
+docker build --no-cache -t wordcount__start ~/CodeLess/benchmark/template_functions/wordcount__start
+docker build --no-cache -t wordcount__count ~/CodeLess/benchmark/template_functions/wordcount__count
+docker build --no-cache -t wordcount__merge ~/CodeLess/benchmark/template_functions/wordcount__merge
+
+

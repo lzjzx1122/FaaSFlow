@@ -1,0 +1,44 @@
+workflow_name: svd
+global_inputs:
+  $USER.start:
+    type: NORMAL
+    dest:
+      svd__start: { block_0: { start } }
+templates:
+  svd__start:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          start: { type: NORMAL }
+        output_datas:
+          matrix:
+            type: FOREACH
+            dest:
+              svd__compute: { block_0: { matrix } }
+          VIRTUAL.CNT:
+            type: NORMAL
+            dest:
+              svd__merge: { block_0: { VIRTUAL.CNT } }
+  svd__compute:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          matrix: { type: NORMAL }
+        output_datas:
+          res:
+            type: MERGE
+            dest:
+              svd__merge: { block_0: { res } }
+  svd__merge:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          VIRTUAL.CNT: { type: NORMAL }
+          res: { type: LIST }
+        output_datas:
+          res:
+            type: NORMAL
+            dest: { $USER }

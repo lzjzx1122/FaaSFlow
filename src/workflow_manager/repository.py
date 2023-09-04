@@ -1,121 +1,61 @@
-from typing import Any, List
-import couchdb
-import redis
-import json
-import sys
+import gevent
 
-sys.path.append('../../config')
-import config
+from config import config
+import couchdb
 
 couchdb_url = config.COUCHDB_URL
 
+
 class Repository:
     def __init__(self):
-        self.redis = redis.StrictRedis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=config.REDIS_DB)
-        self.couch = couchdb.Server(couchdb_url)
+        self.couchdb = couchdb.Server(couchdb_url)
+        self.waiting_logs = []
 
-    # get all function_name for every node seems to solve the problem of KeyError Exception in manager.py, line 103
-    def get_current_node_functions(self, ip: str, mode: str) -> List[str]:
-        db = self.couch[mode]
-        functions = []
-        for item in db:
-            functions.append(db[item]['function_name'])
-        return functions
+    def create_request_doc(self, request_id: str):
+        if request_id in self.couchdb['results']:
+            # self.couchdb['results'].delete(self.couchdb['results'][request_id])
+            self.couchdb['results'].purge([self.couchdb['results'][request_id]])
+        self.couchdb['results'][request_id] = {}
 
-    def get_foreach_functions(self, db_name) -> List[str]:
-        db = self.couch[db_name]
-        for item in db:
-            doc = db[item]
-            if 'foreach_functions' in doc:
-                return doc['foreach_functions']
+    def clear_couchdb_workflow_latency(self):
+        self.couchdb.delete('workflow_latency')
+        self.couchdb.create('workflow_latency')
 
-    def get_merge_functions(self, db_name) -> List[str]:
-        db = self.couch[db_name]
-        for item in db:
-            doc = db[item]
-            if 'merge_functions' in doc:
-                return doc['merge_functions']
+    def clear_couchdb_results(self):
+        self.couchdb.delete('results')
+        self.couchdb.create('results')
 
-    def get_start_functions(self, db_name) -> List[str]:
-        db = self.couch[db_name]
-        for item in db:
-            doc = db[item]
-            if 'start_functions' in doc:
-                return doc['start_functions']
+    def save_scalability_config(self, dir_path):
+        self.couchdb['results']['scalability_config'] = {'dir': dir_path}
 
-    def get_all_addrs(self, db_name) -> List[str]:
-        db = self.couch[db_name]
-        for item in db:
-            doc = db[item]
-            if 'addrs' in doc:
-                return doc['addrs']
+    def save_kafka_config(self, KAFKA_CHUNK_SIZE):
+        self.couchdb['results']['kafka_config'] = {'KAFKA_CHUNK_SIZE': KAFKA_CHUNK_SIZE}
 
-    def get_function_info(self, function_name: str, mode: str) -> Any:
-        db = self.couch[mode]
-        for item in db.find({'selector': {'function_name': function_name}}):
-            return item
+    def get_kafka_config(self):
+        try:
+            return self.couchdb['results']['kafka_config']
+        except Exception:
+            return None
 
-    def create_request_doc(self, request_id: str) -> None:
-        if request_id in self.couch['results']:
-            doc = self.couch['results'][request_id]
-            self.couch['results'].delete(doc)
-        self.couch['results'][request_id] = {}
-
-    def get_keys(self, request_id: str) -> Any:
-        keys = dict()
-        doc = self.couch['results'][request_id]
-        for k in doc:
-            if k != '_id' and k != '_rev' and k != '_attachments':
-                keys[k] = doc[k]
-        return keys
-
-    # fetch result from couchdb/redis
-    def fetch_from_mem(self, redis_key, content_type):
-        if content_type == 'application/json':
-            redis_value = self.redis[redis_key].decode()
-            return json.loads(redis_value)
-        else:
-            return self.redis[redis_key]
-
-    def fetch_from_db(self, request_id, key):
-        db = self.couch['results']
-        f = db.get_attachment(request_id, filename=key, default='no attachment')
-        if f != 'no attachment':
-            return f.read()
-        else:
-            filename = key + '.json'
-            f = db.get_attachment(request_id, filename=filename, default='no attachment')
-            return json.load(f)
-
-    def fetch(self, request_id, key):
-        print('fetching...', key)
-        redis_key_1 = request_id + '_' + key
-        redis_key_2 = request_id + '_' + key + '.json'
-        value = None
-        if redis_key_1 in self.redis:
-            value = self.fetch_from_mem(redis_key_1, 'bytes')
-        elif redis_key_2 in self.redis:
-            value = self.fetch_from_mem(redis_key_2, 'application/json')
-        else:  # if not
-            value = self.fetch_from_db(request_id, key)
-        print('fetched value: ', value)
-        return value
-    
-    def clear_mem(self, request_id):
-        keys = self.redis.keys()
-        for key in keys:
-            key_str = key.decode()
-            if key_str.startswith(request_id):
-                self.redis.delete(key)
-
-    def clear_db(self, request_id):
-        db = self.couch['results']
-        db.delete(db[request_id])
-
-    def log_status(self, workflow_name, request_id, status):
-        log_db = self.couch['log']
-        log_db.save({'request_id': request_id, 'workflow': workflow_name, 'status': status})
-    
     def save_latency(self, log):
-        latency_db = self.couch['workflow_latency']
-        latency_db.save(log)
+        self.couchdb['workflow_latency'].save(log)
+
+    def save_redis_log(self, request_id, size, time):
+        self.waiting_logs.append({'phase': 'redis', 'request_id': request_id, 'size': size, 'time': time})
+        # self.couchdb['workflow_latency'].save({'phase': 'redis', 'request_id': request_id, 'size': size, 'time': time})
+
+    def get_latencies(self, phase):
+        requests_logs = {}
+        for k in self.couchdb['workflow_latency']:
+            doc = self.couchdb['workflow_latency'][k]
+            if doc['phase'] == phase:
+                request_id = doc['request_id']
+                if request_id not in requests_logs:
+                    requests_logs[request_id] = []
+                requests_logs[request_id].append(doc)
+        return requests_logs
+
+    def upload_waiting_logs(self):
+        tmp_db = self.couchdb['workflow_latency']
+        for log in self.waiting_logs:
+            tmp_db.save(log)

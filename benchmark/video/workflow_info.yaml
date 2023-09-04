@@ -1,0 +1,202 @@
+workflow_name: video
+global_inputs:
+  $USER.start:
+    type: NORMAL
+    dest:
+      video__upload: { block_0: { start } }
+templates:
+  video__upload:
+    blocks:
+      block_0:
+        type: SWITCH
+        input_datas:
+          start: { type: NORMAL }
+        output_datas:
+          split: { type: NORMAL }
+          video_name: { type: NORMAL }
+          user_name: { type: NORMAL }
+          segment_time: { type: NORMAL }
+          target_type: { type: NORMAL }
+          output_prefix: { type: NORMAL }
+          preview_name: { type: NORMAL }
+          gif: { type: NORMAL }
+          video: { type: NORMAL }
+        conditions:
+          'split==True':
+            user_name:
+              video__split: { block_0: { user_name } }
+              video__merge: { block_0: { user_name } }
+            video_name:
+              video__split: { block_0: { video_name } }
+              video__merge: { block_0: { video_name } }
+            segment_time:
+              video__split: { block_0: { segment_time } }
+            video:
+              video__split: { block_0: { video } }
+            target_type:
+              video__transcode: { block_0: { target_type } }
+              video__merge: { block_0: { target_type } }
+            output_prefix:
+              video__merge: { block_0: { output_prefix } }
+          'split==False':
+            user_name:
+              video__simple_process: { block_0: { user_name } }
+            video_name:
+              video__simple_process: { block_0: { video_name } }
+            target_type:
+              video__simple_process: { block_0: { target_type } }
+            video:
+              video__simple_process: { block_0: { video } }
+  video__split:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          user_name: { type: NORMAL }
+          video_name: { type: NORMAL }
+          segment_time: { type: NORMAL }
+          video: { type: NORMAL }
+        output_datas:
+          splited_video:
+            type: FOREACH
+            dest:
+              video__transcode: { block_0: { video } }
+          split_keys:
+            type: NORMAL
+            dest:
+              video__merge: { block_0: { split_keys } }
+          VIRTUAL.CNT: # This is virtual!
+            type: NORMAL
+            dest:
+              video__merge: { block_0: { VIRTUAL.CNT } }
+  video__simple_process:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          user_name: { type: NORMAL }
+          video_name: { type: NORMAL }
+          target_type: { type: NORMAL }
+          video: { type: NORMAL }
+        output_datas:
+          transcoded_video:
+            type: NORMAL
+            dest: { $USER }
+#  video__group0:
+#    blocks:
+#      upload:
+#        type: SWITCH
+#        input_datas:
+#          start: { type: NORMAL }
+#        output_datas:
+#          split: { type: NORMAL }
+#          video_name: { type: NORMAL }
+#          user_name: { type: NORMAL }
+#          segment_time: { type: NORMAL }
+#          target_type: { type: NORMAL }
+#          output_prefix: { type: NORMAL }
+#          preview_name: { type: NORMAL }
+#          gif: { type: NORMAL }
+#          video: { type: NORMAL }
+#        conditions:
+#          'split==True':
+#            user_name:
+#              video__group0: { split: { user_name } }
+#              video__merge: { block_0: { user_name } }
+#            video_name:
+#              video__group0: { split: { video_name } }
+#              video__merge: { block_0: { video_name } }
+#            segment_time:
+#              video__group0: { split: { segment_time } }
+#            video:
+#              video__group0: { split: { video } }
+#            target_type:
+#              video__transcode: { block_0: { target_type } }
+#              video__merge: { block_0: { target_type } }
+#            output_prefix:
+#              video__merge: { block_0: { output_prefix } }
+#          'split==False':
+#            user_name:
+#              video__group0: { simple_process: { user_name } }
+#            video_name:
+#              video__group0: { simple_process: { video_name } }
+#            target_type:
+#              video__group0: { simple_process: { target_type } }
+#            video:
+#              video__group0: { simple_process: { video } }
+#      simple_process:
+#        type: NORMAL
+#        input_datas:
+#          user_name: { type: NORMAL }
+#          video_name: { type: NORMAL }
+#          target_type: { type: NORMAL }
+#          video: { type: NORMAL }
+#        output_datas:
+#          transcoded_video:
+#            type: NORMAL
+#            dest: { $USER }
+#      split:
+#        type: NORMAL
+#        input_datas:
+#          user_name: { type: NORMAL }
+#          video_name: { type: NORMAL }
+#          segment_time: { type: NORMAL }
+#          video: { type: NORMAL }
+#        output_datas:
+#          splited_video:
+#            type: FOREACH
+#            dest:
+#              video__transcode: { block_0: { video } }
+#          split_keys:
+#            type: NORMAL
+#            dest:
+#              video__merge: { block_0: { split_keys } }
+#          VIRTUAL.CNT: # This is virtual!
+#            type: NORMAL
+#            dest:
+#              video__merge: { block_0: { VIRTUAL.CNT } }
+  video__transcode:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          #          user_name: { type: NORMAL }
+          #          video_name: { type: NORMAL }
+          #          segment_time: { type: NORMAL }
+          target_type: { type: NORMAL }
+          video: { type: NORMAL }
+        output_datas:
+          transcoded_video:
+            type: MERGE
+            dest:
+              video__merge: { block_0: { video } }
+  video__merge:
+    blocks:
+      block_0:
+        type: NORMAL
+        input_datas:
+          #          user_name: { type: NORMAL }
+          #          video_name: { type: NORMAL }
+          video: { type: LIST }
+          VIRTUAL.CNT: { type: NORMAL } # This is virtual!
+          user_name: { type: NORMAL }
+          split_keys: { type: NORMAL }
+          target_type: { type: NORMAL }
+          output_prefix: { type: NORMAL }
+          video_name: { type: NORMAL }
+        output_datas:
+          merged_video:
+            type: NORMAL
+            dest: { $USER }
+
+  #  sentiment_analysis:
+  #    blocks:
+  #      block_0:
+  #        input_datas:
+  #          text: { type: NORMAL }
+  #        output_datas:
+  #          score:
+  #            type: NORMAL
+  #            dest:
+  #              upload: { block_0: { files: 1 } }
+

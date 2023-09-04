@@ -1,29 +1,39 @@
-COUCHDB_URL = 'http://openwhisk:openwhisk@10.2.64.8:5984/'
-REDIS_HOST = '127.0.0.1' # it serves to connect with the local redis, so it should be 127.0.0.1
-REDIS_PORT = 6379 # it follows the same configuration as created redis by docker (e.g., -p 6379:6379)
+# In template, functions are across different workflows.
+import os.path
+
+KAFKA_IP = '172.31.214.41'
+GATEWAY_IP = '172.31.214.40'
+COUCHDB_IP = '172.31.214.42'
+# WORKER_ADDRS = ['172.31.214.86']
+# WORKER_ADDRS = ['172.31.214.40', '172.31.214.44', '172.31.214.45']
+WORKER_ADDRS = ['172.31.214.43', '172.31.214.44', '172.31.214.45']
+# WORKER_ADDRS = ['172.31.214.43']
+COUCHDB_URL = f'http://openwhisk:openwhisk@{COUCHDB_IP}:5984/'
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
 REDIS_DB = 0
-GATEWAY_ADDR = '10.2.64.8:7000' # need to update as your private_ip
-MASTER_HOST = '10.2.64.8:8000' # need to update as your private_ip
-WORKFLOW_YAML_ADDR = {'fileprocessing': '/home/openwhisk/Workflow/benchmark/fileprocessing/flat_workflow.yaml',
-                  'illgal_recognizer': '/home/openwhisk/Workflow/benchmark/illgal_recognizer/flat_workflow.yaml',
-                  'video': '/home/openwhisk/Workflow/benchmark/video/flat_workflow.yaml',
-                  'wordcount': '/home/openwhisk/Workflow/benchmark/wordcount/flat_workflow.yaml',
-                  'cycles': '/home/openwhisk/Workflow/benchmark/generator/cycles/flat_workflow.yaml',
-                  'epigenomics': '/home/openwhisk/Workflow/benchmark/generator/epigenomics/flat_workflow.yaml',
-                  'genome': '/home/openwhisk/Workflow/benchmark/generator/genome/flat_workflow.yaml',
-                  'soykb': '/home/openwhisk/Workflow/benchmark/generator/soykb/flat_workflow.yaml'}
-NETWORK_BANDWIDTH = 25 * 1024 * 1024 / 4 # 25MB/s / 4
-NET_MEM_BANDWIDTH_RATIO = 15 # mem_time = net_time / 15
-CONTAINER_MEM = 256 * 1024 * 1024 # 256MB
-NODE_MEM = 256 * 1024 * 1024 * 1024 # 256G
-RESERVED_MEM_PERCENTAGE = 0.2
-GROUP_LIMIT = 100
-RPMs = {'genome-25': [2, 4, 6, 8], 'genome-50': [2, 4, 6, 8, 10], 'genome-75': [2, 4, 6, 8, 10], 'genome-100': [2, 4, 6, 8, 10],
-'video-25': [4, 8, 16, 24], 'video-50': [8, 16, 24, 32, 40], 'video-75': [8, 16, 24, 32, 40], 'video-100': [8, 16, 24, 32, 40]}
-FUNCTION_INFO_ADDRS = {'genome': '../../benchmark/generator/genome', 'epigenomics': '../../benchmark/generator/epigenomics',
-                                                'soykb': '../../benchmark/generator/soykb', 'cycles': '../../benchmark/generator/cycles',
-                                                'fileprocessing': '../../benchmark/fileprocessing', 'wordcount': '../../benchmark/wordcount',
-                                                'illgal_recognizer': '../../benchmark/illgal_recognizer', 'video': '../../benchmark/video'}
-DATA_MODE = 'raw' # raw, optimized
-CONTROL_MODE = 'WorkerSP' # WorkerSP, MasterSP
-CLEAR_DB_AND_MEM = True
+# RESOURCE_MONITOR_URL = 'http://127.0.0.1:7998/{}'
+KAFKA_URL = f'{KAFKA_IP}:9092'
+PREFETCHER_URL = 'http://127.0.0.1:8002/{}'
+GATEWAY_URL = f'{GATEWAY_IP}:7000'
+
+FUNCTIONS_INFO_PATH = '../../benchmark'
+WORKFLOWS_INFO_PATH = {
+                       'video': os.path.expanduser('~/CodeLess/benchmark/video'),
+                       'wordcount': os.path.expanduser('~/CodeLess/benchmark/wordcount'),
+                       'recognizer': os.path.expanduser('~/CodeLess/benchmark/recognizer'),
+                       'svd': os.path.expanduser('~/CodeLess/benchmark/svd')}
+if os.path.exists('/state/partition2/CodeLess'):
+    PREFETCH_POOL_PATH = '/state/partition2/CodeLess/prefetch_pool'
+    FILE_CONTROLLER_PATH = '/state/partition2/CodeLess/file_controller'
+else:
+    PREFETCH_POOL_PATH = os.path.expanduser('~/CodeLess/prefetch_pool')
+    FILE_CONTROLLER_PATH = os.path.expanduser('~/CodeLess/file_controller')
+CHUNK_SIZE = 1 * 1024 * 1024
+
+DOCKER_CPU_QUOTA = 100000
+
+REDIS_EXPIRE_SECONDS = 100
+# COLLECT_CONTAINER_RESOURCE = False
+KAFKA_CHUNK_TEST = False
+DISABLE_PRESSURE_AWARE = False

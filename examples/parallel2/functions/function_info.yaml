@@ -1,5 +1,0 @@
-actions:
-- {image: image_invalid, name: invalid, qos_requirement: 0.95, qos_time: 100}
-- {image: image_sqrt, name: sqrt, qos_requirement: 0.95, qos_time: 100}
-- {image: image_sub, name: sub, qos_requirement: 0.95, qos_time: 100}
-max_container: 10

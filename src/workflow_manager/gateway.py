@@ -1,85 +1,157 @@
-import json
-import gevent
 from gevent import monkey
+
 monkey.patch_all()
-import sys
-from flask import Flask, request
-from repository import Repository
-import requests
 import time
 
-sys.path.append('../../config')
-import config
+from gevent import event
+import sys
+
+sys.path.append('../../')
+import json
+import gevent
+import requests
+from typing import Dict
+
+from config import config
+from repository import Repository
+from flask import Flask, request
+from gevent.pywsgi import WSGIServer
+from workflow_info import WorkflowInfo
+from kafka import KafkaAdminClient
 
 app = Flask(__name__)
 repo = Repository()
+workflows_info = WorkflowInfo.parse(config.WORKFLOWS_INFO_PATH)
+worker_addrs = config.WORKER_ADDRS
 
-def trigger_function(workflow_name, request_id, function_name):
-    info = repo.get_function_info(function_name, workflow_name + '_function_info')
-    ip = ''
-    if config.CONTROL_MODE == 'WorkerSP':
-        ip = info['ip']
-    elif config.CONTROL_MODE == 'MasterSP':
-        ip = config.MASTER_HOST
-    url = 'http://{}/request'.format(ip)
-    data = {
-        'request_id': request_id,
-        'workflow_name': workflow_name,
-        'function_name': function_name,
-        'no_parent_execution': True
-    }
-    requests.post(url, json=data)
 
-def run_workflow(workflow_name, request_id):
-    repo.create_request_doc(request_id)
+class RequestInfo:
+    def __init__(self, request_id):
+        self.request_id = request_id
+        self.result = event.AsyncResult()
 
-    # allocate works
-    start_functions = repo.get_start_functions(workflow_name + '_workflow_metadata')
-    start = time.time()
-    jobs = []
-    for n in start_functions:
-        jobs.append(gevent.spawn(trigger_function, workflow_name, request_id, n))
-    gevent.joinall(jobs)
-    end = time.time()
 
-    # clear memory and other stuff
-    if config.CLEAR_DB_AND_MEM:
-        master_addr  = ''
-        if config.CONTROL_MODE == 'WorkerSP':
-            master_addr = repo.get_all_addrs(workflow_name + '_workflow_metadata')[0]
-        elif config.CONTROL_MODE == 'MasterSP':
-            master_addr = config.MASTER_HOST
-        clear_url = 'http://{}/clear'.format(master_addr)
-        requests.post(clear_url, json={'request_id': request_id, 'master': True, 'workflow_name': workflow_name})
-    
-    return end - start
+requests_info: Dict[str, RequestInfo] = {}
+workersp_url = 'http://{}:8000/{}'
 
-@app.route('/run', methods = ['POST'])
+
+@app.route('/run', methods=['POST'])
 def run():
-    data = request.get_json(force=True, silent=True)
-    workflow = data['workflow']
-    request_id = data['request_id']
-    logging.info('processing request ' + request_id + '...')
-    repo.log_status(workflow, request_id, 'EXECUTE')
-    latency = run_workflow(workflow, request_id)
-    repo.log_status(workflow, request_id, 'FINISH')
-    return json.dumps({'status': 'ok', 'latency': latency})
+    inp = request.get_json(force=True, silent=True)
+    workflow_name = inp['workflow_name']
+    request_id = inp['request_id']
+    input_datas = inp['input_datas']
+    repo.create_request_doc(request_id)
+    requests_info[request_id] = RequestInfo(request_id)
+    workflow_info = workflows_info[workflow_name]
+    video_sp_ip_idx = {1: {'video__upload': 0, 'video__split': 0, 'video__simple_process': 0, 'video__transcode': 0,
+                           'video__merge': 0},
+                       2: {'video__upload': 0, 'video__split': 0, 'video__simple_process': 0, 'video__transcode': 1,
+                           'video__merge': 1},
+                       3: {'video__upload': 0, 'video__split': 1, 'video__simple_process': 1, 'video__transcode': 2,
+                           'video__merge': 1}}
+    wordcount_sp_ip_idx = {1: {'wordcount__start': 0, 'wordcount__count': 0, 'wordcount__merge': 0},
+                           2: {'wordcount__start': 0, 'wordcount__count': 1, 'wordcount__merge': 1},
+                           3: {'wordcount__start': 0, 'wordcount__count': 1, 'wordcount__merge': 2}}
 
-@app.route('/clear_container', methods = ['POST'])
-def clear_container():
-    data = request.get_json(force=True, silent=True)
-    workflow = data['workflow']
-    addrs = repo.get_all_addrs(workflow + '_workflow_metadata')
-    jobs = []
-    for addr in addrs:
-        clear_url = f'http://{addr}/clear_container'
-        jobs.append(gevent.spawn(requests.get, clear_url))
-    gevent.joinall(jobs)
-    return json.dumps({'status': 'ok'})
+    recognizer_sp_ip_idx = {1: {'recognizer__upload': 0, 'recognizer__adult': 0, 'recognizer__violence': 0,
+                                'recognizer__mosaic': 0, 'recognizer__extract': 0, 'recognizer__translate': 0,
+                                'recognizer__censor': 0},
+                            2: {'recognizer__upload': 0, 'recognizer__adult': 1, 'recognizer__violence': 1,
+                                'recognizer__mosaic': 1, 'recognizer__extract': 1, 'recognizer__translate': 1,
+                                'recognizer__censor': 1},
+                            3: {'recognizer__upload': 0, 'recognizer__adult': 1, 'recognizer__violence': 2,
+                                'recognizer__mosaic': 2, 'recognizer__extract': 1, 'recognizer__translate': 0,
+                                'recognizer__censor': 1}
+                            }
 
-from gevent.pywsgi import WSGIServer
-import logging
+    svd_sp_ip_idx = {1: {'svd__start': 0, 'svd__compute': 0, 'svd__merge': 0},
+                     3: {'svd__start': 0, 'svd__compute': 1, 'svd__merge': 2}}
+    worker_num = len(worker_addrs)
+    templates_info = {}
+    for i, template_name in enumerate(workflow_info.templates_infos):
+        ip = worker_addrs[i % worker_num]
+        if workflow_name == 'video':
+            ip = worker_addrs[video_sp_ip_idx[worker_num][template_name]]
+            if template_name == 'video__transcode' and worker_num == 3:
+                flag = int(request_id[-1]) % 2
+                if flag == 0:
+                    idx = 0
+                else:
+                    idx = 2
+                ip = worker_addrs[idx]
+
+        if workflow_name == 'wordcount':
+            ip = worker_addrs[wordcount_sp_ip_idx[worker_num][template_name]]
+        if workflow_name == 'recognizer':
+            ip = worker_addrs[recognizer_sp_ip_idx[worker_num][template_name]]
+        if workflow_name == 'svd':
+            ip = worker_addrs[svd_sp_ip_idx[worker_num][template_name]]
+        # print(template_name, ip)
+        templates_info[template_name] = {'ip': ip}
+
+    # templates_info = {template_name: {'ip': '127.0.0.1'} for template_name in workflow_info.templates_infos}
+    # split video workflow to different nodes!
+    # print(templates_info)
+    data = {'request_id': request_id,
+            'workflow_name': workflow_name,
+            'templates_info': templates_info}
+    ips = set()
+    for template_info in templates_info.values():
+        ips.add(template_info['ip'])
+    st = time.time()
+    # 1. transmit request_info to all relative nodes
+    events = []
+    for ip in ips:
+        remote_url = workersp_url.format(ip, 'request_info')
+        events.append(gevent.spawn(requests.post, remote_url, json=data))
+    gevent.joinall(events)
+    # 2. transmit input_datas of this request to relative nodes
+    # 2.1 gather input_datas of each IP
+    ips_datas_mapping: Dict[str, dict] = {}
+    for input_data_name in input_datas:
+        for dest_template_name in workflow_info.data['global_inputs'][input_data_name]['dest']:
+            ip = templates_info[dest_template_name]['ip']
+            if ip not in ips_datas_mapping:
+                ips_datas_mapping[ip] = {}
+            if input_data_name not in ips_datas_mapping[ip]:
+                ips_datas_mapping[ip][input_data_name] = input_datas[input_data_name]
+    # 2.2 transmit input_datas
+    # Todo. Assume user's input_datas are small.
+    events = []
+    for ip in ips_datas_mapping:
+        remote_url = workersp_url.format(ip, 'transfer_data')
+        data = {'request_id': request_id,
+                'workflow_name': workflow_name,
+                'template_name': 'global_inputs',
+                'block_name': 'global_inputs',
+                'datas': ips_datas_mapping[ip]}
+        events.append(gevent.spawn(requests.post, remote_url, json=data))
+    gevent.joinall(events)
+    result = requests_info[request_id].result.get()
+    ed = time.time()
+    return json.dumps({'result': result, 'latency': ed - st})
+
+
+@app.route('/post_user_data', methods=['POST'])
+def post_user_data():
+    inp = request.get_json(force=True, silent=True)
+    request_id = inp['request_id']
+    datas = inp['datas']
+    # print(datas)
+    requests_info[request_id].result.set(datas)
+    return 'OK', 200
+
+
+@app.route('/clear', methods=['POST'])
+def clear():
+    client.delete_topics(client.list_topics())
+    requests_info.clear()
+    return 'OK', 200
+
+
 if __name__ == '__main__':
-    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%H:%M:%S', level='INFO')
+    client = KafkaAdminClient(bootstrap_servers=config.KAFKA_URL)
+    client.delete_topics(client.list_topics())
     server = WSGIServer((sys.argv[1], int(sys.argv[2])), app)
     server.serve_forever()

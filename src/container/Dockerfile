@@ -1,32 +1,21 @@
-# recommend not to use the alpine one, it lacks lots of dependencies
-# the slim one ocuppies about 2x space compared to alpine one
-# FROM python:3.7-alpine
 FROM python:3.7-slim
-
+ENV PYTHONUNBUFFERED=1
 COPY pip.conf /etc/pip.conf
-
-# fulfill the structure requirement of proxy
+RUN sed -i "s@http://deb.debian.org@http://mirrors.ustc.edu.cn@g" /etc/apt/sources.list
+RUN sed -i "s@http://security.debian.org@http://mirrors.ustc.edu.cn@g" /etc/apt/sources.list
+#RUN sed -i "s@http://deb.debian.org@http://mirror.sjtu.edu.cn@g" /etc/apt/sources.list
+#RUN sed -i "s@http://security.debian.org@http://mirror.sjtu.edu.cn@g" /etc/apt/sources.list
 RUN mkdir /proxy
-
-# copy libs
-COPY proxy.py /proxy/proxy.py
-COPY main.py /proxy/main.py
-COPY Store.py /proxy/Store.py
-COPY container_config.py /proxy/container_config.py
-
+RUN mkdir /proxy/mnt
+RUN mkdir /proxy/scripts
+COPY block.py container_config.py proxy.py store.py bypass_store.py /proxy/
+COPY scripts /proxy/scripts
 WORKDIR /proxy
-
-# proxy server runs under port 5000
 EXPOSE 5000
 
-# for alpine base only
-# RUN apk update && \
-#     apk add --no-cache --virtual .build-deps gcc musl-dev libffi-dev make && \
-#     pip install --no-cache-dir gevent flask && \
-#     apk del .build-deps
+RUN apt clean
+RUN apt update
+RUN apt install -y iproute2
+RUN pip3 install --no-cache-dir gevent flask requests couchdb redis gipc kafka-python confluent_kafka
 
-RUN apt-get clean
-RUN apt-get update
-RUN pip3 install --no-cache-dir gevent flask couchdb redis
-
-CMD [ "python3", "/proxy/proxy.py" ]
+CMD ["python3", "/proxy/proxy.py"]

@@ -1,6 +1,0 @@
-workflow: wordcount
-functions:
-- {image: wc_start, name: start, qos_requirement: 0.95, qos_time: 100}
-- {image: wc_count, name: count, qos_requirement: 0.95, qos_time: 100}
-- {image: wc_merge, name: merge, qos_requirement: 0.95, qos_time: 100}
-max_containers: 60

@@ -1,0 +1,1 @@
+while true; do docker stats --no-stream --format '{{.MemUsage}}' redis | cut -d '/' -f 1 >>docker-stats; done
