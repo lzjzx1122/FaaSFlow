@@ -59,7 +59,7 @@ Finally, start the engine proxy with the local <worker_ip> on each worker node b
 
 Now you have finished all the operations and are allowed to send invocations by `*test.py` scripts under `test/`. Detailed scripts usage is introduced in [Run Experiment](#jumpexper).
     
-**Note:** We recommend restarting the `test_server.py` on each worker node and the `gateway.py` on the gateway node whenever you start the `run.py` script, to avoid any potential bug.
+**Note:** We recommend restarting the `test_server.py` on each worker node and the `gateway.py` on the gateway node whenever you start the `*test.py` script, to avoid any potential bug.
 
 ## <span id="jumpexper">Run Experiment</span>
 
@@ -80,6 +80,12 @@ Directly run on the gateway node:
     python3 sync_test.py
 ```
 
+### Colocating Multiple Workflows
+
+Directly run on the gateway node: 
+```
+    python3 async_colocation_test.py
+```
 
 ## Cite
 Welcome to cite DataFlower by:
