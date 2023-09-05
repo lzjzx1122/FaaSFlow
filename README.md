@@ -1,12 +1,24 @@
-# DataFlower
+# FaaSFlow
+
+### New Features 
+```
+- 2023.09.05 - Now in FaaSFlow V2.0, DataFlower is a built-in workflow orchestration scheme in FaaSFlow!
+```
+
+### Ongoing Features
+```
+- Checkpoint/Restore for serverless workflows.
+```
 
 ## Introduction
 
-DataFlower is a scheme that achieves the data-flow paradigm for the serverless workflows. In DataFlower, a container is abstracted to be a function logic unit and a data logic unit. The function logic unit runs the functions, and the data logic unit handles the data transmission asynchronously. Moreover, a host-container collaborative communication mechanism is used to support the efficient data transfer.
+FaaSFlow is a serverless workflow framework designed to enhance workflow execution efficiency. It achieves this through the adoption of a worker-side workflow scheduling pattern, thereby reducing scheduling overhead. Additionally, it employs an adaptive storage library that leverages local memory for data transfer between functions situated on the same node.
 
-[//]: # (FaaSFlow is a serverless workflow engine that enables efficient workflow execution in 2 ways: a worker-side workflow schedule pattern to reduce scheduling overhead, and an adaptive storage library to use local memory to transfer data between functions on the same node.)
+In FaaSFlow, there is a built-in execution scheme called DataFlower, which implements the data-flow paradigm for serverless workflow orchestration. With the DataFlower scheme, a container is abstracted to be several function logic units and a data logic unit. The function logic unit executes the functions, while the data logic unit manages data transmission asynchronously. Furthermore, FaaSFlow with DataFlower will employs a collaborative communication mechanism between hosts and containers to facilitate efficient data transfer in conjunction with the adaptive storage library.
 
-*Our work has been accepted by ASPLOS' 24. The paper is [DataFlower: Exploiting the Data-flow Paradigm for Serverless Workflows](https://arxiv.org/abs/2304.14629)*
+The FaaSFlow paper in ASPLOS' 22. The paper is [FaaSFlow: enable efficient workflow execution for function-as-a-service](https://dl.acm.org/doi/10.1145/3503222.3507717).
+
+The DataFlower paper to be appear in ASPLOS' 24. The paper is [DataFlower: Exploiting the Data-flow Paradigm for Serverless Workflows](https://arxiv.org/abs/2304.14629).
 
 [![Security Status](https://s.murphysec.com/badge/lzjzx1122/FaaSFlow.svg)](https://www.murphysec.com/p/lzjzx1122/FaaSFlow)
 
@@ -88,7 +100,27 @@ Directly run on the gateway node:
 ```
 
 ## Cite
-Welcome to cite DataFlower by:
+Welcome to cite FaaSFlow in ASPLOS'22 by:
+```
+@inproceedings{10.1145/3503222.3507717,
+   author = {Li, Zijun and Liu, Yushi and Guo, Linsong and Chen, Quan and Cheng, Jiagan and Zheng, Wenli and Guo, Minyi},
+   title = {FaaSFlow: Enable Efficient Workflow Execution for Function-as-a-Service},
+   year = {2022},
+   isbn = {9781450392051},
+   publisher = {Association for Computing Machinery},
+   address = {New York, NY, USA},
+   url = {https://doi.org/10.1145/3503222.3507717},
+   doi = {10.1145/3503222.3507717},
+   booktitle = {Proceedings of the 27th ACM International Conference on Architectural Support for Programming Languages and Operating Systems},
+   pages = {782–796},
+   numpages = {15},
+   keywords = {master-worker, serverless workflows, graph partition, FaaS},
+   location = {Lausanne, Switzerland},
+   series = {ASPLOS '22}
+}
+```
+
+and DataFlower in ASPLOS'24 by:
 ```
 @misc{li2023dataflower,
       title={DataFlower: Exploiting the Data-flow Paradigm for Serverless Workflow Orchestration}, 
