@@ -2,7 +2,7 @@
 
 ### New Features 
 ```
-- 2023.09.05 - Now in FaaSFlow V2.0, DataFlower is a built-in workflow orchestration scheme in FaaSFlow!
+- 2023.09.05 - Now in FaaSFlow v2.0, DataFlower is a built-in workflow orchestration scheme!
 ```
 
 ### Ongoing Features
@@ -14,25 +14,25 @@
 
 FaaSFlow is a serverless workflow framework designed to enhance workflow execution efficiency. It achieves this through the adoption of a worker-side workflow scheduling pattern, thereby reducing scheduling overhead. Additionally, it employs an adaptive storage library that leverages local memory for data transfer between functions situated on the same node.
 
-In FaaSFlow, there is a built-in execution scheme called DataFlower, which implements the data-flow paradigm for serverless workflow orchestration. With the DataFlower scheme, a container is abstracted to be several function logic units and a data logic unit. The function logic unit executes the functions, while the data logic unit manages data transmission asynchronously. Furthermore, FaaSFlow with DataFlower will employs a collaborative communication mechanism between hosts and containers to facilitate efficient data transfer in conjunction with the adaptive storage library.
+In FaaSFlow, there is a built-in execution scheme called DataFlower, which implements the data-flow paradigm for serverless workflow orchestration. With the DataFlower scheme, a container is abstracted to be several function logic units and a data logic unit. The function logic unit executes the functions, while the data logic unit manages data transmission asynchronously. Furthermore, FaaSFlow with DataFlower will employ a collaborative communication mechanism between hosts and containers to facilitate efficient data transfer in conjunction with the adaptive storage library.
 
-The FaaSFlow paper in ASPLOS' 22. The paper is [FaaSFlow: enable efficient workflow execution for function-as-a-service](https://dl.acm.org/doi/10.1145/3503222.3507717).
+The FaaSFlow paper in *ASPLOS'22*. The paper is [FaaSFlow: enable efficient workflow execution for function-as-a-service](https://dl.acm.org/doi/10.1145/3503222.3507717).
 
-The DataFlower paper to be appear in ASPLOS' 24. The paper is [DataFlower: Exploiting the Data-flow Paradigm for Serverless Workflows](https://arxiv.org/abs/2304.14629).
+The DataFlower paper to be appear in *ASPLOS'24*. The paper is [DataFlower: Exploiting the Data-flow Paradigm for Serverless Workflows](https://arxiv.org/abs/2304.14629).
 
 [![Security Status](https://s.murphysec.com/badge/lzjzx1122/FaaSFlow.svg)](https://www.murphysec.com/p/lzjzx1122/FaaSFlow)
 
 
-## Hardware Depedencies and Private IP Address
+## Hardware Dependencies and Private IP Address
 
-1. In our experiment setup, we use three aliyun ecs instances ecs.g7.4xlarge (cores: 16, DRAM: 64GB) for the worker nodes, and two ecs.c7.2xlarge (cores: 8, DRAM: 16GB) instances for the remote storage node and the gateway node. All nodes run Ubuntu 20.04. The remote storage node is installed with Kafka to transfer intermediate data and CouchDB to collect log. The gateway node is also responsible for generating workflow invocations.
+1. In our experiment setup, we use three aliyun ECS instances ecs.g7.4xlarge (cores: 16, DRAM: 64GB) for the worker nodes, and two ecs.c7.2xlarge (cores: 8, DRAM: 16GB) instances for the remote storage node and the gateway node. All nodes run Ubuntu 20.04. The remote storage node is installed with Kafka to transfer intermediate data and CouchDB to collect logs. The gateway node is also responsible for generating workflow invocations.
 
 
 2. Please save the private IP address of the gateway node as the **<gateway_ip>**, the private IP address of the remote storage node as the **<storage_ip>**, and the private IP address of the other 3 worker nodes as the **<worker_ip>**. 
 
 ## About Config Setting
 
-There are 3 places for config setting. `src/container/container_config.py` specifies CouchDB and Kafka's address, you need to fill in correct ip so that application code can directly connect to database inside container environment. Besides, `scripts/kafka/docker-compose.yml` speficies the Kafka's configuration. All other configurations are in `config/config.py`.
+There are 3 places for config settings. `src/container/container_config.py` specifies CouchDB and Kafka's address. You need to fill in the correct IP so that the application code can directly connect to the database inside the container environment. Besides, `scripts/kafka/docker-compose.yml` specifies the Kafka's configuration. All other configurations are in `config/config.py`.
 
 ## Installation and Software Dependencies
 
@@ -51,7 +51,7 @@ Clone our code `https://github.com/lzjzx1122/FaaSFlow.git` and:
 
 4. Run `scripts/db_setup.bash` on the remote storage node and `scripts/gateway_setup.bash` on the gateway node. These scripts install docker, Kafka, CouchDB, some python packages. 
 
-5. On each worker node: Run `scripts/worker_setup.bash`. This install docker, Redis, some python packages, and build docker images from 4 benchmarks.
+5. On each worker node: Run `scripts/worker_setup.bash`. This installs docker, Redis, and some python packages, and builds docker images from 4 benchmarks.
 
 ## Worker Start-up
 
@@ -69,14 +69,14 @@ Finally, start the engine proxy with the local <worker_ip> on each worker node b
     python3 test_server.py <worker_ip>             (proxy are ready to serve)
 ```
 
-Now you have finished all the operations and are allowed to send invocations by `*test.py` scripts under `test/`. Detailed scripts usage is introduced in [Run Experiment](#jumpexper).
+Now you have finished all the operations and are allowed to send invocations by `*test.py` scripts under `test/`. Detailed script usage is introduced in [Run Experiment](#jumpexper).
     
 **Note:** We recommend restarting the `test_server.py` on each worker node and the `gateway.py` on the gateway node whenever you start the `*test.py` script, to avoid any potential bug.
 
 ## <span id="jumpexper">Run Experiment</span>
 
 We provide some test scripts under `test/`.
-**<span id="note">Note:**</span> We recommend to restart all `test_server.py` and `gateway.py` processes whenever you start the `*test.py` script, to avoid any potential bug. The restart will clear all background function containers and reclaim the memory space. 
+**<span id="note">Note:**</span> We recommend restarting all `test_server.py` and `gateway.py` processes whenever you start the `*test.py` script, to avoid any potential bug. The restart will clear all background function containers and reclaim the memory space. 
 
 ### Response Latency
 
@@ -106,15 +106,11 @@ Welcome to cite FaaSFlow in ASPLOS'22 by:
    author = {Li, Zijun and Liu, Yushi and Guo, Linsong and Chen, Quan and Cheng, Jiagan and Zheng, Wenli and Guo, Minyi},
    title = {FaaSFlow: Enable Efficient Workflow Execution for Function-as-a-Service},
    year = {2022},
-   isbn = {9781450392051},
-   publisher = {Association for Computing Machinery},
    address = {New York, NY, USA},
-   url = {https://doi.org/10.1145/3503222.3507717},
    doi = {10.1145/3503222.3507717},
    booktitle = {Proceedings of the 27th ACM International Conference on Architectural Support for Programming Languages and Operating Systems},
    pages = {782–796},
    numpages = {15},
-   keywords = {master-worker, serverless workflows, graph partition, FaaS},
    location = {Lausanne, Switzerland},
    series = {ASPLOS '22}
 }
