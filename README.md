@@ -1,8 +1,13 @@
 # FaaSFlow
+![GitHub release (with filter)](https://img.shields.io/github/v/release/lzjzx1122/faasflow?label=Release%20Version)
+![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/lzjzx1122/faasflow?label=Last%20Commit)
+[![Static Badge](https://img.shields.io/badge/Organization_Website-EPCC-purple)](http://epcc.sjtu.edu.cn)
+
 
 ### New Features 
 ```
-- 2023.09.05 - Now in FaaSFlow v2.0, DataFlower is a built-in workflow orchestration scheme!
+- Sep 5, 2023 (FaaSFlow v2.0) - DataFlower is a built-in workflow orchestration scheme!
+- Dec 2, 2021 (FaaSFlow v1.0) - FaaFlow public version release.
 ```
 
 ### Ongoing Features
