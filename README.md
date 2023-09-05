@@ -1,6 +1,6 @@
 # FaaSFlow
-![GitHub release (with filter)](https://img.shields.io/github/v/release/lzjzx1122/faasflow?label=Release%20Version)
-![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/lzjzx1122/faasflow?label=Last%20Commit)
+[![GitHub release (with filter)](https://img.shields.io/github/v/release/lzjzx1122/faasflow?label=Release%20Version)](https://github.com/lzjzx1122/FaaSFlow/releases/tag/v2.0)
+[![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/lzjzx1122/faasflow?label=Last%20Commit)](https://github.com/lzjzx1122/FaaSFlow/commits/main)
 [![Static Badge](https://img.shields.io/badge/Organization_Website-EPCC-purple)](http://epcc.sjtu.edu.cn)
 
 
@@ -21,9 +21,9 @@ FaaSFlow is a serverless workflow framework designed to enhance workflow executi
 
 In FaaSFlow, there is a built-in execution scheme called DataFlower, which implements the data-flow paradigm for serverless workflow orchestration. With the DataFlower scheme, a container is abstracted to be several function logic units and a data logic unit. The function logic unit executes the functions, while the data logic unit manages data transmission asynchronously. Furthermore, FaaSFlow with DataFlower will employ a collaborative communication mechanism between hosts and containers to facilitate efficient data transfer in conjunction with the adaptive storage library.
 
-The FaaSFlow paper in *ASPLOS'22*. The paper is [FaaSFlow: enable efficient workflow execution for function-as-a-service](https://dl.acm.org/doi/10.1145/3503222.3507717).
+The FaaSFlow paper in *ASPLOS'22* is [FaaSFlow: enable efficient workflow execution for function-as-a-service](https://dl.acm.org/doi/10.1145/3503222.3507717).
 
-The DataFlower paper to be appear in *ASPLOS'24*. The paper is [DataFlower: Exploiting the Data-flow Paradigm for Serverless Workflows](https://arxiv.org/abs/2304.14629).
+The DataFlower paper in *ASPLOS'24* is [DataFlower: Exploiting the Data-flow Paradigm for Serverless Workflows](https://arxiv.org/abs/2304.14629).
 
 [![Security Status](https://s.murphysec.com/badge/lzjzx1122/FaaSFlow.svg)](https://www.murphysec.com/p/lzjzx1122/FaaSFlow)
 
