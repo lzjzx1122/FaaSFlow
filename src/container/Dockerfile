@@ -8,7 +8,8 @@ RUN sed -i "s@http://security.debian.org@http://mirrors.ustc.edu.cn@g" /etc/apt/
 RUN mkdir /proxy
 RUN mkdir /proxy/mnt
 RUN mkdir /proxy/scripts
-COPY block.py container_config.py proxy.py store.py bypass_store.py /proxy/
+COPY block.py container_config.py proxy.pyg bypass_store.py /proxy/
+COPY store.py /proxy/
 COPY scripts /proxy/scripts
 WORKDIR /proxy
 EXPOSE 5000
