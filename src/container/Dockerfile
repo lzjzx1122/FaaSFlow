@@ -1,8 +1,8 @@
 FROM python:3.7-slim
 ENV PYTHONUNBUFFERED=1
 COPY pip.conf /etc/pip.conf
-RUN sed -i "s@http://deb.debian.org@http://mirrors.ustc.edu.cn@g" /etc/apt/sources.list
-RUN sed -i "s@http://security.debian.org@http://mirrors.ustc.edu.cn@g" /etc/apt/sources.list
+#RUN sed -i "s@http://deb.debian.org@http://mirrors.ustc.edu.cn@g" /etc/apt/sources.list
+#RUN sed -i "s@http://security.debian.org@http://mirrors.ustc.edu.cn@g" /etc/apt/sources.list
 #RUN sed -i "s@http://deb.debian.org@http://mirror.sjtu.edu.cn@g" /etc/apt/sources.list
 #RUN sed -i "s@http://security.debian.org@http://mirror.sjtu.edu.cn@g" /etc/apt/sources.list
 RUN mkdir /proxy
