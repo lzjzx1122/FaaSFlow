@@ -199,12 +199,10 @@ def test_to_all():
     #     }
     # target_workflow = {
     #     'video': {28: 10, 30: 10}}
-    target_workflow = {'recognizer': {10: 10},
-                       'video': {32: 10, 36: 10},
-                       'wordcount': {20: 5, 24: 5}}
-    target_workflow = {
-                       'svd': {1: 5, 2: 5, 4: 5, 8: 5},
-                        }
+    target_workflow = {'recognizer': {1: 1},
+                       'video': {1: 1},
+                       'svd': {1: 1},
+                       'wordcount': {1: 1}}
     # target_workflow = {
     #                    'recognizer': {6: 10},
     #                    'video': {2: 10, 4: 10, 8: 10, 16: 10, 24: 10, 32: 10, 36: 10}}
