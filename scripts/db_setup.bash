@@ -20,5 +20,5 @@ docker run -itd -p 5984:5984 -e COUCHDB_USER=openwhisk -e COUCHDB_PASSWORD=openw
 python3 couchdb_starter.py
 # install redis
 docker pull redis
-docker-compose -f kafka/docker-compose.yml up
+docker-compose -f kafka/docker-compose.yml up -d
 #docker run -itd -p 6379:6379 --name redis redis
