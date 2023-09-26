@@ -30,14 +30,18 @@ The DataFlower paper in *ASPLOS'24* is [DataFlower: Exploiting the Data-flow Par
 
 ## Hardware Dependencies and Private IP Address
 
-1. In our experiment setup, we use three aliyun ECS instances ecs.g7.4xlarge (cores: 16, DRAM: 64GB) for the worker nodes, and two ecs.c7.2xlarge (cores: 8, DRAM: 16GB) instances for the remote storage node and the gateway node. All nodes run Ubuntu 20.04. The remote storage node is installed with Kafka to transfer intermediate data and CouchDB to collect logs. The gateway node is also responsible for generating workflow invocations.
+1. Our experiment setup requires at least three nodes (one gateway node, one storage node, and one or more worker nodes). For the gateway node and the storage node, the minimal hardware requirements is \{Cores: 8, DRAM: 16GB, Disk: 200GB SSD\}. For each worker node, the minimal hardware requirements is \{Cores: 16, DRAM: 64GB, Disk: 200GB SSD\}. All nodes run Ubuntu 20.04. The remote storage node is installed with Kafka to transfer intermediate data and CouchDB to collect logs. The gateway node is also responsible for generating workflow invocations.
 
 
-2. Please save the private IP address of the gateway node as the **<gateway_ip>**, the private IP address of the remote storage node as the **<storage_ip>**, and the private IP address of the other 3 worker nodes as the **<worker_ip>**. 
+2. Please save the private IP address of the gateway node as the **<gateway_ip>**, the private IP address of the remote storage node as the **<storage_ip>**, and the private IP address of each worker node as the **<worker_ip>**. 
+
+
 
 ## About Config Setting
 
 There are 3 places for config settings. `src/container/container_config.py` specifies CouchDB and Kafka's address. You need to fill in the correct IP so that the application code can directly connect to the database inside the container environment. Besides, `scripts/kafka/docker-compose.yml` specifies the Kafka's configuration. All other configurations are in `config/config.py`.
+
+Currently DataFlower support the worker nodes number less or equal than three, while the elements number of `WORKER_ADDRS` in `config/config.py` represents whether the evaluation will be done within a single worker node or among multiple worker nodes. To run DataFlower under more than three worker nodes, the ip route table of each function of each benchmark should be assigned in `*_sp_ip_idx` in `src/workflow_manager/gateway.py`. 
 
 ## Installation and Software Dependencies
 
@@ -52,7 +56,7 @@ Clone our code `https://github.com/lzjzx1122/FaaSFlow.git` and:
 
    Reset `KAFKA_IP` as `<storage_ip>` in `config/config.py`, `KAFKA_URL` as `<storage_ip>:9092/` in `src/container/container_config.py`, and `KAFKA_ADVERTISED_LISTENERS` as `PLAINTEXT://<storage_ip>:9092,PLAINTEXT_INTERNAL://broker:29092` in `scripts/kafka/docker-compose.yml`
 
-3. Then, clone the modified code into each node (5 nodes total).
+3. Then, clone the modified code into each node.
 
 4. Run `scripts/db_setup.bash` on the remote storage node and `scripts/gateway_setup.bash` on the gateway node. These scripts install docker, Kafka, CouchDB, some python packages. 
 
@@ -80,7 +84,7 @@ Now you have finished all the operations and are allowed to send invocations by 
 
 ## <span id="jumpexper">Run Experiment</span>
 
-We provide some test scripts under `test/`.
+We provide some test scripts under `test/`. And the expected results is in `test/expected_results`.
 **<span id="note">Note:**</span> We recommend restarting all `test_server.py` and `gateway.py` processes whenever you start the `*test.py` script, to avoid any potential bug. The restart will clear all background function containers and reclaim the memory space. 
 
 ### Response Latency

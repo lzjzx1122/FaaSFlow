@@ -66,6 +66,7 @@ def run():
                             }
 
     svd_sp_ip_idx = {1: {'svd__start': 0, 'svd__compute': 0, 'svd__merge': 0},
+                     2: {'svd__start': 0, 'svd__compute': 1, 'svd__merge': 0},
                      3: {'svd__start': 0, 'svd__compute': 1, 'svd__merge': 2}}
     worker_num = len(worker_addrs)
     templates_info = {}
