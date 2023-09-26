@@ -211,7 +211,7 @@ def test_to_all():
     # target_rpm = {
     #               'ultraHigh': {'recognizer': 80, 'video': 40, 'wordcount': 160}}
     for rpm_type in target_rpm:
-        test_to_one(rpm_type, target_rpm[rpm_type], 60 * 5)
+        test_to_one(rpm_type, target_rpm[rpm_type], 60 * 1)
 
 
 test_to_all()

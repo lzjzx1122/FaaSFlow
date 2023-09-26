@@ -191,6 +191,10 @@ def test_to_all():
     target_workflow = {
         'svd': {10: 5, 20: 5, 40: 5, 60: 5, 80: 5, 100: 5}
         }
+    target_workflow = {'recognizer': {10: 1},
+                       'wordcount': {10: 1},
+                       'svd': {10: 1},
+                       'video': {4: 1}}
     for workflow_name in target_workflow:
         for rpm in target_workflow[workflow_name]:
             test_to_one(workflow_name, rpm, 60 * target_workflow[workflow_name][rpm])
