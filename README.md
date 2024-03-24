@@ -127,12 +127,16 @@ Welcome to cite FaaSFlow in ASPLOS'22 by:
 
 and DataFlower in ASPLOS'24 by:
 ```
-@misc{li2023dataflower,
-      title={DataFlower: Exploiting the Data-flow Paradigm for Serverless Workflow Orchestration}, 
-      author={Zijun Li and Chuhao Xu and Quan Chen and Jieru Zhao and Chen Chen and Minyi Guo},
-      year={2023},
-      eprint={2304.14629},
-      archivePrefix={arXiv},
-      primaryClass={cs.DC}
+@inproceedings{10.1145/3623278.3624755,
+   author = {Li, Zijun and Xu, Chuhao and Chen, Quan and Zhao, Jieru and Chen, Chen and Guo, Minyi},
+   title = {DataFlower: Exploiting the Data-flow Paradigm for Serverless Workflow Orchestration},
+   year = {2024},
+   address = {New York, NY, USA},
+   doi = {10.1145/3623278.3624755},
+   booktitle = {Proceedings of the 28th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 4},
+   pages = {57–72},
+   numpages = {16},
+   location = {Vancouver, BC, Canada},
+   series = {ASPLOS '23}
 }
 ```
